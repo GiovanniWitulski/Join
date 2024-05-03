@@ -3,22 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/assets/css/mobile_template.css">
     <title>Join</title>
     <script src="script.js"></script>
 </head>
 <body>
-    <div>
-        <header>
-            <img src="/assets/img/join-logo.svg" alt="">
-        </header>
-        <nav class="nav-mobile">
-            <img src="/assets/img/summary-icon.svg" alt="">
-            <img src="/assets/img/board-icon.svg" alt="">
-            <img src="/assets/img/add-task-icon.svg" alt="">
-            <img src="/assets/img/contacts-icon.svg" alt="">
-        </nav>
+    <header>
+        <img class="join-logo" src="/assets/img/join-logo.svg" alt="join logo">
+        <div>
+            <span class="sm-btn">SM</span>
+            <nav class="side-menu">
+                <ul class="ul-side-menu">
+                    <li class="li-side-menu"><a href="">Help</a></li>
+                    <li class="li-side-menu"><a href="">Legal Notice</a></li>
+                    <li class="li-side-menu"><a href="">Privacy Policy</a></li>
+                    <li class="li-side-menu"><a href="">Log out</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="mobileTamplateContent">
     </div>
+
+    <nav class="nav-mobile">
+        <a class="menu-links" href="/summary.html">
+            <img class="menu-icons" src="/assets/img/summary-icon.svg" alt="summary">
+            <span>Summary</span>
+        </a>
+        <a class="menu-links" href="/board.html">
+            <img class="menu-icons" src="/assets/img/board-icon.svg" alt="board">
+            <span>Board</span>
+        </a>
+        <a class="menu-links" href="/add_task.html">
+            <img class="menu-icons" src="/assets/img/add-task-icon.svg" alt="add">
+            <span>Add Tasks</span>
+        </a>
+        <a class="menu-links" href="/contacts.html">
+            <img class="menu-icons" src="/assets/img/contacts-icon.svg" alt="contacts">
+            <span>Contacts</span>
+        </a>
+    </nav>
+    <script>
+        const menuButton = document.querySelector('.sm-btn');
+        const sideMenu = document.querySelector('.side-menu');
+
+        menuButton.addEventListener('click', () => {
+        sideMenu.classList.toggle('open');
+        });
+    </script>
 </body>
 </html>

@@ -1,4 +1,143 @@
-.nav-mobile {
+header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 80px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 4px 0px rgba(0, 0, 0, 0.1);
+    background-color: white;
 }
+
+a {
+    text-decoration: none;
+    display: flex;
+    color: unset;
+}
+
+.join-logo {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 16px;
+    height: 39.02px;
+    width: 32px;
+}
+
+.sm-btn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 16px;
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgb(42,54,71);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(41, 171, 226, 1);
+    font-weight: 700;
+}
+
+.sm-btn:hover {
+    cursor: pointer;
+}
+
+.side-menu.open {
+    transform: translateX(0px);
+}
+
+.side-menu {
+    z-index: 1; 
+    position: fixed;
+    top: 63px;
+    right: 8px;
+    transform: translateX(158px);
+    background-color: rgba(42, 54, 71, 1);
+    color: rgb(205, 205, 205);
+    width: 150px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 0px 4px 0px rgba(0, 0, 0, 0.1);
+    transition: all 100ms ease-in-out;
+}
+    
+.side-menu.open {
+    transform: translateX(0px); 
+}
+
+.ul-side-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+}
+
+.li-side-menu {
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+    height: 46px;
+}
+
+#mobileTamplateContent {
+    margin-top: 80px;
+    margin-bottom: 80px;
+    margin-right: 16px;
+    margin-left: 16px;
+    background-color: wheat;
+}
+
+.nav-mobile {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+    color: rgb(205,205,205);
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    align-items: center;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgb(42,54,71);
+    height: 80px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.menu-icons {
+    width: 24px;
+    height: 24px;
+}
+
+.menu-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    width: 80px;
+    height: 76px;
+    border-radius: 16px;
+}
+
+.menu-links:hover {
+    cursor: pointer;
+}
+
+
+
+/* menu btns :focus 
+    not implemented yet 
+*/
+/* .menu-links:hover{
+    background-color: rgb(9, 25, 49);
+    color: white;
+    .menu-icons {
+        filter: invert(1) brightness(6);
+    }
+} */
+                                
