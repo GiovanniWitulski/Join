@@ -15,10 +15,10 @@
             <span class="sm-btn">SM</span>
             <nav class="side-menu">
                 <ul class="ul-side-menu">
-                    <li class="li-side-menu"><a href="">Help</a></li>
-                    <li class="li-side-menu"><a href="">Legal Notice</a></li>
-                    <li class="li-side-menu"><a href="">Privacy Policy</a></li>
-                    <li class="li-side-menu"><a href="">Log out</a></li>
+                    <li class="li-side-menu"><a href="/assets/templates/help.html">Help</a></li>
+                    <li class="li-side-menu"><a href="/assets/templates/legal_notice.html">Legal Notice</a></li>
+                    <li class="li-side-menu"><a href="/assets/templates/privacy_policy.html">Privacy Policy</a></li>
+                    <li class="li-side-menu"><a href="/index.html">Log out</a></li>
                 </ul>
             </nav>
         </div>
@@ -45,12 +45,19 @@
             <span>Contacts</span>
         </a>
     </nav>
+
     <script>
         const menuButton = document.querySelector('.sm-btn');
         const sideMenu = document.querySelector('.side-menu');
 
         menuButton.addEventListener('click', () => {
         sideMenu.classList.toggle('open');
+        });
+
+        document.addEventListener('click', (event) => {
+        if (!sideMenu.contains(event.target) && !menuButton.contains(event.target)) {
+            sideMenu.classList.remove('open'); 
+        }
         });
     </script>
 </body>
