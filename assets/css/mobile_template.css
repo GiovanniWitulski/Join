@@ -44,10 +44,6 @@ a {
     cursor: pointer;
 }
 
-.side-menu.open {
-    transform: translateX(0px);
-}
-
 .side-menu {
     z-index: 1; 
     position: fixed;
@@ -55,7 +51,6 @@ a {
     right: 8px;
     transform: translateX(158px);
     background-color: rgba(42, 54, 71, 1);
-    color: rgb(205, 205, 205);
     width: 150px;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
@@ -80,6 +75,16 @@ a {
     align-items: center;
     padding-left: 16px;
     height: 46px;
+    color: rgb(205, 205, 205);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+}
+
+.li-side-menu:hover {
+    color: white;
+    cursor: pointer;
+    background-color: rgb(48 62 81);
 }
 
 #mobileTamplateContent {
@@ -87,13 +92,9 @@ a {
     margin-bottom: 80px;
     margin-right: 16px;
     margin-left: 16px;
-    background-color: wheat;
 }
 
 .nav-mobile {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16.8px;
     color: rgb(205,205,205);
     display: flex;
     justify-content: space-between;
@@ -126,18 +127,16 @@ a {
 
 .menu-links:hover {
     cursor: pointer;
-}
-
-
-
-/* menu btns :focus 
-    not implemented yet 
-*/
-/* .menu-links:hover{
     background-color: rgb(9, 25, 49);
     color: white;
     .menu-icons {
         filter: invert(1) brightness(6);
     }
-} */
-                                
+}
+
+.menu-links-text {
+    font-family: 'Open Sans' !important;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+}
