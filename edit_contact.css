@@ -115,9 +115,9 @@ body{
     
 }
 
-.create-contact-btn{
+.save-contact-btn{
 
-    margin-top: 32px;
+    
     background: #2A3647;
     color: white;
     border-radius: 10px;
@@ -125,7 +125,7 @@ body{
     font-weight: 700;
     font-size: 21px;
     line-height: 25.2px;
-    width: 202px;
+    width: 99px;
     height: 51px;
     display: flex;
     align-items: center;
@@ -133,7 +133,29 @@ body{
     padding:  13px 10px;
 }
 
-.create-contact-btn:hover{
+.delete-contact-btn{
+
+    width: 82px;
+    height: 51px;
+    border-radius: 10px;
+    border: 1px solid #2A3647;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+
+.button-div{
+    display: flex;
+    align-items: center;
+    margin-top: 32px;
+    gap: 20px;
+
+}
+.save-contact-btn:hover{
+    cursor: pointer;
+}
+
+.delete-contact-btn:hover{
     cursor: pointer;
 }
 
