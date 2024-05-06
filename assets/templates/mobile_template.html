@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/assets/css/mobile_template.css">
     <title>Join</title>
     <script src="script.js"></script>
+    <script src="/assets/js/w3_include.js"></script>
     <a href="/assets/css/fonts.css"></a>
 </head>
 <body>
@@ -26,26 +27,26 @@
         </div>
     </header>
 
-    <div id="mobileTamplateContent">
-    </div>
+    <div id="mobileTamplateContent" w3-include-html="/assets/templates/help.html"></div>
 
     <nav class="nav-mobile">
-        <a class="menu-links" href="/summary.html">
+        <li class="menu-links">
             <img class="menu-icons" src="/assets/svg/summary-icon.svg" alt="summary">
             <span class="menu-links-text">Summary</span>
-        </a>
-        <a class="menu-links" href="/board.html">
+        </li>
+        <li class="menu-links">
             <img class="menu-icons" src="/assets/svg/board-icon.svg" alt="board">
             <span class="menu-links-text">Board</span>
-        </a>
-        <a class="menu-links" href="/add_task.html">
+        </li>
+        <li class="menu-links">
             <img class="menu-icons" src="/assets/svg/add-task-icon.svg" alt="add">
             <span class="menu-links-text">Add Tasks</span>
-        </a>
-        <a class="menu-links" href="/contacts.html">
+        </li>
+        <li class="menu-links" onclick="includeHTML('/assets/templates/contact_details.html')">
             <img class="menu-icons" src="/assets/svg/contacts-icon.svg" alt="contacts">
             <span class="menu-links-text">Contacts</span>
-        </a>
+        </li>
+        <!-- <a href="/assets/templates/contact_details.html"></a> -->
     </nav>
 
     <script>

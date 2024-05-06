@@ -1,3 +1,7 @@
+body {
+    text-wrap: balance;
+}
+
 h1 {
     font-size: 47px;
     font-weight: 700;
@@ -13,6 +17,12 @@ h2 {
     margin-bottom: 16px;
 }
 
+h3 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 19.2px;
+}
+
 .text-container {
     font-size: 16px;
     font-weight: 400;
@@ -20,7 +30,23 @@ h2 {
     margin-bottom: 24px;
 }
 
-a {
+.a-help {
+    margin: 0;
     color: rgba(41, 171, 226, 1);
-    text-decoration: none;
+    display: inline-block;
+}
+
+.help-list {
+    margin-top: 16px;
+    padding-left: 22px;
+    line-height: 19.2px;
+}
+
+ol > li::marker {
+    font-weight: bold;
+    font-size: 28px;
+}
+
+ol {
+    padding-bottom: 16px;
 }
