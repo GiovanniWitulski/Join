@@ -8,8 +8,50 @@
     <title>Add task</title>
     <script src="script.js"></script>
     <script src="assets/js/add_task.js"></script>
+    <script src="./assets/js/w3_include.js"></script>
+    <link rel="stylesheet" href="./assets/css/add_task.css">
 </head>
-<body>
+<body onload="includeHTML()">
+    <div w3-include-html="./assets/templates/mobile_template.html"></div>
     
+    <div class="headline">Add Task</div>
+    <div class="content-container">
+        
+        <form>
+            <div class="titleDiv">
+              <div class="subheadlineDiv"><p class="subheadline">Title <p class="marker">*</p></p></div>  
+                <input id="title-input" type="text" required placeholder="Enter a title">
+                <p class="alert-text none">This field is required</p>
+            </div>
+
+            <div class="descriptionDiv">
+                <p class="subheadline">Description</p>
+                <input type="text">
+            </div>
+
+            <div class="assignedDiv">
+                <p>Assigned to</p>
+                <input type="search">
+            </div>
+
+            <div class="dateDiv">
+                <p>Due date <p class="marker">*</p></p>
+                <input type="date">
+            </div>
+
+            <div class="prioDiv">
+                <button>Urgent</button><button>Medium</button><button>Low</button>
+            </div>
+
+            <div class="createDiv">
+                <p>*<p>This field is required</p></p>
+                <button class="create-btn">Create Task</button>
+            </div>
+            
+        </form>
+        
+        
+        
+    </div>
 </body>
 </html>
