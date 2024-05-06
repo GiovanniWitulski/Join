@@ -139,26 +139,25 @@ body{
 
 #contact-name{
     padding-right: 21px;
-    background: url("./assets/svg/person.svg");
+    background: url("./assets/svg/person.svg") no-repeat calc(100% - 21px);
     background-repeat: no-repeat;
-    background-position: right center;
+   
     background-size: 24px 24px;
    
 }
 
 #contact-mail{
 
-    background: url("./assets/svg/mail.svg");
+    background: url("./assets/svg/mail.svg") no-repeat calc(100% - 21px);
     background-repeat: no-repeat;
-    background-position: right center;
     background-size: 24px 24px;
 }
 
 
 #contact-phone{
 
-    background: url("./assets/svg/call.svg");
+    background: url("./assets/svg/call.svg") no-repeat calc(100% - 21px);
     background-repeat: no-repeat;
-    background-position: right center;
+   
     background-size: 24px 24px;
 }
