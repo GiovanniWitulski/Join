@@ -26,21 +26,29 @@
 
             <div class="descriptionDiv">
                 <p class="subheadline">Description</p>
-                <input type="text">
+                <textarea id="descriptionInput" type="text" placeholder="Enter a Description"></textarea>
             </div>
 
             <div class="assignedDiv">
-                <p>Assigned to</p>
-                <input type="search">
+                <p class="subheadline">Assigned to</p>
+                <select class="selector">
+                    <option value="" disabled selected>Select contacts to assign</option>
+                    <option value="2">Kontakt2</option>
+                    <option value="3">Kontakt3</option>
+                    <option value="4">Kontakt4</option>
+                    <option value="5">Kontakt5</option>
+                </select>
             </div>
 
             <div class="dateDiv">
-                <p>Due date <p class="marker">*</p></p>
-                <input type="date">
+                <div class="subheadlineDiv"><p class="subheadline">Due date <p class="marker">*</p></p></div>
+                <input id="datePicker" type="date">
+                <p class="alert-text none">This field is required</p>
             </div>
 
             <div class="prioDiv">
-                <button>Urgent</button><button>Medium</button><button>Low</button>
+                <p class="subheadline">Prio</p>
+                <div class="buttonDiv"><button>Urgent</button><button>Medium</button><button>Low</button></div>
             </div>
 
             <div class="createDiv">

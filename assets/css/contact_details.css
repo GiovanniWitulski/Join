@@ -3,6 +3,10 @@
     width: 90px;
 }
 
+p{
+    margin: 0;
+}
+
 .headline-div{
     display: flex;
     flex-direction: column;
@@ -16,6 +20,9 @@
     
     font-size: 47px;
     font-weight: 700;
+    margin: 0;
+   
+    
     
 }
 
@@ -23,11 +30,15 @@
     
     font-size: 20px;
     font-weight: 400;
+    margin: 0;
+   
+   
+
 }
 
 .back-btn{
     
-    background-image: url("./assets/svg/arrow-left-line.svg");
+    background-image: url("/assets/svg/arrow-left-line.svg");
     background-size: 32px 32px ;
     width: 32px;
     height: 32px;
@@ -65,6 +76,7 @@
     font-weight: 400;
     padding-top: 21px;
     padding-bottom: 21px;
+    margin: 0;
     
     
 }
@@ -111,7 +123,7 @@ body{
 
 .more-btn{
     
-    background-image: url("./assets/svg/Menu\ Contact\ options.svg");
+    background-image: url("/assets/svg/Menu\ Contact\ options.svg");
     width: 56px;
     height: 56px;
     border-radius: 56px;
@@ -156,7 +168,7 @@ body{
 
 .edit-btn{
   
-    background-image: url("./assets/svg/edit\ contacts\ m.svg");
+    background-image: url("/assets/svg/edit\ contacts\ m.svg");
     width: 96px;
     height: 40px;
     padding: 8px;
@@ -166,7 +178,7 @@ body{
 
 .del-btn{
 
-    background-image: url("./assets/svg/Delete\ contact\ m.svg");
+    background-image: url("/assets/svg/Delete\ contact\ m.svg");
     width: 96px;
     height: 40px;
     padding: 8px;
