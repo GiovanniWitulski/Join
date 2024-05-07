@@ -48,11 +48,14 @@
 
             <div class="prioDiv">
                 <p class="subheadline">Prio</p>
-                <div class="buttonDiv"><button>Urgent</button><button>Medium</button><button>Low</button></div>
+                <div class="buttonDiv">
+                    <button id="urgent-btn" class="urgent-btn" onclick="changeToActive('urgent-btn')">Urgent</button>
+                    <button id="medium-btn" class="medium-btn" onclick="changeToActive('medium-btn')">Medium</button>
+                    <button id="low-btn" class="low-btn" onclick="changeToActive('low-btn')">Low</button></div>
             </div>
 
             <div class="createDiv">
-                <p>*<p>This field is required</p></p>
+                <div class="explanation-div"><p class="marker">*<p class="explanation">This field is required</p></p></div>
                 <button class="create-btn">Create Task</button>
             </div>
             

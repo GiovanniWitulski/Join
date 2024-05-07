@@ -8,6 +8,13 @@
     align-items: flex-end;
     padding-bottom: 32px;
     padding-left: 16px;
+    position: sticky;
+    top: 0px;
+    background-color: #F6F7F8;
+}
+
+body{
+    background: #F6F7F8;
 }
 
 input {
@@ -128,6 +135,76 @@ select{
     padding-bottom: 16px;
 }
 
+.urgent-btn{
+
+    background-color: white;
+    background-image: url(/assets/svg/Prio\ alta.svg);
+    background-position: calc(100% - 20.67px);
+    background-repeat: no-repeat;
+    background-size: 20px 14.51px;
+    padding-inline-end: 48.67px;
+}
+
+.urgent-btn-active{
+
+    background-image: url(/assets/svg/Prio\ alta-2.svg);
+    background-position: calc(100% - 20.67px);
+    background-repeat: no-repeat;
+    background-size: 20px 14.51px;
+    padding-inline-end: 48.67px;
+    background-color: #FF3D00;
+    color: white;
+    font-weight: 700 !important;
+
+}
+
+
+.medium-btn{
+
+    background-color: white;
+    background-image: url(/assets/svg/Prio\ media.svg);
+    background-repeat: no-repeat;
+    background-size: 20px 7.45px;
+    background-position: calc(100% - 16.17px);
+    padding-inline-end: 44.17px;
+    font-size: 16px;
+}
+
+.medium-btn-active{
+
+    background-color: #FFA800;
+    color: white;
+    background-image: url(/assets/svg/Prio\ media-2.svg);
+    background-repeat: no-repeat;
+    background-size: 20px 7.45px;
+    background-position: calc(100% - 16.17px);
+    padding-inline-end: 44.17px;
+    font-weight: 700 !important;
+
+}
+
+
+.low-btn{
+    
+    background-color: white;
+    background-image: url(/assets/svg/Prio\ baja.svg);
+    background-repeat: no-repeat;
+    background-size: 20px 14.51px;
+    background-position: calc(100% - 30.67px) ;
+    padding-inline-end: 38.17px;
+}
+
+.low-btn-active{
+    background-color: #7ae229;
+    color: white;
+    background-image: url(/assets/svg/Prio\ baja-2.svg);
+    background-repeat: no-repeat;
+    background-size: 20px 14.51px;
+    background-position: calc(100% - 30.67px) ;
+    padding-inline-end: 38.17px;
+    font-weight: 700 !important;
+}
+
 
 #datePicker{
 
@@ -143,6 +220,59 @@ select{
     margin-bottom: 4px;
     
 }
+
+.createDiv{
+
+    display: flex;
+    width: 428px;
+    height: 88px;
+    padding: 16px;
+    justify-content: space-between;
+    box-sizing: border-box;
+    align-items: center;
+
+
+}
+
+.explanation{
+
+    
+    
+   
+
+}
+
+.explanation-div{
+
+    display: flex;
+    
+    height: 24px;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.create-btn{
+    width: 183px;
+    height: 56px;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 21px;
+    line-height: 25.2px;
+    font-weight: 700;
+    background-color:  #2A3647;
+    color: white;
+background-image: url(/assets/svg/check.svg);
+background-repeat: no-repeat;
+background-position: calc(100% - 16px);
+background-size: 24px 24px;
+box-sizing: border-box;
+text-align: start;
+display: flex;
+align-items: center;  
+gap: 4px;  
+}
+
 input[type='date']::-webkit-calendar-picker-indicator {
     background: transparent;
     bottom: 0;
@@ -186,4 +316,9 @@ input[type='date']::-webkit-calendar-picker-indicator {
 .buttonDiv button:hover{
 
     cursor: pointer;
+}
+
+.prioDiv{
+
+    padding-bottom: 10px;
 }
