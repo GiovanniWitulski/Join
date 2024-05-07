@@ -8,6 +8,7 @@
     <script src="/assets/js/w3_include.js"></script>
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/assets/css/contact_details.css">
+    <script src="/assets/js/contact_details.js"></script>
 </head>
 <body>
     <div w3-include-html="./assets/templates/mobile_template.html"></div>
@@ -16,7 +17,7 @@
         <button class="back-btn"></button>
     </div>
     <div class="middle-container">
-
+        
         <div class="name-div"><img class="name-pic" src="/assets/svg/Frame 79-3.svg"><p class="name-headline">Tatjana Wolf</p></div>
         <p class="contact-info">Contact Information</p>
         <div>
@@ -25,8 +26,8 @@
             <p class="category-headline">Phone</p>
             <p class="phone">+49 2222 222 22 2</p>
         </div>
-
-
+        
+        
     </div>
     <div class="bottom-container">
         <button class="more-btn"></button>
@@ -34,21 +35,8 @@
             <button class="edit-btn"></button>
             <button class="del-btn"></button>
         </div>
-    
+        
     </div>
-    <script>
-        const menuButton = document.querySelector('.more-btn');
-        const sideMenu = document.querySelector('.edit-menu-sb');
-
-        menuButton.addEventListener('click', () => {
-        sideMenu.classList.toggle('show');
-        });
-
-        document.addEventListener('click', (event) => {
-        if (!sideMenu.contains(event.target) && !menuButton.contains(event.target)) {
-            sideMenu.classList.remove('show'); 
-        }
-        });
-    </script>
+    
 </body>
 </html>
