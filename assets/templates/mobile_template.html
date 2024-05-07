@@ -38,7 +38,7 @@
             <img class="menu-icons" src="/assets/svg/board-icon.svg" alt="board">
             <span class="menu-links-text">Board</span>
         </li>
-        <li class="menu-links">
+        <li class="menu-links" onclick="includeHTML('/add_task.html')">
             <img class="menu-icons" src="/assets/svg/add-task-icon.svg" alt="add">
             <span class="menu-links-text">Add Tasks</span>
         </li>
@@ -49,6 +49,7 @@
         <!-- <a href="/assets/templates/contact_details.html"></a> -->
     </nav>
 
+    
     <script>
         const menuButton = document.querySelector('.sm-btn');
         const sideMenu = document.querySelector('.side-menu');
