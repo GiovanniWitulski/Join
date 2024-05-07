@@ -11,8 +11,31 @@ async function includeHTML(path) {
         let resp = await fetch(file);
         if (resp.ok) {
             element.innerHTML = await resp.text();
+            includeJs(element);
+            includeCss(element);
         } else {
             element.innerHTML = 'Page not found';
         }
     }
+}
+
+async function includeJs(element) {
+    let scripts = element.querySelectorAll('script');
+    scripts.forEach(script => {
+        let newScript = document.createElement('script');
+        let attributes = Array.from(script.attributes);
+        attributes.forEach(attr => newScript.setAttribute(attr.name, attr.value));
+        newScript.innerHTML = script.innerHTML;
+        script.parentNode.replaceChild(newScript, script);
+    });
+}
+
+async function includeCss(element) {
+    let links = element.querySelectorAll('link[rel="stylesheet"]');
+    links.forEach(link => {
+        let newLink = document.createElement('link');
+        newLink.rel = 'stylesheet';
+        newLink.href = link.href;
+        document.head.appendChild(newLink);
+    });
 }

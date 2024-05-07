@@ -1,12 +1,12 @@
-const menuButton = document.querySelector('.more-btn');
-const sideMenu = document.querySelector('.edit-menu-sb');
+const moreButton = document.querySelector('.more-btn');
+const moreBtnMenu = document.querySelector('.edit-menu-sb');
 
-menuButton.addEventListener('click', () => {
-sideMenu.classList.toggle('show');
+moreButton.addEventListener('click', () => {
+moreBtnMenu.classList.toggle('show');
 });
 
 document.addEventListener('click', (event) => {
-if (!sideMenu.contains(event.target) && !menuButton.contains(event.target)) {
-    sideMenu.classList.remove('show'); 
+if (!moreBtnMenu.contains(event.target) && !moreButton.contains(event.target)) {
+    moreBtnMenu.classList.remove('show'); 
 }
 });
