@@ -1,9 +1,8 @@
 /* fonts: */
 
-@font-face {        /* FONTS-PFAND AN GITHUB ANPASSEN */
+@font-face {        /* !!! FONTS-PFAD AN GITHUB ANPASSEN !!! */
     font-family: 'interregular';
-    src: url('fonts/Inter/woff/inter-variablefont_slntwght-webfont.woff2') format('woff2'),
-         url('fonts/Inter/woff/inter-variablefont_slntwght-webfont.woff') format('woff');
+    src: url('/assets/fonts/inter/inter-v13-latin-regular.woff2') format('woff');
     font-weight: normal;
     font-style: normal;
 
