@@ -1,0 +1,123 @@
+/* fonts: */
+
+@font-face {        /* !!! FONTS-PFAD AN GITHUB ANPASSEN !!! */
+    font-family: 'interregular';
+    src: url('/assets/fonts/inter/inter-v13-latin-regular.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* media querys */
+
+/* hover & effects */
+
+/* body */
+
+body {
+    margin: 0;
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+
+
+/* Board-mobile */ 
+
+.render_board_mobile{
+    padding-left: 16px;
+    padding-right: 16px;
+    height: 100%;
+    
+}
+
+.board-add-task-mobile{
+    display: flex;
+    flex-direction: column;
+ }
+
+.board-add-task-title-mobile {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .add-task-mobile-img {
+
+} */
+
+.board-search-mobile {
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #A8A8A8;
+    border-radius: 8px;
+}
+
+#board-input{
+    border: none;
+    height: 24px;
+}
+
+.board-search-icon-mobile{
+    width: 48px;
+    height: 32px;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 1px solid #D1D1D1;
+}
+
+.board-search-icon-mobile-img{ 
+    height: 17.58px;
+    width: 17.58px;
+}
+
+/* .to-do-mobile{
+   
+} */
+
+.to-do-add-mobile{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .to-do-add-mobile-img{}
+
+.to-do-container-mobile{} */
+
+.in-progress-mobile{
+    display: flex;
+    flex-direction: column;
+}
+
+.in-progress-title-mobile{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .in-progress-container-mobile{ 
+     
+} */
+
+.no-task-progress {
+    width: 100%;
+}
+
+/* .await-feedback{} */
+
+.await-feedback-title-mobile{
+    display: flex;
+    justify-content: space-between;  
+}
+
+/* .await-feedback-mobile-img {} */
+
+/* .await-feedback-container{} */
+
+
+
+
+
+
+
+
