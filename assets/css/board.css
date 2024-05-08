@@ -24,10 +24,7 @@ body {
 /* Board-mobile */ 
 
 .render_board_mobile{
-    padding-left: 16px;
-    padding-right: 16px;
-    height: 100%;
-    
+    height: 100%;    
 }
 
 .board-add-task-mobile{
@@ -38,6 +35,8 @@ body {
 .board-add-task-title-mobile {
     display: flex;
     justify-content: space-between;
+    padding-top: 48px;
+    padding-bottom: 40px;
 }
 
 /* .add-task-mobile-img {
@@ -51,6 +50,7 @@ body {
     align-items: center;
     border: 1px solid #A8A8A8;
     border-radius: 8px;
+    margin-bottom: 24px;
 }
 
 #board-input{
@@ -79,6 +79,7 @@ body {
 .to-do-add-mobile{
     display: flex;
     justify-content: space-between;
+    padding-bottom: 16px;
 }
 
 /* .to-do-add-mobile-img{}
@@ -88,11 +89,13 @@ body {
 .in-progress-mobile{
     display: flex;
     flex-direction: column;
+    padding-top: 26px;
 }
 
 .in-progress-title-mobile{
     display: flex;
     justify-content: space-between;
+    padding-bottom: 16px;
 }
 
 /* .in-progress-container-mobile{ 
@@ -107,7 +110,9 @@ body {
 
 .await-feedback-title-mobile{
     display: flex;
-    justify-content: space-between;  
+    justify-content: space-between; 
+    padding-top: 26px; 
+    padding-bottom: 16px;
 }
 
 /* .await-feedback-mobile-img {} */
