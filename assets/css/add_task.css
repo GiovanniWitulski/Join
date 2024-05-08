@@ -123,10 +123,15 @@ input {
     background-size: 24px 24px ; 
 }
 
-/* 
+
 select {
     -webkit-appearance: none;
-} */
+} 
+
+select{
+    -moz-appearance: none;
+}
+
 
 .assignedDiv{
 
