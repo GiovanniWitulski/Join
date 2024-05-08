@@ -104,6 +104,11 @@ body {
 
 .await-feedback{}
 
+.await-feedback-title-mobile{
+    display: flex;
+    justify-content: space-between;  
+}
+
 .await-feedback-mobile-img {}
 
 .await-feedback-container{}
