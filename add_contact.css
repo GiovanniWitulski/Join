@@ -9,7 +9,14 @@ body{
     border-radius: 30px;
     display: flex;
     flex-direction: column;
+    transform: translateY(400px);
+    transition: all 100ms ease-in-out;
 
+}
+
+.show{
+
+    transform: translateY(0px);
 }
 
 .top-container{
