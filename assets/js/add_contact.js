@@ -39,15 +39,15 @@ function getTheInformation(){
     createName();
     getMail();
     getPhoneNumber();
-    postData("contacts");
+    postData('contacts');
 }
 
 
 
 
-async function postData(path="", data={}){
+async function postData(path='', data={}, key=''){
     data = {"mail": contactMail, "mobile": contactPhone, "name": nachnameCapitalized, "vorname": vornameCapitalized }
-    let response = await fetch(URL + ".json",{
+    let response = await fetch(URL + path + key + ".json",{
 
 method: "POST",
 header: {
@@ -62,4 +62,6 @@ body: JSON.stringify(data)
     return responseToJson = await response.json();
     
 }
+
+
 
