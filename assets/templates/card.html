@@ -4,18 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/assets/css/card.css">
+    <script src="/script.js"></script>
+    <script src="/assets/css/card.css"></script>
 </head>
 <body>
-    <div class="card-header"></div>
-    <div class="card-title"></div>
-    <div class="card-description"></div>
-    <div class="due-date"></div>
+    <div id="cardHeader" class="card-header"></div>
+    <div id="cardTitle" class="card-title"></div>
+    <div id="cardDescription" class="card-description"></div>
+    <div id="dueDate" class="due-date"></div>
     <div class="assigned-to">
-        <div><h3>Assigned to:</h3><div class="participants"></div>
+        <div id="assignedTo"><h3>Assigned to:</h3><div id="participants" class="participants"></div>
     </div>
-    <div class="subtasks">
-        <div><h3>Subtasks</h3></div>
-        <div class="checklist"></div>
+    <div class="card-subtasks">
+        <div id="cardSubtasks"><h3>Subtasks</h3></div>
+        <div id="cardChecklist" class="checklist"></div>
     </div>
     <div class="delete-edit">
         <div><img src="" alt=""><h3></h3><img src="" alt=""><h3></h3></div>
