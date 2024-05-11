@@ -1,6 +1,10 @@
 async function includeHTML(path) {
-    document.getElementById('mobileTamplateContent').removeAttribute('w3-include-html');
-    document.getElementById('mobileTamplateContent').setAttribute('w3-include-html', `${path}`);
+
+    if(document.getElementById('mobileTamplateContent')){
+      document.getElementById('mobileTamplateContent').removeAttribute('w3-include-html');
+    document.getElementById('mobileTamplateContent').setAttribute('w3-include-html', `${path}`);  
+    }
+    
     
     console.log(path);
 
@@ -34,9 +38,11 @@ async function includeJs(element) {
 
 
 
-let previousCssLink = null;
+
 
 async function includeCss(element) {
+
+    let previousCssLink = null;
     // Alle vorhandenen CSS-Dateien entfernen
     if (previousCssLink) {
         document.head.removeChild(previousCssLink);
