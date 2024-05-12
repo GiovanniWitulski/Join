@@ -1,4 +1,19 @@
 
-.body {
+.card-body {
     margin: 32px 24px 32px 24px;
 }
+
+.card-header{}
+
+.card-title{}
+
+.card-description{}
+
+.due-date{}
+
+.assigned-to{}
+
+.card-subtasks {}
+
+.delete-edit{}
+

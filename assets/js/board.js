@@ -42,11 +42,17 @@ function searchResult(s){        //Text im Titel oder Beschreibung --> Array Tas
     for(i=0; i<Tasks.length; i++){
         if (Tasks[i].title == s && Tasks[i].type == 0){
             toDoContainer(i);    //Card einfügen
+        } else if (Tasks[i].description && Tasks[i].type == 0){
+            toDoContainer(i);
         }
         if (Tasks[i].title == s && Tasks[i].type == 1){
             inProgressContainer(i); `` //Card einfügen
+        } else if (Tasks[i].description && Tasks[i].type == 1){
+            inProgressContainer(i);
         }
         if (Tasks[i].title == s && Tasks[i].type == 2){
+            awaitFeedbackContainer(i);
+        } else if (Tasks[i].description && Tasks[i].type == 2){
             awaitFeedbackContainer(i);
         }
        }
@@ -55,15 +61,24 @@ function searchResult(s){        //Text im Titel oder Beschreibung --> Array Tas
     
 function toDoContainer (){
     let toDo = document.getElementById('toDoContainer'); 
+
+    //add Task - Cards with .innerHTML //
+    // Label abfragen --> if label1 ---> img src "/img/label1.svg...", 
+    // Checkbox abfragen: var checkbox = document.getElementById('checkboxId');
+    //                    var checked = checkbox.checked;
 }
 
 function inProgressContainer (){
     let inProgress = document.getElementById('inProgressContainer'); 
+    
+    //add Task - Cards with .innerHTML //
 }
 
 function awaitFeedbackContainer(){
     let inProgress = document.getElementById('inProgressContainer'); 
     awaitFeedback.innerHTML += ``
+
+    //add Task - Cards with .innerHTML //
 }
 
 
