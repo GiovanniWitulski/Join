@@ -120,10 +120,7 @@ input {
     box-sizing: border-box;
     background: url(/assets/svg/arrow_drop_downaa.svg)calc(100% - 16px);
     background-repeat: no-repeat;
-<<<<<<< HEAD
     background-color: white;
-=======
->>>>>>> 592a495f7477f5a74497b5c0f18f0dfed84d4bef
     background-size: 24px 24px ; 
 }
 
@@ -133,7 +130,6 @@ input {
 
 
 select {
-<<<<<<< HEAD
     -webkit-appearance: none !important; 
     -moz-appearance: none !important;
    appearance: auto;
@@ -143,10 +139,6 @@ select {
 
 
 
-=======
-    -webkit-appearance: none;
-} */
->>>>>>> 592a495f7477f5a74497b5c0f18f0dfed84d4bef
 
 .assignedDiv{
 
@@ -521,4 +513,25 @@ cursor: pointer;
     position: absolute;
     right: 16px;
     top: 12px;
+}
+
+.option{
+
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.option:hover{
+    cursor: pointer;
+}
+
+
+.optionContainer{
+
+    max-height: 280px;
+    width: 100%;
+    background-color: blue;
+    position: relative;
+    top: 40px;
+    overflow: scroll;
 }

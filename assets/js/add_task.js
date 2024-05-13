@@ -142,10 +142,11 @@ function deleteElementById(elementId){
 
 
 function renderAssignSelector(){
-document.getElementById('contact-selector').innerHTML = `<option value disabled selected>Select contacts to assign</option>`;
+
+
     for (let i = 0; i < contactsAsJson.length; i++) {
         const contact = contactsAsJson[i];
         
-        document.getElementById('contact-selector').innerHTML += `<option class="option" value="${i}">${contact['vorname']} ${contact['name']}</option>`
+        document.getElementById('optionContainer').innerHTML += `<div class="option">${contact['vorname']} ${contact['name']} <img src="/assets/svg/rectangle.svg"></div>`;
     }
 }
