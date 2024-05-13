@@ -120,18 +120,24 @@ input {
     box-sizing: border-box;
     background: url(/assets/svg/arrow_drop_downaa.svg)calc(100% - 16px);
     background-repeat: no-repeat;
-    
+    background-color: white;
     background-size: 24px 24px ; 
+}
+
+.selector:hover{
+    cursor: pointer;
 }
 
 
 select {
-    -webkit-appearance: none;
+    -webkit-appearance: none !important; 
+    -moz-appearance: none !important;
+   appearance: auto;
+   
 } 
 
-select{
-    -moz-appearance: none;
-}
+
+
 
 
 .assignedDiv{
@@ -354,6 +360,11 @@ input[type='date']::-webkit-calendar-picker-indicator {
     background-color: transparent;
 }
 
+.plus-btn:hover{
+
+    cursor: pointer;
+}
+
 
 
 .subtask-btn-div button:hover{ 
@@ -388,6 +399,8 @@ input[type='date']::-webkit-calendar-picker-indicator {
     border: 1px solid #D1D1D1;
    
 }
+
+
 
 #list-of-subtasks{
 
@@ -473,4 +486,34 @@ cursor: pointer;
 
 .none{
     display: none;
+}
+
+.renameSubtaskDiv{
+
+    display: flex;
+    position: relative;
+    left: -40px;
+    width: 396px;
+    justify-content: space-between;
+
+}
+
+.renameSubtaskDiv input{
+    width: 100%;
+    height: 48px;
+    border: 0;
+    border-bottom: 1px solid #29ABE2;
+    padding: 14.5px 0px 14.5px 16px;
+    font-size: 16px;
+    line-height: 19.2px;
+    font-weight: 400;
+    
+}
+
+.edit-subtask-buttons{
+
+    display: flex;
+    position: absolute;
+    right: 16px;
+    top: 12px;
 }

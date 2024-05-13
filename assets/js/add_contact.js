@@ -39,13 +39,13 @@ function getTheInformation(){
     createName();
     getMail();
     getPhoneNumber();
-    postData('contacts');
+    postData('contacts/');
 }
 
 
 
 
-async function postData(path='', data={}, key=''){
+async function postData(path='', data={}, key=contactsAsJson.length){
     data = {"mail": contactMail, "mobile": contactPhone, "name": nachnameCapitalized, "vorname": vornameCapitalized }
     let response = await fetch(URL + path + key + ".json",{
 

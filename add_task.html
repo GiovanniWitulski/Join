@@ -9,9 +9,10 @@
     <script src="/script.js"></script>
     <script src="/assets/js/add_task.js"></script>
     <script src="/assets/js/w3_include.js"></script>
+    <script src="/assets/js/contacts.js"></script>
     <link rel="stylesheet" href="/assets/css/add_task.css">
 </head>
-<body onload="includeHTML()">
+<body onload="includeHTML(), loadContacts('contacts')">
     <div class="headline">Add Task</div>
     <div class="content-container">
         
@@ -29,7 +30,7 @@
 
             <div class="assignedDiv">
                 <p class="subheadline">Assigned to</p>
-                <select class="selector">
+                <select  id="contact-selector" class="selector">
                     <option value="" disabled selected>Select contacts to assign</option>
                     <option value="2">Kontakt2</option>
                     <option value="3">Kontakt3</option>
