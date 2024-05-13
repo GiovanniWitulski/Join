@@ -120,7 +120,10 @@ input {
     box-sizing: border-box;
     background: url(/assets/svg/arrow_drop_downaa.svg)calc(100% - 16px);
     background-repeat: no-repeat;
+<<<<<<< HEAD
     background-color: white;
+=======
+>>>>>>> 592a495f7477f5a74497b5c0f18f0dfed84d4bef
     background-size: 24px 24px ; 
 }
 
@@ -130,6 +133,7 @@ input {
 
 
 select {
+<<<<<<< HEAD
     -webkit-appearance: none !important; 
     -moz-appearance: none !important;
    appearance: auto;
@@ -139,6 +143,10 @@ select {
 
 
 
+=======
+    -webkit-appearance: none;
+} */
+>>>>>>> 592a495f7477f5a74497b5c0f18f0dfed84d4bef
 
 .assignedDiv{
 
@@ -245,8 +253,6 @@ select {
 
 }
 
-
-
 .explanation-div{
 
     display: flex;
@@ -267,15 +273,15 @@ select {
     font-weight: 700;
     background-color:  #2A3647;
     color: white;
-background-image: url(/assets/svg/check.svg);
-background-repeat: no-repeat;
-background-position: calc(100% - 16px);
-background-size: 24px 24px;
-box-sizing: border-box;
-text-align: start;
-display: flex;
-align-items: center;  
-gap: 4px;  
+    background-image: url(/assets/svg/check.svg);
+    background-repeat: no-repeat;
+    background-position: calc(100% - 16px);
+    background-size: 24px 24px;
+    box-sizing: border-box;
+    text-align: start;
+    display: flex;
+    align-items: center;  
+    gap: 4px;  
 }
 
 input[type='date']::-webkit-calendar-picker-indicator {
@@ -461,7 +467,6 @@ cursor: pointer;
 }
 
 .buttonDiv button{
-
     width: 121.33px;
     height: 41px;
     border-radius: 10px;
