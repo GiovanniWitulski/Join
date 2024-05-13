@@ -15,7 +15,7 @@
     <div class="headline">Add Task</div>
     <div class="content-container">
         
-        <form>
+        <form onsubmit="return false">
             <div class="titleDiv">
               <div class="subheadlineDiv"><p class="subheadline">Title <p class="marker">*</p></p></div>  
                 <input id="title-input" type="text" required placeholder="Enter a title">
@@ -40,7 +40,7 @@
 
             <div class="dateDiv">
                 <div class="subheadlineDiv"><p class="subheadline">Due date <p class="marker">*</p></p></div>
-                    <input id="datePicker" type="date">
+                    <input id="datePicker" type="date" autofocus="false">
                     <p class="alert-text none">This field is required</p>
             </div>
 
@@ -53,10 +53,41 @@
                 </div>
             </div>
 
+            <div class="category-div">
+               <div class="subheadlineDiv"><p class="subheadline">Category <p class="marker">*</p></p></div> 
+                <select class="selector">
+                        <option value="">Select task category</option>
+                        <option value="2">Technical Task</option>
+                        <option value="3">User Story</option>
+                </select>
+            </div>
+
+            <div class="subtask-div">
+                <p class="subheadline">Subtasks</p>
+                <div id="subtask-wrapper" class="subtask-wrapper">
+                    <input onclick="changeButtons()" id="subtask-input" type="text" placeholder="Add new subtask">
+                    <div id="subtask-buttons" class="subtask-btn-div none">
+                       <button onclick="cancelSubtask()" class="cancel-btn"></button> 
+                       <div class="btn-divider"></div>
+                       <button onclick="addToSubtasks()" class="correct-btn"></button>   
+                    </div>
+                    <div id="subtask-plus-button-div" class="subtask-plus-btn-div">
+                        <button class="plus-btn"></button>
+                    </div>
+                    
+                </div>
+                <div class="subtask-div">
+                    <ul id="list-of-subtasks"> 
+                    </ul>
+                   
+                </div>
+            </div>
+
             <div class="createDiv">
                 <div class="explanation-div"><p class="marker">*<p class="explanation">This field is required</p></p></div>
                 <button class="create-btn">Create Task</button>
             </div>
+
             
         </form>
         

@@ -1,6 +1,10 @@
 async function includeHTML(path) {
-    document.getElementById('mobileTamplateContent').removeAttribute('w3-include-html');
-    document.getElementById('mobileTamplateContent').setAttribute('w3-include-html', `${path}`);
+
+    if(document.getElementById('mobileTamplateContent')){
+      document.getElementById('mobileTamplateContent').removeAttribute('w3-include-html');
+    document.getElementById('mobileTamplateContent').setAttribute('w3-include-html', `${path}`);  
+    }
+    
     
     console.log(path);
 
@@ -19,6 +23,8 @@ async function includeHTML(path) {
     }
 }
 
+
+
 async function includeJs(element) {
     let scripts = element.querySelectorAll('script');
     scripts.forEach(script => {
@@ -30,7 +36,32 @@ async function includeJs(element) {
     });
 }
 
+
+
+
+
 async function includeCss(element) {
+
+    let previousCssLink = null;
+    // Alle vorhandenen CSS-Dateien entfernen
+    if (previousCssLink) {
+        document.head.removeChild(previousCssLink);
+    }
+
+    // Neue CSS-Datei hinzufügen
+    let link = element.querySelector('link[rel="stylesheet"]');
+    if (link) {
+        let newLink = document.createElement('link');
+        newLink.rel = 'stylesheet';
+        newLink.href = link.href;
+        document.head.appendChild(newLink);
+        previousCssLink = newLink;
+    }
+} 
+
+
+
+/* async function includeCss(element) {
     let links = element.querySelectorAll('link[rel="stylesheet"]');
     links.forEach(link => {
         let newLink = document.createElement('link');
@@ -38,4 +69,4 @@ async function includeCss(element) {
         newLink.href = link.href;
         document.head.appendChild(newLink);
     });
-}
+} */

@@ -3,12 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/assets/css/fonts.css">
+    <link rel="stylesheet" href="/add_contact.css">
     <title>contacts</title>
-    <script src="script.js"></script>
+    <script src="/script.js"></script>
+    <script src="/assets/js/contacts.js"></script>
+    <script src="/assets/js/add_contact.js"></script>
+    <link rel="stylesheet" href="/assets/css/contact.css">
+
 </head>
-<body>
+<body onload="loadContacts('contacts')">
+    <div id="contact-div"></div>
+    <button onclick="showAddContact()" class="add-contact-btn"></button>
+
+    <div id="overlay-container" class="overlay-container">
+        <div class="top-container">
+            <div class="close-btn-div"><button class="close-btn"></button></div>
+            <div class="headline">Add Contact</div>
+            <div class="subheadline">Tasks are better with a team! </div>
+            <img class="divider" src="./assets/svg/underline_blue.svg">
+           
+
+        </div>
+ <img class="contact-pic" src="./assets/svg/Frame 79.svg">
+        <div class="bottom-container">
+            <form onsubmit="getTheInformation()" class="create-contact-form">
+                <input id="contact-name" type="text" required placeholder="Name">
+                <input id="contact-mail" type="email" required placeholder="Email">
+                <input id="contact-phone" type="tel" required placeholder="Phone">
+                <button class="create-contact-btn">Create contact <img src="./assets/svg/check.svg"></button>
+            </form>
+        </div>
+
+    </div>
     
 </body>
 </html>
