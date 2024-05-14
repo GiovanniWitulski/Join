@@ -517,21 +517,51 @@ cursor: pointer;
 
 .option{
 
-    width: 100%;
+    width: 364px;
     display: flex;
     justify-content: space-between;
+    height: 56px;
+    margin-bottom: 2px;
+    align-items: center;
+    padding-left: 16px;
+    border-radius: 10px;
+    
 }
 .option:hover{
     cursor: pointer;
+}
+
+.checkbox-icon{
+    width: 24px;
+    height: 24px;
+    padding-right: 16px;
 }
 
 
 .optionContainer{
 
     max-height: 280px;
-    width: 100%;
-    background-color: blue;
+    overflow-x: hidden !important;
+
+    width: calc(100% + 34px);
+    background-color: white;
     position: relative;
-    top: 40px;
+    top: 16px;
+    right: 16px;
     overflow: scroll;
+    z-index: 1;
+    
+}
+
+.contactNameDiv{
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.checked{
+
+    background-color: #2a3647;
+    color: white;
 }
