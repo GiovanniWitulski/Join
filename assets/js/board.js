@@ -79,7 +79,7 @@ function findTask(event){
 }
 
 function searchResult(s){        //Text im Titel oder Beschreibung --> Array Tasks noch auf API umschreiben
-    //Datenbankabgleich
+                                //Datenbankabgleich --> neue singleinsertFkts oder Array
 
     console.log("SearchResult übergeben:", s);
 
@@ -104,21 +104,23 @@ function searchResult(s){        //Text im Titel oder Beschreibung --> Array Tas
 }
     
 function toDoContainer (){
-
+    console.log("toDoContainer_active");
     for(i=0; i<Tasks.length; i++){
-        const toDoCard = Task[i];
-        if (toDo.type == 0){
+        const toDoCard = Tasks[i];
+        if (toDoCard.type == 0){
+            console.log("toDoContainer If-Active");
             toDo.innerHTML += `
         <div class="card-body">
-        <div id="cardHeader" class="card-header"><img src="" alt="label"></div>
-        <div id="cardTitle" class="card-title"><h1></h1></div>
-        <div id="cardDescription" class="card-description"><h3></h3></div>
-        <div id="dueDate" class="due-date"><h3></h3></div>
+        <div id="cardHeader" class="card-header"><img src="${toDoCard.label}" alt="label"></div>
+        <div id="cardTitle" class="card-title"><h2>${toDoCard.title}</h2></div>
+        <div id="cardDescription" class="card-description"><h3>${toDoCard.description}</h3></div>
+        <div id="dueDate" class="due-date"><h3>${toDoCard.date}</h3></div>
         <div class="assigned-to">
-        <div id="assignedTo"><h3>Assigned to:</h3><div id="participants" class="participants"></div>
+        <div id="assignedTo"><h3>Assigned to: ${toDoCard.assignedTo}</h3><div id="participants" class="participants"></div>
         </div>
         <div class="card-subtasks">
-        <div id="cardSubtasks"><h3>Subtasks</h3></div>
+        <div id="cardSubtasks"><h3>Subtasks: <br><img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${toDoCard.subtask[0]}<br>
+                               </h3><img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${toDoCard.subtask[1]}</div>
         <div id="cardChecklist" class="checklist"></div>
         </div>
         <div class="delete-edit">
@@ -129,6 +131,10 @@ function toDoContainer (){
         }
     }
 
+    if (toDo.innerHTML === '') {
+        toDo.innerHTML = `<img src="assets/svg/No_tasks_feedback_to_do.svg" class="to-do-container-mobile" alt=""></div>`
+    }
+
     //add Task - Cards with .innerHTML //
     // Label abfragen --> if label1 ---> img src "/img/label1.svg...", 
     // Checkbox abfragen: var checkbox = document.getElementById('checkboxId');
@@ -136,12 +142,14 @@ function toDoContainer (){
 }
 
 function inProgressContainer (){
+    console.log("inProgressContainer_active");
     let inProgress = document.getElementById('inProgressContainer'); 
     
     //add Task - Cards with .innerHTML //
 }
 
 function awaitFeedbackContainer(){
+    console.log("awaitFeedbackContainer_active");
     let inProgress = document.getElementById('inProgressContainer'); 
     awaitFeedback.innerHTML += ``
 
