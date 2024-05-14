@@ -3,6 +3,10 @@
     font-family: 'inter', sans-serif;
 }
 
+.d-none {
+    display: none;
+}
+
 h1 {
     font-size: 47px;
     font-weight: 700;
