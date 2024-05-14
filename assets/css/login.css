@@ -1,4 +1,4 @@
-.body-indexhtml {
+.login-body {
     align-items: center;
     margin-top: 37px;
     margin-bottom: 22px;
@@ -19,6 +19,10 @@
     justify-content: center;
 }
 
+.signup-title {
+    text-align: center;
+}
+
 .login-card {
     width: 100%;
     display: flex;
@@ -31,6 +35,19 @@
     margin-bottom: 57.5px;
 }
 
+.empty-div {
+    width: 32px;
+    height: 32px;
+    margin-left: 40px;
+}
+
+.arrow-login-underline-div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .login-underline-div {
     margin-top: 32px;
     display: flex;
@@ -40,6 +57,12 @@
 
 .login-underline {
     margin-top: 16px;
+}
+
+.sign-up-arrow-left {
+    width: 32px;
+    height: 32px;
+    margin-right: 40px;
 }
 
 .form-indexhtml {
@@ -85,7 +108,7 @@
 }
 
 .required-msg {
-    /* font-family: 'Poppins'; */
+    font-family: 'Poppins';
     font-weight: 400px;
     font-size: 12px;
     line-height: 14.4px;
@@ -107,11 +130,7 @@
 
 .remember-me-checkbox {
     width: 16px;
-    height: 16px;
-    top: 4px;
-    left: 4px;
-    border-radius: 3px;
-    border: 2px solid;
+    height: 16px; 
 }
 
 .remember-me-p {
@@ -131,6 +150,18 @@
     align-items: center;
     gap: 21px;
     margin-bottom: 32px;
+}
+
+.signup-btns-div {
+    margin-top: 32px;
+    margin-bottom: 32px;
+    width: 180px;
+    height: 51px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 21px;
 }
 
 .login-btn {

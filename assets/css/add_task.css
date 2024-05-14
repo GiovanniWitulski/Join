@@ -1,18 +1,18 @@
-.headline{
-    height: 112px;
-    width: fit-content;
+.headline {
+    /* height: 112px; */
+    padding-top: 48px;
+    width: 100%;
     font-size: 47px;
     font-weight: 700;
     display: flex;
     align-items: flex-end;
     padding-bottom: 32px;
-    padding-left: 16px;
-    position: sticky;
-    top: 84px;
+    /* position: sticky; */
+    /* top: 84px; */
     background-color: #F6F7F8;
 }
 
-body{
+body {
     background: #F6F7F8;
 }
 
@@ -21,12 +21,11 @@ input {
     background-color: white;
 }
 
-.content-container{
-
+.content-container {
     width: 100%;
-    padding-left: 16px;
     display: flex;
     justify-content: center;
+    margin-bottom: 80px;
 }
 
 .subheadlineDiv{
@@ -51,7 +50,8 @@ input {
     height: 40px;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
-    width: 396px;
+    width: 100%;
+    max-width: 396px;
     padding-inline: 21px;
     padding-bottom: 4px;
 }
@@ -72,8 +72,8 @@ input {
 }
 
 #descriptionInput{
-
-    width: 396px;
+    width: 100%;
+    max-width: 396px;
     height: 88px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
@@ -108,8 +108,8 @@ input {
 }
 
 .selector{
-
-    width: 396px;
+    width: 100%;
+    max-width: 396px;
     height: 48px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
@@ -217,8 +217,8 @@ select {
 
 
 #datePicker{
-
-    width: 396px;
+    width: 100%;
+    max-width: 396px;
     height: 40px;
     border-radius: 10px;
     padding: 8px, 21px, 8px, 21px;
@@ -235,7 +235,8 @@ select {
 .createDiv{
 
     display: flex;
-    width: 428px;
+    width: 100%;
+    max-width: 428px;
     height: 88px;
     padding: 16px;
     justify-content: space-between;
@@ -246,9 +247,7 @@ select {
 }
 
 .explanation-div{
-
     display: flex;
-    
     height: 24px;
     font-weight: 400;
     font-size: 20px;
@@ -256,7 +255,8 @@ select {
 }
 
 .create-btn{
-    width: 183px;
+    width: 100%;
+    max-width: 183px;
     height: 56px;
     border-radius: 10px;
     padding: 16px;
@@ -303,14 +303,16 @@ input[type='date']::-webkit-calendar-picker-indicator {
 .subtask-div{
 
     padding-bottom: 10px;
-    width: 396px;
+    width: 100%;
+    max-width: 396px;
     
 }
 
 #subtask-input{
 
     height: 48px;
-    width: 396px;
+    width: 100%;
+    max-width: 396px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
    padding: 14.5px 16px;
@@ -332,7 +334,8 @@ input[type='date']::-webkit-calendar-picker-indicator {
     position: relative;
     display: flex;
     align-items: center;
-    width: 396px;
+    width: 100%;
+    max-width: 396px;
 
 }
 
@@ -450,8 +453,8 @@ cursor: pointer;
 
 
 .buttonDiv{
-
-    width: 396px;
+    width: 100%;
+    max-width: 396px;
     height: 61px;
     display: flex;
     justify-content: space-between;
@@ -459,7 +462,8 @@ cursor: pointer;
 }
 
 .buttonDiv button{
-    width: 121.33px;
+    width: 100%;
+    max-width: 121.33px;
     height: 41px;
     border-radius: 10px;
     border: unset;
@@ -490,7 +494,8 @@ cursor: pointer;
     display: flex;
     position: relative;
     left: -40px;
-    width: 396px;
+    width: 100%;
+    max-width: 396px;
     justify-content: space-between;
 
 }
@@ -517,21 +522,51 @@ cursor: pointer;
 
 .option{
 
-    width: 100%;
+    width: 364px;
     display: flex;
     justify-content: space-between;
+    height: 56px;
+    margin-bottom: 2px;
+    align-items: center;
+    padding-left: 16px;
+    border-radius: 10px;
+    
 }
 .option:hover{
     cursor: pointer;
+}
+
+.checkbox-icon{
+    width: 24px;
+    height: 24px;
+    padding-right: 16px;
 }
 
 
 .optionContainer{
 
     max-height: 280px;
-    width: 100%;
-    background-color: blue;
+    overflow-x: hidden !important;
+
+    width: calc(100% + 34px);
+    background-color: white;
     position: relative;
-    top: 40px;
+    top: 16px;
+    right: 16px;
     overflow: scroll;
+    z-index: 1;
+    
+}
+
+.contactNameDiv{
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.checked{
+
+    background-color: #2a3647;
+    color: white;
 }

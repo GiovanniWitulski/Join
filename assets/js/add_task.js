@@ -147,6 +147,16 @@ function renderAssignSelector(){
     for (let i = 0; i < contactsAsJson.length; i++) {
         const contact = contactsAsJson[i];
         
-        document.getElementById('optionContainer').innerHTML += `<div class="option">${contact['vorname']} ${contact['name']} <img src="/assets/svg/rectangle.svg"></div>`;
+        document.getElementById('optionContainer').innerHTML += `<div id="contact${i}" class="option" onclick="assignTheContact(this)"><div class="contactNameDiv"><svg class="profile_pic" width="42px" height="42px">
+        <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2" fill="orange" />
+        <text x="12" y="25" fill="white" font-size="12px">${contact['vorname'].charAt(0)}${contact['name'].charAt(0)}</text>
+        </svg>${contact['vorname']} ${contact['name']}</div><img class="checkbox-icon" src="/assets/svg/rectangle.svg"></div>`;
     }
+}
+
+
+function assignTheContact(element){
+
+    document.getElementById(element.id).classList.toggle('checked');
+
 }
