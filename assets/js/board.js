@@ -1,5 +1,5 @@
 
-// String der alle Task beinhalt, Testweise befüllt
+// String der alle Tasks beinhalt, Testweise befüllt
 
 let Tasks = [           
     {
