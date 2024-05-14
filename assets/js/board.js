@@ -7,6 +7,7 @@ let TaskBoard = [
         "description": "To Do Example",
         "date": "03.05.2035",
         "subtask" : ["check this subtask.", "click on the small box to check it."],
+        "subtaskSum" :[0, 1],
         "priority" : ["medium", "/assets/svg/capa_1_medium_priority.svg"],
         "assignedTo" : ["Max Mustermann", "Richard Roberts"], // oder Id's der Mitarbeiter
         "type" : "0",
@@ -18,6 +19,7 @@ let TaskBoard = [
         "description": "In Progress Example",
         "date": "10.05.2035",
         "subtask" : ["check this subtask.", "click on the small box to check it."],
+        "subtaskSum" :[0, 0],
         "priority" : ["urgent", "/assets/svg/Capa_2_Burger menue_Arrow_up.svg"],
         "assignedTo" : ["Max Mustermann", "Richard Roberts"], // oder Id's der Mitarbeiter
         "type" : "1",
@@ -29,6 +31,7 @@ let TaskBoard = [
         "description": "Await Feedback Example",
         "date": "08.05.2035",
         "subtask" : ["check this subtask.", "click on the small box to check it."],
+        "subtaskSum" :[1, 1],
         "priority" : ["low", "/assets/svg/capa_priority_low.svg"],
         "assignedTo" : ["Max Mustermann", "Richard Roberts"], // oder Id's der Mitarbeiter
         "type" : "2",
@@ -37,16 +40,15 @@ let TaskBoard = [
 ];                         
 
 
-//global variables
+//global variables & Elementtargets
 
 const Searchfield = document.getElementById('boardInput').addEventListener('input', findTask);
 let toDo = document.getElementById('toDoContainer');
 let inProgress = document.getElementById('inProgressContainer');
 let awaitFeedback = document.getElementById('awaitFeedbackContainer');
+let Overlay = document.getElementById('Board');
 
 //functions
-
-
 
 function downloadData(){} //load from server    
 
@@ -59,6 +61,8 @@ function renderBoard(){
     awaitFeedbackContainer();    //load await feedback
 
 }
+
+//Search functions 
 
 function findTask(event){
     console.log("findTaskStarted");
@@ -101,31 +105,30 @@ function searchResult(s){
        }
 
 }
-    
+
+//Board render Tasks
+        
+        //--> Subtasks variable (subtaskSum[1,0] --> 1+0 -> (AdditionswertArray -> 1/2 Subtasks erledigt)
+
 function toDoContainer (){
     console.log("toDoContainer_active");
     for(i=0; i<TaskBoard.length; i++){
         const toDoCard = TaskBoard[i];
         if (toDoCard.type == 0){
             console.log("toDoContainer If-Active");
+            sumSubtask = toDoCard.subtaskSum[0]+toDoCard.subtaskSum[1];
+            console.log("Sumsubtask",sumSubtask);
             toDo.innerHTML += `
         <div class="card-body">
         <div id="cardHeader" class="card-header"><img src="${toDoCard.label}" alt="label"></div>
-        <div id="cardTitle" class="card-title"><h2>${toDoCard.title}</h2></div>
-        <div id="cardDescription" class="card-description"><h3>${toDoCard.description}</h3></div>
-        <div id="dueDate" class="due-date"><h3>${toDoCard.date}</h3></div>
+        <div id="cardTitle" class="card-title"><h4>${toDoCard.title}</h4></div>
+        <div id="cardDescription" class="card-description"><h4>${toDoCard.description}</h4></div>
+        <div id="priority" class
         <div class="assigned-to">
-        <div id="assignedTo"><h3>Assigned to: ${toDoCard.assignedTo}</h3><div id="participants" class="participants"></div>
+        <div id="assignedTo"><h4>Assigned to: ${toDoCard.assignedTo}</h4><div id="participants" class="participants"></div>
         </div>
-        <div class="card-subtasks">
-        <div id="cardSubtasks"><h3>Subtasks: </h3><br><img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${toDoCard.subtask[0]}<br>
-                               <img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${toDoCard.subtask[1]}</div>
-        <div id="cardChecklist" class="checklist"></div>
-        </div>
-        <div class="delete-edit">
-        <div><img src="/assets/svg/delete.svg" alt="delete"><h3>Delete</h3></div><div><img src="/assets/svg/edit.svg" alt="Edit"><h3>Edit</h3></div>
-        </div>
-        </div>
+        <div id="cardSubtasks" class="card-subtasks">----- ${sumSubtask}/2 Subtask</div>
+        
          `
         }
     }
@@ -147,24 +150,18 @@ function inProgressContainer (){
         const inProgressCard = TaskBoard[i];
         if (inProgressCard.type == 1){
             console.log("inProgressContainer If-Active");
+            sumSubtask = inProgressCard.subtaskSum[0]+inProgressCard.subtaskSum[1];
             inProgress.innerHTML += `
         <div class="card-body">
         <div id="cardHeader" class="card-header"><img src="${inProgressCard.label}" alt="label"></div>
-        <div id="cardTitle" class="card-title"><h2>${inProgressCard.title}</h2></div>
-        <div id="cardDescription" class="card-description"><h3>${inProgressCard.description}</h3></div>
-        <div id="dueDate" class="due-date"><h3>${inProgressCard.date}</h3></div>
+        <div id="cardTitle" class="card-title"><h4>${inProgressCard.title}</h4></div>
+        <div id="cardDescription" class="card-description"><h4>${inProgressCard.description}</h4></div>
         <div class="assigned-to">
-        <div id="assignedTo"><h3>Assigned to: ${inProgressCard.assignedTo}</h3><div id="participants" class="participants"></div>
+        <div id="assignedTo"><h4>Assigned to: ${inProgressCard.assignedTo}</h4><div id="participants" class="participants"></div>
         </div>
         <div class="card-subtasks">
-        <div id="cardSubtasks"><h3>Subtasks: </h3><br><img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${inProgressCard.subtask[0]}<br>
-                               <img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${inProgressCard.subtask[1]}</div>
-        <div id="cardChecklist" class="checklist"></div>
-        </div>
-        <div class="delete-edit">
-        <div><img src="/assets/svg/delete.svg" alt="delete"><h3>Delete</h3></div><div><img src="/assets/svg/edit.svg" alt="Edit"><h3>Edit</h3></div>
-        </div>
-        </div>
+        <div id="cardSubtasks" class="card-subtasks">----- ${sumSubtask}/2 Subtask</div>
+        
          `
         }
     }
@@ -182,24 +179,18 @@ function awaitFeedbackContainer(){
         const awaitFeedbackCard = TaskBoard[i];
         if (awaitFeedbackCard.type == 2){
             console.log("awaitFeedbackContainer If-Active");
+            sumSubtask = awaitFeedbackCard.subtaskSum[0]+awaitFeedbackCard.subtaskSum[1];
             awaitFeedback.innerHTML += `
         <div class="card-body">
         <div id="cardHeader" class="card-header"><img src="${awaitFeedbackCard.label}" alt="label"></div>
-        <div id="cardTitle" class="card-title"><h2>${awaitFeedbackCard.title}</h2></div>
-        <div id="cardDescription" class="card-description"><h3>${awaitFeedbackCard.description}</h3></div>
-        <div id="dueDate" class="due-date"><h3>${awaitFeedbackCard.date}</h3></div>
+        <div id="cardTitle" class="card-title"><h4>${awaitFeedbackCard.title}</h4></div>
+        <div id="cardDescription" class="card-description"><h4>${awaitFeedbackCard.description}</h4></div>
         <div class="assigned-to">
-        <div id="assignedTo"><h3>Assigned to: ${awaitFeedbackCard.assignedTo}</h3><div id="participants" class="participants"></div>
+        <div id="assignedTo"><h4>Assigned to: ${awaitFeedbackCard.assignedTo}</h4><div id="participants" class="participants"></div>
         </div>
         <div class="card-subtasks">
-        <div id="cardSubtasks"><h3>Subtasks: </h3><br><img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${awaitFeedbackCard.subtask[0]}<br>
-                               <img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${awaitFeedbackCard.subtask[1]}</div>
-        <div id="cardChecklist" class="checklist"></div>
-        </div>
-        <div class="delete-edit">
-        <div><img src="/assets/svg/delete.svg" alt="delete"><h3>Delete</h3></div><div><img src="/assets/svg/edit.svg" alt="Edit"><h3>Edit</h3></div>
-        </div>
-        </div>
+        <div id="cardSubtasks" class="card-subtasks">----- ${sumSubtask}/2 Subtask</div>
+        
          `
         }
     }
@@ -210,6 +201,30 @@ function awaitFeedbackContainer(){
 
 }
 
+// Overlay Task (angeklickter Task) // z-index in Class erhöhen! 
+                                    // innerHTML += da unterliegender Inhalt soll erhalten bleiben!
+                                    // assigned to mit eigener Fkt für Emblem oder als IMG
+function OverlayTask(i){ 
+        const Overlay = TaskBoard[i];
+        Overlay.innerHTML += `              
+        <div class="overlay-task">
+        <div id="verlayHeader" class="card-header"><img src="${Overlay.label}" alt="label"><img src="/assets/svg/Close.svg" alt="close"></div>
+        <div id="overlyTitle" class="card-title"><h2>${Overlay.title}</h2></div>
+        <div id="overlayDescription" class="card-description"><h3>${Overlay.description}</h3></div>
+        <div id="overlaydueDate" class="due-date"><div class="overlay-date">Due date:</div><h3>${Overlay.date}</h3></div>
+        <div id="overlaypriority" class="overlay-priority"></div>
+        <div class="assigned-to">
+        <div id="overlayAssignedTo"><h3>Assigned to: ${Overlay.assignedTo}</h3><div id="participants" class="participants"></div>  
+        </div>
+        <div class="card-subtasks">
+        <div id="cardSubtasks"><h3>Subtasks: </h3><br><img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${Overlay.subtask[0]}<br>
+        <img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${Overlay.subtask[1]}</div>
+        <div id="cardChecklist" class="checklist"></div>
+        </div>
+        <div class="delete-edit">
+        <div><img src="/assets/svg/delete.svg" alt="delete"><h3>Delete</h3></div><div><img src="/assets/svg/edit.svg" alt="Edit"><h3>Edit</h3></div>
+        </div>
+        </div>
 
-
-
+        `
+}

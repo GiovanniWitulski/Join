@@ -124,7 +124,13 @@ body {
     width: 100%;
 }
 
+/* OVERLAY - TASK */
 
+.overlay-task {
+    z-index: 2;
+    background-color: white;
+    border-radius: 8px;
+}
 
 
 
