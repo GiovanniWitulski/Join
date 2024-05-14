@@ -1,7 +1,6 @@
+console.log("board.js_loaded");
 
-// String der alle Tasks beinhalt, Testweise befüllt
-
-let Tasks = [           
+let TaskBoard = [           
     {
         "label": "/assets/svg/Labels Board card label technical task.svg",
         "title": "Technical Task Example",
@@ -47,12 +46,14 @@ let awaitFeedback = document.getElementById('awaitFeedbackContainer');
 
 //functions
 
+
+
 function downloadData(){} //load from server    
 
 function uploadData(){} //upload to server
 
 function renderBoard(){
-    function downloadData(){} //load from server, actualise Task - Array
+    downloadData(); //load from server, actualise Task - Array
     toDoContainer();    //load to do´s 
     inProgressContainer();       //load tasks in progress
     awaitFeedbackContainer();    //load await feedback
@@ -78,25 +79,23 @@ function findTask(event){
     searchResult(SearchedTask);
 }
 
-function searchResult(s){        //Text im Titel oder Beschreibung --> Array Tasks noch auf API umschreiben
-                                //Datenbankabgleich --> neue singleinsertFkts oder Array
-
+function searchResult(s){       
     console.log("SearchResult übergeben:", s);
 
-    for(i=0; i<Tasks.length; i++){
-        if (Tasks[i].title == s && Tasks[i].type == 0){
+    for(i=0; i<TaskBoard.length; i++){
+        if (TaskBoard[i].title == s && TaskBoard[i].type == 0){
             toDoContainer(i);    //Card einfügen
-        } else if (Tasks[i].description == s && Tasks[i].type == 0){
+        } else if (TaskBoard[i].description == s && TaskBoard[i].type == 0){
             toDoContainer(i);   //Card einfügen
         }
-        if (Tasks[i].title == s && Tasks[i].type == 1){
+        if (TaskBoard[i].title == s && TaskBoard[i].type == 1){
             inProgressContainer(i);   //Card einfügen
-        } else if (Tasks[i].description == s && Tasks[i].type == 1){
+        } else if (TaskBoard[i].description == s && TaskBoard[i].type == 1){
             inProgressContainer(i);  //Card einfügen
         }
-        if (Tasks[i].title == s && Tasks[i].type == 2){
+        if (TaskBoard[i].title == s && TaskBoard[i].type == 2){
             awaitFeedbackContainer(i);  //Card einfügen
-        } else if (Tasks[i].description == s && Tasks[i].type == 2){
+        } else if (TaskBoard[i].description == s && TaskBoard[i].type == 2){
             awaitFeedbackContainer(i);  //Card einfügen
         }
        }
@@ -105,8 +104,8 @@ function searchResult(s){        //Text im Titel oder Beschreibung --> Array Tas
     
 function toDoContainer (){
     console.log("toDoContainer_active");
-    for(i=0; i<Tasks.length; i++){
-        const toDoCard = Tasks[i];
+    for(i=0; i<TaskBoard.length; i++){
+        const toDoCard = TaskBoard[i];
         if (toDoCard.type == 0){
             console.log("toDoContainer If-Active");
             toDo.innerHTML += `
@@ -119,8 +118,8 @@ function toDoContainer (){
         <div id="assignedTo"><h3>Assigned to: ${toDoCard.assignedTo}</h3><div id="participants" class="participants"></div>
         </div>
         <div class="card-subtasks">
-        <div id="cardSubtasks"><h3>Subtasks: <br><img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${toDoCard.subtask[0]}<br>
-                               </h3><img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${toDoCard.subtask[1]}</div>
+        <div id="cardSubtasks"><h3>Subtasks: </h3><br><img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${toDoCard.subtask[0]}<br>
+                               <img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${toDoCard.subtask[1]}</div>
         <div id="cardChecklist" class="checklist"></div>
         </div>
         <div class="delete-edit">
@@ -132,7 +131,7 @@ function toDoContainer (){
     }
 
     if (toDo.innerHTML === '') {
-        toDo.innerHTML = `<img src="assets/svg/No_tasks_feedback_to_do.svg" class="to-do-container-mobile" alt=""></div>`
+        toDo.innerHTML = `<img src="assets/svg/assets/svg/board_in_progress_example.svg" class="to-do-container-mobile" alt=""></div>`
     }
 
     //add Task - Cards with .innerHTML //
@@ -143,17 +142,72 @@ function toDoContainer (){
 
 function inProgressContainer (){
     console.log("inProgressContainer_active");
-    let inProgress = document.getElementById('inProgressContainer'); 
+
+    for(i=0; i<TaskBoard.length; i++){
+        const inProgressCard = TaskBoard[i];
+        if (inProgressCard.type == 1){
+            console.log("inProgressContainer If-Active");
+            inProgress.innerHTML += `
+        <div class="card-body">
+        <div id="cardHeader" class="card-header"><img src="${inProgressCard.label}" alt="label"></div>
+        <div id="cardTitle" class="card-title"><h2>${inProgressCard.title}</h2></div>
+        <div id="cardDescription" class="card-description"><h3>${inProgressCard.description}</h3></div>
+        <div id="dueDate" class="due-date"><h3>${inProgressCard.date}</h3></div>
+        <div class="assigned-to">
+        <div id="assignedTo"><h3>Assigned to: ${inProgressCard.assignedTo}</h3><div id="participants" class="participants"></div>
+        </div>
+        <div class="card-subtasks">
+        <div id="cardSubtasks"><h3>Subtasks: </h3><br><img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${inProgressCard.subtask[0]}<br>
+                               <img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${inProgressCard.subtask[1]}</div>
+        <div id="cardChecklist" class="checklist"></div>
+        </div>
+        <div class="delete-edit">
+        <div><img src="/assets/svg/delete.svg" alt="delete"><h3>Delete</h3></div><div><img src="/assets/svg/edit.svg" alt="Edit"><h3>Edit</h3></div>
+        </div>
+        </div>
+         `
+        }
+    }
+
+    if (inProgress.innerHTML === '') {
+        inProgress.innerHTML = `<img class="no-task-progress" src="/assets/svg/No_tasks_feedback_in_progress.svg" alt="">`
+    }
     
-    //add Task - Cards with .innerHTML //
 }
 
 function awaitFeedbackContainer(){
     console.log("awaitFeedbackContainer_active");
-    let inProgress = document.getElementById('inProgressContainer'); 
-    awaitFeedback.innerHTML += ``
 
-    //add Task - Cards with .innerHTML //
+    for(i=0; i<TaskBoard.length; i++){
+        const awaitFeedbackCard = TaskBoard[i];
+        if (awaitFeedbackCard.type == 2){
+            console.log("awaitFeedbackContainer If-Active");
+            awaitFeedback.innerHTML += `
+        <div class="card-body">
+        <div id="cardHeader" class="card-header"><img src="${awaitFeedbackCard.label}" alt="label"></div>
+        <div id="cardTitle" class="card-title"><h2>${awaitFeedbackCard.title}</h2></div>
+        <div id="cardDescription" class="card-description"><h3>${awaitFeedbackCard.description}</h3></div>
+        <div id="dueDate" class="due-date"><h3>${awaitFeedbackCard.date}</h3></div>
+        <div class="assigned-to">
+        <div id="assignedTo"><h3>Assigned to: ${awaitFeedbackCard.assignedTo}</h3><div id="participants" class="participants"></div>
+        </div>
+        <div class="card-subtasks">
+        <div id="cardSubtasks"><h3>Subtasks: </h3><br><img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${awaitFeedbackCard.subtask[0]}<br>
+                               <img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${awaitFeedbackCard.subtask[1]}</div>
+        <div id="cardChecklist" class="checklist"></div>
+        </div>
+        <div class="delete-edit">
+        <div><img src="/assets/svg/delete.svg" alt="delete"><h3>Delete</h3></div><div><img src="/assets/svg/edit.svg" alt="Edit"><h3>Edit</h3></div>
+        </div>
+        </div>
+         `
+        }
+    }
+
+    if (toDo.innerHTML === '') {
+        toDo.innerHTML = `<img src="assets/svg/assets/svg/board_in_progress_example.svg" class="to-do-container-mobile" alt=""></div>`
+    }
+
 }
 
 
