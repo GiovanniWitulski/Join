@@ -8,14 +8,16 @@
     <link rel="stylesheet" href="assets/css/board.css">
     <title>Board</title>
     <script src="/script.js"></script>
-    <script src="/assets/js/board.js" defer></script> 
     <script src="/assets/js/w3_include.js"></script>
+    <script src="/assets/js/board.js" defer></script> 
 
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/assets/css/board.css">
+    <link rel="stylesheet" href="/assets/css/card.css">
 </head>
+    
 <body onload="renderBoard()">
-    <div class="render_board_mobile">
+    <div id="Board" class="render_board_mobile">
         <div class="board-add-task-mobile">
             <div class="board-add-task-title-mobile">
                 <h1>Board</h1><img onclick="addTaskToBoard()" class="add-task-mobile-img" src="/assets/svg/plus_add_task_mobile.svg" alt="add">
@@ -30,14 +32,15 @@
         </div>
         <div class="in-progress-mobile">
             <div class="in-progress-title-mobile"><h2>In progress</h2><img onclick="inProgressAdd()" class="to-do-add-mobile-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
-            <div id="inProgressContainer" class="in-progress-container-mobile"><img class="no-task-progress" src="/assets/svg/No_tasks_feedback_in_progress.svg" alt=""></div>
+            <div id="inProgressContainer" class="in-progress-container-mobile"></div>
         </div>
         <div class="await-feedback">
             <div class="await-feedback-title-mobile"><h2>Await Feedback</h2><img onclick="feedbackAdd()" class="await-feedback-mobile-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
             <div id="awaitFeedbackContainer" class="await-feedback-container">
-                <img src="/assets/svg/board_in_progress_example.svg" alt="TEST_EXAMPLE"> 
             </div>        
         </div>
     </div>
+
+
 </body>
 </html>

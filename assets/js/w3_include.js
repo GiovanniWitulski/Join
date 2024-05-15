@@ -31,6 +31,25 @@ async function includeJs(element) {
     });
 }
 
+
+/*async function includeJs(element){
+
+    let previousJsLink = null;
+    if(previousJsLink){
+        document.head.removeChild(previousJsLink);
+    }
+
+    let scripts = element.querySelectorAll('script');
+    scripts.forEach(script =>{
+        let newScript = document.createElement('script');
+        let attributes = Array.from(script.attributes);
+        attributes.forEach(attr => newScript.setAttribute(attr.name, attr.value));
+        newScript.innerHTML = script.innerHTML;
+        script.parentNode.replaceChild(newScript, script);
+    });
+    previousJsLink = scripts;
+}*/
+
 async function includeCss(element) {
     let previousCssLink = null;
     if (previousCssLink) {
