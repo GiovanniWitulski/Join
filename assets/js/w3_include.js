@@ -1,9 +1,9 @@
 async function includeHTML(path) {
-    if(document.getElementById('mobileTamplateContent')){
-      document.getElementById('mobileTamplateContent').removeAttribute('w3-include-html');
-    document.getElementById('mobileTamplateContent').setAttribute('w3-include-html', `${path}`);  
+    if (document.getElementById('mobileTamplateContent')){
+        document.getElementById('mobileTamplateContent').removeAttribute('w3-include-html');
+        document.getElementById('mobileTamplateContent').setAttribute('w3-include-html', `${path}`);  
     }
-    console.log(path);
+    // console.log(path);
 
     let includeElements = document.querySelectorAll('[w3-include-html]');
     for (let i = 0; i < includeElements.length; i++) {

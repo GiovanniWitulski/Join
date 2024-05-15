@@ -10,7 +10,7 @@
     <script src="/assets/js/remoteStorage.js"></script>
     <script src="/script.js"></script>
     <script src="/assets/js/w3_include.js"></script>
-    <a href="/assets/css/fonts.css"></a>
+    <script type="module" src="/assets/js/mobile_template.js"></script>
 </head>
 <body class="mobileHTML-body">
     <header>
@@ -51,18 +51,7 @@
 
     
     <script>
-        const menuButton = document.querySelector('.sm-btn');
-        const sideMenu = document.querySelector('.side-menu');
 
-        menuButton.addEventListener('click', () => {
-        sideMenu.classList.toggle('open');
-        });
-
-        document.addEventListener('click', (event) => {
-        if (!sideMenu.contains(event.target) && !menuButton.contains(event.target)) {
-            sideMenu.classList.remove('open'); 
-        }
-        });
     </script>
 </body>
 </html>
