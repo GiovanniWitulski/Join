@@ -86,13 +86,22 @@ function findTask(event){
     searchResult(SearchedTask);
 }
 
-function searchResult(s){       
-    console.log("SearchResult übergeben:", s);
+function searchResult(s){        //zu bearbeiten --> Found at i -> i at 
+    console.log("an SearchResult übergeben:", s);
+    const searchArray = TaskBoard;
+    const search = s;
+    const index = searchArray.indexOf(s);
 
-    for(i=0; i<TaskBoard.length; i++){
+    if (index !== 0) {console.log("search found at:", index);}
+    else {console.log("search not found");}
+
+   /* for(i=0; i<TaskBoard.length; i++){
+        console.log("searchresult for loop active:",s);
         if (TaskBoard[i].title == s && TaskBoard[i].type == 0){
+            console.log("found at to do task:", s);
             toDoContainer(i);    //Card einfügen
         } else if (TaskBoard[i].description == s && TaskBoard[i].type == 0){
+            console.log("found at to do task:", s);
             toDoContainer(i);   //Card einfügen
         }
         if (TaskBoard[i].title == s && TaskBoard[i].type == 1){
@@ -105,7 +114,7 @@ function searchResult(s){
         } else if (TaskBoard[i].description == s && TaskBoard[i].type == 2){
             awaitFeedbackContainer(i);  //Card einfügen
         }
-       }
+       } */
 
 }
 
@@ -114,10 +123,11 @@ function searchResult(s){
         //--> Subtasks variable (subtaskSum[1,0] --> 1+0 -> (AdditionswertArray -> 1/2 Subtasks erledigt)
         // contact emblems über eigene FKT einfügen lassen, da Anzahl variieren kann.
         //Falls Subtasks nicht immer zwei Stück -> progressbar => sumSubtask/subtask.length = X -> % progressbar
-function toDoContainer (){
+function toDoContainer (f){
     console.log("toDoContainer_active");
     for(i=0; i<TaskBoard.length; i++){
         const toDoCard = TaskBoard[i];
+        if(f ==! null){console.log("toDoContainer: i übergeben als f:", f);}
         if (toDoCard.type == 0){
             console.log("toDoContainer If-Active");
 
@@ -125,7 +135,6 @@ function toDoContainer (){
             const progressInPercent = sumSubtask * 50;
             
 
-            console.log("Sumsubtask",sumSubtask);
             toDo.innerHTML += `
         <div class="card-body">
         <div id="cardHeader" class="card-header"><img src="${toDoCard.label}" alt="label"></div>
@@ -136,7 +145,7 @@ function toDoContainer (){
         <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
         <rect id="progressRect" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
-        <div class="card-sum-subtask">${sumSubtask}/2 Subtask</div></div>
+        <div class="card-sum-subtask">${sumSubtask}/2 Subtasks</div></div>
         
         <div id="cardParticipantsPriority" class="card-participants-prority">
         <div id="cardContactEmblems" class="card-contact-emblems">
@@ -182,7 +191,7 @@ function inProgressContainer (){
         <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
         <rect id="cardInProgressBar" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
-        <div class="card-sum-subtask">${sumSubtask}/2 Subtask</div></div>
+        <div class="card-sum-subtask">${sumSubtask}/2 Subtasks</div></div>
 
         <div id="cardParticipantsPriority" class="card-participants-prority">
         <div id="cardContactEmblems" class="card-contact-emblems">
@@ -227,7 +236,7 @@ function awaitFeedbackContainer(){
         <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
         <rect id="awaitFeedbackBar" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
-        <div class="card-sum-subtask">${sumSubtask}/2 Subtask</div></div>
+        <div class="card-sum-subtask">${sumSubtask}/2 Subtasks</div></div>
 
         <div id="cardParticipantsPriority" class="card-participants-prority">
         <div id="cardContactEmblems" class="card-contact-emblems">
