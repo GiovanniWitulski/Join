@@ -30,11 +30,14 @@
 
             <div class="assignedDiv">
                 <p class="subheadline">Assigned to</p>
-                <div onclick="renderAssignSelector()" id="contact-selector" class="selector">
-                    <label>Select contacts to assign</label>
-                    
+                <div class="select-wrapper"><input placeholder="Select contacts to assign" type="text" onclick="renderAssignSelector(), showContactsToAssign()" id="contact-selector" class="selector"></input> 
+                
+                  <button id="dropdown-btn" onclick="hideContactsToAssign(this)" class="dropdown-btn"></button>
                 </div>
-                <div id="optionContainer" class="optionContainer"></div>
+                     
+            
+          
+                <div id="optionContainer" class="optionContainer none"></div>
             </div>
 
             <div class="dateDiv">
@@ -54,7 +57,7 @@
 
             <div class="category-div">
                <div class="subheadlineDiv"><p class="subheadline">Category <p class="marker">*</p></p></div> 
-                <select class="selector">
+                <select class="selector dropdown-img">
                         <option value="">Select task category</option>
                         <option value="2">Technical Task</option>
                         <option value="3">User Story</option>

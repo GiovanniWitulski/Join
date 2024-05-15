@@ -142,21 +142,82 @@ function deleteElementById(elementId){
 
 
 function renderAssignSelector(){
-
+if(document.getElementById('optionContainer').innerHTML == ``){
+    document.getElementById('optionContainer').innerHTML = ``;
 
     for (let i = 0; i < contactsAsJson.length; i++) {
         const contact = contactsAsJson[i];
         
-        document.getElementById('optionContainer').innerHTML += `<div id="contact${i}" class="option" onclick="assignTheContact(this)"><div class="contactNameDiv"><svg class="profile_pic" width="42px" height="42px">
+        document.getElementById('optionContainer').innerHTML += `<div id="contact${i}" class="option" onclick="assignTheContact(this,${i})"><div class="contactNameDiv"><svg class="profile_pic" width="42px" height="42px">
         <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2" fill="orange" />
         <text x="12" y="25" fill="white" font-size="12px">${contact['vorname'].charAt(0)}${contact['name'].charAt(0)}</text>
-        </svg>${contact['vorname']} ${contact['name']}</div><img class="checkbox-icon" src="/assets/svg/rectangle.svg"></div>`;
+        </svg><div class="contactNames">${contact['vorname']} ${contact['name']}</div></div><img id="checkbox${i}" class="checkbox-icon" src="/assets/svg/rectangle.svg"></div>`;
+    }
+}
+
+}
+
+
+function assignTheContact(element, checkboxID){
+    document.getElementById(element.id).classList.toggle('checked');
+    let checkbox = document.getElementById(`checkbox${checkboxID}`);
+    let src = checkbox.src;
+    if(document.getElementById(element.id).classList.contains('checked')){
+        checkbox.src = '/assets/svg/checkboxWhite.svg';
+    }else{
+        checkbox.src = '/assets/svg/rectangle.svg';
+    }
+}
+
+function showContactsToAssign(){
+    document.getElementById('optionContainer').classList.remove('none');
+    if(!document.getElementById('dropdown-btn').classList.contains('active')){
+        document.getElementById('dropdown-btn').classList.add('active');
     }
 }
 
 
-function assignTheContact(element){
+function filterAssignedContacts(){
 
-    document.getElementById(element.id).classList.toggle('checked');
+    let assignableContacts = document.getElementsByClassName('contactNames');
+    let input = document.getElementById('contact-selector');
+    let filter = input.value.toLowerCase();
 
+    for (let i = 0; i < assignableContacts.length; i++) {
+        const element = assignableContacts[i];
+        const text = element.innerText;
+        if(!text.toLowerCase().includes(filter)){
+            
+            document.getElementById(`contact${i}`).classList.add('none');
+            document.getElementById(`contact${i}`).classList.remove('option');
+           
+        }else{
+            document.getElementById(`contact${i}`).classList.add('option');
+            document.getElementById(`contact${i}`).classList.remove('none');
+            if(!document.getElementById(`contact${i}`).classList.contains('checked')){
+                document.getElementById(`checkbox${i}`).src = '/assets/svg/rectangle.svg';
+            }
+       
+
+            
+        }
+        
+    }
 }
+
+function addEventListenerToInput(){
+
+    document.getElementById('contact-selector').addEventListener('input',filterAssignedContacts);
+}
+
+function hideContactsToAssign(button){
+
+    document.getElementById('optionContainer').classList.add('none');
+    if(button.classList.contains('active')){
+          button.classList.toggle('active');
+    }
+  
+}
+
+
+document.addEventListener('DOMContentLoaded', addEventListenerToInput);

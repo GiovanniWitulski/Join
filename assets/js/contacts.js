@@ -1,6 +1,6 @@
 let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h','i','j','k','l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 let contactsAsJson;
-const BASE_URL = "https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app/";
+
 
 async function loadContacts(path=""){
     
@@ -23,7 +23,7 @@ function createDivs(){
             for (let j = 0; j < contactsAsJson.length; j++) {
                 const contact = contactsAsJson[j];
                 if(contact['vorname'].charAt(0).toUpperCase() === element.toUpperCase()){
-                    document.getElementById(`contactsOf${element}`).innerHTML += `<div class="singleContact"><svg class="profile_pic" width="42px" height="42px">
+                    document.getElementById(`contactsOf${element}`).innerHTML += `<div onclick="includeHTML('/assets/templates/contact_details.html')" id="${j}" class="singleContact"><svg class="profile_pic" width="42px" height="42px">
                     <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2" fill="orange" />
                     <text x="12" y="25" fill="white" font-size="12px">${contact['vorname'].charAt(0)}${contact['name'].charAt(0)}</text>
                     </svg>
@@ -51,3 +51,5 @@ function showAddContact(){
     
     document.getElementById('overlay-container').classList.add('show');
 }
+
+document.addEventListener('DOMContentLoaded', loadContacts('contacts'));
