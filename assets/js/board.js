@@ -1,8 +1,8 @@
 console.log("board.js_loaded");
 
-let BackupTaskBoard = []
+let TaskBoard = []
 
-let TaskBoard = [           
+let BackgroundTaskBoard = [           
     {
         "label": "/assets/svg/Labels Board card label technical task.svg",
         "title": "Technical Task Example",
@@ -53,8 +53,8 @@ let inProgress = document.getElementById('inProgressContainer');
 let awaitFeedback = document.getElementById('awaitFeedbackContainer');
 let Overlay = document.getElementById('Board');
 
-BackupTaskBoard = TaskBoard; //TaskBoard -> RAM Arbeitsarray --> BackupTaskboard -> ROM Abbilddatei
-console.log ("backuptaskboard:", BackupTaskBoard);
+TaskBoard = BackgroundTaskBoard; //TaskBoard -> RAM Arbeitsarray --> BackgroundTaskBoard -> ROM 
+console.log ("TaskBoard:", TaskBoard);
 
 //functions
 
@@ -77,14 +77,11 @@ function findTask(event){
     const SearchedTask = event.target.value;
     if (SearchedTask == ""){
         console.log("input field empty");
-
+        TaskBoard = BackgroundTaskBoard;
         renderBoard();                //Searchfield empty again -> reload up do date status
-        return;
+        return;                       //Taskboard = BackgroundTaskBoard einfügen
     }
     console.log("Aktueller Suchfeldwert:",SearchedTask);
-    let toDo = document.getElementById('toDoContainer');
-    let inProgress = document.getElementById('inProgressContainer');
-    let awaitFeedback = document.getElementById('awaitFeedbackContainer');
     toDo.innerHTML = '';
     inProgress.innerHTML = '';
     awaitFeedback.innerHTML = '';
@@ -92,8 +89,13 @@ function findTask(event){
     searchResult(SearchedTask);
 }
 
-function searchResult(s){    //nicht mit Suche übereinstimmtenden Task löschen, then renderBoar()
-                             //after search/Änderung Suchinput -> BackupTaskboard = Taskboard befüllen, repeat
+
+
+
+
+function searchResult(s){    //1.TaskBoard leeren , then re2.TaskBoard aus BackupTaskBoard mit passenden Task befüllen
+                             //2.TaskBoard aus BackupTask mit passenden Task befüllen -> 
+                             //3. renderBoard() as usual -> inputSearch empty-> Taskboard = BackupTaskobard
     console.log("an SearchResult übergeben:", s);
     const searchArray = TaskBoard;
     const search = s;
