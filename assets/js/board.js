@@ -77,6 +77,9 @@ function findTask(event){
     const SearchedTask = event.target.value;
     if (SearchedTask == ""){
         console.log("input field empty");
+        toDo.innerHTML = '';
+        inProgress.innerHTML = '';
+        awaitFeedback.innerHTML = '';
         TaskBoard = BackgroundTaskBoard;
         renderBoard();                //Searchfield empty again -> reload up do date status
         return;                       //Taskboard = BackgroundTaskBoard einfügen
@@ -85,46 +88,24 @@ function findTask(event){
     toDo.innerHTML = '';
     inProgress.innerHTML = '';
     awaitFeedback.innerHTML = '';
-
     searchResult(SearchedTask);
 }
 
-
-
-
-
-function searchResult(s){    //1.TaskBoard leeren , then re2.TaskBoard aus BackupTaskBoard mit passenden Task befüllen
-                             //2.TaskBoard aus BackupTask mit passenden Task befüllen -> 
-                             //3. renderBoard() as usual -> inputSearch empty-> Taskboard = BackupTaskobard
+function searchResult(s){    //1. Empty Areas -> img "no tasks in progress/todo/..." <-- NO SHOW!
     console.log("an SearchResult übergeben:", s);
-    const searchArray = TaskBoard;
-    const search = s;
-    const index = searchArray.indexOf(s);
+    TaskBoard = [];
+    console.log("Taskboard:", TaskBoard);
+    for (let i = 0; i < BackgroundTaskBoard.length; i++) {
+        const task = BackgroundTaskBoard[i];
 
-    if (index !== 0) {console.log("search found at:", index);}
-    else {console.log("search not found");}
+        if (task.title.toLowerCase().includes(s.toLowerCase()) || task.description.toLowerCase().includes(s.toLowerCase())) {
+            console.log("Found at i = ", i);
+            TaskBoard.push(task);       
+        }
+    }
+    
 
-   /* for(i=0; i<TaskBoard.length; i++){
-        console.log("searchresult for loop active:",s);
-        if (TaskBoard[i].title == s && TaskBoard[i].type == 0){
-            console.log("found at to do task:", s);
-            toDoContainer(i);    //Card einfügen
-        } else if (TaskBoard[i].description == s && TaskBoard[i].type == 0){
-            console.log("found at to do task:", s);
-            toDoContainer(i);   //Card einfügen
-        }
-        if (TaskBoard[i].title == s && TaskBoard[i].type == 1){
-            inProgressContainer(i);   //Card einfügen
-        } else if (TaskBoard[i].description == s && TaskBoard[i].type == 1){
-            inProgressContainer(i);  //Card einfügen
-        }
-        if (TaskBoard[i].title == s && TaskBoard[i].type == 2){
-            awaitFeedbackContainer(i);  //Card einfügen
-        } else if (TaskBoard[i].description == s && TaskBoard[i].type == 2){
-            awaitFeedbackContainer(i);  //Card einfügen
-        }
-       } */
-
+    renderBoard();
 }
 
 //Board render Tasks
@@ -132,11 +113,11 @@ function searchResult(s){    //1.TaskBoard leeren , then re2.TaskBoard aus Backu
         //--> Subtasks variable (subtaskSum[1,0] --> 1+0 -> (AdditionswertArray -> 1/2 Subtasks erledigt)
         // contact emblems über eigene FKT einfügen lassen, da Anzahl variieren kann.
         //Falls Subtasks nicht immer zwei Stück -> progressbar => sumSubtask/subtask.length = X -> % progressbar
-function toDoContainer (f){
+function toDoContainer (){
     console.log("toDoContainer_active");
     for(i=0; i<TaskBoard.length; i++){
         const toDoCard = TaskBoard[i];
-        if(f ==! null){console.log("toDoContainer: i übergeben als f:", f);}
+
         if (toDoCard.type == 0){
             console.log("toDoContainer If-Active");
             sumSubtask = toDoCard.subtaskSum[0]+toDoCard.subtaskSum[1];
@@ -227,9 +208,11 @@ function inProgressContainer (){
         }
     }
 
+    /* ACTIVATE LATER -> 
     if (inProgress.innerHTML === '') {
         inProgress.innerHTML = `<img class="no-task-progress" src="/assets/svg/No_tasks_feedback_in_progress.svg" alt="">`
     }
+    */
     
 }
 
