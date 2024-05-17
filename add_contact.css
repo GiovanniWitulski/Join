@@ -1,9 +1,8 @@
 
-body{
+body {
     margin: 0;
 }
-.overlay-container{
-
+.overlay-container {
     width: 396px;
     height: 760px;
     border-radius: 30px;
@@ -14,8 +13,7 @@ body{
 
 }
 
-.show{
-
+.show {
     transform: translateY(0px);
 }
 
@@ -27,7 +25,6 @@ body{
 }
 
 .bottom-container{
-
     margin-top: -28px;
 }
 
