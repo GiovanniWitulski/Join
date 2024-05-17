@@ -10,3 +10,6 @@
             sideMenu.classList.remove('open'); 
         }
         });
+
+
+        

@@ -234,11 +234,34 @@ select {
     border: 1px solid #D1D1D1;
     padding-inline: 21px;
     background-image: url(/assets/svg/event.svg);
+    
     background-position: calc(100% - 21px);
     background-size: 24px 24px;
     background-repeat: no-repeat;
+    background-color: white;
     margin-bottom: 4px;
     
+    
+}
+
+#datePicker:hover{
+    cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover{
+    cursor: pointer;
+}
+
+input[type="date"]::-moz-focus-inner{
+    background: transparent;
+}
+
+input[type="date"]::-moz-focus-inner:hover{
+    cursor: pointer;
 }
 
 .createDiv{
@@ -285,9 +308,20 @@ select {
     gap: 4px;  
 }
 
-input[type='date']::-webkit-calendar-picker-indicator {
+/* input[type='date']::-webkit-calendar-picker-indicator {
     background: transparent;
-}
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+} */
+
+
 
 .dateDiv{
     transition: all;
@@ -522,7 +556,8 @@ cursor: pointer;
 
 .option{
 
-    width: 364px;
+    max-width: 364px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     height: 56px;
@@ -619,5 +654,19 @@ cursor: pointer;
 
         transform: rotate(180deg);
     }
+}
+
+@media (max-width: 390px){
+
+    .prioLabel{
+
+        display: none;
+    }
+
+    .buttonDiv button{
+
+        background-position: center;
+    }
+
 }
 
