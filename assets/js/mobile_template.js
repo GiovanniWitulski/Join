@@ -1,15 +1,16 @@
-        const menuButton = document.querySelector('.sm-btn');
-        const sideMenu = document.querySelector('.side-menu');
+function openSideMenu() {
+    const sideMenu = document.getElementById("sideMenu");
+    sideMenu.classList.toggle("side-menu-open");
 
-        menuButton.addEventListener('click', () => {
-        sideMenu.classList.toggle('open');
-        });
+  document.addEventListener('click', handleClickOutside);
+}
 
-        document.addEventListener('click', (event) => {
-        if (!sideMenu.contains(event.target) && !menuButton.contains(event.target)) {
-            sideMenu.classList.remove('open'); 
-        }
-        });
+function handleClickOutside(event) {
+  const sideMenu = document.getElementById("sideMenu");
+  const smBtn = document.getElementById("smBtn");
 
-
-        
+  if (!sideMenu.contains(event.target) && event.target !== smBtn) {
+    sideMenu.classList.remove("side-menu-open");
+    document.removeEventListener('click', handleClickOutside);
+  }
+}

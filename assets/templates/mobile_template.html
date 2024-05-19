@@ -10,14 +10,13 @@
     <script src="/assets/js/remoteStorage.js"></script>
     <script src="/script.js"></script>
     <script src="/assets/js/w3_include.js"></script>
-    <script src="/assets/js/mobile_template.js"></script>
 </head>
 <body class="mobileHTML-body">
     <header>
         <img class="join-logo" src="/assets/svg/join-logo.svg" alt="join logo">
         <div>
-            <span class="sm-btn">SM</span>
-            <nav class="side-menu">
+            <span onclick="openSideMenu()" id="smBtn" class="sm-btn">SM</span>
+            <nav id="sideMenu" class="side-menu">
                 <ul class="ul-side-menu">
                     <li class="li-side-menu"><a href="/assets/templates/help.html">Help</a></li>
                     <li class="li-side-menu"><a href="/assets/templates/legal_notice.html">Legal Notice</a></li>
@@ -28,25 +27,31 @@
         </div>
     </header>
 
-    <div id="mobileTamplateContent" w3-include-html="/assets/templates/help.html"></div>
-
     <nav class="nav-mobile">
-        <li class="menu-links">
-            <img class="menu-icons" src="/assets/svg/summary-icon.svg" alt="summary">
-            <span class="menu-links-text">Summary</span>
-        </li>
-        <li class="menu-links" onclick="includeHTML('/board.html')">
-            <img class="menu-icons" src="/assets/svg/board-icon.svg" alt="board">
-            <span class="menu-links-text">Board</span>
-        </li>
-        <li class="menu-links" onclick="includeHTML('/add_task.html')">
-            <img class="menu-icons" src="/assets/svg/add-task-icon.svg" alt="add">
-            <span class="menu-links-text">Add Tasks</span>
-        </li>
-        <li class="menu-links" onclick="includeHTML('/contacts.html')">
-            <img class="menu-icons" src="/assets/svg/contacts-icon.svg" alt="contacts">
-            <span class="menu-links-text">Contacts</span>
-        </li>
+        <ul>
+            <a class="menu-links" href="/summary.html">
+                <img class="menu-icons" src="/assets/svg/summary-icon.svg" alt="summary">
+                <span class="menu-links-text">Summary</span>
+            </a>
+        </ul>
+        <ul>
+            <a class="menu-links" href="/board.html">
+                <img class="menu-icons" src="/assets/svg/board-icon.svg" alt="board">
+                <span class="menu-links-text">Board</span>
+            </a>
+        </ul>
+        <ul>
+            <a class="menu-links" href="/add_task.html">
+                <img class="menu-icons" src="/assets/svg/add-task-icon.svg" alt="add">
+                <span class="menu-links-text">Add Tasks</span>
+            </a>
+        </ul>
+        <ul>
+            <a class="menu-links" href="/contacts.html">
+                <img class="menu-icons" src="/assets/svg/contacts-icon.svg" alt="contacts">
+                <span class="menu-links-text">Contacts</span>
+            </a>
+        </ul>
     </nav>
 
     
