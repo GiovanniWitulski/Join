@@ -10,3 +10,10 @@ if (!moreBtnMenu.contains(event.target) && !moreButton.contains(event.target)) {
     moreBtnMenu.classList.remove('show'); 
 }
 });
+
+
+
+function displayContact(contactID){
+
+
+}
