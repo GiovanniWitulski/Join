@@ -10,12 +10,14 @@
     <script src="/assets/js/add_task.js"></script>
     <script src="/assets/js/w3_include.js"></script>
     <script src="/assets/js/contacts.js"></script>
+    <script src="/assets/js/remoteStorage.js"></script>
+    <script src="/assets/js/mobile_template.js"></script>
     <link rel="stylesheet" href="/assets/css/add_task.css">
 </head>
 <body onload="includeHTML(), loadContacts('contacts')">
+    <div id="mobileTamplateContent" w3-include-html="/assets/templates/mobile_template.html"></div>
     <div class="headline">Add Task</div>
     <div class="content-container">
-        
         <form onsubmit="return false">
             <div class="titleDiv">
               <div class="subheadlineDiv"><p class="subheadline">Title <p class="marker">*</p></p></div>  
@@ -49,9 +51,9 @@
             <div class="prioDiv">
                 <p class="subheadline">Prio</p>
                 <div class="buttonDiv">
-                    <button id="urgent-btn" class="urgent-btn" onclick="changeToActive('urgent-btn')">Urgent</button>
-                    <button id="medium-btn" class="medium-btn" onclick="changeToActive('medium-btn')">Medium</button>
-                    <button id="low-btn" class="low-btn" onclick="changeToActive('low-btn')">Low</button>
+                    <button id="urgent-btn" class="urgent-btn" onclick="changeToActive('urgent-btn')"><p class="prioLabel">Urgent</p></button>
+                    <button id="medium-btn" class="medium-btn" onclick="changeToActive('medium-btn')"><p class="prioLabel">Medium</p></button>
+                    <button id="low-btn" class="low-btn" onclick="changeToActive('low-btn')"><p class="prioLabel">Low</p></button>
                 </div>
             </div>
 

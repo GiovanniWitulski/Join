@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/assets/css/fonts.css">
     <link rel="stylesheet" href="assets/css/board.css">
     <title>Board</title>
@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="/assets/css/card.css">
 </head>
     
-<body onload="renderBoard()">
+<body onload="includeHTML(), renderBoard()">
+    <div id="mobileTamplateContent" w3-include-html="/assets/templates/mobile_template.html"></div>
     <div id="Board" class="render_board_mobile">
         <div class="board-add-task-mobile">
             <div class="board-add-task-title-mobile">

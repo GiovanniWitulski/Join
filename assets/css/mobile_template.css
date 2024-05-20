@@ -1,3 +1,7 @@
+ul {
+    margin: 0;
+    padding: 0;
+}
 .mobileHTML-body {
     height: 100vh;
 }
@@ -64,7 +68,7 @@ a {
     transition: all 100ms ease-in-out;
 }
     
-.side-menu.open {
+.side-menu-open {
     transform: translateX(0px); 
 }
 
@@ -92,14 +96,6 @@ a {
     background-color: rgb(48 62 81);
 }
 
-#mobileTamplateContent {
-    margin-top: 80px;
-    margin-right: 16px;
-    margin-left: 16px;
-    overflow-y: overlay;
-    margin-bottom: 80px;
-}
-
 .nav-mobile {
     color: rgb(205,205,205);
     display: flex;
@@ -113,6 +109,7 @@ a {
     height: 80px;
     padding-left: 16px;
     padding-right: 16px;
+    z-index: 1;
 }
 
 .menu-icons {
@@ -129,6 +126,14 @@ a {
     width: 80px;
     height: 76px;
     border-radius: 16px;
+    text-decoration: none;
+}
+
+@media (max-width:360px ) {
+    .menu-links {
+        width: max-content;
+        min-width: 70px;
+    }
 }
 
 .menu-links:hover {

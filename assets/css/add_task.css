@@ -1,15 +1,17 @@
 .headline {
-    /* height: 112px; */
-    padding-top: 48px;
-    width: 100%;
+    margin-top: 80px;
+    width: calc(100% - 32px);
     font-size: 47px;
     font-weight: 700;
     display: flex;
     align-items: flex-end;
     padding-bottom: 32px;
-    /* position: sticky; */
-    /* top: 84px; */
+    height: 112px;
+    display: flex;
+    align-items: end;
     background-color: #F6F7F8;
+    margin-left: 16px;
+    margin-right: 16px;
 }
 
 body {
@@ -22,14 +24,15 @@ input {
 }
 
 .content-container {
-    width: 100%;
+    width: calc(100% - 32px);
+    margin-left: 16px;
+    margin-right: 16px;
     display: flex;
     justify-content: center;
     margin-bottom: 80px;
 }
 
-.subheadlineDiv{
-
+.subheadlineDiv {
     display: flex;
 }
 
@@ -234,11 +237,34 @@ select {
     border: 1px solid #D1D1D1;
     padding-inline: 21px;
     background-image: url(/assets/svg/event.svg);
+    
     background-position: calc(100% - 21px);
     background-size: 24px 24px;
     background-repeat: no-repeat;
+    background-color: white;
     margin-bottom: 4px;
     
+    
+}
+
+#datePicker:hover{
+    cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover{
+    cursor: pointer;
+}
+
+input[type="date"]::-moz-focus-inner{
+    background: transparent;
+}
+
+input[type="date"]::-moz-focus-inner:hover{
+    cursor: pointer;
 }
 
 .createDiv{
@@ -285,7 +311,7 @@ select {
     gap: 4px;  
 }
 
-input[type='date']::-webkit-calendar-picker-indicator {
+/* input[type='date']::-webkit-calendar-picker-indicator {
     background: transparent;
     bottom: 0;
     color: transparent;
@@ -296,10 +322,12 @@ input[type='date']::-webkit-calendar-picker-indicator {
     right: 0;
     top: 0;
     width: auto;
-}
+} */
+
+
 
 .dateDiv{
-
+    transition: all;
     margin-bottom: 16px;
 }
 
@@ -531,7 +559,8 @@ cursor: pointer;
 
 .option{
 
-    width: 364px;
+    max-width: 364px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     height: 56px;
@@ -628,5 +657,19 @@ cursor: pointer;
 
         transform: rotate(180deg);
     }
+}
+
+@media (max-width: 390px){
+
+    .prioLabel{
+
+        display: none;
+    }
+
+    .buttonDiv button{
+
+        background-position: center;
+    }
+
 }
 

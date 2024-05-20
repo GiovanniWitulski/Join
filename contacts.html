@@ -6,15 +6,17 @@
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/assets/css/fonts.css">
     <link rel="stylesheet" href="/add_contact.css">
+    <link rel="stylesheet" href="/assets/css/contact.css">
     <title>contacts</title>
     <script src="/script.js"></script>
     <script src="/assets/js/contacts.js"></script>
     <script src="/assets/js/add_contact.js"></script>
-    
-    <link rel="stylesheet" href="/assets/css/contact.css">
-
+    <script src="/assets/js/remoteStorage.js"></script>
+    <script src="/assets/js/w3_include.js"></script>
+    <script src="/assets/js/contact_details.js"></script>
 </head>
-<body onload="loadContacts('contacts')">
+<body onload="includeHTML(), loadContacts('contacts')">
+    <div id="mobileTamplateContent" w3-include-html="/assets/templates/mobile_template.html"></div>
     <div id="contact-div"></div>
     <button onclick="showAddContact()" class="add-contact-btn"></button>
 
@@ -27,7 +29,7 @@
            
 
         </div>
- <img class="contact-pic" src="/assets/svg/Frame 79.svg">
+            <img class="contact-pic" src="/assets/svg/Frame 79.svg">
         <div class="bottom-container">
             <form onsubmit="getTheInformation()" class="create-contact-form">
                 <input id="contact-name" type="text" required placeholder="Name">
@@ -36,7 +38,6 @@
                 <button  class="create-contact-btn">Create contact <img src="/assets/svg/check.svg"></button>
             </form>
         </div>
-
     </div>
     
 </body>
