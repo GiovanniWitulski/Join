@@ -35,13 +35,27 @@ let BackgroundTaskBoard = [
         "description": "Await Feedback Example",
         "date": "08.05.2035",
         "subtask" : ["check this subtask.", "click on the small box to check it."],
-        "subtaskSum" :[1, 1],
+        "subtaskSum" : [1, 1],
         "priority" : ["low", "/assets/svg/capa_priority_low.svg"],
         "assignedTo" : ["Max Mustermann", "Richard Roberts"], // oder Id's der Mitarbeiter
         "contactEmblem" : ["/assets/svg/contact_emblem_Annika_Michelstadt.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg"],
         "type" : "2",
         "taskid": "6"
-    },
+    }, 
+    {
+        "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
+        "title": "User Story Example",
+        "description": "Second to do example",
+        "date": "08.05.2035",
+        "subtask" : ["check this subtask.", "click on the small box to check it."],
+        "subtaskSum" : [1, 1],
+        "priority" : ["low", "/assets/svg/capa_priority_low.svg"],
+        "assignedTo" : ["Max Millenium", "Richard Roberts", "Herbert Hallmann"], // oder Id's der Mitarbeiter
+        "contactEmblem" : ["/assets/svg/contact_emblem_Annika_Michelstadt.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg"],
+        "type" : "0",
+        "taskid": "6"
+    }
+
 
 ];                         
 
@@ -92,7 +106,7 @@ function findTask(event){
     searchResult(SearchedTask);
 }
 
-function searchResult(s){    //1. Empty Areas -> img "no tasks in progress/todo/..." <-- NO SHOW!
+function searchResult(s){    
     console.log("an SearchResult übergeben:", s);
     TaskBoard = [];
     console.log("Taskboard:", TaskBoard);
@@ -111,7 +125,7 @@ function searchResult(s){    //1. Empty Areas -> img "no tasks in progress/todo/
 
 //Board render Tasks 
 
-function toDoContainer (){
+function toDoContainer (){                  //Jeden ProgressBar eigene ID!
     console.log("toDoContainer_active");
     for(i=0; i<TaskBoard.length; i++){
         const toDoCard = TaskBoard[i];
@@ -135,7 +149,7 @@ function toDoContainer (){
             <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
             <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
-            <rect id="progressRect" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
+            <rect id="cardToDoBar" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
             <div class="card-sum-subtask">${sumSubtask}/2 Subtasks</div></div>        
             <div id="cardParticipantsPriority" class="card-participants-priority">
             <div class="card-contact-emblems">${emblems}</div>
@@ -143,8 +157,7 @@ function toDoContainer (){
             </div></div>
                     
             `           
-            
-            const progressBar = document.getElementById('progressRect');
+            const progressBar = document.getElementById('cardToDoBar');
             progressBar.setAttribute('width', `${progressInPercent}%`);
 
         }
@@ -236,7 +249,7 @@ function awaitFeedbackContainer(){
             <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
             <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
-            <rect id="progressRect" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
+            <rect id="cardAwaitFeedbackBar" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
             <div class="card-sum-subtask">${sumSubtask}/2 Subtasks</div></div>        
             <div id="cardParticipantsPriority" class="card-participants-priority">
             <div class="card-contact-emblems">${emblems}</div>
@@ -245,8 +258,9 @@ function awaitFeedbackContainer(){
                 
              `   
           
-        const progressBar = document.getElementById('awaitFeedbackBar');
-        progressBar.setAttribute('width', `${progressInPercent}%`);
+                   const progressBar = document.getElementById('cardAwaitFeedbackBar');
+            progressBar.setAttribute('width', `${progressInPercent}%`);
+
 
         }
     }
