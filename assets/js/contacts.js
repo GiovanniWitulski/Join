@@ -10,9 +10,9 @@ function getAColor(){
 }
 
 
-async function loadContacts(path=""){
-    let response = await fetch(BASE_URL + path + ".json");
-    contactsAsJson = await response.json();
+async function loadContacts(){
+    await loadData('contacts');
+    contactsAsJson = responseToJson;
     createDivs();
 }
 
