@@ -14,7 +14,7 @@ let BackgroundTaskBoard = [
         "assignedTo" : ["Emmanuel Mauer", "Marcel Bensdorf", "Annika Michelstadt"], // oder Id's der Mitarbeiter
         "contactEmblem" : ["/assets/svg/contact_emblem_Emmanuel_Mauer.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
         "type" : "0",
-        "taskid": "4"
+        "taskid": "3"
     },
     {
         "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
@@ -27,7 +27,7 @@ let BackgroundTaskBoard = [
         "assignedTo" : ["Max Mustermann", "Richard Roberts"], // oder Id's der Mitarbeiter
         "contactEmblem" : ["/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
         "type" : "1",
-        "taskid": "4"
+        "taskid": "2"
     },
     {
         "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
@@ -40,7 +40,7 @@ let BackgroundTaskBoard = [
         "assignedTo" : ["Max Mustermann", "Richard Roberts"], // oder Id's der Mitarbeiter
         "contactEmblem" : ["/assets/svg/contact_emblem_Annika_Michelstadt.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg"],
         "type" : "2",
-        "taskid": "6"
+        "taskid": "1"
     }, 
     {
         "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
@@ -50,11 +50,37 @@ let BackgroundTaskBoard = [
         "subtask" : ["check this subtask.", "click on the small box to check it."],
         "subtaskSum" : [1, 1],
         "priority" : ["low", "/assets/svg/capa_priority_low.svg"],
-        "assignedTo" : ["Max Millenium", "Richard Roberts", "Herbert Hallmann"], // oder Id's der Mitarbeiter
+        "assignedTo" : ["Andrew Millenium", "Marc Bob", "Elke Magneto"], // oder Id's der Mitarbeiter
         "contactEmblem" : ["/assets/svg/contact_emblem_Annika_Michelstadt.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg"],
         "type" : "0",
+        "taskid": "4"
+    },
+    {
+        "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
+        "title": "User Story Example",
+        "description": "Second in progress example",
+        "date": "08.05.2035",
+        "subtask" : ["check this subtask.", "click on the small box to check it."],
+        "subtaskSum" : [0, 1],
+        "priority" : ["low", "/assets/svg/capa_priority_low.svg"],
+        "assignedTo" : ["Anton Millenium", "Mitchel Bobford", "Enrico Montequia"], // oder Id's der Mitarbeiter
+        "contactEmblem" : ["/assets/svg/contact_emblem_Annika_Michelstadt.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg"],
+        "type" : "1",
+        "taskid": "5"
+    },
+    {
+        "label": "/assets/svg/Labels Board card label technical task.svg",
+        "title": "Technical Task Example",
+        "description": "A Technical Task, enjoy!",
+        "date": "03.12.2035",
+        "subtask" : ["check this subtask.", "click on the small box to check it."],
+        "subtaskSum" :[0, 1],
+        "priority" : ["medium", "/assets/svg/capa_1_medium_priority.svg"],
+        "assignedTo" : ["Emmanuel Mauer", "Marcel Bensdorf", "Annika Michelstadt"], // oder Id's der Mitarbeiter
+        "contactEmblem" : ["/assets/svg/contact_emblem_Emmanuel_Mauer.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
+        "type" : "2",
         "taskid": "6"
-    }
+    },
 
 
 ];                         
@@ -134,6 +160,7 @@ function toDoContainer (){                  //Jeden ProgressBar eigene ID!
             console.log("toDoContainer If-Active");
             sumSubtask = toDoCard.subtaskSum[0]+toDoCard.subtaskSum[1];
             const progressInPercent = sumSubtask * 50;  
+            const progressBarId = 'cardToDoBar' + toDoCard.taskid;
 
             let emblems = '';                           //contact-emblems
             for (let i = 0; i < toDoCard.contactEmblem.length; i++){
@@ -149,7 +176,7 @@ function toDoContainer (){                  //Jeden ProgressBar eigene ID!
             <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
             <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
-            <rect id="cardToDoBar" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
+            <rect id="cardToDoBar${toDoCard.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
             <div class="card-sum-subtask">${sumSubtask}/2 Subtasks</div></div>        
             <div id="cardParticipantsPriority" class="card-participants-priority">
             <div class="card-contact-emblems">${emblems}</div>
@@ -157,7 +184,7 @@ function toDoContainer (){                  //Jeden ProgressBar eigene ID!
             </div></div>
                     
             `           
-            const progressBar = document.getElementById('cardToDoBar');
+            const progressBar = document.getElementById(progressBarId);
             progressBar.setAttribute('width', `${progressInPercent}%`);
 
         }
@@ -182,6 +209,8 @@ function inProgressContainer (){
             console.log("inProgressContainer If-Active");
             sumSubtask = inProgressCard.subtaskSum[0]+inProgressCard.subtaskSum[1];
             const progressInPercent = sumSubtask * 50;
+            const progressBarId = 'cardInProgressBar' + inProgressCard.taskid;
+
 
             let emblems = '';                           //contact-emblems
             for (let i = 0; i < inProgressCard.contactEmblem.length; i++){
@@ -199,7 +228,7 @@ function inProgressContainer (){
         <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
         <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
-        <rect id="cardInProgressBar" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
+        <rect id="cardInProgressBar${inProgressCard.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
         <div class="card-sum-subtask">${sumSubtask}/2 Subtasks</div></div>
         <div id="cardParticipantsPriority" class="card-participants-priority">
         <div class="card-contact-emblems">${emblems}</div>
@@ -209,7 +238,7 @@ function inProgressContainer (){
         
          `
         
-        const progressBar = document.getElementById('cardInProgressBar');
+        const progressBar = document.getElementById(progressBarId);
         progressBar.setAttribute('width', `${progressInPercent}%`);
 
         }
@@ -233,6 +262,8 @@ function awaitFeedbackContainer(){
             
             sumSubtask = awaitFeedbackCard.subtaskSum[0]+awaitFeedbackCard.subtaskSum[1];
             const progressInPercent = sumSubtask * 50;
+            const progressBarId = 'cardAwaitFeedbackBar' + awaitFeedbackCard.taskid;
+
 
             let emblems = '';                           //contact-emblems
             for (let i = 0; i < awaitFeedbackCard.contactEmblem.length; i++){
@@ -249,7 +280,7 @@ function awaitFeedbackContainer(){
             <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
             <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
-            <rect id="cardAwaitFeedbackBar" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
+            <rect id="cardAwaitFeedbackBar${awaitFeedbackCard.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
             <div class="card-sum-subtask">${sumSubtask}/2 Subtasks</div></div>        
             <div id="cardParticipantsPriority" class="card-participants-priority">
             <div class="card-contact-emblems">${emblems}</div>
@@ -258,7 +289,7 @@ function awaitFeedbackContainer(){
                 
              `   
           
-                   const progressBar = document.getElementById('cardAwaitFeedbackBar');
+                   const progressBar = document.getElementById(progressBarId);
             progressBar.setAttribute('width', `${progressInPercent}%`);
 
 
