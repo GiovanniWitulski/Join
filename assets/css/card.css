@@ -5,6 +5,7 @@
     background-color:  #FFFFFF;
     padding: 16px;
     border-radius: 24px;
+    margin-bottom: 16px;        /*auch bei seitlich gereihten Tasks marginright 16px!?*/
 }
 
 .card-header{
@@ -31,7 +32,9 @@
 }
 
 .card-participants-priority{
-    
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
 }
 
 .card-contact-emblems{
