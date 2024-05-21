@@ -1,7 +1,7 @@
 .contact-section{
     
     width: 100%;
-   
+   max-width: 352px;
     background-color: transparent;
     margin: 20px;
 }
