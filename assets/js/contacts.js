@@ -48,6 +48,7 @@ function createDivs(){
 function refreshContactToLoad(id){
 
     contactToDisplay = id;
+    localStorage.setItem('userID', contactToDisplay);
 }
 
 function showAddContact(){

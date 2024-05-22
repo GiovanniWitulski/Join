@@ -16,7 +16,7 @@
     width: 352px;
     height: 66px;
     border-bottom: 1px solid #d1d1d1;
-    
+    box-sizing: border-box;
     padding-inline-start: 36px;
     display: flex;
     align-items: center;
