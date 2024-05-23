@@ -97,17 +97,28 @@ let Overlay = document.getElementById('Board');
 TaskBoard = BackgroundTaskBoard; //TaskBoard -> RAM Arbeitsarray --> BackgroundTaskBoard -> ROM 
 console.log ("TaskBoard:", TaskBoard);
 
-//functions
+//functions general
 
 function downloadData(){} //load from server    
 
 function uploadData(){} //upload to server
 
-function renderBoard(){
+function renderBoard(){ //load Task to Board/actualise while search active
     downloadData(); //load from server, actualise Task - Array
     toDoContainer();    //load to do´s 
     inProgressContainer();       //load tasks in progress
     awaitFeedbackContainer();    //load await feedback
+}
+
+function overlayTask(id){   //transmitt Id of Clicked Tasked -> OverlayTask(Id) 
+    console.log("OverlayTask active", id);
+    for (i=0; i<TaskBoard.length; i++){
+        const TaskId = TaskBoard[i].taskid;
+        if (TaskId == id){
+            console.log("found Task at:", i);
+            OverlayTaskPopup(i);
+        }
+    }
 
 }
 
@@ -169,7 +180,7 @@ function toDoContainer (){                  //Jeden ProgressBar eigene ID!
             }           
 
                 toDo.innerHTML += `
-            <div class="card-body">
+            <div class="card-body" onclick="overlayTask(${toDoCard.taskid})">
             <div id="cardHeader" class="card-header"><img src="${toDoCard.label}" alt="label"></div>
             <div id="cardTitle" class="card-title"><h4>${toDoCard.title}</h4></div>
             <div id="cardDescription" class="card-description"><h4>${toDoCard.description}</h4></div>
@@ -220,7 +231,7 @@ function inProgressContainer (){
 
 
             inProgress.innerHTML += `
-        <div class="card-body">
+        <div class="card-body" onclick="overlayTask(${inProgressCard.taskid})">
         <div id="cardHeader" class="card-header"><img src="${inProgressCard.label}" alt="label"></div>
         <div id="cardTitle" class="card-title"><h4>${inProgressCard.title}</h4></div>
         <div id="cardDescription" class="card-description"><h4>${inProgressCard.description}</h4></div>
@@ -264,19 +275,17 @@ function awaitFeedbackContainer(){
             const progressInPercent = sumSubtask * 50;
             const progressBarId = 'cardAwaitFeedbackBar' + awaitFeedbackCard.taskid;
 
-
             let emblems = '';                           //contact-emblems
             for (let i = 0; i < awaitFeedbackCard.contactEmblem.length; i++){
                 const src = awaitFeedbackCard.contactEmblem[i];
                 emblems += '<img class="card-contact-emblems-img" src=" '+src+' " alt="contact-emblem">';
             }
 
-
             awaitFeedback.innerHTML += `
-            <div class="card-body">
-            <div id="cardHeader" class="card-header"><img src="${ awaitFeedbackCard.label}" alt="label"></div>
-            <div id="cardTitle" class="card-title"><h4>${ awaitFeedbackCard.title}</h4></div>
-            <div id="cardDescription" class="card-description"><h4>${ awaitFeedbackCard.description}</h4></div>
+            <div class="card-body" onclick="overlayTask(${awaitFeedbackCard.taskid})">
+            <div id="cardHeader" class="card-header"><img src="${awaitFeedbackCard.label}" alt="label"></div>
+            <div id="cardTitle" class="card-title"><h4>${awaitFeedbackCard.title}</h4></div>
+            <div id="cardDescription" class="card-description"><h4>${awaitFeedbackCard.description}</h4></div>
             <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
             <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
@@ -287,45 +296,46 @@ function awaitFeedbackContainer(){
             <div><img src="${awaitFeedbackCard.priority[1]}" alt="priority"></div>
             </div></div>
                 
-             `   
-          
-                   const progressBar = document.getElementById(progressBarId);
+             `             
+            const progressBar = document.getElementById(progressBarId);
             progressBar.setAttribute('width', `${progressInPercent}%`);
-
-
         }
     }
-
     if (toDo.innerHTML === '') {
         toDo.innerHTML = `<img src="assets/svg/assets/svg/board_in_progress_example.svg" class="to-do-container-mobile" alt=""></div>`
     }
-
 }
 
 // Overlay Task/Popup (angeklickter Task) // z-index in Class erhöhen! 
                                     // innerHTML += da unterliegender Inhalt soll erhalten bleiben!
                                     // assigned to mit eigener Fkt für Emblem oder als IMG
-function OverlayTask(i){ 
-        const Overlay = TaskBoard[i];
-        Overlay.innerHTML += `              
+
+
+function OverlayTaskPopup(i){ 
+        const OverlayTask = TaskBoard[i];
+        Overlay.innerHTML += `  
+        <div class="overlay-container">            
         <div class="overlay-task">
-        <div id="verlayHeader" class="card-header"><img src="${Overlay.label}" alt="label"><img src="/assets/svg/Close.svg" alt="close"></div>
-        <div id="overlyTitle" class="card-title"><h2>${Overlay.title}</h2></div>
-        <div id="overlayDescription" class="card-description"><h3>${Overlay.description}</h3></div>
-        <div id="overlaydueDate" class="due-date"><div class="overlay-date">Due date:</div><h3>${Overlay.date}</h3></div>
-        <div id="overlaypriority" class="overlay-priority"></div>
+        <div id="OverlayHeader" class="overlay-card-header"><img src="${OverlayTask.label}" alt="label"><img src="/assets/svg/Close.svg" alt="close"></div>
+        <div id="overlayTitle" class="overlay-card-title">${OverlayTask.title}</div>
+        <div id="overlayDescription" class="overlay-card-description">${OverlayTask.description}</div>
+        <div id="overlaydueDate" class="overlay-card-due-date"><div class="overlay-date">Due date:</div>${OverlayTask.date}</div>
+        <div id="overlaypriority" class="overlay-card-priority"><div class="overlay-card-priority-text">
+        Priority</div><div class="overlay-card-priority-text-img">${OverlayTask.priority[0]}<img src="${OverlayTask.priority[1]}" alt="priority"></div>
+        </div>
         <div class="assigned-to">
-        <div id="overlayAssignedTo"><h3>Assigned to: ${Overlay.assignedTo}</h3><div id="participants" class="participants"></div>  
+        <div id="overlayAssignedTo"><h3>Assigned to: ${OverlayTask.assignedTo}</h3><div id="participants" class="participants"></div>  
         </div>
-        <div class="card-subtasks">
-        <div id="cardSubtasks"><h3>Subtasks: </h3><br><img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${Overlay.subtask[0]}<br>
-        <img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${Overlay.subtask[1]}</div>
-        <div id="cardChecklist" class="checklist"></div>
+        <div class="overlay-card-subtasks">
+        <div id="cardSubtasks"><h3>Subtasks: </h3><br><img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${OverlayTask.subtask[0]}<br>
+        <img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${OverlayTask.subtask[1]}</div>
+        <div id="cardChecklist" class="overlay-card-checklist"></div>
         </div>
-        <div class="delete-edit">
+        <div class="overlay-card-delete-edit">
         <div><img src="/assets/svg/delete.svg" alt="delete"><h3>Delete</h3></div><div><img src="/assets/svg/edit.svg" alt="Edit"><h3>Edit</h3></div>
+        </div>
         </div>
         </div>
 
         `
-}
+} 

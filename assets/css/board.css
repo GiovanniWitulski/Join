@@ -41,9 +41,11 @@ body {
     padding-bottom: 40px;
 }
 
-/* .add-task-mobile-img {
+/* .board-add-task-mobile-img {
 
 } */
+
+/* .add-mobile-small-img{} */ 
 
 .board-search-mobile {
     height: 48px;        
@@ -142,14 +144,6 @@ body {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-}
-
-/* OVERLAY - TASK */
-
-.overlay-task {
-    z-index: 2;
-    background-color: white;
-    border-radius: 8px;
 }
 
 

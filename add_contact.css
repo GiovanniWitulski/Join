@@ -6,6 +6,7 @@ body {
     width: 396px;
     height: 760px;
     border-radius: 30px;
+    background-color: white;
     display: flex;
     flex-direction: column;
     transform: translateY(400px);
@@ -14,7 +15,7 @@ body {
 }
 
 .show {
-    transform: translateY(0px);
+    transform: translateY(-100vh);
 }
 
 .top-container{
@@ -158,4 +159,10 @@ body {
     background-repeat: no-repeat;
    
     background-size: 24px 24px;
+}
+
+
+#contact-div{
+    max-width: 428px;
+    margin-top: 80px;
 }

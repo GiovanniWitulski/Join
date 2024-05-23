@@ -1,19 +1,53 @@
-const moreButton = document.querySelector('.more-btn');
-const moreBtnMenu = document.querySelector('.edit-menu-sb');
+   
+   
+ // Elemente auswählen
+ const moreButton = document.getElementById('more-button');
+ const moreBtnMenu = document.getElementById('edit-menu');
 
-moreButton.addEventListener('click', () => {
-moreBtnMenu.classList.toggle('show');
-});
+ if (moreButton && moreBtnMenu) {
+     // Funktion zum Umschalten des Menüs
+     function toggleMenu() {
+         moreBtnMenu.classList.toggle('hide');
+     }
 
-document.addEventListener('click', (event) => {
-if (!moreBtnMenu.contains(event.target) && !moreButton.contains(event.target)) {
-    moreBtnMenu.classList.remove('show'); 
-}
-});
+     // Funktion zum Schließen des Menüs, wenn außerhalb geklickt wird
+     function closeMenuOnClickOutside(event) {
+         if (!moreBtnMenu.contains(event.target) && !moreButton.contains(event.target)) {
+             moreBtnMenu.classList.add('hide');
+         }
+     }
+
+     // Event-Listener hinzufügen
+     moreButton.addEventListener('click', toggleMenu);
+     document.addEventListener('click', closeMenuOnClickOutside);
+ } else {
+     console.error('Elemente mit den IDs "moreButton" oder "moreBtnMenu" wurden nicht gefunden.');
+ }
 
 
 
-function displayContact(contactID){
+ function loadSingleContactId(){
+    debugger
+
+    let userIdAsString = localStorage.getItem('userID');
+    if (userIdAsString){
+        let userIdAsNumber = Number(userIdAsString);
+        
+        loadSingleContact(userIdAsNumber);
+    }
+ }
 
 
-}
+ function loadSingleContact(id){
+    debugger
+    let user = contactsAsJson[id];
+    debugger
+    document.getElementsByClassName('name-headline')[0].innerHTML = `${user['vorname']} ${user['name']}`;
+    document.getElementsByClassName('email')[0].innerHTML = `${user['mail']}`;
+    document.getElementsByClassName('phone')[0].innerHTML = `${user['mobile']}`;
+ }
+
+
+ window.onload = function(){
+   loadSingleContactId();
+ }

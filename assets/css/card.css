@@ -1,3 +1,8 @@
+/* Hoover - Effects */
+
+
+
+/* Task - Card - Design */
 
 .card-body {
     width: 252px;
@@ -6,6 +11,7 @@
     padding: 16px;
     border-radius: 24px;
     margin-bottom: 16px;        /*auch bei seitlich gereihten Tasks marginright 16px!?*/
+    cursor: pointer;
 }
 
 .card-header{
@@ -51,4 +57,82 @@
 .delete-edit{
     
 }
+
+/* OVERLAY - TASK */
+
+.overlay-task {
+    max-width: 396px;   
+    max-height: 724px;
+    z-index: 1;
+    background-color:  #FFFFFF;
+    border-radius: 30px;
+    position: fixed;
+    top: 96px;
+    bottom: 96px;  
+    left: 16px; 
+    right: 16px; 
+    padding: 32px 24px 32px 24px;
+    margin: 0 auto;                 /* so bleibt es dauerhaft zentiert */    
+}
+
+.overlay-card-header {
+    padding-bottom: 16px;}
+
+.overlay-card-title{
+    padding-bottom: 16px;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.overlay-card-description{
+    padding-bottom: 16px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.overlay-card-due-date{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.overlay-card-priority{
+    padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.overlay-card-priority-text{
+
+}
+
+.overlay-card-priority-img{
+}
+
+.overlay-card-priority-text-img{
+}
+
+.overlay-card-subtasks{
+    padding-bottom: 16px;
+}
+
+.overlay-card-checklist{
+    padding-bottom: 16px;
+}
+
+.overlay-card-delete-edit{
+    padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+
+
 

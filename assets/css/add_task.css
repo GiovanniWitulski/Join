@@ -12,6 +12,9 @@
     background-color: #F6F7F8;
     margin-left: 16px;
     margin-right: 16px;
+    position: sticky;
+    top: 80px;
+    z-index: 2;
 }
 
 body {
