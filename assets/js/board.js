@@ -110,7 +110,29 @@ function renderBoard(){ //load Task to Board/actualise while search active
     awaitFeedbackContainer();    //load await feedback
 }
 
-function overlayTask(id){   //transmitt Id of Clicked Tasked -> OverlayTask(Id) 
+
+
+//TEST CLose popup
+
+function closeOverlay(closeId){
+    var element = document.getElementById(closeId);
+    element.classList.add('hidden');
+    console.log("Klasse hinzugefügt");
+    removeClassFunction(closeId)
+}
+
+function removeClassFunction(closeId) {
+    var element = document.getElementById(closeId);
+    element.classList.remove('meineKlasse');
+    console.log("Klasse entfernt"); }
+
+
+    // end TEST Close Popup
+
+
+
+
+function overlayTask(id){   //TO DO: DISCERNMENT -> Technical Task/User Story Task!! -> OverlayTask FKT 
     console.log("OverlayTask active", id);
     for (i=0; i<TaskBoard.length; i++){
         const TaskId = TaskBoard[i].taskid;
@@ -162,7 +184,7 @@ function searchResult(s){
 
 //Board render Tasks 
 
-function toDoContainer (){                  //Jeden ProgressBar eigene ID!
+function toDoContainer (){                  
     console.log("toDoContainer_active");
     for(i=0; i<TaskBoard.length; i++){
         const toDoCard = TaskBoard[i];
@@ -306,29 +328,30 @@ function awaitFeedbackContainer(){
     }
 }
 
-// Overlay Task/Popup (angeklickter Task) // z-index in Class erhöhen! 
-                                    // innerHTML += da unterliegender Inhalt soll erhalten bleiben!
-                                    // assigned to mit eigener Fkt für Emblem oder als IMG
+// Overlay TECHNICAL Task/Popup (angeklickter Task) // USER STORY Template noch erstellen
+                                                    //--> class.remove/add -> Textstyle
+
+function OverlayTaskPopup(i){  
 
 
-function OverlayTaskPopup(i){ 
         const OverlayTask = TaskBoard[i];
         Overlay.innerHTML += `  
-        <div class="overlay-container">            
+        <div id="${OverlayTask.taskid}" class="overlay-container">            
         <div class="overlay-task">
-        <div id="OverlayHeader" class="overlay-card-header"><img src="${OverlayTask.label}" alt="label"><img src="/assets/svg/Close.svg" alt="close"></div>
+        <div id="OverlayHeader" class="overlay-card-header"><img src="${OverlayTask.label}" alt="label"><img onclick="closeOverlay(${OverlayTask.taskid})" src="/assets/svg/close_black.svg" alt="close"></div>
         <div id="overlayTitle" class="overlay-card-title">${OverlayTask.title}</div>
         <div id="overlayDescription" class="overlay-card-description">${OverlayTask.description}</div>
-        <div id="overlaydueDate" class="overlay-card-due-date"><div class="overlay-date">Due date:</div>${OverlayTask.date}</div>
+        <div id="overlaydueDate" class="overlay-card-due-date"><div>Due date:</div><div class="overlay-due-date">${OverlayTask.date}</div></div>
         <div id="overlaypriority" class="overlay-card-priority"><div class="overlay-card-priority-text">
         Priority</div><div class="overlay-card-priority-text-img">${OverlayTask.priority[0]}<img src="${OverlayTask.priority[1]}" alt="priority"></div>
         </div>
-        <div class="assigned-to">
-        <div id="overlayAssignedTo"><h3>Assigned to: ${OverlayTask.assignedTo}</h3><div id="participants" class="participants"></div>  
+        <div id="overlayAssignedTo" class="overlay-assigned-to">
+        <div class="overlay-assigned-to-text">Assigned to:</div><div id="overlayParticipants" class="overlay-participants">${OverlayTask.assignedTo}</div>  
         </div>
         <div class="overlay-card-subtasks">
-        <div id="cardSubtasks"><h3>Subtasks: </h3><br><img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${OverlayTask.subtask[0]}<br>
+        <div class="overlay-substasks-text">Subtasks:</div><div class="overlay-checkbox"><img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${OverlayTask.subtask[0]}<br>
         <img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${OverlayTask.subtask[1]}</div>
+        </div>
         <div id="cardChecklist" class="overlay-card-checklist"></div>
         </div>
         <div class="overlay-card-delete-edit">
@@ -338,4 +361,7 @@ function OverlayTaskPopup(i){
         </div>
 
         `
+
+        
+
 } 

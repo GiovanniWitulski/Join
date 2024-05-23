@@ -76,7 +76,10 @@
 }
 
 .overlay-card-header {
-    padding-bottom: 16px;}
+    padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+}
 
 .overlay-card-title{
     padding-bottom: 16px;
@@ -92,32 +95,65 @@
 
 .overlay-card-due-date{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    
+    
     padding-bottom: 16px;
     font-size: 16px;
     font-weight: 400;
+    color: #42526E;
+}
+
+.overlay-due-date{
+    color: black;
+    padding-left: 25px;
+
 }
 
 .overlay-card-priority{
     padding-bottom: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex;   
 }
 
 .overlay-card-priority-text{
-
+    color: #42526E;
+    width: 59px;
 }
 
 .overlay-card-priority-img{
+    
 }
 
 .overlay-card-priority-text-img{
+    padding-left: 25px;
+    width: 124px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.overlay-assigned-to{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 16px;
+}
+
+.overlay-assigned-to-text{
+    color: #42526E;
+}
+
+.overlay-participants{
+
 }
 
 .overlay-card-subtasks{
     padding-bottom: 16px;
+}
+
+.overlay-substasks-text{
+    color: #42526E;    
+}
+
+.overlay-checkbox{
+
 }
 
 .overlay-card-checklist{
@@ -129,6 +165,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.hidden {
+    display: none;
 }
 
 
