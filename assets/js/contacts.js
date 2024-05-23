@@ -37,8 +37,7 @@ function createDivs(){
     }  
 }
 
-function refreshContactToLoad(id){
-
+function refreshContactToLoad(id) {
     contactToDisplay = id;
 }
 

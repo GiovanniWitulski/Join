@@ -12,75 +12,77 @@
     <script src="/assets/js/remoteStorage.js"></script>
     <script src="/assets/js/login.js"></script>
 </head>
-    <body class="login-body">
-        <header>
-            <img class="join-logo-indexhtml" src="/assets/svg/join-logo.svg" alt="">
-        </header>
-        <div id="loginParentDiv">
-            <div class="login-card-div">
-                <div class="login-card">
+<body class="login-body">
+    <header>
+        <img class="join-logo-indexhtml" src="/assets/svg/join-logo.svg" alt="">
+    </header>
+    <div id="loginParentDiv">
+        <div class="login-card-div">
+            <div class="login-card">
+                <div class="login-underline-div">
+                    <h1>Log in</h1>
+                    <img class="login-underline" src="/assets/svg/underline-lightblue.svg" alt="">
+                </div>
+                <form id="loginForm" class="form-indexhtml" action="/summary.html" onsubmit="return validateForm()">
+                    <div class="login-input-div-indexhtml">
+                        <input class="login-input-indexhtml" id="loginEmailIndexHtml" type="email" placeholder="Email" required>
+                        <input class="login-input-indexhtml" id="loginPasswordIndexHtml" type="password" placeholder="Password" required>
+                    </div>
+                    <div class="remember-me-div">
+                        <img id="rememberMe" onclick="toggleCheckbox(this)" class="remember-me-checkbox" src="/assets/svg/rectangle.svg">
+                        <p class="remember-me-p">Remember me</p>
+                    </div>
+                <div class="login-btns-div">
+                    <button type="submit" class="login-btn">Log in</button>
+                    <a href="/summary.html"><button class="guest-login-btn" type="button">Guest Log in</button></a>
+                </div>
+                </form>
+            </div>
+        </div>
+    
+        <div class="sign-up-div">
+            <p class="sign-up-p">Not a Join user?</p>
+            <button onclick="showRegisterForm()" class="sign-up-btn">Sign up</button>
+        </div>
+    </div>
+    
+    <div id="signupParentDiv" class="d-none">
+        <div class="login-card-div">
+            <div class="login-card">
+                <div class="arrow-login-underline-div">
+                    <div class="empty-div"></div>
                     <div class="login-underline-div">
-                        <h1>Log in</h1>
+                        <h1 class="signup-title">Sign up</h1>
                         <img class="login-underline" src="/assets/svg/underline-lightblue.svg" alt="">
                     </div>
-                    <form class="form-indexhtml">
-                        <div class="login-input-div-indexhtml">
-                            <input class="login-input-indexhtml" id="loginEmailIndexHtml" type="email" placeholder="Email" required>
-                            <input class="login-input-indexhtml" id="loginPasswordIndexHtml" type="password" placeholder="Password" required>
-                        </div>
-                        <div class="remember-me-div">
-                            <img onclick="toggleCheckbox(this)" class="remember-me-checkbox" src="/assets/svg/rectangle.svg">
-                            <p class="remember-me-p">Remember me</p>
-                        </div>
-                        <div class="login-btns-div">
-                            <button class="login-btn">Log in</button>
-                            <button class="guest-login-btn"><a href="/summary.html">Guest Log in</a></button>
-                        </div>
-                    </form>
+                    <img onclick="showLoginForm()" class="sign-up-arrow-left" src="/assets/svg/arrow-left-line.svg" alt="Back arrow">                    
                 </div>
-            </div>
-        
-            <div class="sign-up-div">
-                <p class="sign-up-p">Not a Join user?</p>
-                <button onclick="showRegisterForm()" class="sign-up-btn">Sign up</button>
-            </div>
-        </div>
-    
-        <div id="signupParentDiv" class="d-none">
-            <div class="login-card-div">
-                <div class="login-card">
-                    <div class="arrow-login-underline-div">
-                        <div class="empty-div"></div>
-                        <div class="login-underline-div">
-                            <h1 class="signup-title">Sign up</h1>
-                            <img class="login-underline" src="/assets/svg/underline-lightblue.svg" alt="">
-                        </div>
-                        <img onclick="showLoginForm()" class="sign-up-arrow-left" src="/assets/svg/arrow-left-line.svg" alt="Back arrow">                    
+
+                <form class="form-indexhtml">
+                    <div class="login-input-div-indexhtml">
+                        <input class="login-input-indexhtml" id="signUpNameIndexHtml" type="text" placeholder="Name" required>
+                        <input class="login-input-indexhtml" id="signUpEmailIndexHtml" type="email" placeholder="Email" required>
+                        <input class="login-input-indexhtml" id="signUpPasswordIndexHtml" type="password" placeholder="Password" required>
+                        <input class="login-input-indexhtml" id="signUpConfirmPasswordIndexHtml" type="password" placeholder="Confirm Password" required>
                     </div>
-    
-                    <form class="form-indexhtml">
-                        <div class="login-input-div-indexhtml">
-                            <input class="login-input-indexhtml" id="signUpNameIndexHtml" type="text" placeholder="Name" required>
-                            <input class="login-input-indexhtml" id="signUpEmailIndexHtml" type="email" placeholder="Email" required>
-                            <input class="login-input-indexhtml" id="signUpPasswordIndexHtml" type="password" placeholder="Password" required>
-                            <input class="login-input-indexhtml" id="signUpConfirmPasswordIndexHtml" type="password" placeholder="Confirm Password" required>
-                        </div>
-                        <p class="required-msg">Ups! your password don't match</p>
-                        <div class="accept-privacy-policy-div">
-                            <img onclick="toggleCheckbox(this)" class="remember-me-checkbox" src="/assets/svg/rectangle.svg">
-                            <p class="remember-me-p">I accept the <a href="/assets/templates/privacy_policy.html"></a>Privacy Policy</p>
-                        </div>
-                    </form>
+                    <div class="required-msg">
+                        <p id="passwordDontMatch" class="required-msg d-none">Ups! your password don't match</p>
+                    </div>
+                    <div class="accept-privacy-policy-div">
+                        <img id="acceptPrivacyPolicy" onclick="toggleCheckbox(this)" class="remember-me-checkbox" src="/assets/svg/rectangle.svg">
+                        <p class="remember-me-p">I accept the <a class="privacy-policy-link" href="/assets/templates/privacy_policy.html">Privacy Policy</a></p>
+                    </div>
                     <div class="signup-btns-div">
-                        <button onclick="signUp()" class="login-btn">Sign up</button>
+                        <button type="submit" onclick="signUp()" class="login-btn">Sign up</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
+    </div>
     
-        <footer class="footer-indexhtml">
-            <a class="a-footer-infdexhtml" href="/assets/templates/privacy_policy.html">Privacy Policy</a>
-            <a class="a-footer-infdexhtml" href="/assets/templates/legal_notice.html">Legal Notice</a>
-        </footer>
+    <footer class="footer-indexhtml">
+        <a class="a-footer-infdexhtml" href="/assets/templates/privacy_policy.html">Privacy Policy</a>
+        <a class="a-footer-infdexhtml" href="/assets/templates/legal_notice.html">Legal Notice</a>
+    </footer>
 </body>
 </html>
