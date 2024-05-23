@@ -155,7 +155,7 @@ body{
     right: -8px;
     bottom: -15px;
     background: #FFFFFF;
-    transform: translateX(150px);
+    transform: translateX(0px);
     transition: all 100ms ease-in-out;
 
 
@@ -198,5 +198,7 @@ body{
 
 .hide{
 
-    display: none;
+    
+    transform: translateX(150px);
+    transition: all 100ms ease-in-out;
 }

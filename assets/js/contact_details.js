@@ -24,10 +24,12 @@
      console.error('Elemente mit den IDs "moreButton" oder "moreBtnMenu" wurden nicht gefunden.');
  }
 
+ 
+
 
 
  function loadSingleContactId(){
-    debugger
+    
 
     let userIdAsString = localStorage.getItem('userID');
     if (userIdAsString){
@@ -39,9 +41,9 @@
 
 
  function loadSingleContact(id){
-    debugger
+    
     let user = contactsAsJson[id];
-    debugger
+    
     document.getElementsByClassName('name-headline')[0].innerHTML = `${user['vorname']} ${user['name']}`;
     document.getElementsByClassName('email')[0].innerHTML = `${user['mail']}`;
     document.getElementsByClassName('phone')[0].innerHTML = `${user['mobile']}`;

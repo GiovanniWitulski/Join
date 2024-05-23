@@ -14,7 +14,17 @@
     margin-right: 16px;
     position: sticky;
     top: 80px;
+    justify-content: center;
+    
     z-index: 2;
+}
+
+.headline-text{
+
+    max-width: 396px;
+    text-align: left;
+    width: 100%;
+  
 }
 
 body {
