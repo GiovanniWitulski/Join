@@ -2,7 +2,7 @@ console.log("board.js_loaded");
 
 let TaskBoard = []
 
-let BackgroundTaskBoard = [           
+let BackgroundTaskBoard = [            
     {
         "label": "/assets/svg/Labels Board card label technical task.svg",
         "title": "Technical Task Example",
@@ -83,7 +83,7 @@ let BackgroundTaskBoard = [
     },
 
 
-];                         
+];                                      // -> mit responteToJson befüllen       
 
 
 //global variables & Elementtargets
