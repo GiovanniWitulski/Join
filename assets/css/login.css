@@ -83,43 +83,51 @@
     width: 100%;
 }
 
+.login-input-divs {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-bottom: 40px;
+}
+
 .login-input-div-indexhtml {
     display: flex;
     flex-direction: column;
     gap: 32px;
     margin-left: 16px;
     margin-right: 16px;
-    margin-bottom: 40px;
     padding: 0;
 }
 
 .login-input-indexhtml {
-    width: 100% - 22px;
     height: 48px;
     border: 1px solid rgba(209, 209, 209, 1);
     border-radius: 10px;
     padding-left: 21px;
-    padding-right: 21px;
+    padding-right: 60px;
 }
 
 .login-input-indexhtml:focus-visible {
     border-color: rgba(41, 171, 226, 1);
+    outline: none;
 }
 
-#loginNameIndexHtml {
-    background: url(/assets/svg/person.svg) no-repeat center right 22px;
+.login-input-div-indexhtml {
+    position: relative;
 }
 
-#loginEmailIndexHtml {
-    background: url(/assets/svg/mail.svg) no-repeat center right 21px;
+.input-icon {
+    position: absolute;
+    right: 21px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: text;
+    /* cursor: pointer; */
 }
 
-#loginPasswordIndexHtml {
-    background: url(/assets/svg/lock.svg) no-repeat center right 26px;
-}
-
-#loginConfirmPasswordIndexHtml {
-    background: url(/assets/svg/lock.svg)  no-repeat center right 26px;
+.input-icon img {
+    width: 24px;
+    height: 24px;
 }
 
 .required-msg-div {
@@ -139,6 +147,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 40px;
 }
 
 .remember-me-div {

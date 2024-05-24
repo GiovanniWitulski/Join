@@ -12,10 +12,14 @@
     <script src="/assets/js/remoteStorage.js"></script>
     <script src="/assets/js/login.js"></script>
 </head>
-<body class="login-body">
+<body onload="landingPageAnimation()" class="login-body">
+    <!-- <body onload="landingPageAnimation()" class="login-body"> -->
     <header>
         <img class="join-logo-indexhtml" src="/assets/svg/join-logo.svg" alt="">
     </header>
+    <!-- <div>
+            ANIMATION DIV
+        </div> -->
     <div id="loginParentDiv">
         <div class="login-card-div">
             <div class="login-card">
@@ -24,11 +28,21 @@
                     <img class="login-underline" src="/assets/svg/underline-lightblue.svg" alt="">
                 </div>
                 <form id="loginForm" class="form-indexhtml" action="/summary.html" onsubmit="return validateForm()">
-                    <div class="login-input-div-indexhtml">
-                        <input class="login-input-indexhtml" id="loginEmailIndexHtml" type="email" placeholder="Email" required>
-                        <input class="login-input-indexhtml" id="loginPasswordIndexHtml" type="password" placeholder="Password" required>
+                    <div class="login-input-divs">
+                        <div class="login-input-div-indexhtml mb-40px">
+                            <input class="login-input-indexhtml" id="loginEmailIndexHtml" type="email" placeholder="Email" required>
+                            <div class="input-icon">
+                                <img src="/assets/svg/mail.svg" alt="Email Icon">
+                            </div>
+                        </div>
+                        <div class="login-input-div-indexhtml">
+                            <input class="login-input-indexhtml" id="loginPasswordIndexHtml" type="password" placeholder="Password" required>
+                            <div class="input-icon">
+                                <img src="/assets/svg/lock.svg" alt="Password Icon">
+                            </div>
+                        </div>
                     </div>
-                    <div class="remember-me-div">
+                    <div class="remember-me-div mt-40px">
                         <img id="rememberMe" onclick="toggleCheckbox(this)" class="remember-me-checkbox" src="/assets/svg/rectangle.svg">
                         <p class="remember-me-p">Remember me</p>
                     </div>
@@ -46,6 +60,8 @@
         </div>
     </div>
     
+    <!--------------------------------------- SIGN UP CARD --------------------------------------->
+
     <div id="signupParentDiv" class="d-none">
         <div class="login-card-div">
             <div class="login-card">
@@ -60,10 +76,32 @@
 
                 <form class="form-indexhtml">
                     <div class="login-input-div-indexhtml">
-                        <input class="login-input-indexhtml" id="signUpNameIndexHtml" type="text" placeholder="Name" required>
-                        <input class="login-input-indexhtml" id="signUpEmailIndexHtml" type="email" placeholder="Email" required>
-                        <input class="login-input-indexhtml" id="signUpPasswordIndexHtml" type="password" placeholder="Password" required>
-                        <input class="login-input-indexhtml" id="signUpConfirmPasswordIndexHtml" type="password" placeholder="Confirm Password" required>
+                        <div class="login-input-div-indexhtml">
+                            <input class="login-input-indexhtml" id="signUpNameIndexHtml" type="text" placeholder="Name" required>
+                            <div class="input-icon">
+                                <img src="/assets/svg/person.svg" alt="Name Icon">
+                                <!-- <img src="assets/svg/visibility.svg" alt="">
+                                <img src="" alt=""> -->
+                            </div>
+                        </div>
+                        <div class="login-input-div-indexhtml">
+                            <input class="login-input-indexhtml" id="signUpEmailIndexHtml" type="email" placeholder="Email" required>
+                            <div class="input-icon">
+                                <img src="/assets/svg/mail.svg" alt="Email Icon">
+                            </div>
+                        </div>
+                        <div class="login-input-div-indexhtml">
+                            <input oninput="changeInputFieldImg(this)" class="login-input-indexhtml" id="signUpPasswordIndexHtml" type="password" placeholder="Password" required>
+                            <div class="input-icon">
+                                <img src="/assets/svg/lock.svg" alt="Password Icon">
+                            </div>
+                        </div>
+                        <div class="login-input-div-indexhtml">
+                            <input oninput="changeInputFieldImg(this)" class="login-input-indexhtml" id="signUpConfirmPasswordIndexHtml" type="password" placeholder="Confirm Password" required>
+                            <div class="input-icon">
+                                <img src="/assets/svg/lock.svg" alt="Password Icon">
+                            </div>
+                        </div>
                     </div>
                     <div class="required-msg">
                         <p id="passwordDontMatch" class="required-msg d-none">Ups! your password don't match</p>
