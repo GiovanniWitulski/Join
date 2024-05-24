@@ -68,3 +68,11 @@
 
     cursor: pointer;
 }
+
+.page-content{
+    overflow: hidden;
+    height: calc(100vh - 160px);
+    margin-top: 80px;
+    width: 100%;
+    
+}

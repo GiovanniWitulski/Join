@@ -18,10 +18,13 @@
 </head>
 <body onload="includeHTML()"">
     <div id="mobileTamplateContent" w3-include-html="/assets/templates/mobile_template.html"></div>
+    <div class="page-content">
     <div id="contact-div"></div>
     <button onclick="showAddContact()" class="add-contact-btn"></button>
 
     <div id="overlay-container" class="overlay-container">
+
+        <div class="formular-container">
         <div class="top-container">
             <div class="close-btn-div"><button class="close-btn"></button></div>
             <div class="headline">Add Contact</div>
@@ -39,7 +42,10 @@
                 <button  class="create-contact-btn">Create contact <img src="/assets/svg/check.svg"></button>
             </form>
         </div>
+        </div>
     </div>
+
+</div>
     
 </body>
 </html>

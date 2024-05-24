@@ -5,17 +5,35 @@ body {
 .overlay-container {
     width: 396px;
     height: 760px;
-    border-radius: 30px;
-    background-color: white;
+   
+    
     display: flex;
-    flex-direction: column;
+    
     transform: translateY(400px);
     transition: all 100ms ease-in-out;
+    background-color: rgba(0, 0, 0, 0.4);
 
 }
 
 .show {
-    transform: translateY(-100vh);
+    transform: translateY(0);
+    width: 100vw;
+    height: 100%;
+    position: absolute;
+    z-index: 4;
+    justify-content: center;
+    top: 0px;
+}
+
+.formular-container{
+    max-height: 760px;
+    max-width: 396px;
+    width: 100%;
+    background-color: white;
+    position: relative;
+    top: 80px;
+    border-radius: 30px;
+    height: calc(100vh - 160px);
 }
 
 .top-container{
@@ -23,6 +41,8 @@ body {
     width: 100%;
     height: 352px;
     background-color: #2A3647;
+    margin-top: -23.6px;
+    border-radius: 30px 30px 0px 0px;
 }
 
 .bottom-container{
@@ -56,6 +76,7 @@ body {
     border: none;
     background-color: transparent;
     border-radius: 100%;
+    margin-top: 28px;
     
 }
 
@@ -163,6 +184,9 @@ body {
 
 
 #contact-div{
-    max-width: 428px;
-    margin-top: 80px;
+   
+   height: 100%;
+   overflow: overlay;
+   width: 100%;
+
 }
