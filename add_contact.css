@@ -3,8 +3,8 @@ body {
     margin: 0;
 }
 .overlay-container {
-    width: 396px;
-    height: 760px;
+    width: 100vw;
+    height: 100%;
    
     
     display: flex;
