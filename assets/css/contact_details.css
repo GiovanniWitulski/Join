@@ -202,3 +202,10 @@ body{
     transform: translateX(150px);
     transition: all 100ms ease-in-out;
 }
+
+.name-pic{
+
+    width: 80px;
+    height: 80px;
+    margin-right: 18.5px;
+}

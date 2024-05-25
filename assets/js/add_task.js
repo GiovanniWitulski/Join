@@ -149,7 +149,7 @@ if(document.getElementById('optionContainer').innerHTML == ``){
         const contact = contactsAsJson[i];
         
         document.getElementById('optionContainer').innerHTML += `<div id="contact${i}" class="option" onclick="assignTheContact(this,${i})"><div class="contactNameDiv"><svg class="profile_pic" width="42px" height="42px">
-        <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2" fill="orange" />
+        <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2" fill="${contact['color']}" />
         <text x="12" y="25" fill="white" font-size="12px">${contact['vorname'].charAt(0)}${contact['name'].charAt(0)}</text>
         </svg><div class="contactNames">${contact['vorname']} ${contact['name']}</div></div><img id="checkbox${i}" class="checkbox-icon" src="/assets/svg/rectangle.svg"></div>`;
     }

@@ -26,7 +26,7 @@
 
         <div class="formular-container">
         <div class="top-container">
-            <div class="close-btn-div"><button class="close-btn"></button></div>
+            <div class="close-btn-div"><button onclick="hideTheFormular('overlay-container')" class="close-btn"></button></div>
             <div class="headline">Add Contact</div>
             <div class="subheadline">Tasks are better with a team! </div>
             <img class="divider" src="/assets/svg/underline_blue.svg">
@@ -35,11 +35,11 @@
         </div>
             <img class="contact-pic" src="/assets/svg/Frame 79.svg">
         <div class="bottom-container">
-            <form onsubmit="getTheInformation()" class="create-contact-form">
+            <form onsubmit="getTheInformation(event)" class="create-contact-form">
                 <input id="contact-name" type="text" required placeholder="Name">
                 <input id="contact-mail" type="email" required placeholder="Email">
                 <input id="contact-phone" type="tel" required placeholder="Phone">
-                <button  class="create-contact-btn">Create contact <img src="/assets/svg/check.svg"></button>
+                <button type="submit" class="create-contact-btn">Create contact <img src="/assets/svg/check.svg"></button>
             </form>
         </div>
         </div>
