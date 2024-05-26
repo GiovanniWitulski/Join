@@ -38,12 +38,34 @@ async function loadCurrentContactId(){
 
 async function loadSingleContact(id){
     
-    let user = contactsAsJson[id];
+let user;
+    for (let i = 0; i < contactsAsJson.length; i++) {
+        const element = contactsAsJson[i];
+        if (element['id'] == id){
+            user = element;
+        }
+        
+    }
+
+    
     
     document.getElementsByClassName('name-headline')[0].innerHTML = `${user['vorname']} ${user['name']}`;
     document.getElementsByClassName('email')[0].innerHTML = `${user['mail']}`;
     document.getElementsByClassName('phone')[0].innerHTML = `${user['mobile']}`;
     document.getElementsByClassName('name-pic')[0].outerHTML = drawContactDetailPic(user);
+    document.getElementsByClassName('del-btn')[0].outerHTML = `<button class="del-btn" onclick="deleteContact(${id})"></button>`
+}
+
+
+async function deleteContact(id){
+
+    idToFind = id
+    indexToDelete = contactsAsJson.findIndex(contact => contact.id === idToFind);
+    contactsAsJson.splice(indexToDelete, 1); 
+    
+    await putData('contacts', contactsAsJson);
+    window.location.href = "/contacts.html";
+
 }
 
 function drawContactDetailPic(user){

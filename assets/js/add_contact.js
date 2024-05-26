@@ -53,8 +53,12 @@ async function getTheInformation(event){
     await getPhoneNumber();
     await getId();
     contactColor = await getAColor();
-    await postData('contacts/');
-    event.target.submit(); //formular wird reloaded bzw. submitted 
+    await postData('contacts/'); 
+    await refreshContactToLoad(contactId, 'currentContact');
+    
+    
+     
+     
 }
 
 

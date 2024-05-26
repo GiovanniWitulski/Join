@@ -23,6 +23,10 @@ async function deleteData(path="") {
     return responseToJson = await response.json();
 }
 
+
+
+
+
 async function putData(path='', data={}) {
     
     
