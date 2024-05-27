@@ -24,7 +24,7 @@ let BackgroundTaskBoard = [
         "subtask" : ["check this subtask.", "click on the small box to check it."],
         "subtaskSum" :[0, 0],
         "priority" : ["urgent", "/assets/svg/Capa_2_Burger menue_Arrow_up.svg"],
-        "assignedTo" : ["Max Mustermann", "Richard Roberts"], // oder Id's der Mitarbeiter
+        "assignedTo" : ["Max Bustermann", "Eichard Moberts", "Anton Mabuse"], // oder Id's der Mitarbeiter
         "contactEmblem" : ["/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
         "type" : "1",
         "taskid": "2"
@@ -37,7 +37,7 @@ let BackgroundTaskBoard = [
         "subtask" : ["check this subtask.", "click on the small box to check it."],
         "subtaskSum" : [1, 1],
         "priority" : ["low", "/assets/svg/capa_priority_low.svg"],
-        "assignedTo" : ["Max Mustermann", "Richard Roberts"], // oder Id's der Mitarbeiter
+        "assignedTo" : ["Axel Mustermann", "Mitchard Boberts", "Erik Malmö"], // oder Id's der Mitarbeiter
         "contactEmblem" : ["/assets/svg/contact_emblem_Annika_Michelstadt.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg"],
         "type" : "2",
         "taskid": "1"
@@ -83,7 +83,7 @@ let BackgroundTaskBoard = [
     },
 
 
-];                                      // -> mit responteToJson befüllen       
+];                                      // -> mit responseToJson befüllen       
 
 
 //global variables & Elementtargets
@@ -92,7 +92,7 @@ const Searchfield = document.getElementById('boardInput').addEventListener('inpu
 let toDo = document.getElementById('toDoContainer');
 let inProgress = document.getElementById('inProgressContainer');
 let awaitFeedback = document.getElementById('awaitFeedbackContainer');
-let Overlay = document.getElementById('Board');
+let Overlay = document.getElementById('overlayContainer');
 
 TaskBoard = BackgroundTaskBoard; //TaskBoard -> RAM Arbeitsarray --> BackgroundTaskBoard -> ROM 
 console.log ("TaskBoard:", TaskBoard);
@@ -110,28 +110,10 @@ function renderBoard(){ //load Task to Board/actualise while search active
     awaitFeedbackContainer();    //load await feedback
 }
 
-
-
-//TEST CLose popup
-
-function closeOverlay(closeId){
-    var element = document.getElementById(closeId);
-    element.classList.add('hidden');
-    console.log("Klasse hinzugefügt");
-
-}
-
-function removeClassFunction(closeId) {
-    var element = document.getElementById(closeId);
-    element.classList.remove('hidden');
-    console.log("Klasse entfernt"); }
-
-
-    // end TEST Close Popup
-
-
-
-
+function closeOverlay(closeId){ // Close Popup Task/OverlayTask
+    Overlay.innerHTML = ``;
+}                                   
+   
 function overlayTask(id){   //TO DO: DISCERNMENT -> Technical Task/User Story Task!! -> OverlayTask FKT 
     console.log("OverlayTask active", id);
     for (i=0; i<TaskBoard.length; i++){
@@ -332,13 +314,20 @@ function awaitFeedbackContainer(){
                                                     //--> class.remove/add -> Textstyle
 
 function OverlayTaskPopup(i){  
-
-
+       
         const OverlayTask = TaskBoard[i];
+        let overlayContacts = '';
+         //TEST Values for assigned to: 
+         for (let c = 0; c < OverlayTask.contactEmblem.length; c++){
+            const src = OverlayTask.contactEmblem[c];
+            const contactName = OverlayTask.assignedTo[c];
+            overlayContacts += '<div class="overlay-assigned-to-contacts"><img class="overlay-contact-emblems-img" src=" '+src+' " alt="contact-emblem"><div class="overlay-contact-name">'+contactName+'</div></div>';
+        }           
+        //TestEnde
         Overlay.innerHTML += `  
         <div id="${OverlayTask.taskid}" class="overlay-container">            
         <div class="overlay-task">
-        <div id="OverlayHeader" class="overlay-card-header"><img src="${OverlayTask.label}" alt="label"><img onclick="closeOverlay(${OverlayTask.taskid})" src="/assets/svg/close_black.svg" alt="close"></div>
+        <div id="OverlayHeader" class="overlay-card-header"><img src="${OverlayTask.label}" alt="label"><img onclick="closeOverlay()" src="/assets/svg/close_black.svg" alt="close"></div>
         <div id="overlayTitle" class="overlay-card-title">${OverlayTask.title}</div>
         <div id="overlayDescription" class="overlay-card-description">${OverlayTask.description}</div>
         <div id="overlaydueDate" class="overlay-card-due-date"><div>Due date:</div><div class="overlay-due-date">${OverlayTask.date}</div></div>
@@ -346,13 +335,11 @@ function OverlayTaskPopup(i){
         Priority</div><div class="overlay-card-priority-text-img">${OverlayTask.priority[0]}<img src="${OverlayTask.priority[1]}" alt="priority"></div>
         </div>
         <div id="overlayAssignedTo" class="overlay-assigned-to">
-        <div class="overlay-assigned-to-text">Assigned to:</div><div id="overlayParticipants" class="overlay-participants">${OverlayTask.assignedTo}</div>  
+        <div class="overlay-assigned-to-text">Assigned to:</div><div id="overlayParticipants" class="overlay-participants">${overlayContacts}</div>  
         </div>
         <div class="overlay-card-subtasks">
-        <div class="overlay-substasks-text">Subtasks:</div><div class="overlay-checkbox"><img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${OverlayTask.subtask[0]}<br>
-        <img onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${OverlayTask.subtask[1]}</div>
-        </div>
-        <div id="cardChecklist" class="overlay-card-checklist"></div>
+        <div class="overlay-substasks-text">Subtasks:</div><div class="overlay-checkbox"><div class="overlay-substask"><img class="overlay-checkbox-img" onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${OverlayTask.subtask[0]}</div>
+        <div class="overlay-substask"><img class="overlay-checkbox-img" onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${OverlayTask.subtask[1]}</div></div>
         </div>
         <div class="overlay-card-delete-edit">
         <div><img src="/assets/svg/delete.svg" alt="delete"><h3>Delete</h3></div><div><img src="/assets/svg/edit.svg" alt="Edit"><h3>Edit</h3></div>

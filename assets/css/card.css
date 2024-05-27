@@ -138,10 +138,31 @@
 
 .overlay-assigned-to-text{
     color: #42526E;
+    padding-bottom: 8px;
+}
+
+.overlay-assigned-to-contacts{
+    display: flex;
+    align-items: center;
+    
+    padding-left: 7px;
+    padding-bottom: 4px;
+}
+
+.overlay-contact-name{
+    padding-left: 16px;
 }
 
 .overlay-participants{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 4px;
+    
+}
 
+.overlay-contact-emblems-img{
+    width: 42px;
+    height: 42px;
 }
 
 .overlay-card-subtasks{
@@ -149,11 +170,28 @@
 }
 
 .overlay-substasks-text{
-    color: #42526E;    
+    color: #42526E;  
+    padding-bottom: 8px;      
 }
 
 .overlay-checkbox{
+    
+}
 
+.overlay-substask{
+    display: flex;
+    align-items: center;
+    padding-bottom: 4px;
+}
+
+.overlay-checkbox-img{
+    width: 16px;
+    height: 16px;
+    padding-right: 16px;
+}
+
+.overlay-checkbox{
+    padding-bottom: 4px;
 }
 
 .overlay-card-checklist{
@@ -165,6 +203,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 24px;
 }
 
 .hidden {
