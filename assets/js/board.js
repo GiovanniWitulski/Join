@@ -76,8 +76,8 @@ let BackgroundTaskBoard = [
         "subtask" : ["check this subtask.", "click on the small box to check it."],
         "subtaskSum" :[0, 1],
         "priority" : ["medium", "/assets/svg/capa_1_medium_priority.svg"],
-        "assignedTo" : ["Emmanuel Mauer", "Marcel Bensdorf", "Annika Michelstadt"], // oder Id's der Mitarbeiter
-        "contactEmblem" : ["/assets/svg/contact_emblem_Emmanuel_Mauer.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
+        "assignedTo" : ["Marcel Bensdorf", "Annika Michelstadt"], // oder Id's der Mitarbeiter
+        "contactEmblem" : ["/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
         "type" : "2",
         "taskid": "6"
     },
@@ -163,6 +163,16 @@ function searchResult(s){
 
     renderBoard();
 }
+
+// TO CODE: Functions /////////////////////////////////
+
+function overlayDeleteTask(idtask){}
+
+function overlayEditTask(idtask){}
+
+function doneContainer (){}
+
+/////////////////////////////////////////////////////////////
 
 //Board render Tasks 
 
@@ -310,20 +320,20 @@ function awaitFeedbackContainer(){
     }
 }
 
-// Overlay TECHNICAL Task/Popup (angeklickter Task) // USER STORY Template noch erstellen
+function doneContainer(){}
+
+// Overlay TECHNICAL Task/Popup (angeklickter Task) // Template nach ändern Userlabel/TechicalLabel
                                                     //--> class.remove/add -> Textstyle
 
-function OverlayTaskPopup(i){  
+function OverlayTaskPopup(i){   // TO CODE: EditTaskFkt, DeleteTaskFKT
        
         const OverlayTask = TaskBoard[i];
         let overlayContacts = '';
-         //TEST Values for assigned to: 
          for (let c = 0; c < OverlayTask.contactEmblem.length; c++){
             const src = OverlayTask.contactEmblem[c];
             const contactName = OverlayTask.assignedTo[c];
             overlayContacts += '<div class="overlay-assigned-to-contacts"><img class="overlay-contact-emblems-img" src=" '+src+' " alt="contact-emblem"><div class="overlay-contact-name">'+contactName+'</div></div>';
         }           
-        //TestEnde
         Overlay.innerHTML += `  
         <div id="${OverlayTask.taskid}" class="overlay-container">            
         <div class="overlay-task">
@@ -342,7 +352,7 @@ function OverlayTaskPopup(i){
         <div class="overlay-substask"><img class="overlay-checkbox-img" onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${OverlayTask.subtask[1]}</div></div>
         </div>
         <div class="overlay-card-delete-edit">
-        <div><img src="/assets/svg/delete.svg" alt="delete"><h3>Delete</h3></div><div><img src="/assets/svg/edit.svg" alt="Edit"><h3>Edit</h3></div>
+        <div onclick="overlayDeleteTask" class="overlay-cde"><img class="overlay-cde-img1" src="/assets/svg/delete.svg" alt="delete">Delete</div><div onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="overlay-cde"><img class="overlay-cde-img2" src="/assets/svg/edit.svg" alt="Edit">Edit</div>
         </div>
         </div>
         </div>
