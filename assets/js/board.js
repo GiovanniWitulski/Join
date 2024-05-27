@@ -118,12 +118,12 @@ function closeOverlay(closeId){
     var element = document.getElementById(closeId);
     element.classList.add('hidden');
     console.log("Klasse hinzugefügt");
-    removeClassFunction(closeId)
+
 }
 
 function removeClassFunction(closeId) {
     var element = document.getElementById(closeId);
-    element.classList.remove('meineKlasse');
+    element.classList.remove('hidden');
     console.log("Klasse entfernt"); }
 
 
