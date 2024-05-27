@@ -2,6 +2,7 @@ let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h','i','j','k','l', 'm', 'n'
 let contactsAsJson;
 let contactToDisplay = 0;
 let colors = ['#FC71FF', '#FF7A00', '#9327FF','#6E52FF', '#FFBB2B', '#1FD7C1', '#462F8A', '#FF4646'];
+let contactsWithoutToken = [];
 
 async function getAColor(){
 
@@ -13,9 +14,29 @@ async function getAColor(){
 async function loadContacts(){
     await loadData('contacts');
     contactsAsJson = responseToJson;
+    await readTheTokens();
     createDivs();
 }
 
+
+
+async function readTheTokens(){
+
+    for(const key in contactsAsJson){
+        if(contactsAsJson.hasOwnProperty(key)){
+            const array = contactsAsJson[key];
+            const token = {token: key};
+    
+            array.forEach(element => {
+
+                contact = {...element, ...token};
+                contactsWithoutToken.push(contact);
+                
+                
+            });
+        }
+    }
+    }
 
 function createDivs(){
     
@@ -27,8 +48,8 @@ function createDivs(){
             
             
             document.getElementById('contact-div').innerHTML += `<div class="contact-section" id="${element}"><div class="headline-Div"><p id="headline${element}">${element.toUpperCase(element)}</p></div><div id="contactsOf${element}"></div></div>`;
-            for (let j = 0; j < contactsAsJson.length; j++) {
-                const contact = contactsAsJson[j];
+            for (let j = 0; j < contactsWithoutToken.length; j++) {
+                const contact = contactsWithoutToken[j];
                 if(contact['vorname'].charAt(0).toUpperCase() === element.toUpperCase()){
                     document.getElementById(`contactsOf${element}`).innerHTML += `<a  onclick="refreshContactToLoad(${contact['id']}, 'currentContact')"  id="${j}" class="singleContact"><svg class="profile_pic" width="42px" height="42px">
                     <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2" fill="${contact['color']}" />
@@ -65,3 +86,7 @@ function hideTheFormular(elementToHide){
 
     document.getElementById(elementToHide).classList.remove('show');
 }
+
+
+
+

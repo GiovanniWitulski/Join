@@ -145,8 +145,8 @@ function renderAssignSelector(){
 if(document.getElementById('optionContainer').innerHTML == ``){
     document.getElementById('optionContainer').innerHTML = ``;
 
-    for (let i = 0; i < contactsAsJson.length; i++) {
-        const contact = contactsAsJson[i];
+    for (let i = 0; i < contactsWithoutToken.length; i++) {
+        const contact = contactsWithoutToken[i];
         
         document.getElementById('optionContainer').innerHTML += `<div id="contact${i}" class="option" onclick="assignTheContact(this,${i})"><div class="contactNameDiv"><svg class="profile_pic" width="42px" height="42px">
         <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2" fill="${contact['color']}" />
