@@ -2,7 +2,20 @@ console.log("board.js_loaded");
 
 let TaskBoard = []
 
-let BackgroundTaskBoard = [            
+let BackgroundTaskBoard = [   
+    {
+        "label": "/assets/svg/Labels Board card label technical task.svg",
+        "title": "Technical Task Example",
+        "description": "The code for the example in VS Code has been written",
+        "date": "03.05.2035",
+        "subtask" : ["check this subtask.", "click on the small box to check it."],
+        "subtaskSum" :[0, 1],
+        "priority" : ["medium", "/assets/svg/capa_1_medium_priority.svg"],
+        "assignedTo" : ["Emmanuel Mauer", "Marcel Bensdorf", "Annika Michelstadt"], // oder Id's der Mitarbeiter
+        "contactEmblem" : ["/assets/svg/contact_emblem_Emmanuel_Mauer.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
+        "type" : "3",
+        "taskid": "3"
+    },         
     {
         "label": "/assets/svg/Labels Board card label technical task.svg",
         "title": "Technical Task Example",
@@ -92,6 +105,7 @@ const Searchfield = document.getElementById('boardInput').addEventListener('inpu
 let toDo = document.getElementById('toDoContainer');
 let inProgress = document.getElementById('inProgressContainer');
 let awaitFeedback = document.getElementById('awaitFeedbackContainer');
+let done = document.getElementById('doneContainer');
 let Overlay = document.getElementById('overlayContainer');
 
 TaskBoard = BackgroundTaskBoard; //TaskBoard -> RAM Arbeitsarray --> BackgroundTaskBoard -> ROM 
@@ -105,9 +119,10 @@ function uploadData(){} //upload to server
 
 function renderBoard(){ //load Task to Board/actualise while search active
     downloadData(); //load from server, actualise Task - Array
-    toDoContainer();    //load to do´s 
-    inProgressContainer();       //load tasks in progress
-    awaitFeedbackContainer();    //load await feedback
+    toDoContainer();    //load task to do 
+    inProgressContainer();       //load tasks in progress 
+    awaitFeedbackContainer();    //load task awaiting feedback 
+    doneContainer();            //load tasks done 
 }
 
 function closeOverlay(closeId){ // Close Popup Task/OverlayTask
@@ -164,13 +179,13 @@ function searchResult(s){
     renderBoard();
 }
 
-// TO CODE: Functions /////////////////////////////////
+// TO CODE: Functions //////////////////////////////////////
 
-function overlayDeleteTask(idtask){}
+// function overlayDeleteTask(idtask){}
 
-function overlayEditTask(idtask){}
+// function overlayEditTask(idtask){}
 
-function doneContainer (){}
+// function doneContainer (){}
 
 /////////////////////////////////////////////////////////////
 
@@ -320,7 +335,50 @@ function awaitFeedbackContainer(){
     }
 }
 
-function doneContainer(){}
+function doneContainer(){
+    console.log("DoneContainer_active");
+
+    for(i=0; i<TaskBoard.length; i++){
+        const doneCard = TaskBoard[i];
+        if (doneCard.type == 3){
+            console.log("doneContainer If-Active");
+            
+            sumSubtask = doneCard.subtaskSum[0]+doneCard.subtaskSum[1];
+            const progressInPercent = sumSubtask * 50;
+            const progressBarId = 'doneBar' + doneCard.taskid;
+
+            let emblems = '';                           //contact-emblems
+            for (let i = 0; i < doneCard.contactEmblem.length; i++){
+                const src = doneCard.contactEmblem[i];
+                emblems += '<img class="card-contact-emblems-img" src=" '+src+' " alt="contact-emblem">';
+            }
+
+            done.innerHTML += `
+            <div class="card-body" onclick="overlayTask(${doneCard.taskid})">
+            <div id="cardHeader" class="card-header"><img src="${doneCard.label}" alt="label"></div>
+            <div id="cardTitle" class="card-title"><h4>${doneCard.title}</h4></div>
+            <div id="cardDescription" class="card-description"><h4>${doneCard.description}</h4></div>
+            <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
+            <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
+            <rect id="doneBar${doneCard.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
+            <div class="card-sum-subtask">${sumSubtask}/2 Subtasks</div></div>        
+            <div id="cardParticipantsPriority" class="card-participants-priority">
+            <div class="card-contact-emblems">${emblems}</div>
+            <div><img src="${doneCard.priority[1]}" alt="priority"></div>
+            </div></div>
+                
+             `             
+            const progressBar = document.getElementById(progressBarId);
+            progressBar.setAttribute('width', `${progressInPercent}%`);
+        }
+    }
+    if (toDo.innerHTML === '') {
+        toDo.innerHTML = `<img src="assets/svg/assets/svg/board_in_progress_example.svg" class="to-do-container-mobile" alt=""></div>`
+    }
+}
+
+
 
 // Overlay TECHNICAL Task/Popup (angeklickter Task) // Template nach ändern Userlabel/TechicalLabel
                                                     //--> class.remove/add -> Textstyle
