@@ -36,8 +36,8 @@ async function getPhoneNumber(){
 
 async function getId(){
 
-    if(contactsAsJson){
-      contactId = contactsAsJson.length;  
+    if(contactsWithoutToken){
+      contactId = contactsWithoutToken.length;  
     }else{
         contactId = 0;
     }
@@ -53,7 +53,7 @@ async function getTheInformation(event){
     await getPhoneNumber();
     await getId();
     contactColor = await getAColor();
-    await postData('contacts/'); 
+    await postContact('contacts/'); 
     await refreshContactToLoad(contactId, 'currentContact');
     
     
@@ -64,7 +64,7 @@ async function getTheInformation(event){
 
 
 
-async function postData(path='', data={}) {
+async function postContact(path='', data={}) {
     
     data = {
         "mail": contactMail,
@@ -89,7 +89,7 @@ async function postData(path='', data={}) {
     
     
     let response = await fetch(URL + path + ".json", {
-        method: "PUT", 
+        method: "POST", 
         headers: {
             "Content-Type": "application/json"
         },
