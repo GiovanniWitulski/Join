@@ -199,6 +199,8 @@ let BackgroundTaskBoard = [
 
 //global variables & Elementtargets
 
+let currentDraggedTask;
+
 const Searchfield = document.getElementById('boardInput').addEventListener('input', findTask);
 let toDo = document.getElementById('toDoContainer');
 let inProgress = document.getElementById('inProgressContainer');
@@ -284,6 +286,26 @@ function searchResult(s){
 
 // function checkbox -> Wert in Array änder + checkbox 
 
+// drag & drop functions 
+function startDragging(id){
+    currentDraggedTask = id;
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+  }
+
+function dropAt(newType){
+    for (i=0; i<TaskBoard.length; i++){
+        taskToMove = TaskBoard[i].taskid;
+        if (taskToMove == currentDraggedTask){
+            TaskBoard[i].type = newType;
+            renderBoard();
+            return;
+        }
+    }
+}
+
 /////////////////////////////////////////////////////////////
 
 //Board render Tasks 
@@ -308,7 +330,7 @@ function toDoContainer (){
             }           
 
                 toDo.innerHTML += `
-            <div class="card-body" onclick="overlayTask(${toDoCard.taskid})">
+            <div class="card-body" onclick="overlayTask(${toDoCard.taskid})" ondragstart="startDragging(${toDoCard.taskid})" draggable="true">
             <div id="cardHeader" class="card-header"><img src="${toDoCard.label}" alt="label"></div>
             <div id="cardTitle" class="card-title"><h4>${toDoCard.title}</h4></div>
             <div id="cardDescription" class="card-description"><h4>${toDoCard.description}</h4></div>
@@ -329,14 +351,7 @@ function toDoContainer (){
         }
     }
 
-    if (toDo.innerHTML === '') {
-        toDo.innerHTML = `<img src="assets/svg/assets/svg/board_in_progress_example.svg" class="to-do-container-mobile" alt=""></div>`
-    }
 
-    //add Task - Cards with .innerHTML //
-    // Label abfragen --> if label1 ---> img src "/img/label1.svg...", 
-    // Checkbox abfragen: var checkbox = document.getElementById('checkboxId');
-    //                    var checked = checkbox.checked;
 }
 
 function inProgressContainer (){
@@ -360,7 +375,7 @@ function inProgressContainer (){
 
 
             inProgress.innerHTML += `
-        <div class="card-body" onclick="overlayTask(${inProgressCard.taskid})">
+        <div class="card-body" onclick="overlayTask(${inProgressCard.taskid})" ondragstart="startDragging(${inProgressCard.taskid})" draggable="true">
         <div id="cardHeader" class="card-header"><img src="${inProgressCard.label}" alt="label"></div>
         <div id="cardTitle" class="card-title"><h4>${inProgressCard.title}</h4></div>
         <div id="cardDescription" class="card-description"><h4>${inProgressCard.description}</h4></div>
@@ -412,7 +427,7 @@ function awaitFeedbackContainer(){
             }
 
             awaitFeedback.innerHTML += `
-            <div class="card-body" onclick="overlayTask(${awaitFeedbackCard.taskid})">
+            <div class="card-body" onclick="overlayTask(${awaitFeedbackCard.taskid})" ondragstart="startDragging(${awaitFeedbackCard.taskid})" draggable="true">
             <div id="cardHeader" class="card-header"><img src="${awaitFeedbackCard.label}" alt="label"></div>
             <div id="cardTitle" class="card-title"><h4>${awaitFeedbackCard.title}</h4></div>
             <div id="cardDescription" class="card-description"><h4>${awaitFeedbackCard.description}</h4></div>
@@ -456,7 +471,7 @@ function doneContainer(){
             }
 
             done.innerHTML += `
-            <div class="card-body" onclick="overlayTask(${doneCard.taskid})">
+            <div class="card-body" onclick="overlayTask(${doneCard.taskid})" ondragstart="startDragging(${doneCard.taskid})" draggable="true">
             <div id="cardHeader" class="card-header"><img src="${doneCard.label}" alt="label"></div>
             <div id="cardTitle" class="card-title"><h4>${doneCard.title}</h4></div>
             <div id="cardDescription" class="card-description"><h4>${doneCard.description}</h4></div>
