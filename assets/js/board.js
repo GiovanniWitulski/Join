@@ -1,7 +1,6 @@
 console.log("board.js_loaded");
 
-let TaskBoard = []
-
+/*
 let BackgroundTaskBoard = [   
     {
         "label": "/assets/svg/Labels Board card label technical task.svg",
@@ -14,7 +13,7 @@ let BackgroundTaskBoard = [
         "assignedTo" : ["Emmanuel Mauer", "Marcel Bensdorf", "Annika Michelstadt"], // oder Id's der Mitarbeiter
         "contactEmblem" : ["/assets/svg/contact_emblem_Emmanuel_Mauer.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
         "type" : "3",
-        "taskid": "3"
+        "taskid": "1"
     },         
     {
         "label": "/assets/svg/Labels Board card label technical task.svg",
@@ -27,7 +26,7 @@ let BackgroundTaskBoard = [
         "assignedTo" : ["Emmanuel Mauer", "Marcel Bensdorf", "Annika Michelstadt"], // oder Id's der Mitarbeiter
         "contactEmblem" : ["/assets/svg/contact_emblem_Emmanuel_Mauer.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
         "type" : "0",
-        "taskid": "3"
+        "taskid": "2"
     },
     {
         "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
@@ -40,7 +39,7 @@ let BackgroundTaskBoard = [
         "assignedTo" : ["Max Bustermann", "Eichard Moberts", "Anton Mabuse"], // oder Id's der Mitarbeiter
         "contactEmblem" : ["/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
         "type" : "1",
-        "taskid": "2"
+        "taskid": "3"
     },
     {
         "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
@@ -53,7 +52,7 @@ let BackgroundTaskBoard = [
         "assignedTo" : ["Axel Mustermann", "Mitchard Boberts", "Erik Malmö"], // oder Id's der Mitarbeiter
         "contactEmblem" : ["/assets/svg/contact_emblem_Annika_Michelstadt.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg"],
         "type" : "2",
-        "taskid": "1"
+        "taskid": "4"
     }, 
     {
         "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
@@ -66,7 +65,7 @@ let BackgroundTaskBoard = [
         "assignedTo" : ["Andrew Millenium", "Marc Bob", "Elke Magneto"], // oder Id's der Mitarbeiter
         "contactEmblem" : ["/assets/svg/contact_emblem_Annika_Michelstadt.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg"],
         "type" : "0",
-        "taskid": "4"
+        "taskid": "5"
     },
     {
         "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
@@ -79,7 +78,7 @@ let BackgroundTaskBoard = [
         "assignedTo" : ["Anton Millenium", "Mitchel Bobford", "Enrico Montequia"], // oder Id's der Mitarbeiter
         "contactEmblem" : ["/assets/svg/contact_emblem_Annika_Michelstadt.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg"],
         "type" : "1",
-        "taskid": "5"
+        "taskid": "6"
     },
     {
         "label": "/assets/svg/Labels Board card label technical task.svg",
@@ -92,7 +91,106 @@ let BackgroundTaskBoard = [
         "assignedTo" : ["Marcel Bensdorf", "Annika Michelstadt"], // oder Id's der Mitarbeiter
         "contactEmblem" : ["/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
         "type" : "2",
+        "taskid": "7"
+    },
+
+
+];                                      // -> Task Sammlung für Testen       
+*/
+
+let TaskBoard = []
+
+let BackgroundTaskBoard = [   
+    {
+        "label": "/assets/svg/Labels Board card label technical task.svg",
+        "title": "Technical Task Example",
+        "description": "The code for the example in VS Code has been written",
+        "date": "03.05.2035",
+        "subtask" : ["check this subtask.", "click on the small box to check it."],
+        "subtaskSum" :[0, 0],
+        "priority" : ["medium", "/assets/svg/capa_1_medium_priority.svg"],
+        "assignedTo" : ["Emmanuel Mauer", "Marcel Bensdorf", "Annika Michelstadt"], // oder Id's der Mitarbeiter
+        "contactEmblem" : ["/assets/svg/contact_emblem_Emmanuel_Mauer.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
+        "type" : "3",
+        "taskid": "1"
+    },         
+    {
+        "label": "/assets/svg/Labels Board card label technical task.svg",
+        "title": "Technical Task Example",
+        "description": "Write the code for the example in VS Code",
+        "date": "03.05.2035",
+        "subtask" : ["check this subtask.", "click on the small box to check it."],
+        "subtaskSum" :[0, 1],
+        "priority" : ["medium", "/assets/svg/capa_1_medium_priority.svg"],
+        "assignedTo" : ["Emmanuel Mauer", "Marcel Bensdorf", "Annika Michelstadt"], // oder Id's der Mitarbeiter
+        "contactEmblem" : ["/assets/svg/contact_emblem_Emmanuel_Mauer.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
+        "type" : "0",
+        "taskid": "2"
+    },
+    {
+        "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
+        "title": "User Story Example",
+        "description": "In Progress Example",
+        "date": "10.05.2035",
+        "subtask" : ["check this subtask.", "click on the small box to check it."],
+        "subtaskSum" :[0, 0],
+        "priority" : ["urgent", "/assets/svg/Capa_2_Burger menue_Arrow_up.svg"],
+        "assignedTo" : ["Max Bustermann", "Eichard Moberts", "Anton Mabuse"], // oder Id's der Mitarbeiter
+        "contactEmblem" : ["/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
+        "type" : "1",
+        "taskid": "3"
+    },
+    {
+        "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
+        "title": "User Story Example",
+        "description": "Await Feedback Example",
+        "date": "08.05.2035",
+        "subtask" : ["check this subtask.", "click on the small box to check it."],
+        "subtaskSum" : [1, 1],
+        "priority" : ["low", "/assets/svg/capa_priority_low.svg"],
+        "assignedTo" : ["Axel Mustermann", "Mitchard Boberts", "Erik Malmö"], // oder Id's der Mitarbeiter
+        "contactEmblem" : ["/assets/svg/contact_emblem_Annika_Michelstadt.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg"],
+        "type" : "2",
+        "taskid": "4"
+    }, 
+    {
+        "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
+        "title": "User Story Example",
+        "description": "Second to do example",
+        "date": "08.05.2035",
+        "subtask" : ["check this subtask.", "click on the small box to check it."],
+        "subtaskSum" : [1, 1],
+        "priority" : ["low", "/assets/svg/capa_priority_low.svg"],
+        "assignedTo" : ["Andrew Millenium", "Marc Bob", "Elke Magneto"], // oder Id's der Mitarbeiter
+        "contactEmblem" : ["/assets/svg/contact_emblem_Annika_Michelstadt.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg"],
+        "type" : "0",
+        "taskid": "5"
+    },
+    {
+        "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
+        "title": "User Story Example",
+        "description": "Second in progress example",
+        "date": "08.05.2035",
+        "subtask" : ["check this subtask.", "click on the small box to check it."],
+        "subtaskSum" : [0, 1],
+        "priority" : ["low", "/assets/svg/capa_priority_low.svg"],
+        "assignedTo" : ["Anton Millenium", "Mitchel Bobford", "Enrico Montequia"], 
+        "contactEmblem" : ["/assets/svg/contact_emblem_Annika_Michelstadt.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg"],
+        "type" : "1",
         "taskid": "6"
+    },
+    {
+        "label": "/assets/svg/Labels Board card label technical task.svg",
+        "title": "Technical Task Example",
+        "description": "A Technical Task, enjoy!",
+        "date": "03.12.2035",
+        "subtask" : ["check this subtask.", "click on the small box to check it."],
+        "subtaskSum" :[0, 1],
+        "priority" : ["medium", "/assets/svg/capa_1_medium_priority.svg"],
+        "assignedTo" : ["Marcel Bensdorf", "Annika Michelstadt"], 
+        "contactEmblem" : ["/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
+        "type" : "2",
+        "taskid": "7"
     },
 
 
@@ -134,7 +232,6 @@ function overlayTask(id){   //TO DO: DISCERNMENT -> Technical Task/User Story Ta
     for (i=0; i<TaskBoard.length; i++){
         const TaskId = TaskBoard[i].taskid;
         if (TaskId == id){
-            console.log("found Task at:", i);
             OverlayTaskPopup(i);
         }
     }
@@ -185,14 +282,48 @@ function searchResult(s){
 
 // function overlayEditTask(idtask){}
 
-// function doneContainer (){}
+// function upload 
 
+// function download
+
+// function checkbox -> Wert in Array änder + checkbox 
+
+function toggleCheckboxValue(taskid, position, o) {
+    console.log("toggleCheckboxValue id: position:", taskid, position);
+
+    for (i=0; i<TaskBoard.length; i++){
+        const findTask = TaskBoard[i].taskid;
+        let subtaskValue = TaskBoard[i].subtaskSum[position];
+
+
+        if (findTask == taskid){   
+            console.log("taskfound at arrayposition:", i);
+            console.log(" alter sumbSumvalue:", subtaskValue);
+
+            
+            if (subtaskValue === 0) {
+                TaskBoard[i].subtaskSum[position] = 1;
+            } else {
+                TaskBoard[i].subtaskSum[position] = 0;
+
+             }
+            
+             console.log("Neuer sumbSumvalue:", TaskBoard[i].subtaskSum[position]);
+
+        }
+            
+    }
+    OverlayTaskPopup(o);
+    renderBoard();
+}
 /////////////////////////////////////////////////////////////
 
 //Board render Tasks 
 
 function toDoContainer (){                  
     console.log("toDoContainer_active");
+    toDo.innerHTML = '';
+
     for(i=0; i<TaskBoard.length; i++){
         const toDoCard = TaskBoard[i];
 
@@ -242,6 +373,7 @@ function toDoContainer (){
 
 function inProgressContainer (){
     console.log("inProgressContainer_active");
+    inProgress.innerHTML = '';
 
     for(i=0; i<TaskBoard.length; i++){
         const inProgressCard = TaskBoard[i];
@@ -294,6 +426,7 @@ function inProgressContainer (){
 
 function awaitFeedbackContainer(){
     console.log("awaitFeedbackContainer_active");
+    awaitFeedback.innerHTML = '';
 
     for(i=0; i<TaskBoard.length; i++){
         const awaitFeedbackCard = TaskBoard[i];
@@ -337,6 +470,7 @@ function awaitFeedbackContainer(){
 
 function doneContainer(){
     console.log("DoneContainer_active");
+    done.innerHTML='';
 
     for(i=0; i<TaskBoard.length; i++){
         const doneCard = TaskBoard[i];
@@ -390,8 +524,18 @@ function OverlayTaskPopup(i){   // TO CODE: EditTaskFkt, DeleteTaskFKT
          for (let c = 0; c < OverlayTask.contactEmblem.length; c++){
             const src = OverlayTask.contactEmblem[c];
             const contactName = OverlayTask.assignedTo[c];
+            
             overlayContacts += '<div class="overlay-assigned-to-contacts"><img class="overlay-contact-emblems-img" src=" '+src+' " alt="contact-emblem"><div class="overlay-contact-name">'+contactName+'</div></div>';
         }           
+
+        const checkmark0 = OverlayTask.subtaskSum[0];
+        const checkmark1 = OverlayTask.subtaskSum[1];
+        let check0 = '';   let check1 = ''; 
+        let check = "/assets/svg/checkmark.svg"; let nocheck = "/assets/svg/rectangle.svg";
+        if (checkmark0 == 0){check0 = nocheck;} else {check0 = check;}
+        if (checkmark1 == 0){check1 = nocheck;} else {check1 = check;}
+
+
         Overlay.innerHTML += `  
         <div id="${OverlayTask.taskid}" class="overlay-container">            
         <div class="overlay-task">
@@ -406,8 +550,8 @@ function OverlayTaskPopup(i){   // TO CODE: EditTaskFkt, DeleteTaskFKT
         <div class="overlay-assigned-to-text">Assigned to:</div><div id="overlayParticipants" class="overlay-participants">${overlayContacts}</div>  
         </div>
         <div class="overlay-card-subtasks">
-        <div class="overlay-substasks-text">Subtasks:</div><div class="overlay-checkbox"><div class="overlay-substask"><img class="overlay-checkbox-img" onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${OverlayTask.subtask[0]}</div>
-        <div class="overlay-substask"><img class="overlay-checkbox-img" onclick="toggleCheckbox(this)"  src="/assets/svg/rectangle.svg"> ${OverlayTask.subtask[1]}</div></div>
+        <div class="overlay-substasks-text">Subtasks:</div><div class="overlay-checkbox"><div class="overlay-substask"><img class="overlay-checkbox-img" onclick="toggleCheckboxValue(${OverlayTask.taskid}, 0, ${i})"  src=${check0}> ${OverlayTask.subtask[0]}</div>
+        <div class="overlay-substask"><img class="overlay-checkbox-img" onclick="toggleCheckboxValue(${OverlayTask.taskid}, 1, ${i})"  src=${check1}> ${OverlayTask.subtask[1]}</div></div>
         </div>
         <div class="overlay-card-delete-edit">
         <div onclick="overlayDeleteTask" class="overlay-cde"><img class="overlay-cde-img1" src="/assets/svg/delete.svg" alt="delete">Delete</div><div onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="overlay-cde"><img class="overlay-cde-img2" src="/assets/svg/edit.svg" alt="Edit">Edit</div>
