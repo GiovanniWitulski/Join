@@ -1,5 +1,6 @@
    
-   
+   let newSurname;
+   let newLastName;
    
    
    // Elemente auswählen
@@ -88,8 +89,9 @@ function drawContactDetailPic(user){
     document.getElementById('contact-mail').value = `${currentContact['mail']}`;
     document.getElementById('contact-phone').value = `${currentContact['mobile']}`;
     document.getElementById('closeEditContactButton').outerHTML = `<button id="closeEditContactButton" class="close-btn" onclick="hideEditOverlay()"></button>`
+    document.getElementById('save-edits-btn').setAttribute('onclick',`saveEditsToContact('${currentContact['token']}')`);
+    document.getElementById('delete-contact-btn').setAttribute('onclick',`deleteContact(${id})`);
     showEditOverlay();
-
 
 
 }
@@ -100,6 +102,8 @@ function showEditOverlay(){
    
     document.getElementById('overlayVeil').classList.remove('displayNone');
     document.getElementById('overlay-editContact').classList.add('showEditContact');
+   
+
 }
 
 function hideEditOverlay(){
@@ -108,6 +112,47 @@ function hideEditOverlay(){
     document.getElementById('overlay-editContact').classList.remove('showEditContact');
 }
 
+async function saveEditsToContact(token){
+    
+     let editedName = document.getElementById('contact-name').value;
+     let editedMail = document.getElementById('contact-mail').value;
+     let editedPhone = document.getElementById('contact-phone').value;
+
+     
+     let words = editedName.split(" ");
+     let surname = words[0];
+     let lastName = words[1];
+     
+     
+     if(surname && lastName){
+          newSurname = surname.charAt(0).toUpperCase() + surname.slice(1);
+          newLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1);
+     }else if(surname && !lastName){
+         newSurname = surname.charAt(0).toUpperCase() + surname.slice(1);
+         newLastName = ""
+     }
+
+     let indexOfCurrentContact = contactsWithoutToken.findIndex(element => element.token === token);
+     let contactToUpdate = contactsWithoutToken[indexOfCurrentContact];
+
+
+
+
+
+     let data = { 
+     "mail": editedMail,
+     "mobile": editedPhone,
+     "name": newLastName,
+     "vorname": newSurname,
+     "id": contactToUpdate['id'],
+     "color": contactToUpdate['color']}
+    
+    await putData(`contacts/${token}/0`, data);
+        
+    document.getElementById('edit-contact-form').submit();
+
+
+}
 
 
 

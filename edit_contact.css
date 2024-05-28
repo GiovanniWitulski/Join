@@ -6,13 +6,15 @@ body{
 .overlay-container{
 
     width: 396px;
-    height: 760px;
+    height: calc(100% - 160px);
+    max-height: 760px;
     border-radius: 30px;
     display: flex;
     flex-direction: column;
     background-color: white;
     position: absolute;
     top: 80px;
+    left: calc(50% - 198px);
     z-index: 4;
     transform: translatey(100vh);
     transition: all 100ms ease-in-out;
@@ -157,6 +159,7 @@ body{
     align-items: center;
     margin-top: 32px;
     gap: 20px;
+    margin-bottom: 62px;
 
 }
 .save-contact-btn:hover{
