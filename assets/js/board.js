@@ -222,11 +222,7 @@ function renderBoard(){ //load Task to Board/actualise while search active
     awaitFeedbackContainer();    //load task awaiting feedback 
     doneContainer();            //load tasks done 
 }
-
-function closeOverlay(closeId){ // Close Popup Task/OverlayTask
-    Overlay.innerHTML = ``;
-}                                   
-   
+ 
 function overlayTask(id){   //TO DO: DISCERNMENT -> Technical Task/User Story Task!! -> OverlayTask FKT 
     console.log("OverlayTask active", id);
     for (i=0; i<TaskBoard.length; i++){
@@ -278,9 +274,9 @@ function searchResult(s){
 
 // TO CODE: Functions //////////////////////////////////////
 
-// function overlayDeleteTask(idtask){}
+// function overlayDeleteTask(idtask){} -> splice() -> actualise all & save
 
-// function overlayEditTask(idtask){}
+// function overlayEditTask(idtask){} --> Addtask Page -> load editing Task in Form
 
 // function upload 
 
@@ -288,34 +284,6 @@ function searchResult(s){
 
 // function checkbox -> Wert in Array änder + checkbox 
 
-function toggleCheckboxValue(taskid, position, o) {
-    console.log("toggleCheckboxValue id: position:", taskid, position);
-
-    for (i=0; i<TaskBoard.length; i++){
-        const findTask = TaskBoard[i].taskid;
-        let subtaskValue = TaskBoard[i].subtaskSum[position];
-
-
-        if (findTask == taskid){   
-            console.log("taskfound at arrayposition:", i);
-            console.log(" alter sumbSumvalue:", subtaskValue);
-
-            
-            if (subtaskValue === 0) {
-                TaskBoard[i].subtaskSum[position] = 1;
-            } else {
-                TaskBoard[i].subtaskSum[position] = 0;
-
-             }
-            
-             console.log("Neuer sumbSumvalue:", TaskBoard[i].subtaskSum[position]);
-
-        }
-            
-    }
-    OverlayTaskPopup(o);
-    renderBoard();
-}
 /////////////////////////////////////////////////////////////
 
 //Board render Tasks 
@@ -512,7 +480,7 @@ function doneContainer(){
     }
 }
 
-
+// OVERLAY TASK / POPUP ///////////////////////
 
 // Overlay TECHNICAL Task/Popup (angeklickter Task) // Template nach ändern Userlabel/TechicalLabel
                                                     //--> class.remove/add -> Textstyle
@@ -561,6 +529,37 @@ function OverlayTaskPopup(i){   // TO CODE: EditTaskFkt, DeleteTaskFKT
 
         `
 
-        
-
 } 
+
+function toggleCheckboxValue(taskid, position, o) {
+    console.log("toggleCheckboxValue id: position:", taskid, position);
+
+    for (i=0; i<TaskBoard.length; i++){
+        const findTask = TaskBoard[i].taskid;
+        let subtaskValue = TaskBoard[i].subtaskSum[position];
+
+
+        if (findTask == taskid){   
+            console.log("taskfound at arrayposition:", i);
+            console.log(" alter sumbSumvalue:", subtaskValue);
+
+            
+            if (subtaskValue === 0) {
+                TaskBoard[i].subtaskSum[position] = 1;
+            } else {
+                TaskBoard[i].subtaskSum[position] = 0;
+
+             }
+            
+             console.log("Neuer sumbSumvalue:", TaskBoard[i].subtaskSum[position]);
+
+        }
+            
+    }
+    OverlayTaskPopup(o);
+    renderBoard();
+}
+
+function closeOverlay(closeId){ // Close Popup Task/OverlayTask
+    Overlay.innerHTML = ``;
+}                                   

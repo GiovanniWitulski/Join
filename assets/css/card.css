@@ -46,8 +46,14 @@
 .card-contact-emblems{
     display: flex;
     align-items: center;
+    flex-direction: row;
     justify-content: space-between;
     height: 32px;
+    padding-left: 20px;
+}
+
+.card-contact-emblems-img{
+    margin-left: -20px;
 }
 
 .card-emblems{
