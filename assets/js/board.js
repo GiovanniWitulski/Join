@@ -210,17 +210,20 @@ let awaitFeedback = document.getElementById('awaitFeedbackContainer');
 let done = document.getElementById('doneContainer');
 let Overlay = document.getElementById('overlayContainer');
 
-TaskBoard = BackgroundTaskBoard; //TaskBoard -> RAM Arbeitsarray --> BackgroundTaskBoard -> ROM 
+TaskBoard = BackgroundTaskBoard; //TaskBoard -> RAM Arbeitsarray --> BackgroundTaskBoard -> "ROM" Datenbankabgleich - Server
 console.log ("TaskBoard:", TaskBoard);
+
+
 
 //functions general
 
-function downloadData(){} //load from server    
+function downloadData(){} //load from server->BackupTaskBoard -> TaskBoard // TO CODE
 
-function uploadData(){} //upload to server
+function uploadData(){} //upload to server -> BackupTaskBoard - TaskBoard // TO CODE
 
 function renderBoard(){ //load Task to Board/actualise while search active
     downloadData(); //load from server, actualise Task - Array
+
     toDoContainer();    //load task to do 
     inProgressContainer();       //load tasks in progress 
     awaitFeedbackContainer();    //load task awaiting feedback 
@@ -279,7 +282,6 @@ function searchResult(s){
 
 // TO CODE: Functions //////////////////////////////////////
 
-// function overlayDeleteTask(idtask){} -> splice() -> actualise all & save
 
 // function overlayEditTask(idtask){} --> Addtask Page -> load editing Task in Form
 
@@ -314,7 +316,7 @@ function dropAt(newType){
 }
 
 
-//Board render Tasks 
+//Board render Tasks container
 
 function toDoContainer (){                  
     toDo.innerHTML = '';
@@ -471,7 +473,7 @@ function awaitFeedbackContainer(){
     }
 
 
-}
+}                                       //-> TO CODE: Taskslider left <-> right
 
 function doneContainer(){
     done.innerHTML='';
@@ -525,10 +527,8 @@ function doneContainer(){
 
 // OVERLAY TASK / POPUP ///////////////////////
 
-// Overlay TECHNICAL Task/Popup (angeklickter Task) // Template nach ändern Userlabel/TechicalLabel
-                                                    //--> class.remove/add -> Textstyle
 
-function OverlayTaskPopup(i){   // TO CODE: EditTaskFkt, DeleteTaskFKT
+function OverlayTaskPopup(i){   // TO CODE/CONNECT: EditTaskFkt, DeleteTaskFKT
        
         const OverlayTask = TaskBoard[i];
         let overlayContacts = '';
@@ -571,7 +571,7 @@ function OverlayTaskPopup(i){   // TO CODE: EditTaskFkt, DeleteTaskFKT
         <div class="overlay-substask"><img class="overlay-checkbox-img" onclick="toggleCheckboxValue(${OverlayTask.taskid}, 1, ${i})"  src=${check1}> ${OverlayTask.subtask[1]}</div></div>
         </div>
         <div class="overlay-card-delete-edit">
-        <div onclick="overlayDeleteTask" class="overlay-cde"><img class="overlay-cde-img1" src="/assets/svg/delete.svg" alt="delete">Delete</div><div onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="overlay-cde"><img class="overlay-cde-img2" src="/assets/svg/edit.svg" alt="Edit">Edit</div>
+        <div onclick="overlayDeleteTask(${OverlayTask.taskid}, ${i})" class="overlay-cde"><img class="overlay-cde-img1" src="/assets/svg/delete.svg" alt="delete">Delete</div><div onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="overlay-cde"><img class="overlay-cde-img2" src="/assets/svg/edit.svg" alt="Edit">Edit</div>
         </div>
         </div>
         </div>
@@ -619,4 +619,14 @@ function closeOverlay(closeId){ // Close Popup Task/OverlayTask
     Overlay.innerHTML = ``;
 }                                   
 
+function overlayDeleteTask(idTask, i){          //TO CODE: update to server! -> update BackgroundTaskBoard -> update TaskBoard
+    let taskToDelete = BackgroundTaskBoard[i];
+    if (taskToDelete.taskid == idTask){
+        closeOverlay(idTask);
+        TaskBoard.splice(i, 1);
+        renderBoard();
+    } else {
+        console.log("Taskid & Position Backgroundtaskboard inkongruent.");
+    }
+}
 
