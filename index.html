@@ -13,13 +13,10 @@
     <script src="/assets/js/login.js"></script>
 </head>
 <body onload="landingPageAnimation()" class="login-body">
-    <!-- <body onload="landingPageAnimation()" class="login-body"> -->
+    <div id="loadAnimation"></div>
     <header>
-        <img class="join-logo-indexhtml" src="/assets/svg/join-logo.svg" alt="">
+        <img id="logInHeaderLogo" class="join-logo-indexhtml" src="/assets/svg/join-logo.svg" alt="">
     </header>
-    <!-- <div>
-            ANIMATION DIV
-        </div> -->
     <div id="loginParentDiv">
         <div class="login-card-div">
             <div class="login-card">
@@ -36,7 +33,7 @@
                             </div>
                         </div>
                         <div class="login-input-div-indexhtml">
-                            <input class="login-input-indexhtml" id="loginPasswordIndexHtml" type="password" placeholder="Password" required>
+                            <input oninput="changeInputFieldImg(this)" class="login-input-indexhtml" id="loginPasswordIndexHtml" type="password" placeholder="Password" required>
                             <div class="input-icon">
                                 <img src="/assets/svg/lock.svg" alt="Password Icon">
                             </div>
@@ -71,7 +68,7 @@
                         <h1 class="signup-title">Sign up</h1>
                         <img class="login-underline" src="/assets/svg/underline-lightblue.svg" alt="">
                     </div>
-                    <img onclick="showLoginForm()" class="sign-up-arrow-left" src="/assets/svg/arrow-left-line.svg" alt="Back arrow">                    
+                    <img onclick="showLoginForm()" class="sign-up-arrow-left" src="/assets/svg/arrow-left-line.svg" alt="Back arrow">
                 </div>
 
                 <form class="form-indexhtml">
@@ -80,8 +77,6 @@
                             <input class="login-input-indexhtml" id="signUpNameIndexHtml" type="text" placeholder="Name" required>
                             <div class="input-icon">
                                 <img src="/assets/svg/person.svg" alt="Name Icon">
-                                <!-- <img src="assets/svg/visibility.svg" alt="">
-                                <img src="" alt=""> -->
                             </div>
                         </div>
                         <div class="login-input-div-indexhtml">
