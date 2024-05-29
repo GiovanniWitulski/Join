@@ -30,17 +30,23 @@
         </div>
         <div class="to-do-mobile">
             <div class="to-do-add-mobile"><h2>To do</h2><img onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="add-mobile-small-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
-            <div id="toDoContainer" class="to-do-container-mobile"></div>
+            <div id="toDoContainer" class="to-do-container-mobile" ondrop="dropAt(0)" ondragover="allowDrop(event)"></div>
         </div>
         <div class="in-progress-mobile">
             <div class="in-progress-title-mobile"><h2>In progress</h2><img onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="add-mobile-small-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
-            <div id="inProgressContainer" class="in-progress-container-mobile"></div>
+            <div id="inProgressContainer" class="in-progress-container-mobile" ondrop="dropAt(1)" ondragover="allowDrop(event)"></div>
         </div>
-        <div class="await-feedback">
+        <div class="await-feedback-mobile">
             <div class="await-feedback-title-mobile"><h2>Await Feedback</h2><img onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="add-mobile-small-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
-            <div id="awaitFeedbackContainer" class="await-feedback-container">
+            <div id="awaitFeedbackContainer" class="await-feedback-container" ondrop="dropAt(2)" ondragover="allowDrop(event)">
             </div>        
         </div>
+        <div class="done-mobile">
+            <div class="done-title-mobile"><h2>Done</h2><img onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="add-mobile-small-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
+            <div id="doneContainer" class="done-container-mobile" ondrop="dropAt(3)" ondragover="allowDrop(event)">
+            </div>        
+        </div>
+
     </div>
 </body>
 </html>

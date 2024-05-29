@@ -8,7 +8,6 @@ const URL = "https://join-remotestorage-default-rtdb.europe-west1.firebasedataba
 
 
 async function createName(){
-    
     let fullName = document.getElementById('contact-name').value;
     let words = fullName.split(" ");
     let vorname = words[0];
@@ -20,10 +19,7 @@ async function createName(){
     }else if(vorname && !nachname){
         vornameCapitalized = vorname.charAt(0).toUpperCase() + vorname.slice(1);
         nachnameCapitalized = ""
-    }
-    
-    console.log(vornameCapitalized + nachnameCapitalized);
-    
+    }  
 }
 
 async function getMail(){
@@ -35,13 +31,11 @@ async function getPhoneNumber(){
 }
 
 async function getId(){
-
-    if(contactsAsJson){
-      contactId = contactsAsJson.length;  
+    if(contactsWithoutToken){
+      contactId = contactsWithoutToken.length;  
     }else{
         contactId = 0;
-    }
-    
+    } 
 }
 
 
@@ -53,18 +47,14 @@ async function getTheInformation(event){
     await getPhoneNumber();
     await getId();
     contactColor = await getAColor();
-    await postData('contacts/'); 
-    await refreshContactToLoad(contactId, 'currentContact');
-    
-    
-     
-     
+    await postContact('contacts/'); 
+    await refreshContactToLoad(contactId, 'currentContact');   
 }
 
 
 
 
-async function postData(path='', data={}) {
+async function postContact(path='', data={}) {
     
     data = {
         "mail": contactMail,
@@ -89,7 +79,7 @@ async function postData(path='', data={}) {
     
     
     let response = await fetch(URL + path + ".json", {
-        method: "PUT", 
+        method: "POST", 
         headers: {
             "Content-Type": "application/json"
         },

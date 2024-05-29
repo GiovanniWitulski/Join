@@ -7,7 +7,7 @@
 .card-body {
     width: 252px;
     max-height: 244px;
-    background-color:  #FFFFFF;
+    background-color: #FFFFFF;
     padding: 16px;
     border-radius: 24px;
     margin-bottom: 16px;        /*auch bei seitlich gereihten Tasks marginright 16px!?*/
@@ -46,8 +46,14 @@
 .card-contact-emblems{
     display: flex;
     align-items: center;
+    flex-direction: row;
     justify-content: space-between;
     height: 32px;
+    padding-left: 20px;
+}
+
+.card-contact-emblems-img{
+    margin-left: -20px;
 }
 
 .card-emblems{
@@ -62,9 +68,10 @@
 
 .overlay-task {
     max-width: 396px;   
+    height: fit-content;
     max-height: 724px;
     z-index: 1;
-    background-color:  #FFFFFF;
+    background-color:   #FFFFFF; 
     border-radius: 30px;
     position: fixed;
     top: 96px;
@@ -94,9 +101,7 @@
 }
 
 .overlay-card-due-date{
-    display: flex;
-    
-    
+    display: flex;    
     padding-bottom: 16px;
     font-size: 16px;
     font-weight: 400;
@@ -133,20 +138,20 @@
 .overlay-assigned-to{
     display: flex;
     flex-direction: column;
-    padding-bottom: 16px;
+    padding-bottom: 12px;
 }
 
 .overlay-assigned-to-text{
     color: #42526E;
-    padding-bottom: 8px;
+    padding-bottom: 4px;
 }
 
 .overlay-assigned-to-contacts{
     display: flex;
-    align-items: center;
-    
+    align-items: center;    
     padding-left: 7px;
-    padding-bottom: 4px;
+    padding-bottom: 7px;
+    padding-top: 11px;
 }
 
 .overlay-contact-name{
@@ -155,9 +160,7 @@
 
 .overlay-participants{
     display: flex;
-    flex-direction: column;
-    padding-bottom: 4px;
-    
+    flex-direction: column;    
 }
 
 .overlay-contact-emblems-img{
@@ -174,8 +177,7 @@
     padding-bottom: 8px;      
 }
 
-.overlay-checkbox{
-    
+.overlay-checkbox{    
 }
 
 .overlay-substask{
@@ -190,21 +192,47 @@
     padding-right: 16px;
 }
 
-.overlay-checkbox{
-    padding-bottom: 4px;
-}
+
 
 .overlay-card-checklist{
     padding-bottom: 16px;
 }
 
 .overlay-card-delete-edit{
-    padding-bottom: 16px;
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     align-items: center;
     height: 24px;
 }
+
+.overlay-cde{
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    padding-left: 8px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.overlay-cde-img1{
+    height: 18px;
+    width: 16px;
+    padding-right: 8px;
+}
+
+.overlay-cde-img2{
+    height: 18.25px;
+    width: 18.28px;
+    padding-right: 8px;
+    
+}
+
+.overlay-cde-text{
+  
+}
+
+
+/* Potential - Classes */
 
 .hidden {
     display: none;
