@@ -102,7 +102,7 @@ let TaskBoard = []
 
 let BackgroundTaskBoard = [   
     {
-        "label": "/assets/svg/Labels Board card label technical task.svg",
+        "label": [0],
         "title": "Technical Task Example",
         "description": "The code for the example in VS Code has been written",
         "date": "03.05.2035",
@@ -115,7 +115,7 @@ let BackgroundTaskBoard = [
         "taskid": "1"
     },         
     {
-        "label": "/assets/svg/Labels Board card label technical task.svg",
+        "label": [0],
         "title": "Technical Task Example",
         "description": "Write the code for the example in VS Code",
         "date": "03.05.2035",
@@ -128,7 +128,7 @@ let BackgroundTaskBoard = [
         "taskid": "2"
     },
     {
-        "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
+        "label": [1],
         "title": "User Story Example",
         "description": "In Progress Example",
         "date": "10.05.2035",
@@ -141,7 +141,7 @@ let BackgroundTaskBoard = [
         "taskid": "3"
     },
     {
-        "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
+        "label": [1],
         "title": "User Story Example",
         "description": "Await Feedback Example",
         "date": "08.05.2035",
@@ -154,7 +154,7 @@ let BackgroundTaskBoard = [
         "taskid": "4"
     }, 
     {
-        "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
+        "label": [1],
         "title": "User Story Example",
         "description": "Second to do example",
         "date": "08.05.2035",
@@ -167,7 +167,7 @@ let BackgroundTaskBoard = [
         "taskid": "5"
     },
     {
-        "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
+        "label": [1],        
         "title": "User Story Example",
         "description": "Second in progress example",
         "date": "08.05.2035",
@@ -180,7 +180,7 @@ let BackgroundTaskBoard = [
         "taskid": "6"
     },
     {
-        "label": "/assets/svg/Labels Board card label technical task.svg",
+        "label": [0],
         "title": "Technical Task Example",
         "description": "A Technical Task, enjoy!",
         "date": "03.12.2035",
@@ -189,7 +189,7 @@ let BackgroundTaskBoard = [
         "priority" : ["medium", "/assets/svg/capa_1_medium_priority.svg"],
         "assignedTo" : ["Marcel Bensdorf", "Annika Michelstadt"], 
         "contactEmblem" : ["/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
-        "type" : "2",
+        "type" : "1",
         "taskid": "7"
     },
 
@@ -200,6 +200,8 @@ let BackgroundTaskBoard = [
 //global variables & Elementtargets
 
 let currentDraggedTask;
+const TechnicalTaskLabel = '<img src="/assets/svg/Labels_Board_card_label_tourquise_Technical_Task.svg" alt="">'
+const UserStoryLabel = '<img src="/assets/svg/Labels_Board_card_label_blue_User_Story.svg" alt="">'
 
 const Searchfield = document.getElementById('boardInput').addEventListener('input', findTask);
 let toDo = document.getElementById('toDoContainer');
@@ -287,6 +289,10 @@ function searchResult(s){
 
 // function checkbox -> Wert in Array änder + checkbox 
 
+
+/////////////////////////////////////////////////////////////
+
+
 // drag & drop functions 
 function startDragging(id){
     currentDraggedTask = id;
@@ -307,7 +313,6 @@ function dropAt(newType){
     }
 }
 
-/////////////////////////////////////////////////////////////
 
 //Board render Tasks 
 
@@ -322,6 +327,13 @@ function toDoContainer (){
             const progressInPercent = sumSubtask * 50;  
             const progressBarId = 'cardToDoBar' + toDoCard.taskid;
 
+            let label;
+            if(toDoCard.label == 0){
+                label = TechnicalTaskLabel;
+            } else {
+                label = UserStoryLabel;
+            }            
+
             let emblems = '';                           //contact-emblems
             for (let i = 0; i < toDoCard.contactEmblem.length; i++){
                 const src = toDoCard.contactEmblem[i];
@@ -330,7 +342,7 @@ function toDoContainer (){
 
                 toDo.innerHTML += `
             <div class="card-body" onclick="overlayTask(${toDoCard.taskid})" ondragstart="startDragging(${toDoCard.taskid})" draggable="true">
-            <div id="cardHeader" class="card-header"><img src="${toDoCard.label}" alt="label"></div>
+            <div id="cardHeader" class="card-header">${label}</div>
             <div id="cardTitle" class="card-title"><h4>${toDoCard.title}</h4></div>
             <div id="cardDescription" class="card-description"><h4>${toDoCard.description}</h4></div>
             <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
@@ -365,6 +377,12 @@ function inProgressContainer (){
             const progressInPercent = sumSubtask * 50;
             const progressBarId = 'cardInProgressBar' + inProgressCard.taskid;
 
+            let label;
+            if(inProgressCard.label == 0){
+                label = TechnicalTaskLabel;
+            } else {
+                label = UserStoryLabel;
+            }            
 
             let emblems = '';                           //contact-emblems
             for (let i = 0; i < inProgressCard.contactEmblem.length; i++){
@@ -375,7 +393,7 @@ function inProgressContainer (){
 
             inProgress.innerHTML += `
         <div class="card-body" onclick="overlayTask(${inProgressCard.taskid})" ondragstart="startDragging(${inProgressCard.taskid})" draggable="true">
-        <div id="cardHeader" class="card-header"><img src="${inProgressCard.label}" alt="label"></div>
+        <div id="cardHeader" class="card-header">${label}</div>
         <div id="cardTitle" class="card-title"><h4>${inProgressCard.title}</h4></div>
         <div id="cardDescription" class="card-description"><h4>${inProgressCard.description}</h4></div>
         
@@ -415,6 +433,13 @@ function awaitFeedbackContainer(){
             const progressInPercent = sumSubtask * 50;
             const progressBarId = 'cardAwaitFeedbackBar' + awaitFeedbackCard.taskid;
 
+            let label;
+            if(awaitFeedbackCard.label == 0){
+                label = TechnicalTaskLabel;
+            } else {
+                label = UserStoryLabel;
+            }            
+
             let emblems = '';                           //contact-emblems
             for (let i = 0; i < awaitFeedbackCard.contactEmblem.length; i++){
                 const src = awaitFeedbackCard.contactEmblem[i];
@@ -423,7 +448,7 @@ function awaitFeedbackContainer(){
 
             awaitFeedback.innerHTML += `
             <div class="card-body" onclick="overlayTask(${awaitFeedbackCard.taskid})" ondragstart="startDragging(${awaitFeedbackCard.taskid})" draggable="true">
-            <div id="cardHeader" class="card-header"><img src="${awaitFeedbackCard.label}" alt="label"></div>
+            <div id="cardHeader" class="card-header">${label}</div>
             <div id="cardTitle" class="card-title"><h4>${awaitFeedbackCard.title}</h4></div>
             <div id="cardDescription" class="card-description"><h4>${awaitFeedbackCard.description}</h4></div>
             <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
@@ -459,6 +484,13 @@ function doneContainer(){
             const progressInPercent = sumSubtask * 50;
             const progressBarId = 'doneBar' + doneCard.taskid;
 
+            let label;
+            if(doneCard.label == 0){
+                label = TechnicalTaskLabel;
+            } else {
+                label = UserStoryLabel;
+            }            
+
             let emblems = '';                           //contact-emblems
             for (let i = 0; i < doneCard.contactEmblem.length; i++){
                 const src = doneCard.contactEmblem[i];
@@ -467,7 +499,7 @@ function doneContainer(){
 
             done.innerHTML += `
             <div class="card-body" onclick="overlayTask(${doneCard.taskid})" ondragstart="startDragging(${doneCard.taskid})" draggable="true">
-            <div id="cardHeader" class="card-header"><img src="${doneCard.label}" alt="label"></div>
+            <div id="cardHeader" class="card-header">${label}</div>
             <div id="cardTitle" class="card-title"><h4>${doneCard.title}</h4></div>
             <div id="cardDescription" class="card-description"><h4>${doneCard.description}</h4></div>
             <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
@@ -513,23 +545,29 @@ function OverlayTaskPopup(i){   // TO CODE: EditTaskFkt, DeleteTaskFKT
         let check = "/assets/svg/checkmark.svg"; let nocheck = "/assets/svg/rectangle.svg";
         if (checkmark0 == 0){check0 = nocheck;} else {check0 = check;}
         if (checkmark1 == 0){check1 = nocheck;} else {check1 = check;}
-
+        
+        let label;
+        if(OverlayTask.label == 0){
+            label = TechnicalTaskLabel;
+        } else {
+            label = UserStoryLabel;
+        }            
 
         Overlay.innerHTML += `  
         <div id="${OverlayTask.taskid}" class="overlay-container">            
         <div class="overlay-task">
-        <div id="OverlayHeader" class="overlay-card-header"><img src="${OverlayTask.label}" alt="label"><img onclick="closeOverlay()" src="/assets/svg/close_black.svg" alt="close"></div>
+        <div id="overlayHeader" class="overlay-card-header">${label}<img onclick="closeOverlay()" src="/assets/svg/close_black.svg" alt="close"></div>
         <div id="overlayTitle" class="overlay-card-title">${OverlayTask.title}</div>
         <div id="overlayDescription" class="overlay-card-description">${OverlayTask.description}</div>
-        <div id="overlaydueDate" class="overlay-card-due-date"><div>Due date:</div><div class="overlay-due-date">${OverlayTask.date}</div></div>
-        <div id="overlaypriority" class="overlay-card-priority"><div class="overlay-card-priority-text">
+        <div id="overlaydueDate" class="overlay-card-due-date"><div id="overlayDueDate">Due date:</div><div class="overlay-due-date">${OverlayTask.date}</div></div>
+        <div id="overlaypriority" class="overlay-card-priority"><div id="overlayPriorityText" class="overlay-card-priority-text">
         Priority</div><div class="overlay-card-priority-text-img">${OverlayTask.priority[0]}<img src="${OverlayTask.priority[1]}" alt="priority"></div>
         </div>
         <div id="overlayAssignedTo" class="overlay-assigned-to">
-        <div class="overlay-assigned-to-text">Assigned to:</div><div id="overlayParticipants" class="overlay-participants">${overlayContacts}</div>  
+        <div id="overlayAssignedToText" class="overlay-assigned-to-text">Assigned to:</div><div id="overlayParticipants" class="overlay-participants">${overlayContacts}</div>  
         </div>
         <div class="overlay-card-subtasks">
-        <div class="overlay-substasks-text">Subtasks:</div><div class="overlay-checkbox"><div class="overlay-substask"><img class="overlay-checkbox-img" onclick="toggleCheckboxValue(${OverlayTask.taskid}, 0, ${i})"  src=${check0}> ${OverlayTask.subtask[0]}</div>
+        <div id="overlaySubstasksText" class="overlay-substasks-text">Subtasks:</div><div class="overlay-checkbox"><div class="overlay-substask"><img class="overlay-checkbox-img" onclick="toggleCheckboxValue(${OverlayTask.taskid}, 0, ${i})"  src=${check0}> ${OverlayTask.subtask[0]}</div>
         <div class="overlay-substask"><img class="overlay-checkbox-img" onclick="toggleCheckboxValue(${OverlayTask.taskid}, 1, ${i})"  src=${check1}> ${OverlayTask.subtask[1]}</div></div>
         </div>
         <div class="overlay-card-delete-edit">
@@ -539,7 +577,13 @@ function OverlayTaskPopup(i){   // TO CODE: EditTaskFkt, DeleteTaskFKT
         </div>
 
         `
+        if (OverlayTask.label == 1){
+            document.getElementById('overlayDueDate').style.cssText = 'font-weight: 700; color: #42526E;';
+            document.getElementById('overlayAssignedToText').style.cssText = 'font-weight: 700; color: #42526E;';
+            document.getElementById('overlayPriorityText').style.cssText = 'font-weight: 700; color: #42526E;';
+            document.getElementById('overlaySubstasksText').style.cssText = 'font-weight: 700; color: #42526E;';
 
+        }   
 } 
 
 function toggleCheckboxValue(taskid, position, o) {
@@ -574,3 +618,5 @@ function toggleCheckboxValue(taskid, position, o) {
 function closeOverlay(closeId){ // Close Popup Task/OverlayTask
     Overlay.innerHTML = ``;
 }                                   
+
+
