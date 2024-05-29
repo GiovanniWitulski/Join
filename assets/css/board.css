@@ -30,6 +30,12 @@ body {
     padding-right: 16px;
 }
 
+.placeholder-container-img{
+    height: 100%; 
+    max-width: 396px;
+}
+
+
 .board-add-task-mobile{
     
     display: flex;
@@ -165,6 +171,7 @@ cursor: pointer;
 .done-container-mobile{
     width: 100%;
 }
+
 
 
 

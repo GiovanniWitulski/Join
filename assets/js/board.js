@@ -223,6 +223,7 @@ function renderBoard(){ //load Task to Board/actualise while search active
     inProgressContainer();       //load tasks in progress 
     awaitFeedbackContainer();    //load task awaiting feedback 
     doneContainer();            //load tasks done 
+    console.log("render_actice");
 }
  
 function overlayTask(id){   //TO DO: DISCERNMENT -> Technical Task/User Story Task!! -> OverlayTask FKT 
@@ -311,14 +312,12 @@ function dropAt(newType){
 //Board render Tasks 
 
 function toDoContainer (){                  
-    console.log("toDoContainer_active");
     toDo.innerHTML = '';
 
     for(i=0; i<TaskBoard.length; i++){
         const toDoCard = TaskBoard[i];
 
         if (toDoCard.type == 0){
-            console.log("toDoContainer If-Active");
             sumSubtask = toDoCard.subtaskSum[0]+toDoCard.subtaskSum[1];
             const progressInPercent = sumSubtask * 50;  
             const progressBarId = 'cardToDoBar' + toDoCard.taskid;
@@ -350,18 +349,18 @@ function toDoContainer (){
 
         }
     }
-
-
+    
+    if (toDo.innerHTML == ''){
+        toDo.innerHTML = `<img class="placeholder-container-img" src="/assets/svg/No_tasks_feedback_to_do.svg" alt="no-task-to-do">`
+    }
 }
 
 function inProgressContainer (){
-    console.log("inProgressContainer_active");
     inProgress.innerHTML = '';
 
     for(i=0; i<TaskBoard.length; i++){
         const inProgressCard = TaskBoard[i];
         if (inProgressCard.type == 1){
-            console.log("inProgressContainer If-Active");
             sumSubtask = inProgressCard.subtaskSum[0]+inProgressCard.subtaskSum[1];
             const progressInPercent = sumSubtask * 50;
             const progressBarId = 'cardInProgressBar' + inProgressCard.taskid;
@@ -399,22 +398,18 @@ function inProgressContainer (){
         }
     }
 
-    /* ACTIVATE LATER -> 
-    if (inProgress.innerHTML === '') {
-        inProgress.innerHTML = `<img class="no-task-progress" src="/assets/svg/No_tasks_feedback_in_progress.svg" alt="">`
+    if (inProgress.innerHTML == ''){
+        inProgress.innerHTML = `<img class="placeholder-container-img" src="/assets/svg/No_tasks_feedback_in_progress.svg" alt="no-task-in-progress">`
     }
-    */
     
 }
 
 function awaitFeedbackContainer(){
-    console.log("awaitFeedbackContainer_active");
     awaitFeedback.innerHTML = '';
 
     for(i=0; i<TaskBoard.length; i++){
         const awaitFeedbackCard = TaskBoard[i];
         if (awaitFeedbackCard.type == 2){
-            console.log("awaitFeedbackContainer If-Active");
             
             sumSubtask = awaitFeedbackCard.subtaskSum[0]+awaitFeedbackCard.subtaskSum[1];
             const progressInPercent = sumSubtask * 50;
@@ -446,19 +441,19 @@ function awaitFeedbackContainer(){
             progressBar.setAttribute('width', `${progressInPercent}%`);
         }
     }
-    if (toDo.innerHTML === '') {
-        toDo.innerHTML = `<img src="assets/svg/assets/svg/board_in_progress_example.svg" class="to-do-container-mobile" alt=""></div>`
+    if (awaitFeedback.innerHTML === '') {
+        awaitFeedback.innerHTML = `<img src="/assets/svg/no_tasks_awaiting_feedback.png" class="to-do-container-mobile" alt="no-task-awaits-feedback"></div>`
     }
+
+
 }
 
 function doneContainer(){
-    console.log("DoneContainer_active");
     done.innerHTML='';
 
     for(i=0; i<TaskBoard.length; i++){
         const doneCard = TaskBoard[i];
         if (doneCard.type == 3){
-            console.log("doneContainer If-Active");
             
             sumSubtask = doneCard.subtaskSum[0]+doneCard.subtaskSum[1];
             const progressInPercent = sumSubtask * 50;
@@ -490,8 +485,9 @@ function doneContainer(){
             progressBar.setAttribute('width', `${progressInPercent}%`);
         }
     }
-    if (toDo.innerHTML === '') {
-        toDo.innerHTML = `<img src="assets/svg/assets/svg/board_in_progress_example.svg" class="to-do-container-mobile" alt=""></div>`
+
+    if (done.innerHTML === '') {
+        done.innerHTML = `<img src="/assets/svg/no_tasks_done.png" class="to-do-container-mobile" alt="no-task-done"></div>`
     }
 }
 
