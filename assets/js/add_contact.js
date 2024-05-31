@@ -12,7 +12,6 @@ async function createName(){
     let words = fullName.split(" ");
     let vorname = words[0];
     let nachname = words[1];
-    
     if(vorname && nachname){
         vornameCapitalized = vorname.charAt(0).toUpperCase() + vorname.slice(1);
         nachnameCapitalized = nachname.charAt(0).toUpperCase() + nachname.slice(1);
@@ -22,22 +21,24 @@ async function createName(){
     }  
 }
 
+
 async function getMail(){
     contactMail = document.getElementById('contact-mail').value;
 }
+
 
 async function getPhoneNumber(){
     contactPhone = document.getElementById('contact-phone').value;
 }
 
+
 async function getId(){
     if(contactsWithoutToken){
-      contactId = contactsWithoutToken.length;  
+        contactId = contactsWithoutToken.length;  
     }else{
         contactId = 0;
     } 
 }
-
 
 
 async function getTheInformation(event){
@@ -52,43 +53,27 @@ async function getTheInformation(event){
 }
 
 
-
-
 async function postContact(path='', data={}) {
-    
-    data = {
-        "mail": contactMail,
-        "mobile": contactPhone,
-        "name": nachnameCapitalized,
-        "vorname": vornameCapitalized,
-        "id": contactId,
-        "color": contactColor
-    };
-    
-    
+    data = await getDataForPostContact();
     let fetchResponse = await fetch(URL + path + ".json");
     let currentData = await fetchResponse.json();
-    
-    
     if (!Array.isArray(currentData)) {
         currentData = [];
     }
-    
-    
     currentData.push(data);
-    
-    
-    let response = await fetch(URL + path + ".json", {
-        method: "POST", 
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(currentData)
-    });
-    
-    return await response.json();
+    await postData(path,currentData);
 }
 
+async function getDataForPostContact(){
+return {
+    "mail": contactMail,
+    "mobile": contactPhone,
+    "name": nachnameCapitalized,
+    "vorname": vornameCapitalized,
+    "id": contactId,
+    "color": contactColor
+};
+}
 
 
 

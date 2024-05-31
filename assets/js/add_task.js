@@ -3,6 +3,7 @@
 
 let subtaskCount = 0;
 let priorityOfTask;
+let idOfNewTask;
 
 function changeToActive(id){
     let possibleId = ['urgent-btn', 'medium-btn', 'low-btn'];
@@ -249,13 +250,32 @@ async function getTheDataForPostTask() {
         label: getTheCategoryOfTask(),
         subtaskSum: getTheSubtaskStatus(getTheSubtasksOfTask()),
         type: "0",
-        taskid: "0"
+        taskid: await getTheIdOfTask()
     };
   await postData('tasks', data);
   document.getElementById('addTaskForm').submit();
 }
 
 
+async function getTheIdOfTask(){
+
+    let id = await loadData('taskId');
+    
+    if(id != null){
+
+        idOfNewTask = id + 1;
+       await putData('taskId', idOfNewTask);
+       console.log(idOfNewTask);
+
+    }else{
+        idOfNewTask = 0;
+       await putData('taskId', idOfNewTask);
+       console.log(idOfNewTask);
+    }
+
+    return idOfNewTask;
+
+}
 
 function getTheSubtaskStatus(subtasks){
     
