@@ -306,7 +306,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 document.addEventListener('click', function(event){
-
     let optionContainer = document.getElementById('optionContainer');
     if(!optionContainer.contains(event.target) && event.target != document.getElementById('contact-selector')){
         let button = document.getElementById('dropdown-btn');
