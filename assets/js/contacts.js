@@ -11,9 +11,10 @@ async function getAColor(){
 
 
 async function loadContacts(){
-    await loadData('contacts');
-    contactsAsJson = responseToJson;
-    await readTheTokens();
+    
+    
+    contactsAsJson = await getContacts();
+   
     createDivs();
 }
 
@@ -39,8 +40,8 @@ function createDivs(){
         for (let i = 0; i < alphabet.length; i++) {
             const element = alphabet[i];
             document.getElementById('contact-div').innerHTML += `<div class="contact-section" id="${element}"><div class="headline-Div"><p id="headline${element}">${element.toUpperCase(element)}</p></div><div id="contactsOf${element}"></div></div>`;
-            for (let j = 0; j < contactsWithoutToken.length; j++) {
-                const contact = contactsWithoutToken[j];
+            for (let j = 0; j < contactsAsJson.length; j++) {
+                const contact = contactsAsJson[j];
                 if(contact['vorname'].charAt(0).toUpperCase() === element.toUpperCase()){
                     document.getElementById(`contactsOf${element}`).innerHTML += generateHTMLcodeForContacts(contact, j);
                 }
@@ -54,7 +55,7 @@ function createDivs(){
 
 
 function generateHTMLcodeForContacts(contact, j){
-    return `<a  onclick="refreshContactToLoad(${contact['id']}, 'currentContact')"  id="${j}" class="singleContact"><svg class="profile_pic" width="42px" height="42px">
+    return `<a  onclick="refreshContactToLoad(${j}, 'currentContact')"  id="${j}" class="singleContact"><svg class="profile_pic" width="42px" height="42px">
     <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2" fill="${contact['color']}" />
     <text x="12" y="25" fill="white" font-size="12px">${contact['vorname'].charAt(0)}${contact['name'].charAt(0)}</text>
     </svg>

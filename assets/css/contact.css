@@ -67,6 +67,12 @@
 .add-contact-btn:hover{
 
     cursor: pointer;
+    background-image: url(/assets/svg/person_blue.svg);
+    border: none;
+   
+   background-position-y:calc(0px);
+   
+
 }
 
 .page-content{

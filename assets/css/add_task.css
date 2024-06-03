@@ -168,6 +168,7 @@ select {
 .assignedDiv{
 
     padding-bottom: 16px;
+    width: 396px;
 }
 
 .urgent-btn{
@@ -340,6 +341,10 @@ input[type="date"]::-moz-focus-inner:hover{
 .create-btn:hover{
 
     cursor: pointer;
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    border: 1px solid transparent;
+
 }
 
 
@@ -548,6 +553,8 @@ cursor: pointer;
 .assignedContactPics{
     display: flex;
     gap: 8px;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
 .renameSubtaskDiv{
@@ -609,7 +616,7 @@ cursor: pointer;
     max-height: 280px;
     overflow-x: hidden !important;
 
-    
+    width: 100%;
     background-color: white;
     position: relative;
     top: 0px;
@@ -655,6 +662,7 @@ cursor: pointer;
 .select-wrapper{
 
     position: relative;
+    width: 100%;
 
 }
 

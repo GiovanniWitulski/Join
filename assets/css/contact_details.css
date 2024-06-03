@@ -132,13 +132,15 @@ body{
     box-shadow: 0px 4px 4px 0px #00000040;
     background-position-x: center;
     border: 1px solid #2A3647;
-    background-color: transparent;
+    
     
 }
 
 .more-btn:hover{
 
     cursor: pointer;
+    background-image: url("/assets/svg/Menu\ Contact\ options_blue.svg");
+    border: none;
 }
 
 .edit-menu-sb{
@@ -191,10 +193,13 @@ body{
 
 .edit-btn:hover{
     cursor: pointer;
+    background-image: url("/assets/svg/edit\ contacts_hover.svg");
+    
 }
 
 .del-btn:hover{
     cursor: pointer;
+    background-image: url("/assets/svg/delete\ contact_hover.svg");
 }
 
 .hide{

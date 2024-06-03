@@ -33,8 +33,9 @@ async function getPhoneNumber(){
 
 
 async function getId(){
-    if(contactsWithoutToken){
-        contactId = contactsWithoutToken.length;  
+    if(contactsAsJson){
+        contactId = contactsAsJson.findIndex(element => element.vorname === (vornameCapitalized));
+        console.log(contactId);
     }else{
         contactId = 0;
     } 
@@ -48,32 +49,38 @@ async function getTheInformation(event){
     await getPhoneNumber();
     await getId();
     contactColor = await getAColor();
-    await postContact('contacts/'); 
-    await refreshContactToLoad(contactId, 'currentContact');   
+    await getDataForPostContact('contacts/'); 
+    await refreshContactToLoad(contactsAsJson.length, 'currentContact');   
 }
 
 
-async function postContact(path='', data={}) {
-    data = await getDataForPostContact();
-    let fetchResponse = await fetch(URL + path + ".json");
-    let currentData = await fetchResponse.json();
-    if (!Array.isArray(currentData)) {
-        currentData = [];
+
+
+// async function getDataForPostContact(){
+// return {
+//     "mail": contactMail,
+//     "mobile": contactPhone,
+//     "name": nachnameCapitalized,
+//     "vorname": vornameCapitalized,
+//     "id": contactId,
+//     "color": contactColor
+// };
+// }
+
+async function getDataForPostContact(path){
+    
+        let data = {
+            "mail": contactMail,
+            "mobile": contactPhone,
+            "name": nachnameCapitalized,
+            "vorname": vornameCapitalized,
+            "color": contactColor
+        } 
+     
+    
+    
+        postData(path, data);
     }
-    currentData.push(data);
-    await postData(path,currentData);
-}
-
-async function getDataForPostContact(){
-return {
-    "mail": contactMail,
-    "mobile": contactPhone,
-    "name": nachnameCapitalized,
-    "vorname": vornameCapitalized,
-    "id": contactId,
-    "color": contactColor
-};
-}
 
 
 

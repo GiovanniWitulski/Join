@@ -48,7 +48,9 @@ function addToSubtasks(){
     subtaskCount += 1;
     let inputfield = document.getElementById('subtask-input');
     let subtaskList = document.getElementById('list-of-subtasks');
-    subtaskList.innerHTML += `<li id=subtask${subtaskCount}><div class="content-of-subtask"><div id="textOfSubtask${subtaskCount}">${inputfield.value}</div> <div class="edit-subtask-div"><button class="edit-btn" onclick="editSubtask('${subtaskCount}')"></button><div class="btn-divider"></div><button onclick="deleteElementById('subtask${subtaskCount}')" class="trash-btn"></button></div></div></li>`;
+    if(inputfield.value != ''){
+        subtaskList.innerHTML += `<li id=subtask${subtaskCount}><div class="content-of-subtask"><div id="textOfSubtask${subtaskCount}">${inputfield.value}</div> <div class="edit-subtask-div"><button class="edit-btn" onclick="editSubtask('${subtaskCount}')"></button><div class="btn-divider"></div><button onclick="deleteElementById('subtask${subtaskCount}')" class="trash-btn"></button></div></div></li>`;
+    }
     inputfield.value = ``;
     onSubtaskBlur();
 }
@@ -123,8 +125,8 @@ function renderAssignSelector(){
     if(document.getElementById('optionContainer').innerHTML == ``){
         document.getElementById('optionContainer').innerHTML = ``;
         
-        for (let i = 0; i < contactsWithoutToken.length; i++) {
-            const contact = contactsWithoutToken[i];
+        for (let i = 0; i < contactsAsJson.length; i++) {
+            const contact = contactsAsJson[i];
             
             document.getElementById('optionContainer').innerHTML += `<div id="contact${i}" class="option" onclick="assignTheContact(this,${i})"><div class="contactNameDiv"><svg class="profile_pic" width="42px" height="42px">
             <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2" fill="${contact['color']}" />
@@ -292,3 +294,25 @@ function fetchAllAssignedContacts(){
 
 
 document.addEventListener('DOMContentLoaded', addEventListenerToInput);
+document.addEventListener('DOMContentLoaded', () => {
+    let subtaskInputField = document.getElementById('subtask-input');
+    subtaskInputField.addEventListener('keydown', function(event){
+        if(event.key === 'Enter'){
+            event.preventDefault();
+            addToSubtasks();
+        }
+    })
+});
+
+
+document.addEventListener('click', function(event){
+
+    let optionContainer = document.getElementById('optionContainer');
+    if(!optionContainer.contains(event.target) && event.target != document.getElementById('contact-selector')){
+        let button = document.getElementById('dropdown-btn');
+        hideContactsToAssign(button);
+    }else{
+        renderAssignSelector();
+        showContactsToAssign();
+    }
+})
