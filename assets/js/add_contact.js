@@ -8,42 +8,37 @@ const URL = "https://join-remotestorage-default-rtdb.europe-west1.firebasedataba
 
 
 async function createName(){
-    
     let fullName = document.getElementById('contact-name').value;
     let words = fullName.split(" ");
     let vorname = words[0];
     let nachname = words[1];
-    
     if(vorname && nachname){
         vornameCapitalized = vorname.charAt(0).toUpperCase() + vorname.slice(1);
         nachnameCapitalized = nachname.charAt(0).toUpperCase() + nachname.slice(1);
     }else if(vorname && !nachname){
         vornameCapitalized = vorname.charAt(0).toUpperCase() + vorname.slice(1);
         nachnameCapitalized = ""
-    }
-    
-    console.log(vornameCapitalized + nachnameCapitalized);
-    
+    }  
 }
+
 
 async function getMail(){
     contactMail = document.getElementById('contact-mail').value;
 }
 
+
 async function getPhoneNumber(){
     contactPhone = document.getElementById('contact-phone').value;
 }
 
-async function getId(){
 
-    if(contactsAsJson){
-      contactId = contactsAsJson.length;  
+async function getId(){
+    if(contactsWithoutToken){
+        contactId = contactsWithoutToken.length;  
     }else{
         contactId = 0;
-    }
-    
+    } 
 }
-
 
 
 async function getTheInformation(event){
@@ -53,52 +48,32 @@ async function getTheInformation(event){
     await getPhoneNumber();
     await getId();
     contactColor = await getAColor();
-    await postData('contacts/'); 
-    await refreshContactToLoad(contactId, 'currentContact');
-    
-    
-     
-     
+    await postContact('contacts/'); 
+    await refreshContactToLoad(contactId, 'currentContact');   
 }
 
 
-
-
-async function postData(path='', data={}) {
-    
-    data = {
-        "mail": contactMail,
-        "mobile": contactPhone,
-        "name": nachnameCapitalized,
-        "vorname": vornameCapitalized,
-        "id": contactId,
-        "color": contactColor
-    };
-    
-    
+async function postContact(path='', data={}) {
+    data = await getDataForPostContact();
     let fetchResponse = await fetch(URL + path + ".json");
     let currentData = await fetchResponse.json();
-    
-    
     if (!Array.isArray(currentData)) {
         currentData = [];
     }
-    
-    
     currentData.push(data);
-    
-    
-    let response = await fetch(URL + path + ".json", {
-        method: "PUT", 
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(currentData)
-    });
-    
-    return await response.json();
+    await postData(path,currentData);
 }
 
+async function getDataForPostContact(){
+return {
+    "mail": contactMail,
+    "mobile": contactPhone,
+    "name": nachnameCapitalized,
+    "vorname": vornameCapitalized,
+    "id": contactId,
+    "color": contactColor
+};
+}
 
 
 

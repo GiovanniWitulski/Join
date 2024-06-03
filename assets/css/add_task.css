@@ -337,6 +337,11 @@ input[type="date"]::-moz-focus-inner:hover{
     width: auto;
 } */
 
+.create-btn:hover{
+
+    cursor: pointer;
+}
+
 
 
 .dateDiv{
@@ -456,6 +461,7 @@ input[type="date"]::-moz-focus-inner:hover{
 #list-of-subtasks{
 
 padding-top: 8px;
+padding-left: 40px;
 }
 
 #list-of-subtasks button:hover{
@@ -539,12 +545,17 @@ cursor: pointer;
     display: none;
 }
 
+.assignedContactPics{
+    display: flex;
+    gap: 8px;
+}
+
 .renameSubtaskDiv{
 
     display: flex;
     position: relative;
     left: -40px;
-    width: 100%;
+    width: calc(100% + 40px);
     max-width: 396px;
     justify-content: space-between;
 
@@ -573,7 +584,6 @@ cursor: pointer;
 .option{
 
     max-width: 364px;
-    width: 100%;
     display: flex;
     justify-content: space-between;
     height: 56px;

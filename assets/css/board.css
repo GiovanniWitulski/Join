@@ -26,7 +26,16 @@ body {
     height: 100%; 
     max-width: 396px;
     padding-top: 70px;
+    padding-left: 16px;
+    padding-right: 16px;
 }
+
+.placeholder-container-img{
+    height: 100%; 
+    width: 100%;
+    max-width: 396px;
+}
+
 
 .board-add-task-mobile{
     
@@ -129,8 +138,7 @@ cursor: pointer;
 
 /* FEEDBACK */
 
-.await-feedback{
-    padding-bottom: 110px;
+.await-feedback-mobile{
 } 
 
 .await-feedback-title-mobile{
@@ -147,6 +155,26 @@ cursor: pointer;
     flex-wrap: wrap;
     width: 100%;
 }
+
+/* DONE */
+
+.done-mobile{
+    padding-bottom: 110px;
+}
+
+.done-title-mobile{
+    display: flex;
+    justify-content: space-between; 
+    padding-top: 26px; 
+    padding-bottom: 16px; 
+}
+
+.done-container-mobile{
+    width: 100%;
+}
+
+
+
 
 
 

@@ -10,7 +10,11 @@
 .join-logo-indexhtml {
     /* width: 64px;
     height: 78.03px; */
+    /* width: 64px;
+    height: 78.03px; */
     margin-bottom: 47px;
+    position: absolute;
+    z-index: 50;
     position: absolute;
     z-index: 50;
 }
@@ -323,8 +327,24 @@
     right: 0;
     bottom: 0;
     z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
     background-color: #2a3647;
     transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+  }
+  
+  #logInHeaderLogo {
+    animation: loading 2s ease-in-out;
+    z-index: 9;
+    top: 37px;
+    left: 16px;
+    width: 64px;
+    height: 78.03px;
   }
   
   #logInHeaderLogo {
@@ -347,7 +367,19 @@
       height: 129px;
       width: 105px;
       filter: brightness(0) invert(1);
+    from {
+      top: calc(50% - 40px);
+      left: calc(50% - 32px);
+      height: 129px;
+      width: 105px;
+      filter: brightness(0) invert(1);
     }
+  
+    to {
+      top: 37px;
+      left: 16px;
+      width: 64px;
+      height: 78.03px;
   
     to {
       top: 37px;
@@ -356,6 +388,9 @@
       height: 78.03px;
       filter: brightness(1) invert(0);
     }
+  
+  .hide-animation {
+    transform: translateY(-100px);
   }
   
   .hide-animation {
