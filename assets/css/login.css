@@ -8,9 +8,11 @@
 }
 
 .join-logo-indexhtml {
-    width: 64px;
-    height: 78.03px;
+    /* width: 64px;
+    height: 78.03px; */
     margin-bottom: 47px;
+    position: absolute;
+    z-index: 50;
 }
 
 .login-card-div {
@@ -21,6 +23,14 @@
 
 .signup-title {
     text-align: center;
+}
+
+#loginParentDiv {
+    margin-top: 125.03px;
+}
+
+#signupParentDiv {
+    margin-top: 125.03px;
 }
 
 .login-card {
@@ -306,40 +316,48 @@
 
 /* ////////////////////////////////////////////////////////////////// */
 
-/* Container für die Ladeanimation */
 #loadAnimation {
-    width: 100%;
-    height: 100%;
-    z-index: 100; /* Stellt sicher, dass es über allem anderen liegt */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
     background-color: #2a3647;
-    position: fixed; /* Fixiert für vollständige Bildschirmbedeckung */
-    display: flex; /* Flexbox für zentrierte Ausrichtung */
-    align-items: center;
-    justify-content: center;
-    opacity: 1;
-    transition: opacity 1s ease-in-out; 
+    transition: opacity 1s ease-in-out;
+  }
+  
+  #logInHeaderLogo {
+    animation: loading 2s ease-in-out;
+    z-index: 9;
+    top: 37px;
+    left: 16px;
+    width: 64px;
+    height: 78.03px;
   }
   
   .loader-hidden {
     opacity: 0;
-    pointer-events: none; /* Deaktiviert Interaktionen während des Ausblendens */
-  }
-  
-  /* Logo-Animation */
-  #logInHeaderLogo {
-    width: 40px; /* Beginnt mit der endgültigen Größe für eine flüssigere Animation */
-    height: 49.375px; /* Behält das Seitenverhältnis bei */
-    filter: brightness(1) invert(0); /* Beginnt mit dem normalen Zustand */
-    animation: loading 1s ease-in-out forwards; /* 'forwards' behält den Endzustand bei */
   }
   
   @keyframes loading {
-    0% {
-      transform: scale(5) translateY(-50%); /* Beginnt größer und höher */
-      filter: brightness(0) invert(1); 
+    from {
+      top: calc(50% - 40px);
+      left: calc(50% - 32px);
+      height: 129px;
+      width: 105px;
+      filter: brightness(0) invert(1);
     }
-    100% {
-      transform: scale(1) translateY(0); /* Endet bei normaler Größe und Position */
+  
+    to {
+      top: 37px;
+      left: 16px;
+      width: 64px;
+      height: 78.03px;
       filter: brightness(1) invert(0);
     }
+  }
+  
+  .hide-animation {
+    transform: translateY(-100px);
   }

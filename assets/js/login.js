@@ -14,41 +14,44 @@ function changeInputFieldImg(inputField) {
     let inputFieldImg = inputIconDiv.querySelector("img");
     console.log(passwordValue);
     if (passwordValue !== '') {
-        inputFieldImg.src = "assets/svg/visibility_off.svg";
+        inputFieldImg.src = 'assets/svg/visibility_off.svg';
+        inputFieldImg.classList.add('cursor-pointer');
+        inputField.type = "password";
     } else {
-        inputFieldImg.src = "assets/svg/lock.svg";
+        inputFieldImg.src = 'assets/svg/lock.svg';
+        inputFieldImg.classList.remove('cursor-pointer');
     }
 }
 
-function showPassword() {
-
+function showPassword(inputFieldImg) {
+    let inputField = inputFieldImg.parentNode.previousElementSibling;
+  
+    if (inputFieldImg.src.includes('visibility_off.svg')) {
+      inputFieldImg.src = '/assets/svg/visibility.svg';   
+      inputField.type = "text";                           
+    } else {
+        if (!inputFieldImg.src.includes('assets/svg/lock.svg')) {
+            inputFieldImg.src = '/assets/svg/visibility_off.svg';
+            inputField.type = "password";   
+        }                       
+    }
 }
 
-// function validateForm() {
-//     // 1. Validierung durchführen
-//     if (!document.getElementById("name").checkValidity()) {
-//       // Falls ungültig, Fehler anzeigen (z.B. mit einer Meldung)
-//       return false; // Formularübermittlung stoppen
-//     }
+function validateForm() {
+    // if (!document.getElementById("name").checkValidity()) {
+    //   return false; // Formularübermittlung stoppen
+    // }
   
-//     // 2. Seite wechseln (nach erfolgreicher Validierung)
-//     window.location.href = document.getElementById("loginForm").action;
+    window.location.href = document.getElementById("loginForm").action;
   
-//     return false; // Formularübermittlung stoppen (optional, um Standardverhalten zu verhindern)
-// }
+    return false;
+}
 
-// function landingPageAnimation() {
-//     const loadAnimation = document.getElementById('loadAnimation');
-//     const logInHeaderLogo = document.getElementById('logInHeaderLogo');
-
-//     // Simuliert Ladeverzögerung (ersetzen Sie dies durch Ihre tatsächliche Ladeladegik)
-//     setTimeout(() => {
-//       loadAnimation.classList.add('loader-hidden'); // Blende den Lader aus
-    
-//       // Optional: Entferne den Lader aus dem DOM nach Abschluss der Animation
-//       loadAnimation.addEventListener('transitionend', () => {
-//         loadAnimation.remove(); 
-//       });
-    
-//     }, 3000); // Blende den Lader nach 3 Sekunden aus 
-// }
+function landingPageAnimation() {
+    setTimeout(() => {
+        document.getElementById("loadAnimation").classList.add("loader-hidden");
+      }, 200);
+      setTimeout(() => {
+        document.getElementById("loadAnimation").classList.add("d-none");
+      }, 1000);
+}

@@ -23,10 +23,6 @@ async function deleteData(path="") {
     return responseToJson = await response.json();
 }
 
-
-
-
-
 async function putData(path='', data={}) {
     
     
@@ -39,4 +35,24 @@ async function putData(path='', data={}) {
     });
     
     return await response.json();
+}
+
+
+async function getContacts() {
+    try {
+      const data = await loadData('contacts');
+      const contacts = [];
+      for (const key in data) { 
+        if (data.hasOwnProperty(key)) { 
+          contacts.push({ id: key, ...data[key] });
+        }
+      }
+      
+      console.log(contacts);
+      return contacts;
+  
+    } catch (error) {
+      console.error('Fehler beim Laden der Kontakte:', error);
+      throw error;
+    }
 }
