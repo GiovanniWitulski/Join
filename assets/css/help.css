@@ -2,10 +2,6 @@ body {
     text-wrap: balance;
 }
 
-.helpHTML-h1 {
-    margin-top: 128px;
-}
-
 .helpHTML-h2 {
     margin-bottom: 16px;
 }
@@ -21,6 +17,8 @@ body {
     margin: 0;
     color: rgba(41, 171, 226, 1);
     display: inline-block;
+    text-wrap: wrap;
+    overflow-wrap: break-word
 }
 
 .help-list {
@@ -36,4 +34,9 @@ ol > li::marker {
 
 ol {
     padding-bottom: 16px;
+}
+
+p {
+    margin: 0;
+    padding: 0;
 }

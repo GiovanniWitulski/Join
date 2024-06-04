@@ -367,6 +367,7 @@
       height: 129px;
       width: 105px;
       filter: brightness(0) invert(1);
+    }
     from {
       top: calc(50% - 40px);
       left: calc(50% - 32px);
@@ -380,6 +381,7 @@
       left: 16px;
       width: 64px;
       height: 78.03px;
+    }
   
     to {
       top: 37px;
@@ -388,11 +390,12 @@
       height: 78.03px;
       filter: brightness(1) invert(0);
     }
-  
+}
   .hide-animation {
     transform: translateY(-100px);
   }
   
   .hide-animation {
     transform: translateY(-100px);
-  }
+  } 
+ 

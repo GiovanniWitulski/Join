@@ -10,6 +10,8 @@
 a {
     text-decoration: none;
     color: unset;
+    text-wrap: wrap;
+    overflow-wrap: break-word
 }
 
 .d-none {
@@ -21,18 +23,24 @@ h1 {
     font-size: 47px;
     font-weight: 700;
     line-height: 56.4px;
+    text-wrap: wrap;
+    overflow-wrap: break-word
 }
 
 h2 {
     font-size: 27px;
     font-weight: 700;
     line-height: 32.4px;
+    text-wrap: wrap;
+    overflow-wrap: break-word
 }
 
 h3 {
     font-size: 20px;
     font-weight: 700;
     line-height: 19.2px;
+    text-wrap: wrap;
+    overflow-wrap: break-word
 }
 
 .ml-mr-16px {
@@ -48,12 +56,20 @@ h3 {
     margin-top: 80px;
 }
 
+.mt-128px {
+    margin-top: 128px;
+}
+
 /* .mt-40px {
     margin-top: 40px;
 } */
 
 .mb-16px {
     margin-bottom: 16px;
+}
+
+.mt-16px {
+    margin-top: 16px;
 }
 
 .mt-24px {
