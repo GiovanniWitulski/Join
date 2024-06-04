@@ -9,6 +9,7 @@
 .none{
     
     display: none;
+    transition: all 100ms ease-in-out;
 }
 
 .headline-Div{
@@ -81,4 +82,16 @@
     margin-top: 80px;
     width: 100%;
     
+}
+
+.overlayVeilAddContact{
+
+    position: fixed;
+    top: 0;
+    left: 0; 
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 5;
+    transition: all 150ms ease-in-out;
 }

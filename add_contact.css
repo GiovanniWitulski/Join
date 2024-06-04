@@ -11,7 +11,7 @@ body {
     
     transform: translateY(400px);
     transition: all 100ms ease-in-out;
-    background-color: rgba(0, 0, 0, 0.4);
+   
 
 }
 
@@ -20,9 +20,10 @@ body {
     width: 100vw;
     height: 100%;
     position: absolute;
-    z-index: 4;
+    z-index: 6;
     justify-content: center;
     top: 0px;
+    transition: all 100ms ease-in-out;
 }
 
 .formular-container{

@@ -72,6 +72,7 @@ async function refreshContactToLoad(id, path) {
 
 function showAddContact(){
     document.getElementById('overlay-container').classList.add('show');
+    document.getElementById('overlayVeilAddContact').classList.remove('none');
 }
 
 
@@ -80,7 +81,10 @@ document.addEventListener('DOMContentLoaded', loadContacts('contacts'));
 
 function hideTheFormular(elementToHide){
     document.getElementById(elementToHide).classList.remove('show');
+    document.getElementById('overlayVeilAddContact').classList.add('none');
 }
+
+
 
 
 
