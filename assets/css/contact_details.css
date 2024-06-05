@@ -111,6 +111,8 @@ p{
 
 body{
     background: #F6F7F8;
+    display: flex;
+    flex-direction: column;
     
 }
 
@@ -233,4 +235,17 @@ body{
 .displayNone{
 
     display: none;
+}
+
+#notificationAddContact{
+    transform: translateY(50vh);
+    transition: all 120ms ease-in-out;
+    align-self: center;
+}
+
+
+.showContactAdded{
+
+    transform: translateY(100px) !important;
+    transition: all 120ms ease-in-out;
 }

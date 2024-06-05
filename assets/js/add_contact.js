@@ -50,7 +50,15 @@ async function getTheInformation(event){
     await getId();
     contactColor = await getAColor();
     await getDataForPostContact('contacts/'); 
+    await confirmContactCreation();
     await refreshContactToLoad(contactsAsJson.length, 'currentContact');   
+    
+}
+
+
+async function confirmContactCreation(){
+
+    localStorage.setItem('contactWasCreated', 'true');
 }
 
 

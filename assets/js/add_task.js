@@ -226,7 +226,18 @@ async function getTheDataForPostTask() {
         taskid: await getTheIdOfTask()
     };
     await postData('tasks', data);
-    document.getElementById('addTaskForm').submit();
+    await showNotification();
+    //document.getElementById('addTaskForm').submit();
+}
+
+
+async function showNotification() {
+    document.getElementById('taskAddedNotification').classList.add('showNotification');
+    
+    // 2000 Millisekunden = 2 Sekunden
+    setTimeout(function() {
+        window.location.href = "/board.html";
+    }, 1000);
 }
 
 

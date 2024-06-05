@@ -111,4 +111,25 @@ async function saveEditsToContact(token){
 }
 
 
+async function checkIfContactWasCreated(){
+
+    let wasContactCreated = localStorage.getItem('contactWasCreated');
+    if(wasContactCreated == "true"){
+       await showTheNotificaiton();
+    }
+
+}
+async function showTheNotificaiton(){
+
+    document.getElementById('notificationAddContact').classList.add('showContactAdded');
+
+    setTimeout(() => {
+        document.getElementById('notificationAddContact').classList.remove('showContactAdded');
+    }, 1000);
+
+    localStorage.clear();
+    
+}
+
+document.addEventListener('DOMContentLoaded', checkIfContactWasCreated);
 

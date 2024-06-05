@@ -29,6 +29,8 @@
 
 body {
     background: #F6F7F8;
+    display: flex;
+    flex-direction: column;
 }
 
 input {
@@ -168,7 +170,8 @@ select {
 .assignedDiv{
 
     padding-bottom: 16px;
-    width: 396px;
+    max-width: 396px;
+
 }
 
 .urgent-btn{
@@ -704,4 +707,25 @@ cursor: pointer;
     }
 
 }
+
+.addedToBoardNotification{
+
+    width: 326px;
+    height: 74px;
+
+}
+
+.notificationDiv{
+    transform: translateY(0);
+    transition: all 120ms ease-in-out;
+    align-self: center;
+}
+
+.showNotification{
+
+    transform: translateY(-50vh);
+    transition: all 120ms ease-in-out;
+}
+
+
 
