@@ -107,6 +107,7 @@ body {
     position: relative;
     top: -60px;
     left: calc(50% - 60px);
+    transition: all 120ms ease-in-out;
 }
 
 .create-contact-form input:nth-child(even){
@@ -192,4 +193,42 @@ body {
    overflow: overlay;
    width: 100%;
 
+}
+
+
+@media(max-height: 860px){
+
+    .top-container{
+        max-height: 352px;
+        height: 220px;
+
+    }
+    
+    .headline{
+        padding-top: 0px;
+
+    }
+
+   
+
+    .formular-container{
+        margin: 0px 16px;
+    }
+
+    .headline{
+        font-size: 30px;
+    }
+    .subheadline{
+
+        font-size: 15px;
+    }
+}
+
+@media(max-height: 725px){
+    .contact-pic{
+        width: 60px;
+        height: 60px;
+        top: -30px;
+        left: calc(50% - 30px);
+    }
 }
