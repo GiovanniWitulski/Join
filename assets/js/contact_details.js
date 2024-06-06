@@ -56,8 +56,13 @@ function drawContactDetailPic(user){
     <text x="20" y="48" fill="white" font-size="27px">${user['vorname'].charAt(0)}${user['name'].charAt(0)}</text></svg>`;
 }
 
+async function drawContactEditPic(user){
+    return `<svg class="contact-pic-edit" width="62px" height="62px"><circle class="circle" cx="60" cy="60" r="58" stroke="white" stroke-width="2" fill="${user['color']}" />
+    <text class="circle-text" x="50%" y="55%" fill="white" font-size="47px">${user['vorname'].charAt(0)}${user['name'].charAt(0)}</text></svg>`;
+}
 
- function fillEditContactForm(id){
+
+ async function fillEditContactForm(id){
     idToFind = id;
    // indexToFill = contactsAsJson.findIndex(contact => contact.id === idToFind);
     currentContact = contactsAsJson[idToFind];
@@ -68,6 +73,7 @@ function drawContactDetailPic(user){
     document.getElementById('save-edits-btn').setAttribute('onclick',`saveEditsToContact('${currentContact['id']}')`);
     document.getElementById('delete-contact-btn').setAttribute('onclick',`deleteContact(${id})`);
     showEditOverlay();
+    document.getElementById('editContactPic').outerHTML = await drawContactEditPic(currentContact);
 }
 
 

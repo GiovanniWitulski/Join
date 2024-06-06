@@ -4,27 +4,27 @@ body {
     overflow-y: hidden;
 }
 .overlay-container {
-    width: 100vw;
-    height: 100%;
    
+     width: 100vw;
+    height: 100%;
+    position: absolute;
+    z-index: 6;
+    justify-content: center;
+    top: 0px;
     
     display: flex;
     
-    transform: translateY(400px);
+    transform: translateY(100vh);
     transition: all 100ms ease-in-out;
    
 
 }
 
 .show {
-    transform: translateY(0);
-    width: 100vw;
-    height: 100%;
-    position: absolute;
-    z-index: 6;
-    justify-content: center;
-    top: 0px;
+    
+  
     transition: all 100ms ease-in-out;
+    transform: translateY(0);
 }
 
 .formular-container{
