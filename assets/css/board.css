@@ -111,8 +111,10 @@ cursor: pointer;
 /* .to-do-add-mobile-img{} */
 
 .to-do-container-mobile{
-   width: 100%;
-} 
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
 
 /* PROGRESS */
 
@@ -129,7 +131,9 @@ cursor: pointer;
 }
 
 .in-progress-container-mobile{ 
-  width: 100%;   
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%; 
 } 
 
 .no-task-progress {
@@ -152,9 +156,14 @@ cursor: pointer;
 
 .await-feedback-container{
     display: flex;
-    flex-wrap: wrap;
-    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
 }
+
+.await-feedback-container::-webkit-scrollbar{
+    display: none;
+} /* in addition, if others browerser don´t react to scrollbar-width: none, above*/
 
 /* DONE */
 
@@ -170,6 +179,8 @@ cursor: pointer;
 }
 
 .done-container-mobile{
+    display: flex;
+    flex-wrap: wrap;
     width: 100%;
 }
 
