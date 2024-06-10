@@ -5,12 +5,10 @@
 /* Task - Card - Design */
 
 .card-body {
-    
-    width: 252px;
-    max-height: 244px;
+    max-width: 252px;
     display: flex;
     flex-direction: column;
-    background-color: #FFFFFF;
+    background-color: #FFFFFF;    /* #FFFFFF; */
     padding: 16px;
     border-radius: 24px;
     margin-bottom: 16px;        
@@ -19,6 +17,7 @@
 
 .card-header{
     padding-bottom: 28px;
+    width: 220px;
 }
 
 .card-title{
@@ -26,8 +25,13 @@
 }
 
 .card-description{
+    width: 220px;
     color: #A8A8A8;
     padding-bottom: 24px;
+    white-space: normal;
+    height: 38px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .due-date{}
@@ -37,10 +41,12 @@
 .card-subtasks {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding-bottom: 24px;
 }
 
 .card-sum-subtask{
+    font-size: 12px;
     padding-left: 4px;
 }
 

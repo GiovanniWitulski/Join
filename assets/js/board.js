@@ -334,7 +334,13 @@ function toDoContainer (){
                 label = TechnicalTaskLabel;
             } else {
                 label = UserStoryLabel;
-            }            
+            }     
+            
+            let lastChar = toDoCard.description[toDoCard.description.length - 1];
+            if (lastChar === "." || lastChar === "!" || lastChar === "?"){
+                console.log("foundchar:", lastChar);
+                toDoCard.description = toDoCard.description.slice(0, -1);
+            }
 
             let emblems = '';                           //contact-emblems
             for (let i = 0; i < toDoCard.contactEmblem.length; i++){
@@ -346,7 +352,7 @@ function toDoContainer (){
             <div class="card-body" onclick="overlayTask(${toDoCard.taskid})" ondragstart="startDragging(${toDoCard.taskid})" draggable="true">
             <div id="cardHeader" class="card-header">${label}</div>
             <div id="cardTitle" class="card-title"><h4>${toDoCard.title}</h4></div>
-            <div id="cardDescription" class="card-description"><h4>${toDoCard.description}</h4></div>
+            <div id="cardDescription" class="card-description"><h4>${toDoCard.description}...</h4></div>
             <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
             <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
@@ -384,7 +390,14 @@ function inProgressContainer (){
                 label = TechnicalTaskLabel;
             } else {
                 label = UserStoryLabel;
-            }            
+            }       
+            
+            let lastChar = inProgressCard.description[inProgressCard.description.length - 1];
+            if (lastChar === "." || lastChar === "!" || lastChar === "?"){
+                console.log("foundchar:", lastChar);
+                inProgressCard.description = inProgressCard.description.slice(0, -1);
+            }
+
 
             let emblems = '';                           //contact-emblems
             for (let i = 0; i < inProgressCard.contactEmblem.length; i++){
@@ -397,7 +410,7 @@ function inProgressContainer (){
         <div class="card-body" onclick="overlayTask(${inProgressCard.taskid})" ondragstart="startDragging(${inProgressCard.taskid})" draggable="true">
         <div id="cardHeader" class="card-header">${label}</div>
         <div id="cardTitle" class="card-title"><h4>${inProgressCard.title}</h4></div>
-        <div id="cardDescription" class="card-description"><h4>${inProgressCard.description}</h4></div>
+        <div id="cardDescription" class="card-description"><h4>${inProgressCard.description}...</h4></div>
         
         <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
         <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -440,7 +453,14 @@ function awaitFeedbackContainer(){
                 label = TechnicalTaskLabel;
             } else {
                 label = UserStoryLabel;
-            }            
+            }          
+            
+            let lastChar = awaitFeedbackCard.description[awaitFeedbackCard.description.length - 1];
+            if (lastChar === "." || lastChar === "!" || lastChar === "?"){
+                console.log("foundchar:", lastChar);
+                awaitFeedbackCard.description = awaitFeedbackCard.description.slice(0, -1);
+            }
+
 
             let emblems = '';                           //contact-emblems
             for (let i = 0; i < awaitFeedbackCard.contactEmblem.length; i++){
@@ -449,10 +469,11 @@ function awaitFeedbackContainer(){
             }
 
             awaitFeedback.innerHTML += `
+            <div class="await-feedback-cards-container">
             <div class="card-body" onclick="overlayTask(${awaitFeedbackCard.taskid})" ondragstart="startDragging(${awaitFeedbackCard.taskid})" draggable="true">
             <div id="cardHeader" class="card-header">${label}</div>
             <div id="cardTitle" class="card-title"><h4>${awaitFeedbackCard.title}</h4></div>
-            <div id="cardDescription" class="card-description"><h4>${awaitFeedbackCard.description}</h4></div>
+            <div id="cardDescription" class="card-description"><h4>${awaitFeedbackCard.description}...</h4></div>
             <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
             <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
@@ -462,6 +483,7 @@ function awaitFeedbackContainer(){
             <div class="card-contact-emblems">${emblems}</div>
             <div><img src="${awaitFeedbackCard.priority[1]}" alt="priority"></div>
             </div></div>
+            </div>
                 
              `             
             const progressBar = document.getElementById(progressBarId);
@@ -491,7 +513,14 @@ function doneContainer(){
                 label = TechnicalTaskLabel;
             } else {
                 label = UserStoryLabel;
-            }            
+            }          
+            
+            let lastChar = doneCard.description[doneCard.description.length - 1];
+            if (lastChar === "." || lastChar === "!" || lastChar === "?"){
+                console.log("foundchar:", lastChar);
+                doneCard.description = doneCard.description.slice(0, -1);
+            }
+
 
             let emblems = '';                           //contact-emblems
             for (let i = 0; i < doneCard.contactEmblem.length; i++){
@@ -503,7 +532,7 @@ function doneContainer(){
             <div class="card-body" onclick="overlayTask(${doneCard.taskid})" ondragstart="startDragging(${doneCard.taskid})" draggable="true">
             <div id="cardHeader" class="card-header">${label}</div>
             <div id="cardTitle" class="card-title"><h4>${doneCard.title}</h4></div>
-            <div id="cardDescription" class="card-description"><h4>${doneCard.description}</h4></div>
+            <div id="cardDescription" class="card-description"><h4>${doneCard.description}...</h4></div>
             <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
             <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
