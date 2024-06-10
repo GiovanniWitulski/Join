@@ -5,6 +5,7 @@
 /* Task - Card - Design */
 
 .card-body {
+    
     width: 252px;
     max-height: 244px;
     display: flex;
