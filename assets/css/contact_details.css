@@ -58,14 +58,17 @@ p{
     justify-content: space-between;
     padding-top: 48px;
     padding-right: 16px;
-    margin-top: 80px;
+   
 }
+
+
 
 .name-div{
     display: flex;
     align-items: center;
     font-size: 36px;
     font-weight: 700;
+    flex-wrap: wrap;
 }
 
 .middle-container{
@@ -93,6 +96,12 @@ p{
     padding-bottom: 22px;
     
     
+}
+
+#page-content-div{
+    margin-top: 80px;
+    max-height: calc(100vh - 160px);
+
 }
 
 .category-headline{
@@ -228,7 +237,7 @@ body{
     width: 100vw;
     z-index: 4;
   
-    transition: all 150ms ease-in-out;
+   
 }
 
 
@@ -238,14 +247,25 @@ body{
 }
 
 #notificationAddContact{
-    transform: translateY(50vh);
+    transform: translateY(100vh);
     transition: all 120ms ease-in-out;
     align-self: center;
+}
+
+#notificationAddContact img{
+
+    max-width: 100%;
 }
 
 
 .showContactAdded{
 
-    transform: translateY(100px) !important;
+    transform: translateY(-100px) !important;
     transition: all 120ms ease-in-out;
+}
+
+@media(max-height: 700px){
+    .top-container{
+        padding-top: 10px;
+    }
 }

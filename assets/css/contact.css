@@ -1,6 +1,6 @@
 .contact-section{
     
-    width: 100%;
+    
    max-width: 352px;
     background-color: transparent;
     margin: 20px;
@@ -14,7 +14,7 @@
 
 .headline-Div{
     
-    width: 352px;
+    max-width: 352px;
     height: 66px;
     border-bottom: 1px solid #d1d1d1;
     box-sizing: border-box;
@@ -34,6 +34,11 @@
     gap: 35px;
     display: flex;
     align-items: center;
+    
+}
+
+.singleContact div p{
+    transition: all 120ms ease-in-out;
 }
 
 .singleContact:hover{
@@ -96,4 +101,9 @@
     transition: all 150ms ease-in-out;
 }
 
+@media(max-width: 370px){
+    .singleContact p{
+        font-size: 12px;
+    }
+}
 

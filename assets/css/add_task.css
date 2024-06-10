@@ -558,6 +558,7 @@ cursor: pointer;
     gap: 8px;
     width: 100%;
     flex-wrap: wrap;
+    margin-top: 8px;
 }
 
 .renameSubtaskDiv{
@@ -710,7 +711,7 @@ cursor: pointer;
 
 .addedToBoardNotification{
 
-    width: 326px;
+    max-width: 326px;
     height: 74px;
 
 }

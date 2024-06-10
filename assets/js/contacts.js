@@ -1,7 +1,7 @@
 let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h','i','j','k','l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 let contactsAsJson;
 let contactToDisplay = 0;
-let colors = ['#FC71FF', '#FF7A00', '#9327FF','#6E52FF', '#FFBB2B', '#1FD7C1', '#462F8A', '#FF4646'];
+let colors = ['#FF7A00', '#FF5EB3', '#6E52FF','#9327FF', '#00BEE8', '#1FD7C1', '#FF745E', '#FFA35E','#FC71FF','#FFC701', '#0038FF', '#C3FF2B', '#FFE62B', '#FF4646', '#FFBB2B'];
 let contactsWithoutToken = [];
 
 async function getAColor(){
