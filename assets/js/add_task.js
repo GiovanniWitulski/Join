@@ -211,7 +211,9 @@ function hideContactsToAssign(button){
 }
 
 
-async function getTheDataForPostTask() {
+async function getTheDataForPostTask(event) {
+    
+    event.preventDefault();
     const data = {
         title: document.getElementById('title-input').value,
         description: document.getElementById('descriptionInput').value,
@@ -227,6 +229,7 @@ async function getTheDataForPostTask() {
     };
     await postData('tasks', data);
     await showNotification();
+    
     //document.getElementById('addTaskForm').submit();
 }
 

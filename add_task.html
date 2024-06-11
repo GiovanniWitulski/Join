@@ -18,7 +18,7 @@
     <div id="mobileTamplateContent" w3-include-html="/assets/templates/mobile_template.html"></div>
     <div class="headline"><p class="headline-text">Add Task</p></div>
     <div class="content-container">
-        <form id="addTaskForm" onsubmit="return false">
+        <form id="addTaskForm" onsubmit="getTheDataForPostTask(event)">
             <div class="titleDiv">
               <div class="subheadlineDiv"><p class="subheadline">Title <p class="marker">*</p></p></div>  
                 <input id="title-input" type="text" required placeholder="Enter a title">
@@ -52,9 +52,9 @@
             <div class="prioDiv">
                 <p class="subheadline">Prio</p>
                 <div class="buttonDiv">
-                    <button id="urgent-btn" class="urgent-btn" onclick="changeToActive('urgent-btn')"><p class="prioLabel">Urgent</p></button>
-                    <button id="medium-btn" class="medium-btn" onclick="changeToActive('medium-btn')"><p class="prioLabel">Medium</p></button>
-                    <button id="low-btn" class="low-btn" onclick="changeToActive('low-btn')"><p class="prioLabel">Low</p></button>
+                    <button type="button" id="urgent-btn" class="urgent-btn" onclick="changeToActive('urgent-btn')"><p class="prioLabel">Urgent</p></button>
+                    <button type="button" id="medium-btn" class="medium-btn" onclick="changeToActive('medium-btn')"><p class="prioLabel">Medium</p></button>
+                    <button type="button" id="low-btn" class="low-btn" onclick="changeToActive('low-btn')"><p class="prioLabel">Low</p></button>
                 </div>
             </div>
 
@@ -90,7 +90,7 @@
 
             <div class="createDiv">
                 <div class="explanation-div"><p class="marker">*<p class="explanation">This field is required</p></p></div>
-                <button type="button" onclick="getTheDataForPostTask()" class="create-btn">Create Task</button>
+                <button type="submit" class="create-btn">Create Task</button>
             </div>
 
             
