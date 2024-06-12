@@ -6,7 +6,6 @@ let contactId;
 let contactColor;
 const URL = "https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app/";
 
-
 async function createName(){
     let fullName = document.getElementById('contact-name').value;
     let words = fullName.split(" ");

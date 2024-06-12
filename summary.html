@@ -6,12 +6,52 @@
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/assets/css/fonts.css">
     <link rel="stylesheet" href="/assets/css/mobile_template.css">
+    <link rel="stylesheet" href="/assets/css/summary.css">
     <title>Summary</title>
     <script src="script.js"></script>
     <script src="assets/js/w3_include.js"></script>
+    <script src="assets/js/remoteStorage.js"></script>
+    <script src="assets/js/summary.js"></script>
 </head>
-<body onload="includeHTML()">
+<body class="summary-body" onload="includeHTML()">
     <div id="mobileTamplateContent" w3-include-html="/assets/templates/mobile_template.html"></div>
-
+    <div class="mt-128px summary-title-div">
+        <h1>Join 360</h1>
+        <span>Key Metrics at a Glance</span>
+        <img class="summary-underline-blue" src="assets/svg/underline-lightblue.svg" alt="">
+    </div>
+    <div class="summary-container">
+        <div class="summary-container-part">
+            <div class="todo-container">
+                <img class="summary-icons" src="/assets/svg/pen.svg" alt="">
+                <span class=""><b id="tasksToDoCounter" class="summary-task-numbers">1</b> to-do</span>
+            </div>
+            <div class="todo-container">
+                <img class="summary-icons" src="/assets/svg/doneTasksIcon.svg" alt="">
+                <span class=""><b id="tasksDoneCounter" class="summary-task-numbers">1</b> done</span>
+            </div>
+        </div>
+        <div class="summary-container-part urgent-task-container">
+            <div class="urgent-task-counter-container">
+                <img class="summary-icons" src="/assets/svg/urgent.svg" alt="">
+                <span class=""><b id="urgentTasksCounter" class="summary-task-numbers">1</b> urgent</span>
+            </div>
+            <img src="/assets/svg/summary_divide_line.svg" alt="">
+            <span class=""><b id="urgentTasksDate" class="urgent-task-deadline">October 16, 2022</b>
+                Upcomming Deadline
+            </span>
+        </div>
+        <div class="summary-container-part">
+            <span class="tasks-in-board-container">
+                <b id="tasksInBoardCounter" class="summary-task-numbers">1</b> tasks <br> in board
+            </span>
+            <span class="tasks-in-board-container">
+                <b id="tasksInProgressCounter" class="summary-task-numbers">1</b> tasks <br> in Progress
+            </span>
+            <span class="tasks-in-board-container">
+                <b id="tasksInFeedbackCounter" class="summary-task-numbers">1</b> Awaiting <br> feedback
+            </span>
+        </div>
+    </div>
 </body>
 </html>
