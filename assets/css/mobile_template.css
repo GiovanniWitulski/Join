@@ -157,8 +157,16 @@ a {
     line-height: 16.8px;
 }
 
+.join-logo-desktop {
+    display: none;
+}
+
+.nav-footer {
+    display: none;
+}
 
 @media (min-width:800px ) {
+
     .nav-mobile {
         display: flex;
         flex-direction: column;
@@ -184,8 +192,43 @@ a {
         text-decoration: none;
     }
 
-    ul {
+    .nav-ul {
         width: 100%;
     }
 
+    .join-logo-desktop {
+        display: unset;
+        position: fixed;
+        top: 64px;
+        left: 65.98px;
+        width: 100.03px;
+        height: 121.97px;
+        z-index: 4;
+    }
+
+    .nav-footer {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        left: 56px;
+        bottom: 64px;
+        gap: 8px;
+        z-index: 4;
+    }
+
+    .nav-footer-link {
+        text-decoration: none;
+        color: rgba(168, 168, 168, 1);
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19.2px;
+        transition: all 100ms ease-in-out;
+    }
+    
+    .nav-footer-link:hover {
+        padding-left: 0;
+        padding-right: 0;
+        color: rgba(41, 171, 226, 1);
+        font-weight: 700;
+    }
 }
