@@ -27,6 +27,7 @@
         <div class="formular-container">
         <div class="top-container">
             <div class="close-btn-div"><button onclick="hideTheFormular('overlay-container')" class="close-btn"></button></div>
+            <div class="join-logo-div"><img class="addContactJoinLogo" src="/assets/svg/join-logo-white.svg"></div>
             <div class="headline">Add Contact</div>
             <div class="subheadline">Tasks are better with a team! </div>
             <img class="divider" src="/assets/svg/underline_blue.svg">
@@ -39,7 +40,12 @@
                 <input id="contact-name" type="text" required placeholder="Name">
                 <input id="contact-mail" type="email" required placeholder="Email">
                 <input id="contact-phone" type="tel" required placeholder="Phone">
-                <button type="submit" class="create-contact-btn">Create contact <img src="/assets/svg/check.svg"></button>
+                <div class="addContact-btn-div">
+                    <button type="button" class="cancel-addContact-btn">Cancel</button>
+                    <button type="submit" class="create-contact-btn">Create contact <img src="/assets/svg/check.svg"></button>
+                    
+                </div>
+                
             </form>
         </div>
         </div>

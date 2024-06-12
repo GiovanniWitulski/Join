@@ -44,7 +44,12 @@
 .singleContact:hover{
 
     cursor: pointer;
-    background-color: rgb(240, 237, 237);
+    background-color: #2A3647;
+
+}
+
+.singleContact:hover p:first-child{
+color: white;
 }
 
 .mail{
@@ -105,5 +110,26 @@
     .singleContact p{
         font-size: 12px;
     }
+}
+
+
+@media(min-width: 800px){
+
+    .page-content{
+
+        position: relative;
+        left: 232px;
+        height: calc(100vh - 80px);
+        width: calc(100% - 232px);
+
+
+    }
+
+    #contact-div{
+
+        width: 400px;
+    }
+
+
 }
 
