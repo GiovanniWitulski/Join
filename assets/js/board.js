@@ -284,7 +284,8 @@ function searchResult(s){
 
 
 // function overlayEditTask(idtask){} --> Addtask Page -> load editing Task in Form
-
+                                    //--> Taskpopup slide in
+                                    //--> Edit Task -> changed addTask as Popup, editetTask-> new task, old task -> delete
 // function upload 
 
 // function download
