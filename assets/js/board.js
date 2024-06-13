@@ -100,7 +100,7 @@ let BackgroundTaskBoard = [
 
 let TaskBoard = []
 
-let BackgroundTaskBoard = [   
+  let BackgroundTaskBoardAlt= [   
     {
         "label": [0],
         "title": "Technical Task Example",
@@ -196,8 +196,12 @@ let BackgroundTaskBoard = [
 
 ];                                      // -> mit responseToJson befüllen       
 
+let BackgroundTaskBoard = [] // Test, backup siehe drüber
+
 
 //global variables & Elementtargets
+const databaseURL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app';
+
 
 let currentDraggedTask;
 const TechnicalTaskLabel = '<img src="/assets/svg/Labels_Board_card_label_tourquise_Technical_Task.svg" alt="">'
@@ -210,25 +214,84 @@ let awaitFeedback = document.getElementById('awaitFeedbackContainer');
 let done = document.getElementById('doneContainer');
 let Overlay = document.getElementById('overlayContainer');
 
-TaskBoard = BackgroundTaskBoard; //TaskBoard -> RAM Arbeitsarray --> BackgroundTaskBoard -> "ROM" Datenbankabgleich - Server
 console.log ("TaskBoard:", TaskBoard);
 
 
 
 //functions general
 
-function downloadData(){} //load from server->BackupTaskBoard -> TaskBoard // TO CODE
+////////TEST//////////////////
+
+// Funktion zum Abrufen der Daten und Speichern in BackgroundTaskBoard
+async function downloadData() {
+
+BackgroundTaskBoard = [];
+
+try {
+    const response = await fetch(`${databaseURL}/tasks.json`);
+    if (!response.ok) {
+      throw new Error('Netzwerkantwort war nicht in Ordnung');
+    }
+    const data = await response.json();
+
+    // Iterieren über jedes Unterobjekt im JSON und Formatieren der Daten
+    Object.values(data).forEach(task => {
+      // Überprüfen, ob subtask ein Array ist
+      const subtaskArray = Array.isArray(task.subtask) ? task.subtask : [];
+      // Überprüfen, ob subtaskSum ein Array ist
+      const subtaskSumArray = Array.isArray(task.subtaskSum) ? task.subtaskSum : [];
+      // Überprüfen, ob priority ein Array ist
+      const priorityArray = Array.isArray(task.priority) ? task.priority : [];
+      // Überprüfen, ob assignedTo ein Array ist
+      const assignedToArray = Array.isArray(task.assignedTo) ? task.assignedTo : [];
+      // Überprüfen, ob contactEmblem ein Array ist
+      const contactEmblemArray = Array.isArray(task.contactEmblem) ? task.contactEmblem : [];
+
+      // Beispiel: Hier kannst du die Felder des Unterobjekts anpassen und in das neue Format überführen
+      const formattedTask = {
+        label: task.label,
+        title: task.title,
+        description: task.description,
+        date: task.date,
+        subtask: subtaskArray,
+        subtaskSum: subtaskSumArray,
+        priority: task.priority,
+        assignedTo: assignedToArray,
+        contactEmblem: contactEmblemArray,
+        type: task.type,
+        taskid: task.taskid
+      };
+
+      // Hinzufügen des formatierten Tasks zum externen Array
+      BackgroundTaskBoard.push(formattedTask);
+    });
+
+    // Anzeigen der formatierten Daten im externen Array in der Konsole
+    console.log("Download BackgroundTaskBoard",BackgroundTaskBoard);
+    TaskBoard = BackgroundTaskBoard;
+    console.log("Download Taskboard", TaskBoard);
+    
+  } catch (error) {
+    console.error('Fehler beim Abrufen und Formatieren der Daten:', error);
+  }
+  renderBoard();
+  console.log(BackgroundTaskBoardAlt)
+}
+        
+////////TEST/////////////
+
+
 
 function uploadData(){} //upload to server -> BackupTaskBoard - TaskBoard // TO CODE
 
 function renderBoard(){ //load Task to Board/actualise while search active
-    downloadData(); //load from server, actualise Task - Array
-
-    toDoContainer();    //load task to do 
-    inProgressContainer();       //load tasks in progress 
-    awaitFeedbackContainer();    //load task awaiting feedback 
-    doneContainer();            //load tasks done 
     console.log("render_actice");
+    console.log("render_Taskboard Inhalt:", TaskBoard);
+
+    toDoContainer();    //render task to do 
+    inProgressContainer();       //render tasks in progress 
+    awaitFeedbackContainer();    //render task awaiting feedback 
+    doneContainer();            //render tasks done 
 }
  
 function overlayTask(id){   //TO DO: DISCERNMENT -> Technical Task/User Story Task!! -> OverlayTask FKT 
@@ -283,12 +346,18 @@ function searchResult(s){
 // TO CODE: Functions //////////////////////////////////////
 
 
+// EMBLEMS auf <div>SVG</div> ändern !!!!!!!!!!!
+
 // function overlayEditTask(idtask){} --> Addtask Page -> load editing Task in Form
                                     //--> Taskpopup slide in
                                     //--> Edit Task -> changed addTask as Popup, editetTask-> new task, old task -> delete
 // function upload 
 
 // function download
+
+
+// ^^ in Progress
+
 
 // function checkbox -> Wert in Array änder + checkbox 
 
@@ -319,14 +388,21 @@ function dropAt(newType){
 
 //Board render Tasks container
 
-function toDoContainer (){                  
+function toDoContainer (){              // EMBLEMS auf <div>SVG</div> ändern
+    console.log("todoContainer Active");                
     toDo.innerHTML = '';
 
     for(i=0; i<TaskBoard.length; i++){
         const toDoCard = TaskBoard[i];
 
         if (toDoCard.type == 0){
-            sumSubtask = toDoCard.subtaskSum[0]+toDoCard.subtaskSum[1];
+            amountSubTasks = toDoCard.subtask.length +1;
+            console.log("amountsubtask",amountSubTasks)
+            sumSubtask = toDoCard.subtaskSum[0];
+            if (sumSubtask === amountSubTasks) {sumSubtask = 2;}
+            else if (sumSubtask = amountSubTasks/2) {sumSubtask = 1;} 
+            else {sumSubtask = 0;}
+            
             const progressInPercent = sumSubtask * 50;  
             const progressBarId = 'cardToDoBar' + toDoCard.taskid;
 
@@ -337,6 +413,7 @@ function toDoContainer (){
                 label = UserStoryLabel;
             }     
             
+            
             let lastChar = toDoCard.description[toDoCard.description.length - 1];
             if (lastChar === "." || lastChar === "!" || lastChar === "?"){
                 console.log("foundchar:", lastChar);
@@ -345,9 +422,18 @@ function toDoContainer (){
 
             let emblems = '';                           //contact-emblems
             for (let i = 0; i < toDoCard.contactEmblem.length; i++){
-                const src = toDoCard.contactEmblem[i];
-                emblems += '<img class="card-contact-emblems-img" src=" '+src+' " alt="contact-emblem">';
+                const svg = toDoCard.contactEmblem[i];
+                emblems += `<div class="card-contact-emblems-icon">${svg}</div>`;
             }           
+
+
+            let priority = '';
+            if (toDoCard.priority === "low"){
+                priority = "/assets/svg/capa_priority_low.svg";
+            }    else if (toDoCard.priority === "medium"){
+                priority = "/assets/svg/capa_1_medium_priority.svg";
+            }   else if(toDoCard.priority === "urgent") {
+                priority = "/assets/svg/Capa_2_Burger menue_Arrow_up.svg"}
 
                 toDo.innerHTML += `
             <div class="card-body" onclick="overlayTask(${toDoCard.taskid})" ondragstart="startDragging(${toDoCard.taskid})" draggable="true">
@@ -361,7 +447,7 @@ function toDoContainer (){
             <div class="card-sum-subtask">${sumSubtask}/2 Subtasks</div></div>        
             <div id="cardParticipantsPriority" class="card-participants-priority">
             <div class="card-contact-emblems">${emblems}</div>
-            <div><img src="${toDoCard.priority[1]}" alt="priority"></div>
+            <div><img src="${priority}" alt="priority"></div>
             </div></div>
                     
             `           

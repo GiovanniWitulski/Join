@@ -65,7 +65,11 @@
     padding-left: 20px;
 }
 
-.card-contact-emblems-img{
+.card-contact-emblems-icon{
+    margin-left: -20px;
+}
+
+.card-contact-emblems-img{          /*ggf. obsolet  */
     margin-left: -20px;
 }
 
