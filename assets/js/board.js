@@ -276,10 +276,14 @@ try {
   renderBoard();
   console.log(BackgroundTaskBoardAlt)
 }
+
+// TO CODE //
         
 function uploadData(){} //upload to server -> BackupTaskBoard - TaskBoard // TO CODE
 
-function renderBoard(){ //load Task to Board/actualise while search active
+// TO CODE //
+
+function renderBoard(){ 
     console.log("render_actice");
     console.log("render_Taskboard Inhalt:", TaskBoard);
 
@@ -289,7 +293,7 @@ function renderBoard(){ //load Task to Board/actualise while search active
     doneContainer();            //render tasks done 
 }
  
-function overlayTask(id){   //TO DO: DISCERNMENT -> Technical Task/User Story Task!! -> OverlayTask FKT 
+function overlayTask(id){   
     console.log("OverlayTask active", id);
     for (i=0; i<TaskBoard.length; i++){
         const TaskId = TaskBoard[i].taskid;
@@ -397,20 +401,29 @@ function toDoContainer (){              // EMBLEMS auf <div>SVG</div> ändern
             let sumSubtask1 = 0;
             let sumSubtaskCalc = 0;    //Calculation for barchart !!!declared "0"!!! at beginning (svg -reasons)
 
-            
-             if (toDoCard.subtaskSum[0] === null && toDoCard.subtaskSum[1] === null){
-                sumSubtask = 0;
-            }   else if (toDoCard.subtaskSum[0] !== null && toDoCard.subtaskSum[1] !== null){
-                sumSubtask = toDoCard.subtaskSum[0]+toDoCard.subtaskSum[1];
-            }   else if (toDoCard.subtaskSum[0] !== null){            
-                sumSubtask = toDoCard.subtaskSum[0];
-            }
-           
-            /*
-            sumSubtask = sumSubtask0 + sumSubtask1;
-            console.log("subtasksum", sumSubtask)
-            */
+            if (toDoCard.subtaskSum[0] === null && toDoCard.subtaskSum[1] === null){
+                sumSubtask = 0; }            
+            if (toDoCard.subtaskSum[0] !== null && toDoCard.subtaskSum[1] !== null){
+                sumSubtask = toDoCard.subtaskSum[0] + toDoCard.subtaskSum[1]; }
+            if (toDoCard.subtaskSum[0] !== null){            
+                sumSubtask = toDoCard.subtaskSum[0]; }
+            if (toDoCard.subtaskSum[0] === undefined){            
+                sumSubtask = 0; console.log;}
 
+            
+            /*
+            if (toDoCard.subtaskSum[0] === null && toDoCard.subtaskSum[1] === null){
+                sumSubtask = 0; 
+            }   else if (toDoCard.subtaskSum[0] !== null){            
+                sumSubtask = toDoCard.subtaskSum[0]; 
+            }   else if (toDoCard.subtaskSum[0] !== null && toDoCard.subtaskSum[1] !== null){
+                sumSubtask = toDoCard.subtaskSum[0]+toDoCard.subtaskSum[1]; 
+            }   else if (toDoCard.subtaskSum[0] === null){            
+                sumSubtask = 0; 
+            }
+ 
+            */
+          
             if (sumSubtask/amountSubTasks === 1){
                 sumSubtaskCalc = 2;
             } else if (sumSubtask/amountSubTasks === 0.5){
