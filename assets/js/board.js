@@ -218,9 +218,8 @@ console.log ("TaskBoard:", TaskBoard);
 
 
 
-//functions general
+////////////functions general///////////
 
-////////TEST//////////////////
 
 // Funktion zum Abrufen der Daten und Speichern in BackgroundTaskBoard
 async function downloadData() {
@@ -278,10 +277,6 @@ try {
   console.log(BackgroundTaskBoardAlt)
 }
         
-////////TEST/////////////
-
-
-
 function uploadData(){} //upload to server -> BackupTaskBoard - TaskBoard // TO CODE
 
 function renderBoard(){ //load Task to Board/actualise while search active
@@ -396,23 +391,43 @@ function toDoContainer (){              // EMBLEMS auf <div>SVG</div> ändern
         const toDoCard = TaskBoard[i];
 
         if (toDoCard.type == 0){
-            amountSubTasks = toDoCard.subtask.length +1;
-            console.log("amountsubtask",amountSubTasks)
-            sumSubtask = toDoCard.subtaskSum[0];
-            if (sumSubtask === amountSubTasks) {sumSubtask = 2;}
-            else if (sumSubtask = amountSubTasks/2) {sumSubtask = 1;} 
-            else {sumSubtask = 0;}
+            let amountSubTasks = toDoCard.subtask.length; //amount substasks
+            let sumSubtask = 0;                            //amount solved subtasks
+            let sumSubtask0 = 0;
+            let sumSubtask1 = 0;
+            let sumSubtaskCalc = 0;    //Calculation for barchart !!!declared "0"!!! at beginning (svg -reasons)
+
             
-            const progressInPercent = sumSubtask * 50;  
+             if (toDoCard.subtaskSum[0] === null && toDoCard.subtaskSum[1] === null){
+                sumSubtask = 0;
+            }   else if (toDoCard.subtaskSum[0] !== null && toDoCard.subtaskSum[1] !== null){
+                sumSubtask = toDoCard.subtaskSum[0]+toDoCard.subtaskSum[1];
+            }   else if (toDoCard.subtaskSum[0] !== null){            
+                sumSubtask = toDoCard.subtaskSum[0];
+            }
+           
+            /*
+            sumSubtask = sumSubtask0 + sumSubtask1;
+            console.log("subtasksum", sumSubtask)
+            */
+
+            if (sumSubtask/amountSubTasks === 1){
+                sumSubtaskCalc = 2;
+            } else if (sumSubtask/amountSubTasks === 0.5){
+                sumSubtaskCalc = 1;
+            } else if (sumSubtask/amountSubTasks === 0){
+                sumSubtaskCalc = 0;
+            } 
+            const progressInPercent = sumSubtaskCalc * 50;  
             const progressBarId = 'cardToDoBar' + toDoCard.taskid;
+
 
             let label;
             if(toDoCard.label == 0){
                 label = TechnicalTaskLabel;
             } else {
                 label = UserStoryLabel;
-            }     
-            
+            }                 
             
             let lastChar = toDoCard.description[toDoCard.description.length - 1];
             if (lastChar === "." || lastChar === "!" || lastChar === "?"){
@@ -435,6 +450,7 @@ function toDoContainer (){              // EMBLEMS auf <div>SVG</div> ändern
             }   else if(toDoCard.priority === "urgent") {
                 priority = "/assets/svg/Capa_2_Burger menue_Arrow_up.svg"}
 
+
                 toDo.innerHTML += `
             <div class="card-body" onclick="overlayTask(${toDoCard.taskid})" ondragstart="startDragging(${toDoCard.taskid})" draggable="true">
             <div id="cardHeader" class="card-header">${label}</div>
@@ -444,7 +460,7 @@ function toDoContainer (){              // EMBLEMS auf <div>SVG</div> ändern
             <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
             <rect id="cardToDoBar${toDoCard.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
-            <div class="card-sum-subtask">${sumSubtask}/2 Subtasks</div></div>        
+            <div class="card-sum-subtask">${sumSubtask}/${amountSubTasks} Subtasks</div></div>        
             <div id="cardParticipantsPriority" class="card-participants-priority">
             <div class="card-contact-emblems">${emblems}</div>
             <div><img src="${priority}" alt="priority"></div>
