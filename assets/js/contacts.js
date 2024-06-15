@@ -66,7 +66,12 @@ function generateHTMLcodeForContacts(contact, j){
 async function refreshContactToLoad(id, path) {
     contactToDisplay = id;
     await putData(path,id)
-    window.location.href = "/assets/templates/contact_details.html";
+    if (window.innerWidth >= 800){
+        loadCurrentContactId();
+    }else{
+         window.location.href = "/assets/templates/contact_details.html";
+    }
+   
 }
 
 
@@ -80,6 +85,9 @@ document.addEventListener('DOMContentLoaded', loadContacts('contacts'));
 
 
 function hideTheFormular(elementToHide){
+    document.getElementById('contact-name').value = ``;
+    document.getElementById('contact-mail').value = ``;
+    document.getElementById('contact-phone').value = ``;
     document.getElementById(elementToHide).classList.remove('show');
     document.getElementById('overlayVeilAddContact').classList.add('none');
 }

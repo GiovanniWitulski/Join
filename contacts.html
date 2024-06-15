@@ -20,6 +20,34 @@
     <div id="mobileTamplateContent" w3-include-html="/assets/templates/mobile_template.html"></div>
     <div class="page-content">
     <div id="contact-div"></div>
+    <div id="contact-details-desktop">
+        <div id="page-content-div">
+            <div class="top-container-desktop">
+                <div class="headline-div-desktop"><p class="contacts-headline">Contacts</p><img class="contacts-divider" src="/assets/svg/underline_blue.svg"><p class="contacts-subheadline">Better with a team</p></div>
+                <a href="/contacts.html" class="back-btn"></a>
+            </div>
+            <div class="middle-container-desktop">
+                
+                <div class="name-div"><img class="name-pic" ><p  class="name-headline">Tatjana Wolf</p></div> 
+                 <div class="bottom-container-desktop">
+                    <button class="edit-btn"></button>
+                    <button class="del-btn"></button>
+            </div>
+                <p class="contact-info-desktop">Contact Information</p>
+                <div>
+                    <p class="category-headline">Email</p>
+                    <p class="email">wolf@gmail.com</p>
+                    <p class="category-headline">Phone</p>
+                    <p class="phone">+49 2222 222 22 2</p>
+                </div>
+                
+                
+            </div>
+          
+        </div>
+
+
+    </div>
     <button onclick="showAddContact()" class="add-contact-btn"></button>
 
     <div id="overlay-container" class="overlay-container">
@@ -41,7 +69,7 @@
                 <input id="contact-mail" type="email" required placeholder="Email">
                 <input id="contact-phone" type="tel" required placeholder="Phone">
                 <div class="addContact-btn-div">
-                    <button type="button" class="cancel-addContact-btn">Cancel</button>
+                    <button onclick="hideTheFormular('overlay-container')" type="button" class="cancel-addContact-btn">Cancel</button>
                     <button type="submit" class="create-contact-btn">Create contact <img src="/assets/svg/check.svg"></button>
                     
                 </div>
@@ -50,7 +78,7 @@
         </div>
         </div>
     </div>
-
+    
 </div>
     <div id="overlayVeilAddContact" class="overlayVeilAddContact none"></div>
     

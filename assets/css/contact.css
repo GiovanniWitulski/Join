@@ -106,6 +106,131 @@ color: white;
     transition: all 150ms ease-in-out;
 }
 
+.contacts-divider{
+    transform: rotate(90deg);
+}
+
+.contacts-headline{
+    font-size: 61px ;
+    
+font-family: Inter;
+font-size: 61px;
+font-weight: 700;
+line-height: 73.2px;
+text-align: left;
+
+}
+
+.contacts-subheadline{
+
+    font-size: 27px;
+   
+font-family: Inter;
+font-size: 27px;
+font-weight: 400;
+line-height: 32.4px;
+text-align: left;
+
+}
+
+.contacts-divider{
+    width: 58px;
+    height: 3px;
+}
+
+.name-headline{
+
+ 
+font-family: Inter;
+font-size: 47px;
+font-weight: 500;
+line-height: 56.4px;
+text-align: left;
+
+}
+
+.contact-info-desktop{
+
+ 
+font-family: Inter;
+font-size: 20px;
+font-weight: 400;
+line-height: 24px;
+text-align: left;
+height: 74px;
+display: flex;
+align-items: center;
+padding-bottom: 21px;
+
+}
+
+.category-headline{
+    font-family: Inter;
+font-size: 16px;
+font-weight: 700;
+line-height: 19.2px;
+text-align: left;
+padding-bottom: 15px;
+
+}
+
+.email{
+   
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    text-align: left;
+    color: #007CEE;
+    padding-bottom: 22px;
+    
+}
+
+.name-pic{
+    width: 80px;
+    height: 80px;
+}
+
+.name-div{
+    display: flex;
+    align-items: center;
+    gap: 54px;
+}
+
+.edit-btn{
+    background-image: url("/assets/svg/edit\ contacts\ m.svg");
+    width: 96px;
+    height: 40px;
+    padding: 8px;
+    border: unset;
+    background-color: transparent;
+}
+
+.del-btn{
+    background-image: url("/assets/svg/Delete\ contact\ m.svg");
+    width: 96px;
+    height: 40px;
+    padding: 8px;
+    border: unset;
+    background-color: transparent;
+
+}
+
+#page-content-div{
+    padding-left: 62px;
+}
+
+
+.top-container-desktop{
+
+    padding-bottom: 32px;
+}
+
+
+.bottom-container-desktop{
+
+    padding-left: 134px;
+}
 @media(max-width: 370px){
     .singleContact p{
         font-size: 12px;
@@ -121,8 +246,13 @@ color: white;
         left: 232px;
         height: calc(100vh - 80px);
         width: calc(100% - 232px);
+display: flex;
 
+    }
 
+    .headline-div-desktop{
+        display: flex;
+        align-items: center;
     }
 
     #contact-div{
