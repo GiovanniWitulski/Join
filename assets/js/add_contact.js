@@ -50,14 +50,33 @@ async function getTheInformation(event){
     contactColor = await getAColor();
     await getDataForPostContact('contacts/'); 
     await confirmContactCreation();
-    await refreshContactToLoad(contactsAsJson.length, 'currentContact');   
+    await checkIfDesktop();
     
 }
 
 
+async function checkIfDesktop(){
+   
+    if(window.innerWidth < 800){
+            await refreshContactToLoad(contactsAsJson.length, 'currentContact');   
+    }else{
+
+        hideTheFormular('overlay-container');
+        loadContacts();
+    }
+        
+    
+        
+    }
+    
+
+
 async function confirmContactCreation(){
 
-    localStorage.setItem('contactWasCreated', 'true');
+    if(window.innerWidth < 800){
+        localStorage.setItem('contactWasCreated', 'true'); 
+    }
+   
 }
 
 

@@ -67,13 +67,19 @@ async function refreshContactToLoad(id, path) {
     contactToDisplay = id;
     await putData(path,id)
     if (window.innerWidth >= 800){
-        loadCurrentContactId();
+        loadCurrentContactId('desktop');
+        showContactDetails();
     }else{
          window.location.href = "/assets/templates/contact_details.html";
     }
    
 }
 
+
+function showContactDetails(){
+    
+    document.getElementById('middle-container-desktop').classList.add('show');
+}
 
 function showAddContact(){
     document.getElementById('overlay-container').classList.add('show');
@@ -90,6 +96,21 @@ function hideTheFormular(elementToHide){
     document.getElementById('contact-phone').value = ``;
     document.getElementById(elementToHide).classList.remove('show');
     document.getElementById('overlayVeilAddContact').classList.add('none');
+}
+
+
+async function fillEditContactFormDesktop(id){
+    idToFind = id;
+   // indexToFill = contactsAsJson.findIndex(contact => contact.id === idToFind);
+    currentContact = contactsAsJson[idToFind];
+    document.getElementById('contact-name-desktop').value = `${currentContact['vorname']} ${currentContact['name']}`;
+    document.getElementById('contact-mail-desktop').value = `${currentContact['mail']}`;
+    document.getElementById('contact-phone-desktop').value = `${currentContact['mobile']}`;
+    document.getElementById('closeEditContactButton-desktop').outerHTML = `<button id="closeEditContactButton" class="close-btn" onclick="hideEditOverlay()"></button>`
+    document.getElementById('save-edits-btn-desktop').setAttribute('onclick',`saveEditsToContact('${currentContact['id']}')`);
+    document.getElementById('delete-contact-btn-desktop').setAttribute('onclick',`deleteContact(${id})`);
+    showEditOverlay();
+    document.getElementById('editContactPic-desktop').outerHTML = await drawContactEditPic(currentContact);
 }
 
 

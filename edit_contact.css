@@ -220,6 +220,9 @@ background-color:#29ABE2;
     transition: all 100ms ease-in-out;
 }
 
+
+
+
 @media(max-width: 400px){
 
     .overlay-container{

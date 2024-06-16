@@ -198,12 +198,19 @@ padding-bottom: 15px;
 }
 
 .edit-btn{
-    background-image: url("/assets/svg/edit\ contacts\ m.svg");
+    background-image: url("/assets/svg/edit_black_font.svg");
     width: 96px;
     height: 40px;
     padding: 8px;
     border: unset;
     background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.edit-btn:hover{
+    background-image: url("/assets/svg/edit_blue_font.svg");
+   
 }
 
 .del-btn{
@@ -213,7 +220,13 @@ padding-bottom: 15px;
     padding: 8px;
     border: unset;
     background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
 
+}
+
+.del-btn:hover{
+    background-image: url("/assets/svg/delete_blue_font.svg");
 }
 
 #page-content-div{
@@ -231,6 +244,24 @@ padding-bottom: 15px;
 
     padding-left: 134px;
 }
+
+.middle-container-desktop{
+
+     transform: translateX(100vw); 
+    transition: all 120ms ease-in-out;
+}
+
+.show{
+
+    transform: translateX(0);
+    transition: all 120ms ease-in-out;
+}
+
+.fade{
+    opacity: 0;
+}
+
+
 @media(max-width: 370px){
     .singleContact p{
         font-size: 12px;

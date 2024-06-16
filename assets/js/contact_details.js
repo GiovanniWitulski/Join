@@ -21,7 +21,12 @@
 async function loadCurrentContactId(){
     let userId = await loadData('currentContact');
     console.log(userId);
-   await loadSingleContact(userId)
+    if(window.innerWidth >= 800){
+        await loadSingleContactDesktop(userId);
+    }else{
+        await loadSingleContact(userId);
+    }
+   
 }
 
 
@@ -40,6 +45,23 @@ let user;
     document.getElementsByClassName('del-btn')[0].outerHTML = `<button class="del-btn" onclick="deleteContact(${id})"></button>`
     document.getElementsByClassName('edit-btn')[0].outerHTML = `<button class="edit-btn" onclick="fillEditContactForm(${id})"></button>`
 }
+
+
+async function loadSingleContactDesktop(id){
+    let user;
+        for (let i = 0; i < contactsAsJson.length; i++) {
+            const element = contactsAsJson[i];
+            if (i == id){
+                user = element;
+            }
+        }
+        document.getElementsByClassName('name-headline')[0].innerHTML = `${user['vorname']} ${user['name']}`;
+        document.getElementsByClassName('email')[0].innerHTML = `${user['mail']}`;
+        document.getElementsByClassName('phone')[0].innerHTML = `${user['mobile']}`;
+        document.getElementsByClassName('name-pic')[0].outerHTML = drawContactDetailPic(user);
+        document.getElementsByClassName('del-btn')[0].outerHTML = `<button class="del-btn" onclick="deleteContact(${id})"></button>`
+        document.getElementsByClassName('edit-btn')[0].outerHTML = `<button class="edit-btn" onclick="fillEditContactFormDesktop(${id})"></button>`
+    }
 
 
 async function deleteContact(id){
@@ -62,6 +84,12 @@ async function drawContactEditPic(user){
 }
 
 
+async function drawContactEditPicDesktop(user){
+    return `<svg id="editContactPic-desktop" class="contact-pic" width="62px" height="62px"><circle class="circle" cx="60" cy="60" r="58" stroke="white" stroke-width="2" fill="${user['color']}" />
+    <text class="circle-text" x="20%" y="60%" fill="white" font-size="47px">${user['vorname'].charAt(0)}${user['name'].charAt(0)}</text></svg>`;
+}
+
+
  async function fillEditContactForm(id){
     idToFind = id;
    // indexToFill = contactsAsJson.findIndex(contact => contact.id === idToFind);
@@ -77,6 +105,21 @@ async function drawContactEditPic(user){
 }
 
 
+async function fillEditContactFormDesktop(id){
+    idToFind = id;
+   // indexToFill = contactsAsJson.findIndex(contact => contact.id === idToFind);
+    currentContact = contactsAsJson[idToFind];
+    document.getElementById('contact-name-desktop').value = `${currentContact['vorname']} ${currentContact['name']}`;
+    document.getElementById('contact-mail-desktop').value = `${currentContact['mail']}`;
+    document.getElementById('contact-phone-desktop').value = `${currentContact['mobile']}`;
+    document.getElementById('closeEditContactButton').outerHTML = `<button id="closeEditContactButton" class="close-btn" onclick="hideEditOverlayDesktop()"></button>`
+    document.getElementById('save-edits-btn-desktop').setAttribute('onclick',`saveEditsToContact('${currentContact['id']}')`);
+    document.getElementById('delete-contact-btn-desktop').setAttribute('onclick',`deleteContact(${id})`);
+    showEditOverlayDesktop();
+    document.getElementById('editContactPic-desktop').outerHTML = await drawContactEditPicDesktop(currentContact);
+}
+
+
 function showEditOverlay(){
     document.getElementById('overlayVeil').classList.remove('displayNone');
     document.getElementById('overlay-editContact').classList.add('showEditContact');
@@ -89,10 +132,33 @@ function hideEditOverlay(){
 }
 
 
+function showEditOverlayDesktop(){
+    document.getElementById('edit-contact-container').classList.add('show');
+    document.getElementById('overlayVeilAddContact').classList.remove('none');
+}
+
+
+function hideEditOverlayDesktop(){
+    document.getElementById('edit-contact-container').classList.remove('show');
+    document.getElementById('overlayVeilAddContact').classList.add('none');
+}
+
+
+async function getTheEditedData(element){
+
+    if(window.innerWidth >= 800){
+        return document.getElementById(`${element}-desktop`).value;
+    
+    }else{
+        return document.getElementById(element).value;
+    }
+}
+
+
 async function saveEditsToContact(token){
-     let editedName = document.getElementById('contact-name').value;
-     let editedMail = document.getElementById('contact-mail').value;
-     let editedPhone = document.getElementById('contact-phone').value;
+     let editedName = await getTheEditedData('contact-name');
+     let editedMail = await getTheEditedData('contact-mail');
+     let editedPhone = await getTheEditedData('contact-phone');
      let words = editedName.split(" ");
      let surname = words[0];
      let lastName = words[1];
@@ -113,7 +179,30 @@ async function saveEditsToContact(token){
      "id": contactToUpdate['id'],
      "color": contactToUpdate['color']}
     await putData(`contacts/${token}/`, data);
-    document.getElementById('edit-contact-form').submit();
+    await submitForm(indexOfCurrentContact);
+  
+}
+
+async function submitForm(){
+    if(window.innerWidth < 800){
+         document.getElementById('edit-contact-form').submit();
+    }else{
+       
+     await blendItOut(); 
+     loadContacts();
+     await loadCurrentContactId();
+       
+       
+        
+    }
+     
+}
+
+async function blendItOut(){
+    document.getElementById('edit-contact-container').classList.add('fade');
+    document.getElementById('overlayVeilAddContact').classList.add('none');
+    document.getElementById('edit-contact-container').classList.remove('show');
+    document.getElementById('edit-contact-container').classList.remove('fade');
 }
 
 
