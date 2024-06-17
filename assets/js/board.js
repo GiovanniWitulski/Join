@@ -100,7 +100,7 @@ let BackgroundTaskBoard = [
 
 let TaskBoard = []
 
-  let BackgroundTaskBoardAlt= [   
+let BackgroundTaskBoardAlt= [   
     {
         "label": [0],
         "title": "Technical Task Example",
@@ -194,14 +194,13 @@ let TaskBoard = []
     },
 
 
-];                                      // -> mit responseToJson befüllen       
+];                                             
 
 let BackgroundTaskBoard = [] // Test, backup siehe drüber
 
 
 //global variables & Elementtargets
 const databaseURL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app';
-
 
 let currentDraggedTask;
 const TechnicalTaskLabel = '<img src="/assets/svg/Labels_Board_card_label_tourquise_Technical_Task.svg" alt="">'
@@ -216,12 +215,9 @@ let Overlay = document.getElementById('overlayContainer');
 
 console.log ("TaskBoard:", TaskBoard);
 
+////////////Main Start Functions///////////
 
 
-////////////functions general///////////
-
-
-// Funktion zum Abrufen der Daten und Speichern in BackgroundTaskBoard
 async function downloadData() {
 
 BackgroundTaskBoard = [];
@@ -277,12 +273,6 @@ try {
   console.log(BackgroundTaskBoardAlt)
 }
 
-// TO CODE //
-        
-function uploadData(){} //upload to server -> BackupTaskBoard - TaskBoard // TO CODE
-
-// TO CODE //
-
 function renderBoard(){ 
     console.log("render_actice");
     console.log("render_Taskboard Inhalt:", TaskBoard);
@@ -292,9 +282,8 @@ function renderBoard(){
     awaitFeedbackContainer();    //render task awaiting feedback 
     doneContainer();            //render tasks done 
 }
- 
+
 function overlayTask(id){   
-    console.log("OverlayTask active", id);
     for (i=0; i<TaskBoard.length; i++){
         const TaskId = TaskBoard[i].taskid;
         if (TaskId == id){
@@ -304,7 +293,15 @@ function overlayTask(id){
 
 }
 
-//Search functions 
+// TO CODE //
+        
+function uploadData(){} //upload to server -> BackupTaskBoard - TaskBoard // TO CODE
+
+// TO CODE //
+
+ 
+
+//Search functions  /////////////////////////////////////////
 
 function findTask(event){
     console.log("findTaskStarted");
@@ -345,7 +342,6 @@ function searchResult(s){
 // TO CODE: Functions //////////////////////////////////////
 
 
-// EMBLEMS auf <div>SVG</div> ändern !!!!!!!!!!!
 
 // function overlayEditTask(idtask){} --> Addtask Page -> load editing Task in Form
                                     //--> Taskpopup slide in
@@ -355,16 +351,10 @@ function searchResult(s){
 // function download
 
 
-// ^^ in Progress
-
-
-// function checkbox -> Wert in Array änder + checkbox 
-
-
 /////////////////////////////////////////////////////////////
 
 
-// drag & drop functions 
+// drag & drop functions  //////////////7
 function startDragging(id){
     currentDraggedTask = id;
 }
@@ -385,7 +375,7 @@ function dropAt(newType){
 }
 
 
-//Board render Tasks container
+// Board render Tasks container /////////////////
 
 function toDoContainer (){             
     console.log("todoContainer Active");                
@@ -427,7 +417,7 @@ function toDoContainer (){
 
 
             let label;                              //Labeldiscernment
-            if(toDoCard.label == 0){
+            if(toDoCard.label === 1){
                 label = TechnicalTaskLabel;
             } else {
                 label = UserStoryLabel;
@@ -520,7 +510,7 @@ function inProgressContainer (){
 
 
         let label;
-          if(inProgressCard.label == 0){
+          if(inProgressCard.label == 1){
               label = TechnicalTaskLabel;
           } else {
               label = UserStoryLabel;
@@ -617,7 +607,7 @@ function awaitFeedbackContainer(){
   
   
           let label;                              //Labeldiscernment
-          if(awaitFeedbackCard.label == 0){
+          if(awaitFeedbackCard.label == 1){
               label = TechnicalTaskLabel;
           } else {
               label = UserStoryLabel;
@@ -713,7 +703,7 @@ function doneContainer(){
   
   
             let label;                              //Labeldiscernment
-            if(doneCard.label == 0){
+            if(doneCard.label == 1){
                 label = TechnicalTaskLabel;
             } else {
                 label = UserStoryLabel;
@@ -774,13 +764,25 @@ function doneContainer(){
 function OverlayTaskPopup(i){   // TO CODE/CONNECT: EditTaskFkt, DeleteTaskFKT
        
         const OverlayTask = TaskBoard[i];
+
+
+        let emblem = '';
         let overlayContacts = '';
          for (let c = 0; c < OverlayTask.contactEmblem.length; c++){
-            const src = OverlayTask.contactEmblem[c];
             const contactName = OverlayTask.assignedTo[c];
-            
-            overlayContacts += '<div class="overlay-assigned-to-contacts"><img class="overlay-contact-emblems-img" src=" '+src+' " alt="contact-emblem"><div class="overlay-contact-name">'+contactName+'</div></div>';
-        }           
+            const src = OverlayTask.contactEmblem[c];
+            emblem = src;            
+            overlayContacts += '<div class="overlay-assigned-to-contacts">'+emblem+'<div class="overlay-contact-name">'+contactName+'</div></div>';
+        }         
+        
+        let priority = '';
+        if (OverlayTask.priority === "low"){
+            priority = "/assets/svg/capa_priority_low.svg";
+        }    else if (OverlayTask.priority === "medium"){
+            priority = "/assets/svg/capa_1_medium_priority.svg";
+        }   else if(OverlayTask.priority === "urgent") {
+            priority = "/assets/svg/Capa_2_Burger menue_Arrow_up.svg"}
+
 
         const checkmark0 = OverlayTask.subtaskSum[0];
         const checkmark1 = OverlayTask.subtaskSum[1];
@@ -790,7 +792,7 @@ function OverlayTaskPopup(i){   // TO CODE/CONNECT: EditTaskFkt, DeleteTaskFKT
         if (checkmark1 == 0){check1 = nocheck;} else {check1 = check;}
         
         let label;
-        if(OverlayTask.label == 0){
+        if(OverlayTask.label == 1){
             label = TechnicalTaskLabel;
         } else {
             label = UserStoryLabel;
@@ -804,7 +806,7 @@ function OverlayTaskPopup(i){   // TO CODE/CONNECT: EditTaskFkt, DeleteTaskFKT
         <div id="overlayDescription" class="overlay-card-description">${OverlayTask.description}</div>
         <div id="overlaydueDate" class="overlay-card-due-date"><div id="overlayDueDate">Due date:</div><div class="overlay-due-date">${OverlayTask.date}</div></div>
         <div id="overlaypriority" class="overlay-card-priority"><div id="overlayPriorityText" class="overlay-card-priority-text">
-        Priority</div><div class="overlay-card-priority-text-img">${OverlayTask.priority[0]}<img src="${OverlayTask.priority[1]}" alt="priority"></div>
+        Priority</div><div class="overlay-card-priority-text-img"><img src="${priority}" alt="priority">${OverlayTask.priority}</div>
         </div>
         <div id="overlayAssignedTo" class="overlay-assigned-to">
         <div id="overlayAssignedToText" class="overlay-assigned-to-text">Assigned to:</div><div id="overlayParticipants" class="overlay-participants">${overlayContacts}</div>  
@@ -820,7 +822,8 @@ function OverlayTaskPopup(i){   // TO CODE/CONNECT: EditTaskFkt, DeleteTaskFKT
         </div>
 
         `
-        if (OverlayTask.label == 1){
+        if (OverlayTask.label === 1){
+            console.log("labelcheck_Bold700active");
             document.getElementById('overlayDueDate').style.cssText = 'font-weight: 700; color: #42526E;';
             document.getElementById('overlayAssignedToText').style.cssText = 'font-weight: 700; color: #42526E;';
             document.getElementById('overlayPriorityText').style.cssText = 'font-weight: 700; color: #42526E;';
