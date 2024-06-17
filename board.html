@@ -3,20 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/assets/css/fonts.css">
-    <link rel="stylesheet" href="assets/css/board.css">
+
     <title>Board</title>
     <script src="/script.js"></script>
     <script src="/assets/js/w3_include.js"></script>
     <script src="/assets/js/board.js" defer></script> 
+    <script src="/assets/js/add_task.js"></script>
+    <script src="/assets/js/contacts.js"></script>
+    <script src="/assets/js/remoteStorage.js"></script>
 
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/assets/css/board.css">
     <link rel="stylesheet" href="/assets/css/card.css">
+    <link rel="stylesheet" href="/assets/css/fonts.css">
+    <link rel="stylesheet" href="/assets/css/add_task.css">
+
+
 </head>
     
-<body onload="includeHTML(), downloadData()">
+<body onload="includeHTML(), downloadData(), loadContacts('contacts'), changeToActive('medium-btn')">
     <div id="mobileTamplateContent" w3-include-html="/assets/templates/mobile_template.html"></div>
     <div id="Board" class="render_board_mobile">
         <div id="overlayContainer"></div>

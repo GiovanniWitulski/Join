@@ -87,7 +87,7 @@
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: 100vh;
+    height: 100%;
 }
 
 .overlay-task {
@@ -216,8 +216,6 @@
     padding-right: 16px;
 }
 
-
-
 .overlay-card-checklist{
     padding-bottom: 16px;
 }
@@ -256,11 +254,79 @@
 }
 
 
+/* EDIT TASK */
+
+.close-edit{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.board-edit-task{
+    max-width: 396px;
+    height: fit-content;
+    max-height: 724px;
+    z-index: 3;
+    background-color: #FFFFFF;
+    border-radius: 30px;
+    position: fixed;
+    top: 20px;
+    bottom: 20px;
+    left: 16px;
+    right: 16px;
+    padding: 32px 24px 32px 24px;
+    margin: 0 auto;
+}
+
+.edit-button-box{
+    display: flex;
+    width: 100%;
+    max-width: 428px;
+    height: 88px;
+    justify-content: end;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.edit-button{
+    width: 100%;
+    max-width: 70px;
+    height: 56px;
+    border-radius: 10px;
+    padding: 8px;
+    font-size: 21px;
+    line-height: 25.2px;
+    font-weight: 700;
+    background-color: #2A3647;
+    color: white;
+    background-image: url(/assets/svg/check.svg);
+    background-repeat: no-repeat;
+    background-position: calc(100% - 2px);
+    background-size: 24px 24px;
+    box-sizing: border-box;
+    text-align: start;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.prio-div-card{
+    height: 88px;
+}
+
+.description-card-edit{
+    padding-bottom: 8px;
+}
+
+.subtask-card-edit{
+
+}
 /* Potential - Classes */
 
 .hidden {
     display: none;
 }
+
 
 
 

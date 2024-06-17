@@ -814,7 +814,7 @@ function OverlayTaskPopup(i){   // TO CODE/CONNECT: EditTaskFkt
         <div id="overlaySubtask1" class="overlay-subtask"><img class="overlay-checkbox-img" onclick="toggleCheckboxValue(${OverlayTask.taskid}, 1, ${i})"  src=${check1}> ${OverlayTask.subtask[1]}</div></div>
         </div>
         <div class="overlay-card-delete-edit">
-        <div onclick="overlayDeleteTask(${OverlayTask.taskid}, ${i})" class="overlay-cde"><img class="overlay-cde-img1" src="/assets/svg/delete.svg" alt="delete">Delete</div><div onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="overlay-cde"><img class="overlay-cde-img2" src="/assets/svg/edit.svg" alt="Edit">Edit</div>
+        <div onclick="overlayDeleteTask(${OverlayTask.taskid}, ${i})" class="overlay-cde"><img class="overlay-cde-img1" src="/assets/svg/delete.svg" alt="delete">Delete</div><div onclick="editTaskOverlay(${OverlayTask.taskid}, ${i})" class="overlay-cde"><img class="overlay-cde-img2" src="/assets/svg/edit.svg" alt="Edit">Edit</div>
         </div>
         </div>
         </div>
@@ -882,6 +882,82 @@ function overlayDeleteTask(idTask, i){          //TO CODE: update to server! -> 
 
 // Edit Task function //*css*/`
     
-function editTask(idTask, i){
+function editTaskOverlay(idTask, i){
+    Overlay.innerHTML = '';
+    Overlay.innerHTML = `
+    <div class="board-edit-task">
+    <div class="close-edit"><img onclick="closeOverlay(${idTask}, ${i})" src="/assets/svg/close_black.svg" alt="close"></div>
+    <div class="content-container">
+        <form id="addTaskForm" onsubmit="getTheDataForPostTask(event)">
+            <div class="titleDiv">
+              <div class="subheadlineDiv"><p class="subheadline">Title <p class="marker">*</p></p></div>  
+                <input id="title-input" type="text" required placeholder="Enter a title">
+                <p class="alert-text none">This field is required</p>
+            </div>
 
+            <div class="description-card-edit">
+                <p class="subheadline">Description</p>
+                <textarea id="descriptionInput" type="text" placeholder="Enter a Description"></textarea>
+            </div>
+            
+            <div class="dateDiv">
+                <div class="subheadlineDiv"><p class="subheadline">Due date <p class="marker">*</p></p></div>
+                    <input id="datePicker" type="date">
+                    <p class="alert-text none">This field is required</p>
+            </div>
+
+
+            <div class="prio-div-card">
+                <p class="subheadline">Prio</p>
+                <div class="buttonDiv">
+                    <button type="button" id="urgent-btn" class="urgent-btn" onclick="changeToActive('urgent-btn')"><p class="prioLabel">Urgent</p></button>
+                    <button type="button" id="medium-btn" class="medium-btn" onclick="changeToActive('medium-btn')"><p class="prioLabel">Medium</p></button>
+                    <button type="button" id="low-btn" class="low-btn" onclick="changeToActive('low-btn')"><p class="prioLabel">Low</p></button>
+                </div>
+            </div>
+
+            <div class="assignedDiv">
+                <p class="subheadline">Assigned to</p>
+                <div class="select-wrapper"><input placeholder="Select contacts to assign" type="text" onclick="renderAssignSelector(), showContactsToAssign()" id="contact-selector" class="selector"></input> 
+                
+                  <button id="dropdown-btn" onclick="hideContactsToAssign(this)" class="dropdown-btn"></button>
+                </div>           
+          
+                <div id="optionContainer" class="optionContainer none"></div>
+                <div id="assignedContactPics" class="assignedContactPics"></div>
+            </div>
+
+            <div class="subtask-card-edit">
+                <p class="subheadline">Subtasks</p>
+                <div id="subtask-wrapper" class="subtask-wrapper">
+                    <input onclick="changeButtons()" id="subtask-input" type="text" placeholder="Add new subtask">
+                    <div id="subtask-buttons" class="subtask-btn-div none">
+                       <button onclick="cancelSubtask()" class="cancel-btn"></button> 
+                       <div class="btn-divider"></div>
+                       <button onclick="addToSubtasks()" class="correct-btn"></button>   
+                    </div>
+                    <div id="subtask-plus-button-div" class="subtask-plus-btn-div">
+                        <button class="plus-btn"></button>
+                    </div>
+                    
+                </div>
+                <div class="subtask-div">
+                    <ul id="list-of-subtasks"> 
+                    </ul>
+                   
+                </div>
+            </div>
+
+            <div class="edit-button-box">
+                <button type="submit" class="edit-button">OK</button>
+            </div>
+
+            
+        </form>
+        
+        
+       
+    </div>
+    </div>
+    `
 }
