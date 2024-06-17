@@ -348,7 +348,6 @@ function searchResult(s){
                                     //--> Edit Task -> changed addTask as Popup, editetTask-> new task, old task -> delete
 // function upload 
 
-// function download
 
 
 /////////////////////////////////////////////////////////////
@@ -378,7 +377,6 @@ function dropAt(newType){
 // Board render Tasks container /////////////////
 
 function toDoContainer (){             
-    console.log("todoContainer Active");                
     toDo.innerHTML = '';
 
     for(i=0; i<TaskBoard.length; i++){
@@ -761,7 +759,7 @@ function doneContainer(){
 // OVERLAY TASK / POPUP ///////////////////////
 
 
-function OverlayTaskPopup(i){   // TO CODE/CONNECT: EditTaskFkt, DeleteTaskFKT
+function OverlayTaskPopup(i){   // TO CODE/CONNECT: EditTaskFkt
        
         const OverlayTask = TaskBoard[i];
 
@@ -812,8 +810,8 @@ function OverlayTaskPopup(i){   // TO CODE/CONNECT: EditTaskFkt, DeleteTaskFKT
         <div id="overlayAssignedToText" class="overlay-assigned-to-text">Assigned to:</div><div id="overlayParticipants" class="overlay-participants">${overlayContacts}</div>  
         </div>
         <div class="overlay-card-subtasks">
-        <div id="overlaySubstasksText" class="overlay-substasks-text">Subtasks:</div><div class="overlay-checkbox"><div class="overlay-substask"><img class="overlay-checkbox-img" onclick="toggleCheckboxValue(${OverlayTask.taskid}, 0, ${i})"  src=${check0}> ${OverlayTask.subtask[0]}</div>
-        <div class="overlay-substask"><img class="overlay-checkbox-img" onclick="toggleCheckboxValue(${OverlayTask.taskid}, 1, ${i})"  src=${check1}> ${OverlayTask.subtask[1]}</div></div>
+        <div id="overlaySubstasksText" class="overlay-substasks-text">Subtasks:</div><div class="overlay-checkbox"><div id="overlaySubtask0" class="overlay-subtask"><img class="overlay-checkbox-img" onclick="toggleCheckboxValue(${OverlayTask.taskid}, 0, ${i})"  src=${check0}> ${OverlayTask.subtask[0]}</div>
+        <div id="overlaySubtask1" class="overlay-subtask"><img class="overlay-checkbox-img" onclick="toggleCheckboxValue(${OverlayTask.taskid}, 1, ${i})"  src=${check1}> ${OverlayTask.subtask[1]}</div></div>
         </div>
         <div class="overlay-card-delete-edit">
         <div onclick="overlayDeleteTask(${OverlayTask.taskid}, ${i})" class="overlay-cde"><img class="overlay-cde-img1" src="/assets/svg/delete.svg" alt="delete">Delete</div><div onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="overlay-cde"><img class="overlay-cde-img2" src="/assets/svg/edit.svg" alt="Edit">Edit</div>
@@ -822,13 +820,19 @@ function OverlayTaskPopup(i){   // TO CODE/CONNECT: EditTaskFkt, DeleteTaskFKT
         </div>
 
         `
+        if (OverlayTask.subtask[0] === undefined){
+            document.getElementById('overlaySubtask0').style.display = 'none';
+        }
+        if (OverlayTask.subtask[1] === undefined){
+            document.getElementById('overlaySubtask1').style.display = 'none';
+        }
+
         if (OverlayTask.label === 1){
             console.log("labelcheck_Bold700active");
             document.getElementById('overlayDueDate').style.cssText = 'font-weight: 700; color: #42526E;';
             document.getElementById('overlayAssignedToText').style.cssText = 'font-weight: 700; color: #42526E;';
             document.getElementById('overlayPriorityText').style.cssText = 'font-weight: 700; color: #42526E;';
             document.getElementById('overlaySubstasksText').style.cssText = 'font-weight: 700; color: #42526E;';
-
         }   
 } 
 
@@ -876,3 +880,8 @@ function overlayDeleteTask(idTask, i){          //TO CODE: update to server! -> 
     }
 }
 
+// Edit Task function //*css*/`
+    
+function editTask(idTask, i){
+
+}

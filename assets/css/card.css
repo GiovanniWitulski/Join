@@ -83,6 +83,13 @@
 
 /* OVERLAY - TASK */
 
+.overlay-container{
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+}
+
 .overlay-task {
     max-width: 396px;   
     height: fit-content;
@@ -197,7 +204,7 @@
 .overlay-checkbox{    
 }
 
-.overlay-substask{
+.overlay-subtask{
     display: flex;
     align-items: center;
     padding-bottom: 4px;
