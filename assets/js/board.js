@@ -387,7 +387,7 @@ function dropAt(newType){
 
 //Board render Tasks container
 
-function toDoContainer (){              // EMBLEMS auf <div>SVG</div> ändern
+function toDoContainer (){             
     console.log("todoContainer Active");                
     toDo.innerHTML = '';
 
@@ -397,33 +397,24 @@ function toDoContainer (){              // EMBLEMS auf <div>SVG</div> ändern
         if (toDoCard.type == 0){
             let amountSubTasks = toDoCard.subtask.length; //amount substasks
             let sumSubtask = 0;                            //amount solved subtasks
-            let sumSubtask0 = 0;
-            let sumSubtask1 = 0;
             let sumSubtaskCalc = 0;    //Calculation for barchart !!!declared "0"!!! at beginning (svg -reasons)
 
+            if (amountSubTasks === 2){         //"if null" - just for data failures securement
             if (toDoCard.subtaskSum[0] === null && toDoCard.subtaskSum[1] === null){
                 sumSubtask = 0; }            
             if (toDoCard.subtaskSum[0] !== null && toDoCard.subtaskSum[1] !== null){
                 sumSubtask = toDoCard.subtaskSum[0] + toDoCard.subtaskSum[1]; }
-            if (toDoCard.subtaskSum[0] !== null){            
-                sumSubtask = toDoCard.subtaskSum[0]; }
-            if (toDoCard.subtaskSum[0] === undefined){            
-                sumSubtask = 0; console.log;}
-
-            
-            /*
-            if (toDoCard.subtaskSum[0] === null && toDoCard.subtaskSum[1] === null){
-                sumSubtask = 0; 
-            }   else if (toDoCard.subtaskSum[0] !== null){            
-                sumSubtask = toDoCard.subtaskSum[0]; 
-            }   else if (toDoCard.subtaskSum[0] !== null && toDoCard.subtaskSum[1] !== null){
-                sumSubtask = toDoCard.subtaskSum[0]+toDoCard.subtaskSum[1]; 
-            }   else if (toDoCard.subtaskSum[0] === null){            
-                sumSubtask = 0; 
             }
- 
-            */
-          
+
+            if (amountSubTasks === 1){
+                if(toDoCard.subtaskSum[0] !== null){
+                    sumSubtask = toDoCard.subtaskSum[0];
+                }
+                if(toDoCard.subtaskSum[0] === null){
+                sumSubtask = 0;} 
+            }
+            
+            
             if (sumSubtask/amountSubTasks === 1){
                 sumSubtaskCalc = 2;
             } else if (sumSubtask/amountSubTasks === 0.5){
@@ -435,7 +426,7 @@ function toDoContainer (){              // EMBLEMS auf <div>SVG</div> ändern
             const progressBarId = 'cardToDoBar' + toDoCard.taskid;
 
 
-            let label;
+            let label;                              //Labeldiscernment
             if(toDoCard.label == 0){
                 label = TechnicalTaskLabel;
             } else {
@@ -444,14 +435,14 @@ function toDoContainer (){              // EMBLEMS auf <div>SVG</div> ändern
             
             let lastChar = toDoCard.description[toDoCard.description.length - 1];
             if (lastChar === "." || lastChar === "!" || lastChar === "?"){
-                console.log("foundchar:", lastChar);
                 toDoCard.description = toDoCard.description.slice(0, -1);
-            }
+            }                                 //preparing optic for description
 
-            let emblems = '';                           //contact-emblems
+            let emblems = '';                          //contact-emblems
             for (let i = 0; i < toDoCard.contactEmblem.length; i++){
                 const svg = toDoCard.contactEmblem[i];
                 emblems += `<div class="card-contact-emblems-icon">${svg}</div>`;
+                if (i === 5){break;}
             }           
 
 
@@ -492,98 +483,169 @@ function toDoContainer (){              // EMBLEMS auf <div>SVG</div> ändern
 }
 
 function inProgressContainer (){
-    inProgress.innerHTML = '';
+  inProgress.innerHTML = '';
 
-    for(i=0; i<TaskBoard.length; i++){
-        const inProgressCard = TaskBoard[i];
-        if (inProgressCard.type == 1){
-            sumSubtask = inProgressCard.subtaskSum[0]+inProgressCard.subtaskSum[1];
-            const progressInPercent = sumSubtask * 50;
-            const progressBarId = 'cardInProgressBar' + inProgressCard.taskid;
+  for(i=0; i<TaskBoard.length; i++){
+      const inProgressCard = TaskBoard[i];
+      if (inProgressCard.type == 1){
+        let amountSubTasks = inProgressCard.subtask.length; //amount substasks
+        let sumSubtask = 0;                            //amount solved subtasks
+        let sumSubtaskCalc = 0;    //Calculation for barchart !!!declared "0"!!! at start (svg -reasons)
 
-            let label;
-            if(inProgressCard.label == 0){
-                label = TechnicalTaskLabel;
-            } else {
-                label = UserStoryLabel;
-            }       
-            
-            let lastChar = inProgressCard.description[inProgressCard.description.length - 1];
-            if (lastChar === "." || lastChar === "!" || lastChar === "?"){
-                console.log("foundchar:", lastChar);
-                inProgressCard.description = inProgressCard.description.slice(0, -1);
-            }
-
-
-            let emblems = '';                           //contact-emblems
-            for (let i = 0; i < inProgressCard.contactEmblem.length; i++){
-                const src = inProgressCard.contactEmblem[i];
-                emblems += '<img class="card-contact-emblems-img" src=" '+src+' " alt="contact-emblem">';
-            }
-
-
-            inProgress.innerHTML += `
-        <div class="card-body" onclick="overlayTask(${inProgressCard.taskid})" ondragstart="startDragging(${inProgressCard.taskid})" draggable="true">
-        <div id="cardHeader" class="card-header">${label}</div>
-        <div id="cardTitle" class="card-title"><h4>${inProgressCard.title}</h4></div>
-        <div id="cardDescription" class="card-description"><h4>${inProgressCard.description}...</h4></div>
-        
-        <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
-        <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
-        <rect id="cardInProgressBar${inProgressCard.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
-        <div class="card-sum-subtask">${sumSubtask}/2 Subtasks</div></div>
-        <div id="cardParticipantsPriority" class="card-participants-priority">
-        <div class="card-contact-emblems">${emblems}</div>
-        <div><img src="${inProgressCard.priority[1]}" alt="priority"></div>
-        </div></div>
-
-        
-         `
-        
-        const progressBar = document.getElementById(progressBarId);
-        progressBar.setAttribute('width', `${progressInPercent}%`);
-
+        if (amountSubTasks === 2){         //"if null" - just for data failures securement
+        if (inProgressCard.subtaskSum[0] === null && inProgressCard.subtaskSum[1] === null){
+            sumSubtask = 0; }            
+        if (inProgressCard.subtaskSum[0] !== null && inProgressCard.subtaskSum[1] !== null){
+            sumSubtask = inProgressCard.subtaskSum[0] + inProgressCard.subtaskSum[1]; }
         }
-    }
 
-    if (inProgress.innerHTML == ''){
-        inProgress.innerHTML = `<img class="placeholder-container-img" src="/assets/svg/No_tasks_feedback_in_progress.svg" alt="no-task-in-progress">`
-    }
-    
+        if (amountSubTasks === 1){
+            if(inProgressCard.subtaskSum[0] !== null){
+                sumSubtask = inProgressCard.subtaskSum[0];
+            }
+            if(inProgressCard.subtaskSum[0] === null){
+            sumSubtask = 0;} 
+        }
+        
+        
+        if (sumSubtask/amountSubTasks === 1){
+            sumSubtaskCalc = 2;
+        } else if (sumSubtask/amountSubTasks === 0.5){
+            sumSubtaskCalc = 1;
+        } else if (sumSubtask/amountSubTasks === 0){
+            sumSubtaskCalc = 0;
+        } 
+        const progressInPercent = sumSubtaskCalc * 50;  
+        const progressBarId = 'cardToDoBar' + inProgressCard.taskid;
+
+
+        let label;
+          if(inProgressCard.label == 0){
+              label = TechnicalTaskLabel;
+          } else {
+              label = UserStoryLabel;
+          }       
+          
+          let lastChar = inProgressCard.description[inProgressCard.description.length - 1];
+          if (lastChar === "." || lastChar === "!" || lastChar === "?"){
+              console.log("foundchar:", lastChar);
+              inProgressCard.description = inProgressCard.description.slice(0, -1);
+          }
+
+          let emblems = '';                          //contact-emblems
+          for (let i = 0; i < inProgressCard.contactEmblem.length; i++){
+              const svg = inProgressCard.contactEmblem[i];
+              emblems += `<div class="card-contact-emblems-icon">${svg}</div>`;
+              if (i === 5){break;}
+          }           
+
+          let priority = '';
+          if (inProgressCard.priority === "low"){
+              priority = "/assets/svg/capa_priority_low.svg";
+          }    else if (inProgressCard.priority === "medium"){
+              priority = "/assets/svg/capa_1_medium_priority.svg";
+          }   else if(inProgressCard.priority === "urgent") {
+              priority = "/assets/svg/Capa_2_Burger menue_Arrow_up.svg"}
+
+
+          inProgress.innerHTML += `
+          <div class="card-body" onclick="overlayTask(${inProgressCard.taskid})" ondragstart="startDragging(${inProgressCard.taskid})" draggable="true">
+          <div id="cardHeader" class="card-header">${label}</div>
+          <div id="cardTitle" class="card-title"><h4>${inProgressCard.title}</h4></div>
+          <div id="cardDescription" class="card-description"><h4>${inProgressCard.description}...</h4></div>
+          <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
+          <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
+          <rect id="cardToDoBar${inProgressCard.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
+          <div class="card-sum-subtask">${sumSubtask}/${amountSubTasks} Subtasks</div></div>        
+          <div id="cardParticipantsPriority" class="card-participants-priority">
+          <div class="card-contact-emblems">${emblems}</div>
+          <div><img src="${priority}" alt="priority"></div>
+          </div></div>
+
+      
+          `      
+      const progressBar = document.getElementById(progressBarId);
+      progressBar.setAttribute('width', `${progressInPercent}%`);
+
+      
+      }
+  }
+
+  if (inProgress.innerHTML == ''){
+      inProgress.innerHTML = `<img class="placeholder-container-img" src="/assets/svg/No_tasks_feedback_in_progress.svg" alt="no-task-in-progress">`
+  }
+  
 }
 
 function awaitFeedbackContainer(){
     awaitFeedback.innerHTML = '';
-
+  
     for(i=0; i<TaskBoard.length; i++){
         const awaitFeedbackCard = TaskBoard[i];
         if (awaitFeedbackCard.type == 2){
             
-            sumSubtask = awaitFeedbackCard.subtaskSum[0]+awaitFeedbackCard.subtaskSum[1];
-            const progressInPercent = sumSubtask * 50;
-            const progressBarId = 'cardAwaitFeedbackBar' + awaitFeedbackCard.taskid;
-
-            let label;
-            if(awaitFeedbackCard.label == 0){
-                label = TechnicalTaskLabel;
-            } else {
-                label = UserStoryLabel;
-            }          
-            
-            let lastChar = awaitFeedbackCard.description[awaitFeedbackCard.description.length - 1];
-            if (lastChar === "." || lastChar === "!" || lastChar === "?"){
-                console.log("foundchar:", lastChar);
-                awaitFeedbackCard.description = awaitFeedbackCard.description.slice(0, -1);
-            }
-
-
-            let emblems = '';                           //contact-emblems
-            for (let i = 0; i < awaitFeedbackCard.contactEmblem.length; i++){
-                const src = awaitFeedbackCard.contactEmblem[i];
-                emblems += '<img class="card-contact-emblems-img" src=" '+src+' " alt="contact-emblem">';
-            }
-
+          let amountSubTasks = awaitFeedbackCard.subtask.length; //amount substasks
+          let sumSubtask = 0;                            //amount solved subtasks
+          let sumSubtaskCalc = 0;    //Calculation for barchart !!!declared "0"!!! at beginning (svg -reasons)
+  
+          if (amountSubTasks === 2){         //"if null" - just for data failures securement
+          if (awaitFeedbackCard.subtaskSum[0] === null && awaitFeedbackCard.subtaskSum[1] === null){
+              sumSubtask = 0; }            
+          if (awaitFeedbackCard.subtaskSum[0] !== null && awaitFeedbackCard.subtaskSum[1] !== null){
+              sumSubtask = awaitFeedbackCard.subtaskSum[0] + awaitFeedbackCard.subtaskSum[1]; }
+          }
+  
+          if (amountSubTasks === 1){
+              if(awaitFeedbackCard.subtaskSum[0] !== null){
+                  sumSubtask = awaitFeedbackCard.subtaskSum[0];
+              }
+              if(awaitFeedbackCard.subtaskSum[0] === null){
+              sumSubtask = 0;} 
+          }
+          
+          
+          if (sumSubtask/amountSubTasks === 1){
+              sumSubtaskCalc = 2;
+          } else if (sumSubtask/amountSubTasks === 0.5){
+              sumSubtaskCalc = 1;
+          } else if (sumSubtask/amountSubTasks === 0){
+              sumSubtaskCalc = 0;
+          } 
+          const progressInPercent = sumSubtaskCalc * 50;  
+          const progressBarId = 'cardToDoBar' + awaitFeedbackCard.taskid;
+  
+  
+          let label;                              //Labeldiscernment
+          if(awaitFeedbackCard.label == 0){
+              label = TechnicalTaskLabel;
+          } else {
+              label = UserStoryLabel;
+          }                 
+          
+          let lastChar = awaitFeedbackCard.description[awaitFeedbackCard.description.length - 1];
+          if (lastChar === "." || lastChar === "!" || lastChar === "?"){
+              awaitFeedbackCard.description = awaitFeedbackCard.description.slice(0, -1);
+          }                                 //preparing optic for description
+  
+          let emblems = '';                          //contact-emblems
+          for (let i = 0; i < awaitFeedbackCard.contactEmblem.length; i++){
+              const svg = awaitFeedbackCard.contactEmblem[i];
+              emblems += `<div class="card-contact-emblems-icon">${svg}</div>`;
+              if (i === 5){break;}
+          }           
+  
+  
+          let priority = '';
+          if (awaitFeedbackCard.priority === "low"){
+              priority = "/assets/svg/capa_priority_low.svg";
+          }    else if (awaitFeedbackCard.priority === "medium"){
+              priority = "/assets/svg/capa_1_medium_priority.svg";
+          }   else if(awaitFeedbackCard.priority === "urgent") {
+              priority = "/assets/svg/Capa_2_Burger menue_Arrow_up.svg"}
+  
+  
+  
             awaitFeedback.innerHTML += `
             <div class="await-feedback-cards-container">
             <div class="card-body" onclick="overlayTask(${awaitFeedbackCard.taskid})" ondragstart="startDragging(${awaitFeedbackCard.taskid})" draggable="true">
@@ -593,13 +655,12 @@ function awaitFeedbackContainer(){
             <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
             <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
-            <rect id="cardAwaitFeedbackBar${awaitFeedbackCard.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
-            <div class="card-sum-subtask">${sumSubtask}/2 Subtasks</div></div>        
+            <rect id="cardToDoBar${awaitFeedbackCard.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
+            <div class="card-sum-subtask">${sumSubtask}/${amountSubTasks} Subtasks</div></div>        
             <div id="cardParticipantsPriority" class="card-participants-priority">
             <div class="card-contact-emblems">${emblems}</div>
-            <div><img src="${awaitFeedbackCard.priority[1]}" alt="priority"></div>
+            <div><img src="${priority}" alt="priority"></div>
             </div></div>
-            </div>
                 
              `             
             const progressBar = document.getElementById(progressBarId);
@@ -609,42 +670,78 @@ function awaitFeedbackContainer(){
     if (awaitFeedback.innerHTML === '') {
         awaitFeedback.innerHTML = `<img src="/assets/svg/no_tasks_awaiting_feedback.png" class="to-do-container-mobile" alt="no-task-awaits-feedback"></div>`
     }
-
-
-}                                       //-> TO CODE: Taskslider left <-> right
-
-function doneContainer(){
-    done.innerHTML='';
-
+  
+  
+}                                       
+  
+function doneContainer(){             
+    console.log("todoContainer Active");                
+    done.innerHTML = '';
+  
     for(i=0; i<TaskBoard.length; i++){
         const doneCard = TaskBoard[i];
+  
         if (doneCard.type == 3){
+            let amountSubTasks = doneCard.subtask.length; //amount substasks
+            let sumSubtask = 0;                            //amount solved subtasks
+            let sumSubtaskCalc = 0;    //Calculation for barchart !!!declared "0"!!! at beginning (svg -reasons)
+  
+            if (amountSubTasks === 2){         //"if null" - just for data failures securement
+            if (doneCard.subtaskSum[0] === null && doneCard.subtaskSum[1] === null){
+                sumSubtask = 0; }            
+            if (doneCard.subtaskSum[0] !== null && doneCard.subtaskSum[1] !== null){
+                sumSubtask = doneCard.subtaskSum[0] + doneCard.subtaskSum[1]; }
+            }
+  
+            if (amountSubTasks === 1){
+                if(doneCard.subtaskSum[0] !== null){
+                    sumSubtask = doneCard.subtaskSum[0];
+                }
+                if(doneCard.subtaskSum[0] === null){
+                sumSubtask = 0;} 
+            }            
             
-            sumSubtask = doneCard.subtaskSum[0]+doneCard.subtaskSum[1];
-            const progressInPercent = sumSubtask * 50;
-            const progressBarId = 'doneBar' + doneCard.taskid;
-
-            let label;
+            if (sumSubtask/amountSubTasks === 1){
+                sumSubtaskCalc = 2;
+            } else if (sumSubtask/amountSubTasks === 0.5){
+                sumSubtaskCalc = 1;
+            } else if (sumSubtask/amountSubTasks === 0){
+                sumSubtaskCalc = 0;
+            } 
+            const progressInPercent = sumSubtaskCalc * 50;  
+            const progressBarId = 'cardToDoBar' + doneCard.taskid;
+  
+  
+            let label;                              //Labeldiscernment
             if(doneCard.label == 0){
                 label = TechnicalTaskLabel;
             } else {
                 label = UserStoryLabel;
-            }          
+            }                 
             
             let lastChar = doneCard.description[doneCard.description.length - 1];
             if (lastChar === "." || lastChar === "!" || lastChar === "?"){
-                console.log("foundchar:", lastChar);
                 doneCard.description = doneCard.description.slice(0, -1);
-            }
-
-
-            let emblems = '';                           //contact-emblems
+            }                                 //preparing optic for description
+  
+            let emblems = '';                          //contact-emblems
             for (let i = 0; i < doneCard.contactEmblem.length; i++){
-                const src = doneCard.contactEmblem[i];
-                emblems += '<img class="card-contact-emblems-img" src=" '+src+' " alt="contact-emblem">';
-            }
-
-            done.innerHTML += `
+                const svg = doneCard.contactEmblem[i];
+                emblems += `<div class="card-contact-emblems-icon">${svg}</div>`;
+                if (i === 5){break;}
+            }           
+  
+  
+            let priority = '';
+            if (doneCard.priority === "low"){
+                priority = "/assets/svg/capa_priority_low.svg";
+            }    else if (doneCard.priority === "medium"){
+                priority = "/assets/svg/capa_1_medium_priority.svg";
+            }   else if(doneCard.priority === "urgent") {
+                priority = "/assets/svg/Capa_2_Burger menue_Arrow_up.svg"}
+  
+  
+                done.innerHTML += `
             <div class="card-body" onclick="overlayTask(${doneCard.taskid})" ondragstart="startDragging(${doneCard.taskid})" draggable="true">
             <div id="cardHeader" class="card-header">${label}</div>
             <div id="cardTitle" class="card-title"><h4>${doneCard.title}</h4></div>
@@ -652,24 +749,25 @@ function doneContainer(){
             <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
             <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
-            <rect id="doneBar${doneCard.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
-            <div class="card-sum-subtask">${sumSubtask}/2 Subtasks</div></div>        
+            <rect id="cardToDoBar${doneCard.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
+            <div class="card-sum-subtask">${sumSubtask}/${amountSubTasks} Subtasks</div></div>        
             <div id="cardParticipantsPriority" class="card-participants-priority">
             <div class="card-contact-emblems">${emblems}</div>
-            <div><img src="${doneCard.priority[1]}" alt="priority"></div>
+            <div><img src="${priority}" alt="priority"></div>
             </div></div>
-                
-             `             
+                    
+            `           
             const progressBar = document.getElementById(progressBarId);
             progressBar.setAttribute('width', `${progressInPercent}%`);
+  
         }
     }
-
+    
     if (done.innerHTML === '') {
         done.innerHTML = `<img src="/assets/svg/no_tasks_done.png" class="to-do-container-mobile" alt="no-task-done"></div>`
     }
 }
-
+  
 // OVERLAY TASK / POPUP ///////////////////////
 
 
