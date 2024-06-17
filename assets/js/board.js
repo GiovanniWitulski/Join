@@ -1,3 +1,4 @@
+
 console.log("board.js_loaded");
 
 /*
@@ -883,6 +884,21 @@ function overlayDeleteTask(idTask, i){          //TO CODE: update to server! -> 
 // Edit Task function //*css*/`
     
 function editTaskOverlay(idTask, i){
+
+    const editTask = TaskBoard[i];
+    /*
+    if (editTask.subtask[0] !== undefined){
+        
+        let subtask1 = editTask.subtask[0];
+        let subtaskList = document.getElementById('edit-list-of-subtasks');
+        subtaskList.innerHTML += `<li id=subtask1><div class="content-of-subtask"><div id="">${subtask1}</div> <div class="edit-subtask-div"><button class="edit-btn" onclick=""></button><div class="btn-divider"></div><button onclick="" class="trash-btn"></button></div></div></li>`;
+    }
+    }
+    if (editTask.subtask[1] !== undefined){
+        secondSubtask = editTask.subtask[1];
+        
+    }           */ 
+ 
     Overlay.innerHTML = '';
     Overlay.innerHTML = `
     <div class="board-edit-task">
@@ -891,18 +907,18 @@ function editTaskOverlay(idTask, i){
         <form id="addTaskForm" onsubmit="getTheDataForPostTask(event)">
             <div class="titleDiv">
               <div class="subheadlineDiv"><p class="subheadline">Title <p class="marker">*</p></p></div>  
-                <input id="title-input" type="text" required placeholder="Enter a title">
+                <input id="title-input" type="text" required placeholder="${editTask.title}">
                 <p class="alert-text none">This field is required</p>
             </div>
 
             <div class="description-card-edit">
                 <p class="subheadline">Description</p>
-                <textarea id="descriptionInput" type="text" placeholder="Enter a Description"></textarea>
+                <textarea id="descriptionInput" type="text" placeholder="${editTask.description}"></textarea>
             </div>
             
             <div class="dateDiv">
                 <div class="subheadlineDiv"><p class="subheadline">Due date <p class="marker">*</p></p></div>
-                    <input id="datePicker" type="date">
+                    <input id="datePicker" type="date" placeholder="${editTask.date}">
                     <p class="alert-text none">This field is required</p>
             </div>
 
@@ -942,14 +958,14 @@ function editTaskOverlay(idTask, i){
                     
                 </div>
                 <div class="subtask-div">
-                    <ul id="list-of-subtasks"> 
+                    <ul id="edit-list-of-subtasks"> 
                     </ul>
                    
                 </div>
             </div>
 
             <div class="edit-button-box">
-                <button type="submit" class="edit-button">OK</button>
+                <button class="edit-button">OK</button>
             </div>
 
             

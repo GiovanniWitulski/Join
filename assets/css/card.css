@@ -267,7 +267,7 @@
     height: fit-content;
     max-height: 724px;
     z-index: 3;
-    background-color: #FFFFFF;
+    background-color: lightgray;
     border-radius: 30px;
     position: fixed;
     top: 20px;
