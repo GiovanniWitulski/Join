@@ -883,7 +883,7 @@ function overlayDeleteTask(idTask, i){          //TO CODE: update to server! -> 
 
 // Edit Task function //*css*/`
     
-function editTaskOverlay(idTask, i){
+function editTaskOverlay(idTask, i){    //use of same container as Overlay/PopupTask
 
     const editTask = TaskBoard[i];
     /*
@@ -905,12 +905,18 @@ function editTaskOverlay(idTask, i){
     <div class="close-edit"><img onclick="closeOverlay(${idTask}, ${i})" src="/assets/svg/close_black.svg" alt="close"></div>
 
     <form action="/action_page.php">
-  <label for="birthday" class="calendar-icon-label">
-    <input type="date" id="birthday" name="birthday" class="date-input">
-  </label>
-</form>
-    
+    <label for="edit_input" class="calendar-icon-label">
+    <input type="date" id="edit_input" name="edit_input" class="date-input" placeholder="tt.mm.jjj">
+    </label>
+    </form>     
     
     </div>
     `
+    // pre-set Task
+    let initialDate = editTask.date; //  YYYY-MM-DD (!)
+    let dateInput = document.getElementById("edit_input");
+    dateInput.value = initialDate;
+    
+
+
 }

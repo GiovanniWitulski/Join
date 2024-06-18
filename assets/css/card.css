@@ -323,36 +323,55 @@
 }
 
 .date-input {
-    width: calc(100% - 4px); /* Platz für das Icon abziehen */
-    height: 100%;
-    padding: 8px 21px;
-    border: 1px solid #D1D1D1; /* Benutzerdefinierte Border-Stil */
-    border-radius: 10px; /* Benutzerdefinierter Border-Radius */
+    width: calc(100% - 44px);    height: 40px; 
+    padding: 8px 21px; 
+    border: 1px solid #D1D1D1; 
+    border-radius: 10px; 
     outline: none;
-    background-color: white; /* Standardmäßiger weißer Hintergrund */
-    background-image: url('/assets/svg/event.svg'); /* Hintergrundbild mit der SVG-Datei */
-    background-position: calc(100% - 18px) center; /* Verschiebung des Hintergrundbilds nach rechts */
+    background-color: white; 
+    background-image: url('/assets/svg/event.svg'); 
+    background-position: calc(100% - 18px) center; 
     background-size: 24px 24px;
     background-repeat: no-repeat;
-    cursor: pointer; /* Zeiger-Cursor hinzufügen, um Interaktivität anzuzeigen */
+    cursor: pointer; 
+}
+
+/* placeholder conditions for "all" browsers */
+.date-input::placeholder {
+    color: black;
+}
+
+.date-input::-webkit-input-placeholder {
+    color: black;
+}
+
+.date-input::-moz-placeholder {
+    color: black;
+}
+
+.date-input:-ms-input-placeholder {
+    color: black;
+}
+
+.date-input:-moz-placeholder {
+    color: black;
 }
 
 .calendar-icon-label {
-    position: relative; /* Position relativ für das Label */
-    display: inline-block; /* Als Inline-Block-Element behandeln */
+    position: relative; 
+    display: inline-block; 
     width: 100%;
 }
 
-#birthday::-webkit-calendar-picker-indicator {
+#edit_input::-webkit-calendar-picker-indicator {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0; /* Standard-Kalender-Icon unsichtbar machen */
-    cursor: pointer; /* Zeiger-Cursor hinzufügen, um Interaktivität anzuzeigen */
+    opacity: 0; 
+    cursor: pointer; 
 }
-
 
 /* Potential - Classes */
 
