@@ -66,7 +66,7 @@ function generateHTMLcodeForContacts(contact, j){
 async function refreshContactToLoad(id, path) {
     contactToDisplay = id;
     await putData(path,id)
-    if (window.innerWidth >= 800){
+    if (window.innerWidth >= 1250){
         loadCurrentContactId('desktop');
         showContactDetails();
     }else{
@@ -113,6 +113,24 @@ async function fillEditContactFormDesktop(id){
     document.getElementById('editContactPic-desktop').outerHTML = await drawContactEditPic(currentContact);
 }
 
+
+function rewriteButton(){
+
+    if(document.getElementsByClassName('add-contact-btn')[0]){
+        if(window.innerWidth >= 1250){
+           document.getElementsByClassName('add-contact-btn')[0].innerHTML = `Add new contact`;
+    }else{
+        document.getElementsByClassName('add-contact-btn')[0].innerHTML = ``;
+    }
+    }
+    
+     
+    
+}
+
+
+document.addEventListener('DOMContentLoaded', rewriteButton);
+window.addEventListener('resize', rewriteButton);
 
 
 

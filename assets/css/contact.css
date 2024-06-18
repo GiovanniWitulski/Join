@@ -206,10 +206,12 @@ padding-bottom: 15px;
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: center;
+    transition: all 120ms ease-in-out;
 }
 
 .edit-btn:hover{
     background-image: url("/assets/svg/edit_blue_font.svg");
+    cursor: pointer;
    
 }
 
@@ -222,11 +224,13 @@ padding-bottom: 15px;
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: center;
+    transition: all 120ms ease-in-out;
 
 }
 
 .del-btn:hover{
     background-image: url("/assets/svg/delete_blue_font.svg");
+    cursor: pointer;
 }
 
 #page-content-div{
@@ -272,6 +276,19 @@ padding-bottom: 15px;
 @media(min-width: 800px){
 
     .page-content{
+        height: 100vh;
+    }
+
+    #contact-div{
+        margin-left: 232px;
+        width: calc(100% - 232px);
+        height: calc(100% - 80px);
+    }
+}
+
+@media(min-width: 1250px){
+
+    .page-content{
 
         position: relative;
         left: 232px;
@@ -289,6 +306,39 @@ display: flex;
     #contact-div{
 
         width: 400px;
+        margin-top: 86px;
+        padding-left: 28px;
+        height: unset;
+        margin-left: 0px;
+    }
+
+    .add-contact-btn{
+        position: absolute;
+        top: 22.5px;
+        left: 52px;
+        width: 352px;
+        height: 56px;
+        border-radius: 10px;
+        box-shadow: unset;
+        color: white;
+        background-position: calc(100% - 64.5px) center;
+        font-size: 21px;
+        font-weight: 700;
+        text-align: start;
+        padding: 0px 64.5px;
+
+
+    }
+
+    .add-contact-btn:hover{
+        background-color:#29ABE2;
+        background-image: url("/assets/svg/person_add.svg");
+        background-position: calc(100% - 64.5px) center;
+    }
+
+    #contact-details-desktop{
+        position: absolute;
+        left: 432px;
     }
 
 

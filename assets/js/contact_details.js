@@ -20,8 +20,7 @@
 
 async function loadCurrentContactId(){
     let userId = await loadData('currentContact');
-    console.log(userId);
-    if(window.innerWidth >= 800){
+    if(window.innerWidth >= 1250){
         await loadSingleContactDesktop(userId);
     }else{
         await loadSingleContact(userId);
@@ -146,7 +145,7 @@ function hideEditOverlayDesktop(){
 
 async function getTheEditedData(element){
 
-    if(window.innerWidth >= 800){
+    if(window.innerWidth >= 1250){
         return document.getElementById(`${element}-desktop`).value;
     
     }else{
@@ -184,7 +183,7 @@ async function saveEditsToContact(token){
 }
 
 async function submitForm(){
-    if(window.innerWidth < 800){
+    if(window.innerWidth < 1250){
          document.getElementById('edit-contact-form').submit();
     }else{
        

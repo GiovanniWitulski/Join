@@ -269,3 +269,11 @@ body{
         padding-top: 10px;
     }
 }
+
+
+@media(min-width: 800px){
+
+    #page-content-div{
+        margin-left: 232px;
+    }
+}
