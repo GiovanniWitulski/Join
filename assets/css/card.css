@@ -321,6 +321,38 @@
 .subtask-card-edit{
 
 }
+
+.date-input {
+    width: calc(100% - 4px); /* Platz für das Icon abziehen */
+    height: 100%;
+    padding: 8px 21px;
+    border: 1px solid #D1D1D1; /* Benutzerdefinierte Border-Stil */
+    border-radius: 10px; /* Benutzerdefinierter Border-Radius */
+    outline: none;
+    background-color: white; /* Standardmäßiger weißer Hintergrund */
+    background-image: url('/assets/svg/event.svg'); /* Hintergrundbild mit der SVG-Datei */
+    background-position: calc(100% - 18px) center; /* Verschiebung des Hintergrundbilds nach rechts */
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+    cursor: pointer; /* Zeiger-Cursor hinzufügen, um Interaktivität anzuzeigen */
+}
+
+.calendar-icon-label {
+    position: relative; /* Position relativ für das Label */
+    display: inline-block; /* Als Inline-Block-Element behandeln */
+}
+
+#birthday::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Standard-Kalender-Icon unsichtbar machen */
+    cursor: pointer; /* Zeiger-Cursor hinzufügen, um Interaktivität anzuzeigen */
+}
+
+
 /* Potential - Classes */
 
 .hidden {
