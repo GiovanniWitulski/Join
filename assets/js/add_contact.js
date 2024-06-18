@@ -57,7 +57,7 @@ async function getTheInformation(event){
 
 async function checkIfDesktop(){
    
-    if(window.innerWidth < 800){
+    if(window.innerWidth < 1250){
             await refreshContactToLoad(contactsAsJson.length, 'currentContact');   
     }else{
 
@@ -73,7 +73,7 @@ async function checkIfDesktop(){
 
 async function confirmContactCreation(){
 
-    if(window.innerWidth < 800){
+    if(window.innerWidth < 1250){
         localStorage.setItem('contactWasCreated', 'true'); 
     }
    

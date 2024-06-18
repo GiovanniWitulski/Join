@@ -49,7 +49,7 @@ async function getContacts() {
         }
       }
       
-      console.log(contacts);
+      
       return contacts;
   
     } catch (error) {

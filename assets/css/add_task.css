@@ -717,7 +717,7 @@ cursor: pointer;
 }
 
 .notificationDiv{
-    transform: translateY(0);
+    transform: translateY(100vh);
     transition: all 120ms ease-in-out;
     align-self: center;
 }
@@ -726,6 +726,20 @@ cursor: pointer;
 
     transform: translateY(-50vh);
     transition: all 120ms ease-in-out;
+}
+
+@media(min-width: 800px){
+
+    .content-container{
+
+        width: calc(100% - 232px);
+        margin-left: 232px;
+    }
+
+    .headline{
+        margin-left: 232px;
+        width: calc(100% - 232px);
+    }
 }
 
 
