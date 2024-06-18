@@ -6,7 +6,6 @@ function changeToActive(id){
     let possibleId = ['urgent-btn', 'medium-btn', 'low-btn'];
     possibleId.splice(possibleId.indexOf(id), 1);
     priorityOfTask = id.split('-')[0];
-    console.log(priorityOfTask);
     let element = document.getElementById(id)
     element.classList.toggle(`${id}-active`);
     for (let i = 0; i < possibleId.length; i++) {
