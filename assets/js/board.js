@@ -1,203 +1,7 @@
-
 console.log("board.js_loaded");
-
-/*
-let BackgroundTaskBoard = [   
-    {
-        "label": "/assets/svg/Labels Board card label technical task.svg",
-        "title": "Technical Task Example",
-        "description": "The code for the example in VS Code has been written",
-        "date": "03.05.2035",
-        "subtask" : ["check this subtask.", "click on the small box to check it."],
-        "subtaskSum" :[0, 1],
-        "priority" : ["medium", "/assets/svg/capa_1_medium_priority.svg"],
-        "assignedTo" : ["Emmanuel Mauer", "Marcel Bensdorf", "Annika Michelstadt"], // oder Id's der Mitarbeiter
-        "contactEmblem" : ["/assets/svg/contact_emblem_Emmanuel_Mauer.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
-        "type" : "3",
-        "taskid": "1"
-    },         
-    {
-        "label": "/assets/svg/Labels Board card label technical task.svg",
-        "title": "Technical Task Example",
-        "description": "Write the code for the example in VS Code",
-        "date": "03.05.2035",
-        "subtask" : ["check this subtask.", "click on the small box to check it."],
-        "subtaskSum" :[0, 1],
-        "priority" : ["medium", "/assets/svg/capa_1_medium_priority.svg"],
-        "assignedTo" : ["Emmanuel Mauer", "Marcel Bensdorf", "Annika Michelstadt"], // oder Id's der Mitarbeiter
-        "contactEmblem" : ["/assets/svg/contact_emblem_Emmanuel_Mauer.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
-        "type" : "0",
-        "taskid": "2"
-    },
-    {
-        "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
-        "title": "User Story Example",
-        "description": "In Progress Example",
-        "date": "10.05.2035",
-        "subtask" : ["check this subtask.", "click on the small box to check it."],
-        "subtaskSum" :[0, 0],
-        "priority" : ["urgent", "/assets/svg/Capa_2_Burger menue_Arrow_up.svg"],
-        "assignedTo" : ["Max Bustermann", "Eichard Moberts", "Anton Mabuse"], // oder Id's der Mitarbeiter
-        "contactEmblem" : ["/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
-        "type" : "1",
-        "taskid": "3"
-    },
-    {
-        "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
-        "title": "User Story Example",
-        "description": "Await Feedback Example",
-        "date": "08.05.2035",
-        "subtask" : ["check this subtask.", "click on the small box to check it."],
-        "subtaskSum" : [1, 1],
-        "priority" : ["low", "/assets/svg/capa_priority_low.svg"],
-        "assignedTo" : ["Axel Mustermann", "Mitchard Boberts", "Erik Malmö"], // oder Id's der Mitarbeiter
-        "contactEmblem" : ["/assets/svg/contact_emblem_Annika_Michelstadt.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg"],
-        "type" : "2",
-        "taskid": "4"
-    }, 
-    {
-        "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
-        "title": "User Story Example",
-        "description": "Second to do example",
-        "date": "08.05.2035",
-        "subtask" : ["check this subtask.", "click on the small box to check it."],
-        "subtaskSum" : [1, 1],
-        "priority" : ["low", "/assets/svg/capa_priority_low.svg"],
-        "assignedTo" : ["Andrew Millenium", "Marc Bob", "Elke Magneto"], // oder Id's der Mitarbeiter
-        "contactEmblem" : ["/assets/svg/contact_emblem_Annika_Michelstadt.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg"],
-        "type" : "0",
-        "taskid": "5"
-    },
-    {
-        "label": "/assets/svg/Labels_Board_card_label_blue_User_Story.svg",
-        "title": "User Story Example",
-        "description": "Second in progress example",
-        "date": "08.05.2035",
-        "subtask" : ["check this subtask.", "click on the small box to check it."],
-        "subtaskSum" : [0, 1],
-        "priority" : ["low", "/assets/svg/capa_priority_low.svg"],
-        "assignedTo" : ["Anton Millenium", "Mitchel Bobford", "Enrico Montequia"], // oder Id's der Mitarbeiter
-        "contactEmblem" : ["/assets/svg/contact_emblem_Annika_Michelstadt.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg"],
-        "type" : "1",
-        "taskid": "6"
-    },
-    {
-        "label": "/assets/svg/Labels Board card label technical task.svg",
-        "title": "Technical Task Example",
-        "description": "A Technical Task, enjoy!",
-        "date": "03.12.2035",
-        "subtask" : ["check this subtask.", "click on the small box to check it."],
-        "subtaskSum" :[0, 1],
-        "priority" : ["medium", "/assets/svg/capa_1_medium_priority.svg"],
-        "assignedTo" : ["Marcel Bensdorf", "Annika Michelstadt"], // oder Id's der Mitarbeiter
-        "contactEmblem" : ["/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
-        "type" : "2",
-        "taskid": "7"
-    },
-
-
-];                                      // -> Task Sammlung für Testen       
-*/
-
 let TaskBoard = []
 
-let BackgroundTaskBoardAlt= [   
-    {
-        "label": [0],
-        "title": "Technical Task Example",
-        "description": "The code for the example in VS Code has been written",
-        "date": "03.05.2035",
-        "subtask" : ["check this subtask.", "click on the small box to check it."],
-        "subtaskSum" :[0, 0],
-        "priority" : ["medium", "/assets/svg/capa_1_medium_priority.svg"],
-        "assignedTo" : ["Emmanuel Mauer", "Marcel Bensdorf", "Annika Michelstadt"], // oder Id's der Mitarbeiter
-        "contactEmblem" : ["/assets/svg/contact_emblem_Emmanuel_Mauer.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
-        "type" : "3",
-        "taskid": "1"
-    },         
-    {
-        "label": [0],
-        "title": "Technical Task Example",
-        "description": "Write the code for the example in VS Code",
-        "date": "03.05.2035",
-        "subtask" : ["check this subtask.", "click on the small box to check it."],
-        "subtaskSum" :[0, 1],
-        "priority" : ["medium", "/assets/svg/capa_1_medium_priority.svg"],
-        "assignedTo" : ["Emmanuel Mauer", "Marcel Bensdorf", "Annika Michelstadt"], // oder Id's der Mitarbeiter
-        "contactEmblem" : ["/assets/svg/contact_emblem_Emmanuel_Mauer.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
-        "type" : "0",
-        "taskid": "2"
-    },
-    {
-        "label": [1],
-        "title": "User Story Example",
-        "description": "In Progress Example",
-        "date": "10.05.2035",
-        "subtask" : ["check this subtask.", "click on the small box to check it."],
-        "subtaskSum" :[0, 0],
-        "priority" : ["urgent", "/assets/svg/Capa_2_Burger menue_Arrow_up.svg"],
-        "assignedTo" : ["Max Bustermann", "Eichard Moberts", "Anton Mabuse"], // oder Id's der Mitarbeiter
-        "contactEmblem" : ["/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
-        "type" : "1",
-        "taskid": "3"
-    },
-    {
-        "label": [1],
-        "title": "User Story Example",
-        "description": "Await Feedback Example",
-        "date": "08.05.2035",
-        "subtask" : ["check this subtask.", "click on the small box to check it."],
-        "subtaskSum" : [1, 1],
-        "priority" : ["low", "/assets/svg/capa_priority_low.svg"],
-        "assignedTo" : ["Axel Mustermann", "Mitchard Boberts", "Erik Malmö"], // oder Id's der Mitarbeiter
-        "contactEmblem" : ["/assets/svg/contact_emblem_Annika_Michelstadt.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg"],
-        "type" : "2",
-        "taskid": "4"
-    }, 
-    {
-        "label": [1],
-        "title": "User Story Example",
-        "description": "Second to do example",
-        "date": "08.05.2035",
-        "subtask" : ["check this subtask.", "click on the small box to check it."],
-        "subtaskSum" : [1, 1],
-        "priority" : ["low", "/assets/svg/capa_priority_low.svg"],
-        "assignedTo" : ["Andrew Millenium", "Marc Bob", "Elke Magneto"], // oder Id's der Mitarbeiter
-        "contactEmblem" : ["/assets/svg/contact_emblem_Annika_Michelstadt.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg"],
-        "type" : "0",
-        "taskid": "5"
-    },
-    {
-        "label": [1],        
-        "title": "User Story Example",
-        "description": "Second in progress example",
-        "date": "08.05.2035",
-        "subtask" : ["check this subtask.", "click on the small box to check it."],
-        "subtaskSum" : [0, 1],
-        "priority" : ["low", "/assets/svg/capa_priority_low.svg"],
-        "assignedTo" : ["Anton Millenium", "Mitchel Bobford", "Enrico Montequia"], 
-        "contactEmblem" : ["/assets/svg/contact_emblem_Annika_Michelstadt.svg", "/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Emmanuel_Mauer.svg"],
-        "type" : "1",
-        "taskid": "6"
-    },
-    {
-        "label": [0],
-        "title": "Technical Task Example",
-        "description": "A Technical Task, enjoy!",
-        "date": "03.12.2035",
-        "subtask" : ["check this subtask.", "click on the small box to check it."],
-        "subtaskSum" :[0, 1],
-        "priority" : ["medium", "/assets/svg/capa_1_medium_priority.svg"],
-        "assignedTo" : ["Marcel Bensdorf", "Annika Michelstadt"], 
-        "contactEmblem" : ["/assets/svg/contact_emblem_Marcel_Bensdorf.svg", "/assets/svg/contact_emblem_Annika_Michelstadt.svg"],
-        "type" : "1",
-        "taskid": "7"
-    },
-
-
-];                                             
-
-let BackgroundTaskBoard = [] // Test, backup siehe drüber
+let BackgroundTaskBoard = [] 
 
 
 //global variables & Elementtargets
@@ -217,12 +21,8 @@ let Overlay = document.getElementById('overlayContainer');
 console.log ("TaskBoard:", TaskBoard);
 
 ////////////Main Start Functions///////////
-
-
 async function downloadData() {
-
 BackgroundTaskBoard = [];
-
 try {
     const response = await fetch(`${databaseURL}/tasks.json`);
     if (!response.ok) {
@@ -257,12 +57,9 @@ try {
         type: task.type,
         taskid: task.taskid
       };
-
-      // Hinzufügen des formatierten Tasks zum externen Array
       BackgroundTaskBoard.push(formattedTask);
     });
 
-    // Anzeigen der formatierten Daten im externen Array in der Konsole
     console.log("Download BackgroundTaskBoard",BackgroundTaskBoard);
     TaskBoard = BackgroundTaskBoard;
     console.log("Download Taskboard", TaskBoard);
@@ -271,7 +68,6 @@ try {
     console.error('Fehler beim Abrufen und Formatieren der Daten:', error);
   }
   renderBoard();
-  console.log(BackgroundTaskBoardAlt)
 }
 
 function renderBoard(){ 
@@ -883,40 +679,3 @@ function overlayDeleteTask(idTask, i){          //TO CODE: update to server! -> 
 
 // Edit Task function //*css*/`
     
-function editTaskOverlay(idTask, i){    //use of same container as Overlay/PopupTask
-
-    const editTask = TaskBoard[i];
-    /*
-    if (editTask.subtask[0] !== undefined){
-        
-        let subtask1 = editTask.subtask[0];
-        let subtaskList = document.getElementById('edit-list-of-subtasks');
-        subtaskList.innerHTML += `<li id=subtask1><div class="content-of-subtask"><div id="">${subtask1}</div> <div class="edit-subtask-div"><button class="edit-btn" onclick=""></button><div class="btn-divider"></div><button onclick="" class="trash-btn"></button></div></div></li>`;
-    }
-    }
-    if (editTask.subtask[1] !== undefined){
-        secondSubtask = editTask.subtask[1];
-        
-    }           */ 
- 
-    Overlay.innerHTML = '';
-    Overlay.innerHTML = `
-    <div class="board-edit-task">
-    <div class="close-edit"><img onclick="closeOverlay(${idTask}, ${i})" src="/assets/svg/close_black.svg" alt="close"></div>
-
-    <form action="/action_page.php">
-    <label for="edit_input" class="calendar-icon-label">
-    <input type="date" id="edit_input" name="edit_input" class="date-input" placeholder="tt.mm.jjj">
-    </label>
-    </form>     
-    
-    </div>
-    `
-    // pre-set Task
-    let initialDate = editTask.date; //  YYYY-MM-DD (!)
-    let dateInput = document.getElementById("edit_input");
-    dateInput.value = initialDate;
-    
-
-
-}
