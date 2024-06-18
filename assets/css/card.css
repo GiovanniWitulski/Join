@@ -340,6 +340,7 @@
 .calendar-icon-label {
     position: relative; /* Position relativ für das Label */
     display: inline-block; /* Als Inline-Block-Element behandeln */
+    width: 100%;
 }
 
 #birthday::-webkit-calendar-picker-indicator {
