@@ -71,10 +71,6 @@ async function processContacts() {
 // Starten der Verarbeitung der Kontaktdatenkette
 processContacts();
 
-
-
-
-
 ///////// RENDER EDIT TASK ////////// 
 function editTaskOverlay(idTask, i){    //use of same container as Overlay/PopupTask
     const editTask = TaskBoard[i];
@@ -101,15 +97,32 @@ function editTaskOverlay(idTask, i){    //use of same container as Overlay/Popup
     <label for="edit_input" class="calendar-icon-label">
     <input type="date" id="edit_input" name="edit_input" class="date-input" placeholder="tt.mm.jjj">
     </label>
-    </form>         
-    </div>
+    </form>   
+    
+    <form action="/action_page.php">    
+    <select name="cars" id="cars" class="nameListEdit">
+    <option " value="ID NAME Verena Volkers">Verena Volkers</option>
+    <option value="ID Thomas Langlang">Thomas Langlang</option>
+    <option value="ID oder Name">Verena Keinbart</option>
+    <option value="id oder Name">Audius Homan</option>
+    </select>
+    </form>
+    </div>   
+
+
     `
     // pre-set Task
     let initialDate = editTask.date; //  YYYY-MM-DD (!)
     let dateInput = document.getElementById("edit_input");
     dateInput.value = initialDate;
+
+    function handleCarSelection() {
+        const selectedCar = document.getElementById('cars').value;
+        console.log(`Ausgewähltes Auto: ${selectedCar}`);
+    }
     
+    document.getElementById('cars').addEventListener('change', handleCarSelection);
 
 }
 
-    
+
