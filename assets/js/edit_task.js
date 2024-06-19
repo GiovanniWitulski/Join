@@ -1,10 +1,12 @@
-let editContactsEmblem = [];
-let editContacts = []
+let editContacts = [];
+let choosenContactsEdit = [];
 
-// load contacts for edit -> saved in right format for Taskboard//
-// Extern deklariertes Array für editContacts
+// Starten der Verarbeitung der Kontaktdatenkette
+processContacts().then(() => {
+    // Hier können Sie die Funktion aufrufen, die auf editContacts zugreifen soll
+    // Beispiel: IhreFunktionDieEditContactsVerwendet();
+});
 
-// Funktion zum Laden der Kontaktdaten
 async function loadContacts() {
     const FIREFIREBASE_URL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app/';
     const endpoint = 'contacts';
@@ -25,7 +27,7 @@ async function loadContacts() {
     }
 }
 
-// Funktion zur Erstellung des SVG-basierten Profilbildes
+// Funktion zur Erstellung Profilbild
 function createContactEdit(vorname, nachname, color) {
     const vornameInitial = vorname.charAt(0).toUpperCase(); // Erster Buchstabe des Vornamens
     const nachnameInitial = nachname ? nachname.charAt(0).toUpperCase() : ''; // Erster Buchstabe des Nachnamens, falls vorhanden
@@ -41,6 +43,9 @@ function createContactEdit(vorname, nachname, color) {
 
 // Hauptfunktion zum Laden, Verarbeiten und Speichern der Kontaktdaten
 async function processContacts() {
+    // Sicherstellen, dass editContacts jedes Mal neu initialisiert wird
+    editContacts = [];
+
     try {
         // Laden der Kontaktdaten
         const contacts = await loadContacts();
@@ -62,19 +67,27 @@ async function processContacts() {
 
         // Ausgabe des editContacts Arrays zur Überprüfung
         console.log('editContacts:', editContacts);
+        console.log("editContactlength", editContacts.length);
 
     } catch (error) {
         console.error('Fehler bei der Verarbeitung der Kontakte:', error);
+        throw error;
     }
 }
 
-// Starten der Verarbeitung der Kontaktdatenkette
-processContacts();
 
 ///////// RENDER EDIT TASK ////////// 
 function editTaskOverlay(idTask, i){    //use of same container as Overlay/PopupTask
     const editTask = TaskBoard[i];
-    let userEmblems = "";
+    let contactListEdit='';
+    for (i=0; i<editContacts.length;i++){       
+        let prename = editContacts[i].assignedTo[0];
+        let name = editContacts[i].assignedTo[1];
+        let userIcon = editContacts[i].contactEmblem;
+        contactListEdit += '<div id="contactFieldEdit'+i+'" class="contactFieldEdit"><div class="edit-contact-name-svg">'+userIcon+' '+prename+' '+name+'</div><div id="editCheckbox'+i+'"><img class="edit-contact-check" src="/assets/svg/rectangle.svg" alt=""></div></div>';
+    } 
+    
+
     /*
     if (editTask.subtask[0] !== undefined){
         
@@ -99,29 +112,18 @@ function editTaskOverlay(idTask, i){    //use of same container as Overlay/Popup
     </label>
     </form>   
     
-    <form action="/action_page.php">    
-    <select name="cars" id="cars" class="nameListEdit">
-    <option " value="ID NAME Verena Volkers">Verena Volkers</option>
-    <option value="ID Thomas Langlang">Thomas Langlang</option>
-    <option value="ID oder Name">Verena Keinbart</option>
-    <option value="id oder Name">Audius Homan</option>
-    </select>
-    </form>
-    </div>   
-
+    
+    
+    <div class="contact-list-container">
+    ${contactListEdit}
+    </div>
 
     `
-    // pre-set Task
+    // pre-set date // don´t touch
     let initialDate = editTask.date; //  YYYY-MM-DD (!)
     let dateInput = document.getElementById("edit_input");
     dateInput.value = initialDate;
-
-    function handleCarSelection() {
-        const selectedCar = document.getElementById('cars').value;
-        console.log(`Ausgewähltes Auto: ${selectedCar}`);
-    }
-    
-    document.getElementById('cars').addEventListener('change', handleCarSelection);
+    //
 
 }
 

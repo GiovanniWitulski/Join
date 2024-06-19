@@ -1,8 +1,5 @@
-console.log("board.js_loaded");
 let TaskBoard = []
-
 let BackgroundTaskBoard = [] 
-
 
 //global variables & Elementtargets
 const databaseURL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app';
@@ -17,8 +14,6 @@ let inProgress = document.getElementById('inProgressContainer');
 let awaitFeedback = document.getElementById('awaitFeedbackContainer');
 let done = document.getElementById('doneContainer');
 let Overlay = document.getElementById('overlayContainer');
-
-console.log ("TaskBoard:", TaskBoard);
 
 ////////////Main Start Functions///////////
 async function downloadData() {
@@ -169,7 +164,6 @@ function dropAt(newType){
         }
     }
 }
-
 
 // Board render Tasks container /////////////////
 
@@ -460,7 +454,6 @@ function awaitFeedbackContainer(){
 }                                       
   
 function doneContainer(){             
-    console.log("todoContainer Active");                
     done.innerHTML = '';
   
     for(i=0; i<TaskBoard.length; i++){
@@ -625,7 +618,6 @@ function OverlayTaskPopup(i){   // TO CODE/CONNECT: EditTaskFkt
         }
 
         if (OverlayTask.label === 1){
-            console.log("labelcheck_Bold700active");
             document.getElementById('overlayDueDate').style.cssText = 'font-weight: 700; color: #42526E;';
             document.getElementById('overlayAssignedToText').style.cssText = 'font-weight: 700; color: #42526E;';
             document.getElementById('overlayPriorityText').style.cssText = 'font-weight: 700; color: #42526E;';
@@ -635,28 +627,19 @@ function OverlayTaskPopup(i){   // TO CODE/CONNECT: EditTaskFkt
 
 function toggleCheckboxValue(taskid, position, o) {
     console.log("toggleCheckboxValue id: position:", taskid, position);
-
     for (i=0; i<TaskBoard.length; i++){
         const findTask = TaskBoard[i].taskid;
         let subtaskValue = TaskBoard[i].subtaskSum[position];
-
-
         if (findTask == taskid){   
             console.log("taskfound at arrayposition:", i);
-            console.log(" alter sumbSumvalue:", subtaskValue);
-
-            
+            console.log(" alter sumbSumvalue:", subtaskValue);            
             if (subtaskValue === 0) {
                 TaskBoard[i].subtaskSum[position] = 1;
             } else {
                 TaskBoard[i].subtaskSum[position] = 0;
-
-             }
-            
+             }            
              console.log("Neuer sumbSumvalue:", TaskBoard[i].subtaskSum[position]);
-
-        }
-            
+        }            
     }
     OverlayTaskPopup(o);
     renderBoard();
