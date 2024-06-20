@@ -1,6 +1,8 @@
 let editContacts = [];
 let editContactsShow = [];
 let choosenContactsEdit = [];
+let EditTask = [];
+let contactListEdit='';
 
 
 processContacts(); // start load contacts and fill array edit contact
@@ -64,22 +66,55 @@ async function processContacts() {
     }
 }
 
-function FilterContactsEdit (event){
-    const searchedContact = event.target.value;
-    console.log(searchedContact);
+//search functions //
+
+function FilterContactsEdit(event) {
+    const searchedContact = event.target.value.toLowerCase(); // Umwandlung des Suchbegriffs in Kleinbuchstaben für Case-Insensitive Suche
+    if (searchedContact === ""){
+        editContactsShow = editContacts;
+        return;
+    }
+    editContactsShow = [];
+    for (let i = 0; i < editContacts.length; i++) {
+        let prename = editContacts[i].assignedTo[0].toLowerCase(); // Vorname in Kleinbuchstaben umwandeln
+        let name = editContacts[i].assignedTo[1].toLowerCase();    // Nachname in Kleinbuchstaben umwandeln
+
+        // Überprüfen, ob der Vorname oder der Nachname den Suchbegriff enthalten
+        if (prename.includes(searchedContact) || name.includes(searchedContact)) {
+            const foundContact = editContacts[i]
+            console.log(foundContact);
+            editContactsShow.push(foundContact);
+        }
+    }
+    console.log("editContactsShow after search", editContactsShow);
+    renderContactListEdit();
 }
-
-
-
 console.log("editContactsShow", editContactsShow);
 
 ///////// RENDER EDIT TASK ////////// 
-function editTaskOverlay(idTask, i){    //use of same container as Overlay/PopupTask
+/*
+function renderContactListEdit() {
+    for (i=0; i<editContactsShow.length;i++){       
+        let prename = editContactsShow[i].assignedTo[0];
+        let name = editContactsShow[i].assignedTo[1];
+        let userIcon = editContactsShow[i].contactEmblem;
+        contactListEdit += '<div id="contactFieldEdit'+i+'" class="contactFieldEdit"><div class="edit-contact-name-svg">'+userIcon+' '+prename+' '+name+'</div><div id="editCheckbox'+i+'"><img class="edit-contact-check" src="/assets/svg/rectangle.svg" alt=""></div></div>';
+    } 
+    return contactListEdit;
+    editTaskRender();
+} */
 
-    const editTask = TaskBoard[i];
+function editTaskOverlay(idTask, i){
+    EditTask = TaskBoard[i];
+    editTaskRender(idTask, i);
+}
+
+function editTaskRender(idTask, i){    //use of same container as Overlay/PopupTask
+
+    const editTask = EditTask;
     let placeholderTitle = editTask.title;
     let placeholderDescription = editTask.description;
-    let contactListEdit='';
+    
     for (i=0; i<editContactsShow.length;i++){       
         let prename = editContactsShow[i].assignedTo[0];
         let name = editContactsShow[i].assignedTo[1];
@@ -116,7 +151,7 @@ function editTaskOverlay(idTask, i){    //use of same container as Overlay/Popup
         <img onclick="" src="/assets/svg/arrow_drop_downaa.svg" alt="openContactList"></div>
     </div>
     
-    <div class="contact-list-container">
+    <div id="contact-list-container" class="contact-list-container">
     ${contactListEdit}
     </div>
 
