@@ -1,11 +1,9 @@
 let editContacts = [];
+let editContactsShow = [];
 let choosenContactsEdit = [];
 
-// Starten der Verarbeitung der Kontaktdatenkette
-processContacts().then(() => {
-    // Hier können Sie die Funktion aufrufen, die auf editContacts zugreifen soll
-    // Beispiel: IhreFunktionDieEditContactsVerwendet();
-});
+
+processContacts(); // start load contacts and fill array edit contact
 
 async function loadContacts() {
     const FIREFIREBASE_URL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app/';
@@ -41,53 +39,53 @@ function createContactEdit(vorname, nachname, color) {
     return svgTemplate;
 }
 
-// Hauptfunktion zum Laden, Verarbeiten und Speichern der Kontaktdaten
 async function processContacts() {
-    // Sicherstellen, dass editContacts jedes Mal neu initialisiert wird
     editContacts = [];
-
     try {
-        // Laden der Kontaktdaten
         const contacts = await loadContacts();
-
-        // Bearbeiten der Kontaktdaten und Erstellen der SVG-Profile
         contacts.forEach(contact => {
             const { vorname, name, color } = contact;
-            const nachname = name || ''; // Der Nachname wird aus dem Feld .name genommen, falls vorhanden
-
-            // Erstellen des SVG für das Profilbild
+            const nachname = name || ''; 
             const svg = createContactEdit(vorname, nachname, color);
-
-            // Speichern der bearbeiteten Daten im editContacts Array
             editContacts.push({
-                assignedTo: [vorname, nachname], // Vorname und Nachname separat speichern
+                assignedTo: [vorname, nachname], 
+                contactEmblem: svg
+            });
+            editContactsShow.push({
+                assignedTo: [vorname, nachname], 
                 contactEmblem: svg
             });
         });
-
-        // Ausgabe des editContacts Arrays zur Überprüfung
         console.log('editContacts:', editContacts);
         console.log("editContactlength", editContacts.length);
-
     } catch (error) {
         console.error('Fehler bei der Verarbeitung der Kontakte:', error);
         throw error;
     }
 }
 
+function FilterContactsEdit (event){
+    const searchedContact = event.target.value;
+    console.log(searchedContact);
+}
+
+
+
+console.log("editContactsShow", editContactsShow);
 
 ///////// RENDER EDIT TASK ////////// 
 function editTaskOverlay(idTask, i){    //use of same container as Overlay/PopupTask
+
     const editTask = TaskBoard[i];
+    let placeholderTitle = editTask.title;
+    let placeholderDescription = editTask.description;
     let contactListEdit='';
-    for (i=0; i<editContacts.length;i++){       
-        let prename = editContacts[i].assignedTo[0];
-        let name = editContacts[i].assignedTo[1];
-        let userIcon = editContacts[i].contactEmblem;
+    for (i=0; i<editContactsShow.length;i++){       
+        let prename = editContactsShow[i].assignedTo[0];
+        let name = editContactsShow[i].assignedTo[1];
+        let userIcon = editContactsShow[i].contactEmblem;
         contactListEdit += '<div id="contactFieldEdit'+i+'" class="contactFieldEdit"><div class="edit-contact-name-svg">'+userIcon+' '+prename+' '+name+'</div><div id="editCheckbox'+i+'"><img class="edit-contact-check" src="/assets/svg/rectangle.svg" alt=""></div></div>';
     } 
-    
-
     /*
     if (editTask.subtask[0] !== undefined){
         
@@ -110,9 +108,13 @@ function editTaskOverlay(idTask, i){    //use of same container as Overlay/Popup
     <label for="edit_input" class="calendar-icon-label">
     <input type="date" id="edit_input" name="edit_input" class="date-input" placeholder="tt.mm.jjj">
     </label>
-    </form>   
+    </form>       
     
-    
+    <div class="SearchContactEdit">
+        <input type="text" id="InputSearchEdit" class="InputSearchEdit" placeholder="Select contacts to assign">
+        <div id="ContactListEditButton" class="contact-list-edit-button">
+        <img onclick="" src="/assets/svg/arrow_drop_downaa.svg" alt="openContactList"></div>
+    </div>
     
     <div class="contact-list-container">
     ${contactListEdit}
@@ -124,6 +126,7 @@ function editTaskOverlay(idTask, i){    //use of same container as Overlay/Popup
     let dateInput = document.getElementById("edit_input");
     dateInput.value = initialDate;
     //
+    const ContactSearchField = document.getElementById('InputSearchEdit').addEventListener('input', FilterContactsEdit);
 
 }
 
