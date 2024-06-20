@@ -1,8 +1,14 @@
 let editContacts = [];
 let editContactsShow = [];
-let choosenContactsEdit = [];
 let EditTask = [];
 let contactListEdit='';
+let taskboardPosition = 0;
+let newTitle;
+let newDescription;
+let newDate;
+let choosenContactsEdit = [];
+let newSubtask = [];
+
 
 
 processContacts(); // start load contacts and fill array edit contact
@@ -27,7 +33,7 @@ async function loadContacts() {
     }
 }
 
-// Funktion zur Erstellung Profilbild
+// Funktion Profilbild //
 function createContactEdit(vorname, nachname, color) {
     const vornameInitial = vorname.charAt(0).toUpperCase(); // Erster Buchstabe des Vornamens
     const nachnameInitial = nachname ? nachname.charAt(0).toUpperCase() : ''; // Erster Buchstabe des Nachnamens, falls vorhanden
@@ -87,9 +93,18 @@ function FilterContactsEdit(event) {
         }
     }
     console.log("editContactsShow after search", editContactsShow);
-    renderContactListEdit();
+    
 }
-console.log("editContactsShow", editContactsShow);
+// EditedTask -> Taskboard // later upload complete Taskboard
+
+function storeNewData(){ //delete old task, add new task with old id
+    let DataEdit = EditTask;
+    EditTask.title = newTitle;
+    EditTask.description = newDescription;
+    EditTask.assignedTo = choosenContactsEdit;
+    EditTask.date = newDate
+}
+
 
 ///////// RENDER EDIT TASK ////////// 
 /*
@@ -106,6 +121,7 @@ function renderContactListEdit() {
 
 function editTaskOverlay(idTask, i){
     EditTask = TaskBoard[i];
+    taskboardPosition = i;
     editTaskRender(idTask, i);
 }
 
@@ -138,6 +154,14 @@ function editTaskRender(idTask, i){    //use of same container as Overlay/PopupT
     Overlay.innerHTML = `
     <div class="board-edit-task">
     <div class="close-edit"><img onclick="closeOverlay(${idTask}, ${i})" src="/assets/svg/close_black.svg" alt="close"></div>
+    
+    <div id="edit-title" class="edit-title">
+        <input type="text" id="titleEdit" class="edit-title-input" placeholder="${editTask.title}">
+    </div>
+
+    <div id="edit-description" class="edit-description">
+    <textarea id="descriptionEdit" class="edit-description-input" placeholder="${editTask.description}"></textarea>
+    </div>
 
     <form action="/action_page.php">
     <label for="edit_input" class="calendar-icon-label">
