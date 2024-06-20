@@ -234,7 +234,13 @@ async function getTheDataForPostTask(event) {
 
 
 async function showNotification() {
-    document.getElementById('taskAddedNotification').classList.add('showNotification');
+    const notificationElement = document.getElementById('taskAddedNotification');
+notificationElement.classList.remove('none');
+
+setTimeout(() => {
+    notificationElement.classList.add('showNotification');
+}, 100);
+
     
     // 2000 Millisekunden = 2 Sekunden
     setTimeout(function() {
