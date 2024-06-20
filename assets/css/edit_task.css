@@ -181,6 +181,7 @@
 .contact-list-edit-button{
     padding-right: 16px;
     padding-left: 16px;
+    cursor: pointer;
 }
 
 .edit-contact-name-svg{
@@ -203,3 +204,13 @@
 .checkbox.selected {
     background-image: url('/assets/svg/checkboxWhite.svg');
 }
+
+.background-blue {
+    background-color: #2A3647;
+    color: white;
+}
+
+.hiddenMenue{
+    display: none;
+}
+

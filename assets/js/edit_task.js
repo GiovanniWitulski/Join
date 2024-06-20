@@ -1,14 +1,16 @@
 let editContacts = [];
 let editContactsShow = [];
 let EditTask = [];
-let contactListEdit='';
+let contactListEdit;
 let taskboardPosition = 0;
+let searchButton = "/assets/svg/arrow_drop_downaa.svg";
 let newTitle;
 let newDescription;
 let newDate;
 let newPriority;
 let choosenContactsEdit = [];
 let newSubtasks = [];
+let taskIdBoard = 0;
 
 
 
@@ -75,7 +77,7 @@ async function processContacts() {
 
 //search functions //
 
-function FilterContactsEdit(event) {
+function filterContactsEdit(event) {
     const searchedContact = event.target.value.toLowerCase(); // Umwandlung des Suchbegriffs in Kleinbuchstaben für Case-Insensitive Suche
     if (searchedContact === ""){
         editContactsShow = editContacts;
@@ -94,11 +96,37 @@ function FilterContactsEdit(event) {
         }
     }
     console.log("editContactsShow after search", editContactsShow);
-    
+    renderContactListEdit();
+}
+
+function clickButtonSearch(){
+    if (searchButton === "/assets/svg/arrow_drop_downaa.svg"){
+        searchButton = "/assets/svg/arrow_drop_up.svg";
+        document.getElementById('contact-list-container').classList.remove('hiddenMenue');
+    }
+    else if (searchButton === "/assets/svg/arrow_drop_up.svg"){
+        searchButton = "/assets/svg/arrow_drop_downaa.svg";
+        document.getElementById('contact-list-container').classList.add('hiddenMenue');
+    }    
+    return searchButton;
 }
 // EditedTask -> Taskboard // later upload complete Taskboard
 
-function storeNewData(){ //delete old task, add new task with old id
+function selectContact (contactId, p){
+    
+    for (i=0; i<choosenContactsEdit.length; i++){
+        comparesvg = choosenContactsEdit[i].svg;
+        contactsvg = editContactsShow[p].contactEmblem;
+    if (comparesvg === contactsvg){
+        document.getElementById(contactId).classList.remove('background-blue');        
+    } else {
+    document.getElementById('contactId').classList.add('background-blue');}
+    let addToAssigned = editContactsShow[i]
+    choosenContactsEdit.push(addToAssigned);
+    }
+}
+
+function storeNewData(idTask, i){ //onclick OK BUTTON // delete old task, add new task with old id
     EditTask.title = newTitle;
     EditTask.description = newDescription;
     EditTask.assignedTo = choosenContactsEdit;
@@ -106,25 +134,30 @@ function storeNewData(){ //delete old task, add new task with old id
     EditTask.priority = newPriority;
     EditTask.subtask = [];
     EditTask.subtask = newSubtasks;
+    overlayDeleteTask(idTask, i);
 }
 
 
 ///////// RENDER EDIT TASK ////////// 
-/*
-function renderContactListEdit() {
+
+function renderContactListEdit() { //rausgeholt aus render
+    contactListEdit = ''
     for (i=0; i<editContactsShow.length;i++){       
         let prename = editContactsShow[i].assignedTo[0];
         let name = editContactsShow[i].assignedTo[1];
         let userIcon = editContactsShow[i].contactEmblem;
         contactListEdit += '<div id="contactFieldEdit'+i+'" class="contactFieldEdit"><div class="edit-contact-name-svg">'+userIcon+' '+prename+' '+name+'</div><div id="editCheckbox'+i+'"><img class="edit-contact-check" src="/assets/svg/rectangle.svg" alt=""></div></div>';
     } 
+    console.log("contactListEdit",contactListEdit)
     return contactListEdit;
-    editTaskRender();
-} */
+    
+    
+} 
 
 function editTaskOverlay(idTask, i){
     EditTask = TaskBoard[i];
     taskboardPosition = i;
+    taskIdBoard = idTask;
     editTaskRender(idTask, i);
 }
 
@@ -133,14 +166,18 @@ function editTaskRender(idTask, i){    //use of same container as Overlay/PopupT
     const editTask = EditTask;
     let placeholderTitle = editTask.title;
     let placeholderDescription = editTask.description;
+    /*contactListEdit = '';             -->deactivated for placing outside
     
     for (i=0; i<editContactsShow.length;i++){       
         let prename = editContactsShow[i].assignedTo[0];
         let name = editContactsShow[i].assignedTo[1];
         let userIcon = editContactsShow[i].contactEmblem;
         contactListEdit += '<div id="contactFieldEdit'+i+'" class="contactFieldEdit"><div class="edit-contact-name-svg">'+userIcon+' '+prename+' '+name+'</div><div id="editCheckbox'+i+'"><img class="edit-contact-check" src="/assets/svg/rectangle.svg" alt=""></div></div>';
-    } 
+    } */
     /*
+
+
+     
     if (editTask.subtask[0] !== undefined){
         
         let subtask1 = editTask.subtask[0];
@@ -172,13 +209,13 @@ function editTaskRender(idTask, i){    //use of same container as Overlay/PopupT
     </label>
     </form>       
     
-    <div class="SearchContactEdit">
+    <div onclick="clickButtonSearch()" class="SearchContactEdit">
         <input type="text" id="InputSearchEdit" class="InputSearchEdit" placeholder="Select contacts to assign">
         <div id="ContactListEditButton" class="contact-list-edit-button">
-        <img onclick="" src="/assets/svg/arrow_drop_downaa.svg" alt="openContactList"></div>
+        <img  src="${searchButton}" alt="openContactList"></div>
     </div>
     
-    <div id="contact-list-container" class="contact-list-container">
+    <div id="contact-list-container" class="contact-list-container hiddenMenue">
     ${contactListEdit}
     </div>
 
@@ -188,7 +225,7 @@ function editTaskRender(idTask, i){    //use of same container as Overlay/PopupT
     let dateInput = document.getElementById("edit_input");
     dateInput.value = initialDate;
     //
-    const ContactSearchField = document.getElementById('InputSearchEdit').addEventListener('input', FilterContactsEdit);
+    const ContactSearchField = document.getElementById('InputSearchEdit').addEventListener('input', filterContactsEdit);
 
 }
 
