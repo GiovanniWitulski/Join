@@ -6,8 +6,9 @@ let taskboardPosition = 0;
 let newTitle;
 let newDescription;
 let newDate;
+let newPriority;
 let choosenContactsEdit = [];
-let newSubtask = [];
+let newSubtasks = [];
 
 
 
@@ -98,11 +99,13 @@ function FilterContactsEdit(event) {
 // EditedTask -> Taskboard // later upload complete Taskboard
 
 function storeNewData(){ //delete old task, add new task with old id
-    let DataEdit = EditTask;
     EditTask.title = newTitle;
     EditTask.description = newDescription;
     EditTask.assignedTo = choosenContactsEdit;
-    EditTask.date = newDate
+    EditTask.date = newDate;
+    EditTask.priority = newPriority;
+    EditTask.subtask = [];
+    EditTask.subtask = newSubtasks;
 }
 
 
