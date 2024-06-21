@@ -77,27 +77,43 @@ async function processContacts() {
 
 //search functions //
 
-function filterContactsEdit(event) {
-    const searchedContact = event.target.value.toLowerCase(); // Umwandlung des Suchbegriffs in Kleinbuchstaben für Case-Insensitive Suche
-    if (searchedContact === ""){
+function filterContactsEdit(eventOrValue) {
+    let searchedContact = '';
+
+    if (eventOrValue && eventOrValue.target) {
+        searchedContact = eventOrValue.target.value.toLowerCase(); 
+    } else {
+        searchedContact = ''; 
+    }
+
+    if (searchedContact === "") {
         editContactsShow = editContacts;
+        renderContactListEdit();
+        const SearchList = document.getElementById('contact-list-container');
+        SearchList.innerHTML = contactListEdit;         
         return;
     }
+
     editContactsShow = [];
     for (let i = 0; i < editContacts.length; i++) {
-        let prename = editContacts[i].assignedTo[0].toLowerCase(); // Vorname in Kleinbuchstaben umwandeln
-        let name = editContacts[i].assignedTo[1].toLowerCase();    // Nachname in Kleinbuchstaben umwandeln
+        let prename = editContacts[i].assignedTo[0].toLowerCase(); 
+        let name = editContacts[i].assignedTo[1].toLowerCase();    
 
-        // Überprüfen, ob der Vorname oder der Nachname den Suchbegriff enthalten
         if (prename.includes(searchedContact) || name.includes(searchedContact)) {
-            const foundContact = editContacts[i]
+            const foundContact = editContacts[i];
             console.log(foundContact);
             editContactsShow.push(foundContact);
         }
     }
+
+    document.getElementById('contact-list-container').classList.remove('hiddenMenue');
+
     console.log("editContactsShow after search", editContactsShow);
     renderContactListEdit();
+    const SearchList = document.getElementById('contact-list-container');
+    SearchList.innerHTML = contactListEdit;
 }
+
 
 function clickButtonSearch(){
     if (searchButton === "/assets/svg/arrow_drop_downaa.svg"){
@@ -108,6 +124,7 @@ function clickButtonSearch(){
         searchButton = "/assets/svg/arrow_drop_downaa.svg";
         document.getElementById('contact-list-container').classList.add('hiddenMenue');
     }    
+
     return searchButton;
 }
 // EditedTask -> Taskboard // later upload complete Taskboard
@@ -121,6 +138,7 @@ function selectContact (contactId, p){
         document.getElementById(contactId).classList.remove('background-blue');        
     } else {
     document.getElementById('contactId').classList.add('background-blue');}
+    // + svg bild ändern ""}
     let addToAssigned = editContactsShow[i]
     choosenContactsEdit.push(addToAssigned);
     }
@@ -135,6 +153,7 @@ function storeNewData(idTask, i){ //onclick OK BUTTON // delete old task, add ne
     EditTask.subtask = [];
     EditTask.subtask = newSubtasks;
     overlayDeleteTask(idTask, i);
+    TaskBoard.push(); // newTask = editTask
 }
 
 
@@ -146,38 +165,27 @@ function renderContactListEdit() { //rausgeholt aus render
         let prename = editContactsShow[i].assignedTo[0];
         let name = editContactsShow[i].assignedTo[1];
         let userIcon = editContactsShow[i].contactEmblem;
-        contactListEdit += '<div id="contactFieldEdit'+i+'" class="contactFieldEdit"><div class="edit-contact-name-svg">'+userIcon+' '+prename+' '+name+'</div><div id="editCheckbox'+i+'"><img class="edit-contact-check" src="/assets/svg/rectangle.svg" alt=""></div></div>';
+        contactListEdit += '<div id="contactFieldEdit'+i+'" onclick="se" class="contactFieldEdit"><div class="edit-contact-name-svg">'+userIcon+' '+prename+' '+name+'</div><div id="editCheckbox'+i+'"><img class="edit-contact-check" src="/assets/svg/rectangle.svg" alt=""></div></div>';
     } 
-    console.log("contactListEdit",contactListEdit)
+    
     return contactListEdit;
-    
-    
-} 
+}    
 
 function editTaskOverlay(idTask, i){
     EditTask = TaskBoard[i];
     taskboardPosition = i;
     taskIdBoard = idTask;
-    editTaskRender(idTask, i);
+    renderContactListEdit();
+    editTaskRender();
 }
 
-function editTaskRender(idTask, i){    //use of same container as Overlay/PopupTask
-
-    const editTask = EditTask;
+function editTaskRender(){    //use of same container as Overlay/PopupTask
+    let editTask = '';
+    editTask = EditTask;
     let placeholderTitle = editTask.title;
     let placeholderDescription = editTask.description;
-    /*contactListEdit = '';             -->deactivated for placing outside
-    
-    for (i=0; i<editContactsShow.length;i++){       
-        let prename = editContactsShow[i].assignedTo[0];
-        let name = editContactsShow[i].assignedTo[1];
-        let userIcon = editContactsShow[i].contactEmblem;
-        contactListEdit += '<div id="contactFieldEdit'+i+'" class="contactFieldEdit"><div class="edit-contact-name-svg">'+userIcon+' '+prename+' '+name+'</div><div id="editCheckbox'+i+'"><img class="edit-contact-check" src="/assets/svg/rectangle.svg" alt=""></div></div>';
-    } */
-    /*
 
-
-     
+     /*   
     if (editTask.subtask[0] !== undefined){
         
         let subtask1 = editTask.subtask[0];
@@ -193,14 +201,14 @@ function editTaskRender(idTask, i){    //use of same container as Overlay/PopupT
     Overlay.innerHTML = '';
     Overlay.innerHTML = `
     <div class="board-edit-task">
-    <div class="close-edit"><img onclick="closeOverlay(${idTask}, ${i})" src="/assets/svg/close_black.svg" alt="close"></div>
+    <div class="close-edit"><img onclick="closeOverlay(${taskIdBoard}, ${taskboardPosition})" src="/assets/svg/close_black.svg" alt="close"></div>
     
     <div id="edit-title" class="edit-title">
-        <input type="text" id="titleEdit" class="edit-title-input" placeholder="${editTask.title}">
+        <input type="text" id="titleEdit" class="edit-title-input" placeholder="${placeholderTitle}">
     </div>
 
     <div id="edit-description" class="edit-description">
-    <textarea id="descriptionEdit" class="edit-description-input" placeholder="${editTask.description}"></textarea>
+    <textarea id="descriptionEdit" class="edit-description-input" placeholder="${placeholderDescription}"></textarea>
     </div>
 
     <form action="/action_page.php">
@@ -209,7 +217,7 @@ function editTaskRender(idTask, i){    //use of same container as Overlay/PopupT
     </label>
     </form>       
     
-    <div onclick="clickButtonSearch()" class="SearchContactEdit">
+    <div onclick="clickButtonSearch(); filterContactsEdit();" class="SearchContactEdit">
         <input type="text" id="InputSearchEdit" class="InputSearchEdit" placeholder="Select contacts to assign">
         <div id="ContactListEditButton" class="contact-list-edit-button">
         <img  src="${searchButton}" alt="openContactList"></div>
@@ -219,6 +227,10 @@ function editTaskRender(idTask, i){    //use of same container as Overlay/PopupT
     ${contactListEdit}
     </div>
 
+    <div id="choosenContacts" class="choosen-contacts">
+
+    </div>
+    
     `
     // pre-set date // don´t touch
     let initialDate = editTask.date; //  YYYY-MM-DD (!)
@@ -226,6 +238,7 @@ function editTaskRender(idTask, i){    //use of same container as Overlay/PopupT
     dateInput.value = initialDate;
     //
     const ContactSearchField = document.getElementById('InputSearchEdit').addEventListener('input', filterContactsEdit);
+    
 
 }
 

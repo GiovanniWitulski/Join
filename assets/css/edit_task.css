@@ -141,6 +141,8 @@
     border: 1px solid #ccc;
     overflow-y: auto; /* Vertikaler Scrollbalken anzeigen, wenn nötig */
     overflow-x: hidden;
+    z-index: 3;
+    
 }
 
 .contactFieldEdit{
@@ -203,6 +205,12 @@
 
 .checkbox.selected {
     background-image: url('/assets/svg/checkboxWhite.svg');
+}
+
+.choosen-contacts{
+    display: flex;
+    width: 100%;
+    height: 56px;
 }
 
 .background-blue {
