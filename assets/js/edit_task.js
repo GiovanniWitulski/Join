@@ -9,6 +9,7 @@ let newDescription;
 let newDate;
 let newPriority;
 let choosenContactsEdit = []; //wird befüllt von alt und später neu contacts, variabel
+
 let newSubtasks = [];
 let taskIdBoard = 0;
 
@@ -119,13 +120,14 @@ function filterContactsEdit(eventOrValue) {
             editContactsShow.push(foundContact);
         }
     }
-
+    testForChoosenContact();
     document.getElementById('contact-list-container').classList.remove('hiddenMenue');
 
     console.log("editContactsShow after search", editContactsShow);
-    renderContactListEdit();
+    
     const SearchList = document.getElementById('contact-list-container');
     SearchList.innerHTML = contactListEdit;
+    
 }
 
 function clickButtonSearch(){
@@ -144,10 +146,10 @@ function clickButtonSearch(){
 
 function selectContact (contactId){    
     //1. Schleife, ist es im choosen contacts 2. if not add + set check=1
-    
 
     for (i=0; i<choosenContactsEdit.length; i++){
         let compareId = choosenContactsEdit[i].id;
+        console.log("compare idclick", compareId);
         if (compareId === contactId){
             choosenContactsEdit.splice(i, 1);
             editContacts[contactId].checked = 0;
@@ -155,8 +157,11 @@ function selectContact (contactId){
             let addToAssignedTo = editContacts[contactId];
             editContacts[contactId].checked = 1;
             choosenContactsEdit.push(addToAssignedTo)
+            console.log("changedto1", editContacts[contactId].checked);
+            console.log(editContacts);
          } 
     }
+    
     filterContactsEdit();
 }
 
@@ -175,8 +180,31 @@ function storeNewData(idTask, i){ //onclick OK BUTTON // delete old task, add ne
 
 ///////// RENDER EDIT TASK ////////// 
 
+function testForChoosenContact (){
+    for (i=0; i<editContactsShow; i++){
+        editContactsShow[i].checked = 0;
+    }
+    console.log("testforChoosenactive");
+    console.log("testforcontacactive");
+    for (i=0; i<EditTask.assignedTo.length; i++){
+        let taskAssignedto = EditTask.assignedTo[i];
+    for (c=0; c<editContacts.length; c++){
+        let fullname = '';
+        let vorname = editContacts[c].assignedTo[0];
+        let nachname = editContacts[c].assignedTo[1];
+        fullname = vorname + ' ' + nachname;
+        if (fullname === taskAssignedto){
+            console.log("Match :D", fullname);
+            editContacts[c].checked = 1;
+        }
+        
+    }
+    
+}  }
+
 function renderContactListEdit() { //rausgeholt aus render
     contactListEdit = ''
+    console.log("renderContalistActive");
     for (i=0; i<editContactsShow.length;i++){  
         let contactCheck = editContactsShow[i].checked;   
         let editContactId = editContactsShow[i].id;
@@ -184,7 +212,7 @@ function renderContactListEdit() { //rausgeholt aus render
         let name = editContactsShow[i].assignedTo[1];
         let userIcon = editContactsShow[i].contactEmblem;
         if (contactCheck === 1){
-            contactListEdit += '<div id="'+editContactId+'" onclick="selectContact('+editContactId+')" class="contactFieldEdit"><div class="edit-contact-name-svg">'+userIcon+' '+prename+' '+name+'</div><div id="editCheckbox"><img class="edit-contact-check" src="/assets/svg/checkboxWhite.svg" alt=""></div></div>';
+            contactListEdit += '<div id="'+editContactId+'" onclick="selectContact('+editContactId+')" class="background-blue"><div class="edit-contact-name-svg">'+userIcon+' '+prename+' '+name+'</div><div id="editCheckbox"><img class="edit-contact-check" src="/assets/svg/checkboxWhite.svg" alt=""></div></div>';
         } else {
             ///!!! einfach anderer klasse für div vwerdnen, klasse check klasse uncheckt
         contactListEdit += '<div id="'+editContactId+'" onclick="selectContact('+editContactId+')" class="contactFieldEdit"><div class="edit-contact-name-svg">'+userIcon+' '+prename+' '+name+'</div><div id="editCheckbox'+i+'"><img class="edit-contact-check" src="/assets/svg/rectangle.svg" alt=""></div></div>';
@@ -199,6 +227,7 @@ function editTaskOverlay(idTask, i){
     EditTask = TaskBoard[i];
     taskboardPosition = i;
     taskIdBoard = idTask;
+    testForChoosenContact ();
     renderContactListEdit();
     editTaskRender();
 }
