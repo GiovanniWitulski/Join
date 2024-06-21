@@ -1,16 +1,17 @@
-let editContacts = [];
-let editContactsShow = [];
+let editContacts = []; //loaded contacts
+let editContactsShow = []; //contacts with id for render
 let EditTask = [];
-let contactListEdit;
+let contactListEdit; //liste fürs reinrendern in suche
 let taskboardPosition = 0;
 let searchButton = "/assets/svg/arrow_drop_downaa.svg";
 let newTitle;
 let newDescription;
 let newDate;
 let newPriority;
-let choosenContactsEdit = [];
+let choosenContactsEdit = []; //wird befüllt von alt und später neu contacts, variabel
 let newSubtasks = [];
 let taskIdBoard = 0;
+
 
 
 
@@ -52,23 +53,37 @@ function createContactEdit(vorname, nachname, color) {
 
 async function processContacts() {
     editContacts = [];
+    editContactsShow = []; // 
+    let editContactId = 0; // 
+
     try {
         const contacts = await loadContacts();
         contacts.forEach(contact => {
             const { vorname, name, color } = contact;
             const nachname = name || ''; 
             const svg = createContactEdit(vorname, nachname, color);
+
             editContacts.push({
+                checked: 0,
+                id: editContactId,
                 assignedTo: [vorname, nachname], 
                 contactEmblem: svg
             });
+
             editContactsShow.push({
+                checked: 0,
+                id: editContactId,
                 assignedTo: [vorname, nachname], 
                 contactEmblem: svg
             });
+
+            editContactId++;
         });
+
         console.log('editContacts:', editContacts);
-        console.log("editContactlength", editContacts.length);
+        console.log('editContactsShow:', editContactsShow);
+        console.log('editContactlength:', editContacts.length); // Länge des editContacts Arrays
+
     } catch (error) {
         console.error('Fehler bei der Verarbeitung der Kontakte:', error);
         throw error;
@@ -101,7 +116,6 @@ function filterContactsEdit(eventOrValue) {
 
         if (prename.includes(searchedContact) || name.includes(searchedContact)) {
             const foundContact = editContacts[i];
-            console.log(foundContact);
             editContactsShow.push(foundContact);
         }
     }
@@ -113,7 +127,6 @@ function filterContactsEdit(eventOrValue) {
     const SearchList = document.getElementById('contact-list-container');
     SearchList.innerHTML = contactListEdit;
 }
-
 
 function clickButtonSearch(){
     if (searchButton === "/assets/svg/arrow_drop_downaa.svg"){
@@ -129,19 +142,22 @@ function clickButtonSearch(){
 }
 // EditedTask -> Taskboard // later upload complete Taskboard
 
-function selectContact (contactId, p){
+function selectContact (contactId){    
+    //1. Schleife, ist es im choosen contacts 2. if not add + set check=1
     
+
     for (i=0; i<choosenContactsEdit.length; i++){
-        comparesvg = choosenContactsEdit[i].svg;
-        contactsvg = editContactsShow[p].contactEmblem;
-    if (comparesvg === contactsvg){
-        document.getElementById(contactId).classList.remove('background-blue');        
-    } else {
-    document.getElementById('contactId').classList.add('background-blue');}
-    // + svg bild ändern ""}
-    let addToAssigned = editContactsShow[i]
-    choosenContactsEdit.push(addToAssigned);
+        let compareId = choosenContactsEdit[i].id;
+        if (compareId === contactId){
+            choosenContactsEdit.splice(i, 1);
+            editContacts[contactId].checked = 0;
+        } else {
+            let addToAssignedTo = editContacts[contactId];
+            editContacts[contactId].checked = 1;
+            choosenContactsEdit.push(addToAssignedTo)
+         } 
     }
+    filterContactsEdit();
 }
 
 function storeNewData(idTask, i){ //onclick OK BUTTON // delete old task, add new task with old id
@@ -161,11 +177,19 @@ function storeNewData(idTask, i){ //onclick OK BUTTON // delete old task, add ne
 
 function renderContactListEdit() { //rausgeholt aus render
     contactListEdit = ''
-    for (i=0; i<editContactsShow.length;i++){       
+    for (i=0; i<editContactsShow.length;i++){  
+        let contactCheck = editContactsShow[i].checked;   
+        let editContactId = editContactsShow[i].id;
         let prename = editContactsShow[i].assignedTo[0];
         let name = editContactsShow[i].assignedTo[1];
         let userIcon = editContactsShow[i].contactEmblem;
-        contactListEdit += '<div id="contactFieldEdit'+i+'" onclick="se" class="contactFieldEdit"><div class="edit-contact-name-svg">'+userIcon+' '+prename+' '+name+'</div><div id="editCheckbox'+i+'"><img class="edit-contact-check" src="/assets/svg/rectangle.svg" alt=""></div></div>';
+        if (contactCheck === 1){
+            contactListEdit += '<div id="'+editContactId+'" onclick="selectContact('+editContactId+')" class="contactFieldEdit"><div class="edit-contact-name-svg">'+userIcon+' '+prename+' '+name+'</div><div id="editCheckbox"><img class="edit-contact-check" src="/assets/svg/checkboxWhite.svg" alt=""></div></div>';
+        } else {
+            ///!!! einfach anderer klasse für div vwerdnen, klasse check klasse uncheckt
+        contactListEdit += '<div id="'+editContactId+'" onclick="selectContact('+editContactId+')" class="contactFieldEdit"><div class="edit-contact-name-svg">'+userIcon+' '+prename+' '+name+'</div><div id="editCheckbox'+i+'"><img class="edit-contact-check" src="/assets/svg/rectangle.svg" alt=""></div></div>';
+    }
+        
     } 
     
     return contactListEdit;
