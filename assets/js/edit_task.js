@@ -181,8 +181,9 @@ function storeNewData(idTask, i){ //onclick OK BUTTON // delete old task, add ne
 ///////// RENDER EDIT TASK ////////// 
 
 function testForChoosenContact (){
-    for (i=0; i<editContactsShow; i++){
+    for (i=0; i<editContactsShow.length; i++){
         editContactsShow[i].checked = 0;
+        console.log("loopactive=0");
     }
     console.log("testforChoosenactive");
     console.log("testforcontacactive");
@@ -224,6 +225,7 @@ function renderContactListEdit() { //rausgeholt aus render
 }    
 
 function editTaskOverlay(idTask, i){
+    
     EditTask = TaskBoard[i];
     taskboardPosition = i;
     taskIdBoard = idTask;
