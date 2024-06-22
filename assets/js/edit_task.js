@@ -145,7 +145,6 @@ function editSelectPriority (priority){
     EditTask.priority = priority;
     editRenderPriority();
     console.log("EditTAsk", EditTask);
-
 }
 
 function selectContact (contactId){    
@@ -192,8 +191,15 @@ function storeNewData(idTask, i){ //onclick OK BUTTON // delete old task, add ne
 
 
 ///////// RENDER EDIT TASK ////////// 
-function editRenderSubstask(){
-    
+function editRenderSubtask(){        
+        let editSubtask = document.getElementById('editRenderSubtasks');
+        editSubtask.innerHTML = ``;
+        let idCounter = 9;
+    for (i=0; i<EditTask.subtask.length; i++){
+        let editSubAdd = EditTask.subtask[i];
+        idCounter++;
+        editSubtask.innerHTML += `<div class="editSubtask"><div>&bull;'${editSubAdd}'</div><div class="edit-subtask-buttons"><img onclick="addSub(${idCounter})"src="/assets/svg/edit.svg" alt="edit"><div class="placeholder-div">|</div><img onclick="deleteSub(${idCounter})" src="/assets/svg/delete.svg" alt="delete"></div></div>`
+    }
 }
 
 function editRenderPriority(){
@@ -277,6 +283,7 @@ function editTaskOverlay(idTask, i){
     editTaskRender();
     renderChoosenContactsEmblems();
     editRenderPriority();
+    editRenderSubtask();
 }
 
 function editTaskRender(){    //use of same container as Overlay/PopupTask
@@ -302,7 +309,7 @@ function editTaskRender(){    //use of same container as Overlay/PopupTask
     <div class="close-edit"><img onclick="closeOverlay(${taskIdBoard}, ${taskboardPosition})" src="/assets/svg/close_black.svg" alt="close"></div>
     <h4 style="font-weight: 400;">Title</h4>
     <div id="edit-title" class="edit-title">
-        <input type="text" id="titleEdit" class="edit-title-input" placeholder="${placeholderTitle}">
+    <input type="text" id="titleEdit" class="edit-title-input" placeholder="${placeholderTitle}">
     </div>
     <h4 style="font-weight: 400;">Description</h4>
     <div id="edit-description" class="edit-description">
@@ -329,6 +336,9 @@ function editTaskRender(){    //use of same container as Overlay/PopupTask
     <div id="choosenContacts" class="choosen-contacts">
     </div>
     <h4 style="font-weight: 400;">Subtasks</h4>
+    <div id="editSubtaskInput" class="edit-subtask">
+    <input type="text" id="subtaskEdit" class="subtask-edit-input" placeholder="Add new Subtask"><div class="edit-subtask-add"><img src="/assets/svg/add.svg" alt="addsubtask" width="14" height="14"></div>
+    </div>
     <div id="editRenderSubtasks" class="edit-render-subtasks"></div> 
     `
     // pre-set date // don´t touch

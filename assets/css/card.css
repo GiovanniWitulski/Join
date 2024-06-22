@@ -41,6 +41,8 @@
     padding-bottom: 24px;
 }
 
+
+
 .card-sum-subtask{
     font-size: 12px;
     padding-left: 4px;
@@ -249,7 +251,10 @@
     display: none;
 }
 
-
+.background-fade {
+    opacity: 0.5;
+    filter: blur(1px); 
+}
 
 
 

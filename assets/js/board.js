@@ -551,10 +551,11 @@ function doneContainer(){
 // OVERLAY TASK / POPUP ///////////////////////
 
 
-function OverlayTaskPopup(i){   // TO CODE/CONNECT: EditTaskFkt
-       
-        const OverlayTask = TaskBoard[i];
+function OverlayTaskPopup(i){   // TO CODE/CONNECT: EditTaskFkt  
+        document.getElementById('mobileTamplateContent').classList.add('background-fade');
+        document.getElementById('Board').classList.add('background-fade');
 
+        const OverlayTask = TaskBoard[i];
 
         let emblem = '';
         let overlayContacts = '';
@@ -606,12 +607,13 @@ function OverlayTaskPopup(i){   // TO CODE/CONNECT: EditTaskFkt
         <div id="overlaySubtask1" class="overlay-subtask"><img class="overlay-checkbox-img" onclick="toggleCheckboxValue(${OverlayTask.taskid}, 1, ${i})"  src=${check1}> ${OverlayTask.subtask[1]}</div></div>
         </div>
         <div class="overlay-card-delete-edit">
-        <div onclick="overlayDeleteTask(${OverlayTask.taskid}, ${i})" class="overlay-cde"><img class="overlay-cde-img1" src="/assets/svg/delete.svg" alt="delete">Delete</div><div onclick="editTaskOverlay(${OverlayTask.taskid}, ${i})" class="overlay-cde"><img class="overlay-cde-img2" src="/assets/svg/edit.svg" alt="Edit">Edit</div>
+        <div onclick="overlayDeleteTask(${OverlayTask.taskid}, ${i})" class="overlay-cde"><img class="overlay-cde-img1" src="/assets/svg/delete.svg" alt="delete">Delete</div><div class="placeholder-div">|</div><div onclick="editTaskOverlay(${OverlayTask.taskid}, ${i})" class="overlay-cde"><img class="overlay-cde-img2" src="/assets/svg/edit.svg" alt="Edit">Edit</div>
         </div>
         </div>
         </div>
 
         `
+
         if (OverlayTask.subtask[0] === undefined){
             document.getElementById('overlaySubtask0').style.display = 'none';
         }
@@ -649,6 +651,9 @@ function toggleCheckboxValue(taskid, position, o) {
 
 function closeOverlay(closeId){ // Close Popup Task/OverlayTask
     Overlay.innerHTML = ``;
+    document.getElementById('mobileTamplateContent').classList.remove('background-fade');
+    document.getElementById('Board').classList.remove('background-fade');
+
 }                                   
 
 function overlayDeleteTask(idTask, i){          //TO CODE: update to server! -> update BackgroundTaskBoard -> update TaskBoard
