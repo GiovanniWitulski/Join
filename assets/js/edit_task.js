@@ -4,8 +4,6 @@ let EditTask = [];
 let contactListEdit; //liste fürs reinrendern in suche
 let taskboardPosition = 0;
 let searchButton = "/assets/svg/arrow_drop_downaa.svg";
-let newTitle;
-let newDescription;
 let newDate;
 let newPriority;
 let choosenContactsEdit = []; //wird befüllt von alt und später neu contacts, variabel
@@ -139,7 +137,7 @@ function clickButtonSearch(){
     return searchButton;
 }
 
-// EditedTask -> Taskboard // later upload complete Taskboard
+// Edit Task  // later upload complete EditTask -> Taskboard
 
 function editSelectPriority (priority){
     EditTask.priority = priority;
@@ -177,6 +175,53 @@ function selectContact (contactId){
     
 }
 
+function editAddSub(){
+    const inputField = document.getElementById('subtaskEdit');
+    const addSub = inputField.value;
+    EditTask.subtask.push(addSub);
+    EditTask.subtaskSum.push(0);
+    inputField.value = '';
+    console.log(EditTask);
+    editRenderSubtask();
+}
+
+function editEditSub(toEditSub){
+    let number = toEditSub;
+    let addID = number - 10;
+    const inputField = document.getElementById('subtaskEdit');
+    let toEdit = EditTask.subtask[addID];
+    inputField.value = toEdit;
+    editDeleteSub(toEditSub);
+}
+
+
+function editDeleteSub(toDeleteId){
+    let number = toDeleteId
+    let deleteID = number - 10;  //so wird die Stelle im Array gefunden.
+    EditTask.subtask.splice(deleteID, 1);
+    EditTask.subtaskSum.splice(deleteID, 1);
+    console.log(EditTask);
+    editRenderSubtask();
+}
+
+function getTitle(){
+    const inputField = document.getElementById('titleEdit'); 
+    const value = inputField.value.trim();
+    EditTask.title = value;
+}
+
+function getDescription(){
+    const inputField = document.getElementById('descriptionEdit');
+    const value = inputField.value.trim();
+    EditTask.description = value;
+}
+
+function getDate(){ 
+    const inputField = document.getElementById('Edit_Input');
+    const value = inputField.value;
+    console.log("dateinput", value);
+}
+
 function storeNewData(idTask, i){ //onclick OK BUTTON // delete old task, add new task with old id
     EditTask.title = newTitle;
     EditTask.description = newDescription;
@@ -198,7 +243,7 @@ function editRenderSubtask(){
     for (i=0; i<EditTask.subtask.length; i++){
         let editSubAdd = EditTask.subtask[i];
         idCounter++;
-        editSubtask.innerHTML += `<div class="editSubtask"><div>&bull;'${editSubAdd}'</div><div class="edit-subtask-buttons"><img onclick="addSub(${idCounter})"src="/assets/svg/edit.svg" alt="edit"><div class="placeholder-div">|</div><img onclick="deleteSub(${idCounter})" src="/assets/svg/delete.svg" alt="delete"></div></div>`
+        editSubtask.innerHTML += `<div class="editSubtask"><div>&bull; ${editSubAdd}</div><div class="edit-subtask-buttons"><img onclick="editEditSub(${idCounter})"src="/assets/svg/edit.svg" alt="edit"><div class="placeholder-div">|</div><img onclick="editDeleteSub(${idCounter})" src="/assets/svg/delete.svg" alt="delete"></div></div>`
     }
 }
 
@@ -291,18 +336,7 @@ function editTaskRender(){    //use of same container as Overlay/PopupTask
     editTask = EditTask;
     let placeholderTitle = editTask.title;
     let placeholderDescription = editTask.description;
-     /*   
-    if (editTask.subtask[0] !== undefined){
-        
-        let subtask1 = editTask.subtask[0];
-        let subtaskList = document.getElementById('edit-list-of-subtasks');
-        subtaskList.innerHTML += `<li id=subtask1><div class="content-of-subtask"><div id="">${subtask1}</div> <div class="edit-subtask-div"><button class="edit-btn" onclick=""></button><div class="btn-divider"></div><button onclick="" class="trash-btn"></button></div></div></li>`;
-    }
-    }
-    if (editTask.subtask[1] !== undefined){
-        secondSubtask = editTask.subtask[1];
-        
-    }           */ 
+    
     Overlay.innerHTML = '';
     Overlay.innerHTML = `
     <div class="board-edit-task">
@@ -317,8 +351,8 @@ function editTaskRender(){    //use of same container as Overlay/PopupTask
     </div>
     <h4 style="font-weight: 400;">Due date</h4>
     <form action="/action_page.php">
-    <label for="edit_input" class="calendar-icon-label">
-    <input type="date" id="edit_input" name="edit_input" class="date-input" placeholder="tt.mm.jjj">
+    <label for="calender_input" class="calendar-icon-label">
+    <input type="date" id="edit_input" name="date_input" class="date-input" placeholder="tt.mm.jjj">
     </label>
     </form>   
     <h4 style="font-weight: 400;">Priority</h4>
@@ -337,16 +371,20 @@ function editTaskRender(){    //use of same container as Overlay/PopupTask
     </div>
     <h4 style="font-weight: 400;">Subtasks</h4>
     <div id="editSubtaskInput" class="edit-subtask">
-    <input type="text" id="subtaskEdit" class="subtask-edit-input" placeholder="Add new Subtask"><div class="edit-subtask-add"><img src="/assets/svg/add.svg" alt="addsubtask" width="14" height="14"></div>
+    <input type="text" id="subtaskEdit" class="subtask-edit-input" placeholder="Add new Subtask"><div onclick="editAddSub()" class="edit-subtask-add"><img src="/assets/svg/add.svg" alt="addsubtask" width="14" height="14"></div>
     </div>
     <div id="editRenderSubtasks" class="edit-render-subtasks"></div> 
     `
-    // pre-set date // don´t touch
-    let initialDate = editTask.date; //  YYYY-MM-DD (!)
+    // pre-set date // don´t touch ;)
+    let initialDate = editTask.date; //  YYYY-MM-DD-Format (!)
     let dateInput = document.getElementById("edit_input");
     dateInput.value = initialDate;
     //
-    const ContactSearchField = document.getElementById('InputSearchEdit').addEventListener('input', filterContactsEdit);
+    document.getElementById('InputSearchEdit').addEventListener('input', filterContactsEdit);
+    document.getElementById('titleEdit').addEventListener('input', getTitle);
+    document.getElementById('descriptionEdit').addEventListener('input', getDescription);
+    dateInput.addEventListener('change', function() {
+    let selectedDate = dateInput.value; EditTask.date = selectedDate;});
 }
 
 
