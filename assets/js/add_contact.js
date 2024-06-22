@@ -51,62 +51,36 @@ async function getTheInformation(event){
     await getDataForPostContact('contacts/'); 
     await confirmContactCreation();
     await checkIfDesktop();
-    
 }
 
 
 async function checkIfDesktop(){
-   
     if(window.innerWidth < 1250){
-            await refreshContactToLoad(contactsAsJson.length, 'currentContact');   
+        await refreshContactToLoad(contactsAsJson.length, 'currentContact');   
     }else{
-
         hideTheFormular('overlay-container');
         loadContacts();
-    }
-        
-    
-        
-    }
-    
-
-
-async function confirmContactCreation(){
-
-    if(window.innerWidth < 1250){
-        localStorage.setItem('contactWasCreated', 'true'); 
-    }
-   
+    } 
 }
 
 
+async function confirmContactCreation(){
+    if(window.innerWidth < 1250){
+        localStorage.setItem('contactWasCreated', 'true'); 
+    }
+}
 
-
-// async function getDataForPostContact(){
-// return {
-//     "mail": contactMail,
-//     "mobile": contactPhone,
-//     "name": nachnameCapitalized,
-//     "vorname": vornameCapitalized,
-//     "id": contactId,
-//     "color": contactColor
-// };
-// }
 
 async function getDataForPostContact(path){
-    
-        let data = {
-            "mail": contactMail,
-            "mobile": contactPhone,
-            "name": nachnameCapitalized,
-            "vorname": vornameCapitalized,
-            "color": contactColor
-        } 
-     
-    
-    
-        postData(path, data);
-    }
+    let data = {
+        "mail": contactMail,
+        "mobile": contactPhone,
+        "name": nachnameCapitalized,
+        "vorname": vornameCapitalized,
+        "color": contactColor
+    } 
+    postData(path, data);
+}
 
 
 
