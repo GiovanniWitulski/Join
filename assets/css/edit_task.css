@@ -135,13 +135,19 @@
 
 /* ContactList Edit */
 
+.edit-contact-list{
+    position: relative;
+    max-width: 396px;
+    width: 100%;
+}
+
 .contact-list-container {
     width: 100%;
     height: 200px;
     border: 1px solid #ccc;
-    overflow-y: auto; /* Vertikaler Scrollbalken anzeigen, wenn nötig */
+    overflow-y: auto;
     overflow-x: hidden;
-    z-index: 3;
+    position: absolute;
     
 }
 
@@ -154,6 +160,10 @@
     padding-top: 8px;
     background-color: white;
     
+}
+
+.profile_pic{    
+    padding-left: 8px;
 }
 
 .SearchContactEdit{
@@ -191,8 +201,7 @@
 .edit-contact-name-svg{
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding-left: 8px;
+    gap: 16px;   
 }
 
 .edit-contact-check{
@@ -213,6 +222,7 @@
     display: flex;
     width: 100%;
     height: 56px;
+    align-items: center;
 }
 
 .background-blue {

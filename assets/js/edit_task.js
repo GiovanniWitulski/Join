@@ -152,21 +152,25 @@ function selectContact (contactId){
             editContacts[i].checked = 0;
             console.log("afterCheck0eD",editContacts);
             console.log("afterCheck1choosenC",choosenContactsEdit);
-
+            choosenContacts();
             renderContactListEdit();
             filterContactsEdit();
+            renderChoosenContactsEmblems();
             return;
         } else if (compareId === contactId && compareCheck === 0){
             editContacts[i].checked = 1;
             console.log("afterCheck1eD",editContacts);
+            choosenContacts();
             renderContactListEdit();
             filterContactsEdit();
+            renderChoosenContactsEmblems();
             return;
          } 
          
     }
-    // FUNKTION -> choosen contacts befüllen, erste leeren dann befüllen
+    
     filterContactsEdit();
+    
 }
 
 function storeNewData(idTask, i){ //onclick OK BUTTON // delete old task, add new task with old id
@@ -197,14 +201,32 @@ function testForChoosenContact (){
         let nachname = editContacts[c].assignedTo[1];
         fullname = vorname + ' ' + nachname;
         if (fullname === taskAssignedto){
-            console.log("Match :D", fullname);
             editContacts[c].checked = 1;
         }        
-    } // function choosen contacts assigned to befüllen. erste leeeren dann mit check=1 bfüllen
     } 
+    } choosenContacts();
 }  
 
-function choosenContacts (){
+function choosenContacts(){
+    choosenContactsEdit = [];
+    for (i=0; i<editContacts.length; i++){
+        let checktest = editContacts[i].checked;
+        let testedContact = editContacts[i];
+        if (checktest === 1){            
+            choosenContactsEdit.push(testedContact);
+        }
+    }
+    console.log("choosencontacsAtive -> list:", choosenContactsEdit);  
+    
+}
+
+function renderChoosenContactsEmblems(){
+    let editEmblems = document.getElementById('choosenContacts');
+    editEmblems.innerHTML = ``;
+    for (i=0; i<choosenContactsEdit.length; i++){
+        let choosenEmblem = choosenContactsEdit[i].contactEmblem;  
+        editEmblems.innerHTML += `${choosenEmblem}`;              
+    }    
 }
 
 function renderContactListEdit() { //rausgeholt aus render
@@ -217,9 +239,9 @@ function renderContactListEdit() { //rausgeholt aus render
         let name = editContactsShow[i].assignedTo[1];
         let userIcon = editContactsShow[i].contactEmblem;
         if (contactCheck === 1){
-            contactListEdit += '<div id="'+editContactId+'" onclick="selectContact('+editContactId+')" class="background-blue"><div class="edit-contact-name-svg">'+userIcon+' '+prename+' '+name+'</div><div id="editCheckbox"><img class="edit-contact-check" src="/assets/svg/checkboxWhite.svg" alt=""></div></div>';
+            contactListEdit += '<div id="'+editContactId+'" onclick="selectContact('+editContactId+')" class="background-blue"><div class="edit-contact-name-svg"><div class="edit-user-icon">'+userIcon+'</div>'+prename+' '+name+'</div><div id="editCheckbox"><img class="edit-contact-check" src="/assets/svg/checkboxWhite.svg" alt=""></div></div>';
         } else {
-        contactListEdit += '<div id="'+editContactId+'" onclick="selectContact('+editContactId+')" class="contactFieldEdit"><div class="edit-contact-name-svg">'+userIcon+' '+prename+' '+name+'</div><div id="editCheckbox'+i+'"><img class="edit-contact-check" src="/assets/svg/rectangle.svg" alt=""></div></div>';
+        contactListEdit += '<div id="'+editContactId+'" onclick="selectContact('+editContactId+')" class="contactFieldEdit"><div class="edit-contact-name-svg"><div class="edit-user-icon">'+userIcon+'</div>'+prename+' '+name+'</div><div id="editCheckbox'+i+'"><img class="edit-contact-check" src="/assets/svg/rectangle.svg" alt=""></div></div>';
     }
         
     } 
@@ -235,6 +257,7 @@ function editTaskOverlay(idTask, i){
     testForChoosenContact ();
     renderContactListEdit();
     editTaskRender();
+    renderChoosenContactsEmblems()
 }
 
 function editTaskRender(){    //use of same container as Overlay/PopupTask
@@ -260,34 +283,41 @@ function editTaskRender(){    //use of same container as Overlay/PopupTask
     Overlay.innerHTML = `
     <div class="board-edit-task">
     <div class="close-edit"><img onclick="closeOverlay(${taskIdBoard}, ${taskboardPosition})" src="/assets/svg/close_black.svg" alt="close"></div>
-    
+    <h4 style="font-weight: 400;">Title</h4>
     <div id="edit-title" class="edit-title">
         <input type="text" id="titleEdit" class="edit-title-input" placeholder="${placeholderTitle}">
     </div>
 
+    <h4 style="font-weight: 400;">Description</h4>
     <div id="edit-description" class="edit-description">
     <textarea id="descriptionEdit" class="edit-description-input" placeholder="${placeholderDescription}"></textarea>
     </div>
 
+    <h4 style="font-weight: 400;">Due date</h4>
     <form action="/action_page.php">
     <label for="edit_input" class="calendar-icon-label">
     <input type="date" id="edit_input" name="edit_input" class="date-input" placeholder="tt.mm.jjj">
     </label>
     </form>       
-    
+
+    <h4 style="font-weight: 400;">Priority</h4>
+
+    <h4 style="font-weight: 400;">Assigned to</h4>
     <div onclick="clickButtonSearch(); filterContactsEdit();" class="SearchContactEdit">
         <input type="text" id="InputSearchEdit" class="InputSearchEdit" placeholder="Select contacts to assign">
         <div id="ContactListEditButton" class="contact-list-edit-button">
         <img  src="${searchButton}" alt="openContactList"></div>
     </div>
     
+    <div class="edit-contact-list">
     <div id="contact-list-container" class="contact-list-container hiddenMenue">
     ${contactListEdit}
-    </div>
+    </div></div> 
 
     <div id="choosenContacts" class="choosen-contacts">
-
     </div>
+
+    <h4 style="font-weight: 400;">Subtasks</h4>
     
     `
     // pre-set date // don´t touch
