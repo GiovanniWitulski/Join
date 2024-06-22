@@ -45,6 +45,8 @@
                 <div id="assignedContactPics" class="assignedContactPics"></div>
             </div>
         </div>
+
+        <div class="addTaskDivider"></div>
         <div class="rightDiv">
             <div class="dateDiv">
                 <div class="subheadlineDiv"><p class="subheadline">Due date <p class="marker">*</p></p></div>
@@ -93,7 +95,11 @@
 
             <div class="createDiv">
                 <div class="explanation-div"><p class="marker">*<p class="explanation">This field is required</p></p></div>
-                <button type="submit" class="create-btn">Create Task</button>
+                <div class="addTaskCtrlButtons">
+                    <button type="button" onclick="clearTheForm()" class="cancelTaskBtn">Clear</button>
+                    <button type="submit" class="create-btn">Create Task</button>
+                </div>
+                
             </div>
 
             </div>

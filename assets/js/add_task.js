@@ -41,7 +41,9 @@ function addBlurListener(){
     }
 }
 
+
 document.addEventListener("DOMContentLoaded", addBlurListener);
+
 
 function addToSubtasks(){
     subtaskCount += 1;
@@ -97,18 +99,6 @@ function cancelSubtask(){
     onSubtaskBlur();
 }
 
-/*function getTheSubtaskCount(){
-    let subTaskDiv = document.getElementById('list-of-subtasks');
-    if (subTaskDiv){
-        
-        let listElements = subTaskDiv.querySelectorAll('li', 'div');
-        subtaskCount = listElements;
-        return subtaskCount.length;
-        
-    }else{
-        console.log("The element you are looking for could not be found")
-    }
-}*/
 
 function deleteElementById(elementId){
     let element = document.getElementById(elementId);
@@ -228,21 +218,17 @@ async function getTheDataForPostTask(event) {
     };
     await postData('tasks', data);
     await showNotification();
-    
-    //document.getElementById('addTaskForm').submit();
 }
 
 
 async function showNotification() {
     const notificationElement = document.getElementById('taskAddedNotification');
-notificationElement.classList.remove('none');
-
-setTimeout(() => {
-    notificationElement.classList.add('showNotification');
-}, 100);
-
+    notificationElement.classList.remove('none');
     
-    // 2000 Millisekunden = 2 Sekunden
+    setTimeout(() => {
+        notificationElement.classList.add('showNotification');
+    }, 100);
+    
     setTimeout(function() {
         window.location.href = "/board.html";
     }, 1000);
@@ -334,3 +320,7 @@ document.addEventListener('click', function(event){
         showContactsToAssign();
     }
 })
+
+function clearTheForm(){
+    window.location.reload();
+}

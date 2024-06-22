@@ -1,10 +1,10 @@
-   
-   let newSurname;
-   let newLastName;
-   const moreButton = document.getElementById('more-button');
-   const moreBtnMenu = document.getElementById('edit-menu');
-   
-   if (moreButton && moreBtnMenu) {
+
+let newSurname;
+let newLastName;
+const moreButton = document.getElementById('more-button');
+const moreBtnMenu = document.getElementById('edit-menu');
+
+if (moreButton && moreBtnMenu) {
     function toggleMenu() {
         moreBtnMenu.classList.toggle('hide');
     }
@@ -25,12 +25,11 @@ async function loadCurrentContactId(){
     }else{
         await loadSingleContact(userId);
     }
-   
 }
 
 
 async function loadSingleContact(id){
-let user;
+    let user;
     for (let i = 0; i < contactsAsJson.length; i++) {
         const element = contactsAsJson[i];
         if (i == id){
@@ -48,24 +47,22 @@ let user;
 
 async function loadSingleContactDesktop(id){
     let user;
-        for (let i = 0; i < contactsAsJson.length; i++) {
-            const element = contactsAsJson[i];
-            if (i == id){
-                user = element;
-            }
+    for (let i = 0; i < contactsAsJson.length; i++) {
+        const element = contactsAsJson[i];
+        if (i == id){
+            user = element;
         }
-        document.getElementsByClassName('name-headline')[0].innerHTML = `${user['vorname']} ${user['name']}`;
-        document.getElementsByClassName('email')[0].innerHTML = `${user['mail']}`;
-        document.getElementsByClassName('phone')[0].innerHTML = `${user['mobile']}`;
-        document.getElementsByClassName('name-pic')[0].outerHTML = drawContactDetailPic(user);
-        document.getElementsByClassName('del-btn')[0].outerHTML = `<button class="del-btn" onclick="deleteContact(${id})"></button>`
-        document.getElementsByClassName('edit-btn')[0].outerHTML = `<button class="edit-btn" onclick="fillEditContactFormDesktop(${id})"></button>`
     }
+    document.getElementsByClassName('name-headline')[0].innerHTML = `${user['vorname']} ${user['name']}`;
+    document.getElementsByClassName('email')[0].innerHTML = `${user['mail']}`;
+    document.getElementsByClassName('phone')[0].innerHTML = `${user['mobile']}`;
+    document.getElementsByClassName('name-pic')[0].outerHTML = drawContactDetailPic(user);
+    document.getElementsByClassName('del-btn')[0].outerHTML = `<button class="del-btn" onclick="deleteContact(${id})"></button>`
+    document.getElementsByClassName('edit-btn')[0].outerHTML = `<button class="edit-btn" onclick="fillEditContactFormDesktop(${id})"></button>`
+}
 
 
 async function deleteContact(id){
-  
-   
     tokenToDelete = contactsAsJson[id]['id'];
     await deleteData(`contacts/${tokenToDelete}`);
     window.location.href = "/contacts.html";
@@ -89,9 +86,8 @@ async function drawContactEditPicDesktop(user){
 }
 
 
- async function fillEditContactForm(id){
+async function fillEditContactForm(id){
     idToFind = id;
-   // indexToFill = contactsAsJson.findIndex(contact => contact.id === idToFind);
     currentContact = contactsAsJson[idToFind];
     document.getElementById('contact-name').value = `${currentContact['vorname']} ${currentContact['name']}`;
     document.getElementById('contact-mail').value = `${currentContact['mail']}`;
@@ -106,7 +102,6 @@ async function drawContactEditPicDesktop(user){
 
 async function fillEditContactFormDesktop(id){
     idToFind = id;
-   // indexToFill = contactsAsJson.findIndex(contact => contact.id === idToFind);
     currentContact = contactsAsJson[idToFind];
     document.getElementById('contact-name-desktop').value = `${currentContact['vorname']} ${currentContact['name']}`;
     document.getElementById('contact-mail-desktop').value = `${currentContact['mail']}`;
@@ -144,10 +139,8 @@ function hideEditOverlayDesktop(){
 
 
 async function getTheEditedData(element){
-
     if(window.innerWidth >= 1250){
         return document.getElementById(`${element}-desktop`).value;
-    
     }else{
         return document.getElementById(element).value;
     }
@@ -155,75 +148,67 @@ async function getTheEditedData(element){
 
 
 async function saveEditsToContact(token){
-     let editedName = await getTheEditedData('contact-name');
-     let editedMail = await getTheEditedData('contact-mail');
-     let editedPhone = await getTheEditedData('contact-phone');
-     let words = editedName.split(" ");
-     let surname = words[0];
-     let lastName = words[1];
-     if(surname && lastName){
-          newSurname = surname.charAt(0).toUpperCase() + surname.slice(1);
-          newLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1);
-     }else if(surname && !lastName){
-         newSurname = surname.charAt(0).toUpperCase() + surname.slice(1);
-         newLastName = ""
-     }
-     let indexOfCurrentContact = contactsAsJson.findIndex(element => element.id === token);
-     let contactToUpdate = contactsAsJson[indexOfCurrentContact];
-     let data = { 
-     "mail": editedMail,
-     "mobile": editedPhone,
-     "name": newLastName,
-     "vorname": newSurname,
-     "id": contactToUpdate['id'],
-     "color": contactToUpdate['color']}
-    await putData(`contacts/${token}/`, data);
-    await submitForm(indexOfCurrentContact);
-  
-}
-
-async function submitForm(){
-    if(window.innerWidth < 1250){
-         document.getElementById('edit-contact-form').submit();
-    }else{
-       
-     await blendItOut(); 
-     loadContacts();
-     await loadCurrentContactId();
-       
-       
-        
+    let editedName = await getTheEditedData('contact-name');
+    let editedMail = await getTheEditedData('contact-mail');
+    let editedPhone = await getTheEditedData('contact-phone');
+    let words = editedName.split(" ");
+    let surname = words[0];
+    let lastName = words[1];
+    if(surname && lastName){
+        newSurname = surname.charAt(0).toUpperCase() + surname.slice(1);
+        newLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1);
+    }else if(surname && !lastName){
+        newSurname = surname.charAt(0).toUpperCase() + surname.slice(1);
+        newLastName = ""
     }
-     
-}
-
-async function blendItOut(){
-    document.getElementById('edit-contact-container').classList.add('fade');
-    document.getElementById('overlayVeilAddContact').classList.add('none');
-    document.getElementById('edit-contact-container').classList.remove('show');
-    document.getElementById('edit-contact-container').classList.remove('fade');
-}
-
-
-async function checkIfContactWasCreated(){
-
-    let wasContactCreated = localStorage.getItem('contactWasCreated');
-    if(wasContactCreated == "true"){
-       await showTheNotificaiton();
+    let indexOfCurrentContact = contactsAsJson.findIndex(element => element.id === token);
+    let contactToUpdate = contactsAsJson[indexOfCurrentContact];
+    let data = { 
+        "mail": editedMail,
+        "mobile": editedPhone,
+        "name": newLastName,
+        "vorname": newSurname,
+        "id": contactToUpdate['id'],
+        "color": contactToUpdate['color']}
+        await putData(`contacts/${token}/`, data);
+        await submitForm(indexOfCurrentContact);
     }
-
-}
-async function showTheNotificaiton(){
-
-    document.getElementById('notificationAddContact').classList.add('showContactAdded');
-
-    setTimeout(() => {
-        document.getElementById('notificationAddContact').classList.remove('showContactAdded');
-    }, 1000);
-
-    localStorage.clear();
     
-}
-
-document.addEventListener('DOMContentLoaded', checkIfContactWasCreated);
-
+    
+    async function submitForm(){
+        if(window.innerWidth < 1250){
+            document.getElementById('edit-contact-form').submit();
+        }else{
+            await blendItOut(); 
+            loadContacts();
+            await loadCurrentContactId();  
+        }   
+    }
+    
+    
+    async function blendItOut(){
+        document.getElementById('edit-contact-container').classList.add('fade');
+        document.getElementById('overlayVeilAddContact').classList.add('none');
+        document.getElementById('edit-contact-container').classList.remove('show');
+        document.getElementById('edit-contact-container').classList.remove('fade');
+    }
+    
+    
+    async function checkIfContactWasCreated(){
+        let wasContactCreated = localStorage.getItem('contactWasCreated');
+        if(wasContactCreated == "true"){
+            await showTheNotificaiton();
+        }
+    }
+    
+    
+    async function showTheNotificaiton(){
+        document.getElementById('notificationAddContact').classList.add('showContactAdded');
+        setTimeout(() => {
+            document.getElementById('notificationAddContact').classList.remove('showContactAdded');
+        }, 1000);
+        localStorage.clear();
+    }
+    
+    document.addEventListener('DOMContentLoaded', checkIfContactWasCreated);
+    

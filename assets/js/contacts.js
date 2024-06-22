@@ -11,10 +11,7 @@ async function getAColor(){
 
 
 async function loadContacts(){
-    
-    
     contactsAsJson = await getContacts();
-   
     createDivs();
 }
 
@@ -70,16 +67,15 @@ async function refreshContactToLoad(id, path) {
         loadCurrentContactId('desktop');
         showContactDetails();
     }else{
-         window.location.href = "/assets/templates/contact_details.html";
+        window.location.href = "/assets/templates/contact_details.html";
     }
-   
 }
 
 
 function showContactDetails(){
-    
     document.getElementById('middle-container-desktop').classList.add('show');
 }
+
 
 function showAddContact(){
     document.getElementById('overlay-container').classList.add('show');
@@ -101,7 +97,6 @@ function hideTheFormular(elementToHide){
 
 async function fillEditContactFormDesktop(id){
     idToFind = id;
-   // indexToFill = contactsAsJson.findIndex(contact => contact.id === idToFind);
     currentContact = contactsAsJson[idToFind];
     document.getElementById('contact-name-desktop').value = `${currentContact['vorname']} ${currentContact['name']}`;
     document.getElementById('contact-mail-desktop').value = `${currentContact['mail']}`;
@@ -115,17 +110,13 @@ async function fillEditContactFormDesktop(id){
 
 
 function rewriteButton(){
-
     if(document.getElementsByClassName('add-contact-btn')[0]){
         if(window.innerWidth >= 1250){
-           document.getElementsByClassName('add-contact-btn')[0].innerHTML = `Add new contact`;
-    }else{
-        document.getElementsByClassName('add-contact-btn')[0].innerHTML = ``;
+            document.getElementsByClassName('add-contact-btn')[0].innerHTML = `Add new contact`;
+        }else{
+            document.getElementsByClassName('add-contact-btn')[0].innerHTML = ``;
+        }
     }
-    }
-    
-     
-    
 }
 
 
