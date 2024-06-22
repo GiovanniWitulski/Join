@@ -147,7 +147,6 @@ function selectContact (contactId){
     for (i=0; i<editContacts.length; i++){
         let compareId = editContacts[i].id;
         let compareCheck = editContacts[i].checked;
-        console.log("compare idclick", compareId);
         if (compareId === contactId && compareCheck === 1){
             editContacts[i].checked = 0;
             console.log("afterCheck0eD",editContacts);
@@ -159,7 +158,6 @@ function selectContact (contactId){
             return;
         } else if (compareId === contactId && compareCheck === 0){
             editContacts[i].checked = 1;
-            console.log("afterCheck1eD",editContacts);
             choosenContacts();
             renderContactListEdit();
             filterContactsEdit();
@@ -187,12 +185,19 @@ function storeNewData(idTask, i){ //onclick OK BUTTON // delete old task, add ne
 
 
 ///////// RENDER EDIT TASK ////////// 
+function editPriority(){
+    let editPriority = document.getElementById('editPriorityButtonsdiv');
+    editPriority.innerHTML = `
+    <button class="edit-priority-buttons"><h4 style="font-weight: 400;">Urgent</h4><img src="/assets/svg/Capa_2_Burger menue_Arrow_up.svg" alt="urgent">
+    <button class="edit-priority-buttons"><h4 style="font-weight: 400;">Medium</h4><img src="/assets/svg/capa_1_medium_priority.svg" alt="medium"></button>
+    <button class="edit-priority-buttons"><h4 style="font-weight: 400;">Low</h4><img src="/assets/svg/capa_priority_low.svg" alt="low"></button>
+    `;
+}
 
 function testForChoosenContact (){
     for (i=0; i<editContactsShow.length; i++){
         editContactsShow[i].checked = 0;
     }
-    console.log("testforChoosenactive");
     for (i=0; i<EditTask.assignedTo.length; i++){
         let taskAssignedto = EditTask.assignedTo[i];
     for (c=0; c<editContacts.length; c++){
@@ -215,9 +220,7 @@ function choosenContacts(){
         if (checktest === 1){            
             choosenContactsEdit.push(testedContact);
         }
-    }
-    console.log("choosencontacsAtive -> list:", choosenContactsEdit);  
-    
+    }    
 }
 
 function renderChoosenContactsEmblems(){
@@ -231,7 +234,6 @@ function renderChoosenContactsEmblems(){
 
 function renderContactListEdit() { //rausgeholt aus render
     contactListEdit = ''
-    console.log("renderContalistActive");
     for (i=0; i<editContactsShow.length;i++){  
         let contactCheck = editContactsShow[i].checked;   
         let editContactId = editContactsShow[i].id;
@@ -257,7 +259,8 @@ function editTaskOverlay(idTask, i){
     testForChoosenContact ();
     renderContactListEdit();
     editTaskRender();
-    renderChoosenContactsEmblems()
+    renderChoosenContactsEmblems();
+    editPriority();
 }
 
 function editTaskRender(){    //use of same container as Overlay/PopupTask
@@ -279,6 +282,8 @@ function editTaskRender(){    //use of same container as Overlay/PopupTask
         
     }           */ 
  
+
+    
     Overlay.innerHTML = '';
     Overlay.innerHTML = `
     <div class="board-edit-task">
@@ -301,6 +306,7 @@ function editTaskRender(){    //use of same container as Overlay/PopupTask
     </form>       
 
     <h4 style="font-weight: 400;">Priority</h4>
+    <div id="editPriorityButtonsdiv" class="edit-priority-buttons-div"></div>
 
     <h4 style="font-weight: 400;">Assigned to</h4>
     <div onclick="clickButtonSearch(); filterContactsEdit();" class="SearchContactEdit">
