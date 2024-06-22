@@ -106,7 +106,7 @@ function filterContactsEdit(eventOrValue) {
         editContactsShow = editContacts;
         renderContactListEdit();
         const SearchList = document.getElementById('contact-list-container');
-        SearchList.innerHTML = contactListEdit;         
+        SearchList.innerHTML = contactListEdit;    
         return;
     }
 
@@ -122,9 +122,6 @@ function filterContactsEdit(eventOrValue) {
     }
     testForChoosenContact();
     document.getElementById('contact-list-container').classList.remove('hiddenMenue');
-
-    console.log("editContactsShow after search", editContactsShow);
-    
     const SearchList = document.getElementById('contact-list-container');
     SearchList.innerHTML = contactListEdit;
     
@@ -147,21 +144,28 @@ function clickButtonSearch(){
 function selectContact (contactId){    
     //1. Schleife, ist es im choosen contacts 2. if not add + set check=1
 
-    for (i=0; i<choosenContactsEdit.length; i++){
-        let compareId = choosenContactsEdit[i].id;
+    for (i=0; i<editContacts.length; i++){
+        let compareId = editContacts[i].id;
+        let compareCheck = editContacts[i].checked;
         console.log("compare idclick", compareId);
-        if (compareId === contactId){
-            choosenContactsEdit.splice(i, 1);
-            editContacts[contactId].checked = 0;
-        } else {
-            let addToAssignedTo = editContacts[contactId];
-            editContacts[contactId].checked = 1;
-            choosenContactsEdit.push(addToAssignedTo)
-            console.log("changedto1", editContacts[contactId].checked);
-            console.log(editContacts);
+        if (compareId === contactId && compareCheck === 1){
+            editContacts[i].checked = 0;
+            console.log("afterCheck0eD",editContacts);
+            console.log("afterCheck1choosenC",choosenContactsEdit);
+
+            renderContactListEdit();
+            filterContactsEdit();
+            return;
+        } else if (compareId === contactId && compareCheck === 0){
+            editContacts[i].checked = 1;
+            console.log("afterCheck1eD",editContacts);
+            renderContactListEdit();
+            filterContactsEdit();
+            return;
          } 
+         
     }
-    
+    // FUNKTION -> choosen contacts befüllen, erste leeren dann befüllen
     filterContactsEdit();
 }
 
@@ -183,10 +187,8 @@ function storeNewData(idTask, i){ //onclick OK BUTTON // delete old task, add ne
 function testForChoosenContact (){
     for (i=0; i<editContactsShow.length; i++){
         editContactsShow[i].checked = 0;
-        console.log("loopactive=0");
     }
     console.log("testforChoosenactive");
-    console.log("testforcontacactive");
     for (i=0; i<EditTask.assignedTo.length; i++){
         let taskAssignedto = EditTask.assignedTo[i];
     for (c=0; c<editContacts.length; c++){
@@ -197,11 +199,13 @@ function testForChoosenContact (){
         if (fullname === taskAssignedto){
             console.log("Match :D", fullname);
             editContacts[c].checked = 1;
-        }
-        
-    }
-    
-}  }
+        }        
+    } // function choosen contacts assigned to befüllen. erste leeeren dann mit check=1 bfüllen
+    } 
+}  
+
+function choosenContacts (){
+}
 
 function renderContactListEdit() { //rausgeholt aus render
     contactListEdit = ''
@@ -215,7 +219,6 @@ function renderContactListEdit() { //rausgeholt aus render
         if (contactCheck === 1){
             contactListEdit += '<div id="'+editContactId+'" onclick="selectContact('+editContactId+')" class="background-blue"><div class="edit-contact-name-svg">'+userIcon+' '+prename+' '+name+'</div><div id="editCheckbox"><img class="edit-contact-check" src="/assets/svg/checkboxWhite.svg" alt=""></div></div>';
         } else {
-            ///!!! einfach anderer klasse für div vwerdnen, klasse check klasse uncheckt
         contactListEdit += '<div id="'+editContactId+'" onclick="selectContact('+editContactId+')" class="contactFieldEdit"><div class="edit-contact-name-svg">'+userIcon+' '+prename+' '+name+'</div><div id="editCheckbox'+i+'"><img class="edit-contact-check" src="/assets/svg/rectangle.svg" alt=""></div></div>';
     }
         
@@ -225,10 +228,10 @@ function renderContactListEdit() { //rausgeholt aus render
 }    
 
 function editTaskOverlay(idTask, i){
-    
     EditTask = TaskBoard[i];
     taskboardPosition = i;
     taskIdBoard = idTask;
+    choosenContactsEdit = [];
     testForChoosenContact ();
     renderContactListEdit();
     editTaskRender();
