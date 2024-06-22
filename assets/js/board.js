@@ -126,7 +126,9 @@ function searchResult(s){
             TaskBoard.push(task);       
         }
     }
-    
+    if (TaskBoard.length === 0){
+        alert("No matching Task found!");
+    }
 
     renderBoard();
 }
@@ -566,7 +568,7 @@ function OverlayTaskPopup(i){   // TO CODE/CONNECT: EditTaskFkt
         let priority = '';
         if (OverlayTask.priority === "low"){
             priority = "/assets/svg/capa_priority_low.svg";
-        }    else if (OverlayTask.priority === "medium"){
+        }   else if (OverlayTask.priority === "medium"){
             priority = "/assets/svg/capa_1_medium_priority.svg";
         }   else if(OverlayTask.priority === "urgent") {
             priority = "/assets/svg/Capa_2_Burger menue_Arrow_up.svg"}

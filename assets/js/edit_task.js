@@ -9,7 +9,6 @@ let newDescription;
 let newDate;
 let newPriority;
 let choosenContactsEdit = []; //wird befüllt von alt und später neu contacts, variabel
-
 let newSubtasks = [];
 let taskIdBoard = 0;
 
@@ -139,7 +138,15 @@ function clickButtonSearch(){
 
     return searchButton;
 }
+
 // EditedTask -> Taskboard // later upload complete Taskboard
+
+function editSelectPriority (priority){
+    EditTask.priority = priority;
+    editRenderPriority();
+    console.log("EditTAsk", EditTask);
+
+}
 
 function selectContact (contactId){    
     //1. Schleife, ist es im choosen contacts 2. if not add + set check=1
@@ -185,14 +192,23 @@ function storeNewData(idTask, i){ //onclick OK BUTTON // delete old task, add ne
 
 
 ///////// RENDER EDIT TASK ////////// 
-function editPriority(){
-    let editPriority = document.getElementById('editPriorityButtonsdiv');
-    editPriority.innerHTML = `
-    <button class="edit-priority-buttons"><h4 style="font-weight: 400;">Urgent</h4><img src="/assets/svg/Capa_2_Burger menue_Arrow_up.svg" alt="urgent">
-    <button class="edit-priority-buttons"><h4 style="font-weight: 400;">Medium</h4><img src="/assets/svg/capa_1_medium_priority.svg" alt="medium"></button>
-    <button class="edit-priority-buttons"><h4 style="font-weight: 400;">Low</h4><img src="/assets/svg/capa_priority_low.svg" alt="low"></button>
-    `;
+function editRenderSubstask(){
+    
 }
+
+function editRenderPriority(){
+    let editTaskPriority = EditTask.priority;  
+    let editPriority = document.getElementById('editPriorityButtonsdiv');  
+    if (editTaskPriority === "urgent"){editPriority.innerHTML = `<button onclick="editSelectPriority('urgent')" class="edit-priority-buttons background-color-red"><h4 style="font-weight: 400;">Urgent</h4><img src="/assets/svg/Prio alta-2.svg" alt="urgent">
+        <button onclick="editSelectPriority('medium')" id="editButtonMedium"class="edit-priority-buttons"><h4 style="font-weight: 400;">Medium</h4><img src="/assets/svg/capa_1_medium_priority.svg" alt="medium"></button>
+        <button onclick="editSelectPriority('low')" id="editButtonLow" class="edit-priority-buttons"><h4 style="font-weight: 400;">Low</h4><img src="/assets/svg/capa_priority_low.svg" alt="low"></button>`;
+    } else if (editTaskPriority === "medium"){editPriority.innerHTML = `<button onclick="editSelectPriority('urgent')" class="edit-priority-buttons"><h4 style="font-weight: 400;">Urgent</h4><img src="/assets/svg/Capa_2_Burger menue_Arrow_up.svg" alt="urgent">
+        <button onclick="editSelectPriority('medium')" id="editButtonMedium"class="edit-priority-buttons background-color-yellow"><h4 style="font-weight: 400;">Medium</h4><img src="/assets/svg/Prio media-2.svg" alt="medium"></button>
+        <button onclick="editSelectPriority('low')" id="editButtonLow" class="edit-priority-buttons"><h4 style="font-weight: 400;">Low</h4><img src="/assets/svg/capa_priority_low.svg" alt="low"></button>`;
+    } else if (editTaskPriority === "low"){editPriority.innerHTML =`<button onclick="editSelectPriority('urgent')" class="edit-priority-buttons"><h4 style="font-weight: 400;">Urgent</h4><img src="/assets/svg/Capa_2_Burger menue_Arrow_up.svg" alt="urgent">
+        <button onclick="editSelectPriority('medium')" id="editButtonMedium"class="edit-priority-buttons"><h4 style="font-weight: 400;">Medium</h4><img src="/assets/svg/capa_1_medium_priority.svg" alt="medium"></button>
+        <button onclick="editSelectPriority('low')" id="editButtonLow" class="edit-priority-buttons background-color-green"><h4 style="font-weight: 400;">Low</h4><img src="/assets/svg/Prio baja-2.svg" alt="low"></button>`;    
+    } }
 
 function testForChoosenContact (){
     for (i=0; i<editContactsShow.length; i++){
@@ -260,7 +276,7 @@ function editTaskOverlay(idTask, i){
     renderContactListEdit();
     editTaskRender();
     renderChoosenContactsEmblems();
-    editPriority();
+    editRenderPriority();
 }
 
 function editTaskRender(){    //use of same container as Overlay/PopupTask
@@ -268,7 +284,6 @@ function editTaskRender(){    //use of same container as Overlay/PopupTask
     editTask = EditTask;
     let placeholderTitle = editTask.title;
     let placeholderDescription = editTask.description;
-
      /*   
     if (editTask.subtask[0] !== undefined){
         
@@ -281,9 +296,6 @@ function editTaskRender(){    //use of same container as Overlay/PopupTask
         secondSubtask = editTask.subtask[1];
         
     }           */ 
- 
-
-    
     Overlay.innerHTML = '';
     Overlay.innerHTML = `
     <div class="board-edit-task">
@@ -292,39 +304,32 @@ function editTaskRender(){    //use of same container as Overlay/PopupTask
     <div id="edit-title" class="edit-title">
         <input type="text" id="titleEdit" class="edit-title-input" placeholder="${placeholderTitle}">
     </div>
-
     <h4 style="font-weight: 400;">Description</h4>
     <div id="edit-description" class="edit-description">
     <textarea id="descriptionEdit" class="edit-description-input" placeholder="${placeholderDescription}"></textarea>
     </div>
-
     <h4 style="font-weight: 400;">Due date</h4>
     <form action="/action_page.php">
     <label for="edit_input" class="calendar-icon-label">
     <input type="date" id="edit_input" name="edit_input" class="date-input" placeholder="tt.mm.jjj">
     </label>
-    </form>       
-
+    </form>   
     <h4 style="font-weight: 400;">Priority</h4>
     <div id="editPriorityButtonsdiv" class="edit-priority-buttons-div"></div>
-
     <h4 style="font-weight: 400;">Assigned to</h4>
     <div onclick="clickButtonSearch(); filterContactsEdit();" class="SearchContactEdit">
         <input type="text" id="InputSearchEdit" class="InputSearchEdit" placeholder="Select contacts to assign">
         <div id="ContactListEditButton" class="contact-list-edit-button">
         <img  src="${searchButton}" alt="openContactList"></div>
-    </div>
-    
+    </div>    
     <div class="edit-contact-list">
     <div id="contact-list-container" class="contact-list-container hiddenMenue">
     ${contactListEdit}
     </div></div> 
-
     <div id="choosenContacts" class="choosen-contacts">
     </div>
-
     <h4 style="font-weight: 400;">Subtasks</h4>
-    
+    <div id="editRenderSubtasks" class="edit-render-subtasks"></div> 
     `
     // pre-set date // don´t touch
     let initialDate = editTask.date; //  YYYY-MM-DD (!)
@@ -332,8 +337,6 @@ function editTaskRender(){    //use of same container as Overlay/PopupTask
     dateInput.value = initialDate;
     //
     const ContactSearchField = document.getElementById('InputSearchEdit').addEventListener('input', filterContactsEdit);
-    
-
 }
 
 
