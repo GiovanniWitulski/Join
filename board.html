@@ -22,7 +22,6 @@
 <body onload="includeHTML(), downloadData()">
     <div id="mobileTamplateContent" w3-include-html="/assets/templates/mobile_template.html"></div>
     <div id="Board" class="board-titel-add-search">
-        <div class="board-add-task-mobile"></div>
         <div class="board-add-task-mobile">
          <div class="board-add-task-title-mobile">
                 <h1>Board</h1><div class="board-add-mobile"><img onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="board-add-task-mobile-img" src="/assets/svg/plus_add_task_mobile.svg" alt="add"></div>
@@ -30,6 +29,7 @@
         </div>
         <div class="board-search-mobile">
             <div class="board-search-mobile-input"><input id="boardInput" type="text" placeholder="Find task..."><div class="board-search-icon-mobile"><img onclick="findTask()" class="board-search-icon-mobile-img" src="/assets/svg/search.svg" alt="search"></div></div>
+            <div class="board-add-button-desktop"><img onclick="window.location.href='//127.0.0.1:5500/add_task.html'" src="/assets/svg/add_task_board_desktop.svg" alt="addTask"></div>
         </div>
     </div>
         <div class="board-container">

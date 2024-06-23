@@ -446,7 +446,7 @@ function awaitFeedbackContainer(){
         }
     }
     if (awaitFeedback.innerHTML === '') {
-        awaitFeedback.innerHTML = `<img src="/assets/svg/no_tasks_awaiting_feedback.png" class="to-do-container-mobile" alt="no-task-awaits-feedback"></div>`
+        awaitFeedback.innerHTML = `<img class="placeholder-container-img" src="/assets/svg/no_tasks_awaiting_feedback.png" class="to-do-container-mobile" alt="no-task-awaits-feedback"></div>`
     }
   
   
@@ -541,7 +541,7 @@ function doneContainer(){
     }
     
     if (done.innerHTML === '') {
-        done.innerHTML = `<img src="/assets/svg/no_tasks_done.png" class="to-do-container-mobile" alt="no-task-done"></div>`
+        done.innerHTML = `<img class="placeholder-container-img" src="/assets/svg/no_tasks_done.png" class="to-do-container-mobile" alt="no-task-done"></div>`
     }
 }
   
