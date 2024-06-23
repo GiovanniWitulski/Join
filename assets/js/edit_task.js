@@ -7,6 +7,8 @@ let searchButton = "/assets/svg/arrow_drop_downaa.svg";
 let choosenContactsEdit = []; //wird befüllt von alt und später neu contacts, variabel
 let newSubtasks = [];
 let taskIdBoard = 0;
+let newAssignedToName = []
+let newAssignedToSvg = []
 // Kontakte laden
 // Hochladen EditTask
 async function addEditTaskToFirebase() {
@@ -136,7 +138,7 @@ function filterContactsEdit(eventOrValue) {
             editContactsShow.push(foundContact);
         }
     }
-    testForChoosenContact();
+    // testForChoosenContact();
     document.getElementById('contact-list-container').classList.remove('hiddenMenue');
     const SearchList = document.getElementById('contact-list-container');
     SearchList.innerHTML = contactListEdit;
@@ -250,6 +252,7 @@ function storeNewData(taskIdBoard, taskboardPosition){ //onclick OK BUTTON // de
     deleteTask(taskboardPosition); //1.
     TaskBoard.push(EditTask);
     uploadData();
+    closeOverlay();
     //addEditTaskToFirebase();    
     //downloadData(); 
     //closeOverlay();
@@ -302,6 +305,7 @@ function testForChoosenContact (){
 }  
 
 function choosenContacts(){
+    console.log("choosenContactsstarted");
     choosenContactsEdit = [];
     for (i=0; i<editContacts.length; i++){
         let checktest = editContacts[i].checked;
@@ -310,9 +314,18 @@ function choosenContacts(){
             choosenContactsEdit.push(testedContact);
         }
     }    
+     // EditTask.assignedTo =[];
+    EditTask.contactEmblem = []; 
+    EditTask.assignedTo = [];
+    for (let i = 0; i < choosenContactsEdit.length; i++) {
+        let fullName = choosenContactsEdit[i].assignedTo.join(' ');
+        EditTask.assignedTo.push(fullName);
+        EditTask.contactEmblem.push(choosenContactsEdit[i].contactEmblem);
+    }
 }
 
 function renderChoosenContactsEmblems(){
+    console.log("renderChoosencontacsActive");
     let editEmblems = document.getElementById('choosenContacts');
     editEmblems.innerHTML = ``;
     for (i=0; i<choosenContactsEdit.length; i++){

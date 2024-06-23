@@ -648,7 +648,7 @@ function closeOverlay(closeId){ // Close Popup Task/OverlayTask
     Overlay.innerHTML = ``;    
     document.getElementById('mobileTamplateContent').classList.remove('background-fade');
     document.getElementById('Board').classList.remove('background-fade');
-    downloadData();
+    renderBoard();
 }                                   
 
 function overlayDeleteTask(idTask, i){          //TO CODE: update to server! -> update BackgroundTaskBoard -> update TaskBoard
