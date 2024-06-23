@@ -21,16 +21,18 @@
     
 <body onload="includeHTML(), downloadData()">
     <div id="mobileTamplateContent" w3-include-html="/assets/templates/mobile_template.html"></div>
-    <div id="Board" class="render_board_mobile">
-        
+    <div id="Board" class="board-titel-add-search">
+        <div class="board-add-task-mobile"></div>
         <div class="board-add-task-mobile">
-            <div class="board-add-task-title-mobile">
-                <h1>Board</h1><img onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="board-add-task-mobile-img" src="/assets/svg/plus_add_task_mobile.svg" alt="add">
+         <div class="board-add-task-title-mobile">
+                <h1>Board</h1><div class="board-add-mobile"><img onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="board-add-task-mobile-img" src="/assets/svg/plus_add_task_mobile.svg" alt="add"></div>
             </div>
         </div>
         <div class="board-search-mobile">
             <div class="board-search-mobile-input"><input id="boardInput" type="text" placeholder="Find task..."><div class="board-search-icon-mobile"><img onclick="findTask()" class="board-search-icon-mobile-img" src="/assets/svg/search.svg" alt="search"></div></div>
         </div>
+    </div>
+        <div class="board-container">
         <div class="to-do-mobile">
             <div class="to-do-add-mobile"><h2>To do</h2><img onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="add-mobile-small-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
             <div id="toDoContainer" class="to-do-container-mobile" ondrop="dropAt(0)" ondragover="allowDrop(event)"></div>
@@ -48,6 +50,7 @@
             <div class="done-title-mobile"><h2>Done</h2><img onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="add-mobile-small-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
             <div id="doneContainer" class="done-container-mobile" ondrop="dropAt(3)" ondragover="allowDrop(event)">
             </div>        
+        </div>
         </div>
 
     </div>
