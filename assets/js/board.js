@@ -25,20 +25,12 @@ try {
     }
     const data = await response.json();
 
-    // Iterieren über jedes Unterobjekt im JSON und Formatieren der Daten
     Object.values(data).forEach(task => {
-      // Überprüfen, ob subtask ein Array ist
       const subtaskArray = Array.isArray(task.subtask) ? task.subtask : [];
-      // Überprüfen, ob subtaskSum ein Array ist
       const subtaskSumArray = Array.isArray(task.subtaskSum) ? task.subtaskSum : [];
-      // Überprüfen, ob priority ein Array ist
       const priorityArray = Array.isArray(task.priority) ? task.priority : [];
-      // Überprüfen, ob assignedTo ein Array ist
       const assignedToArray = Array.isArray(task.assignedTo) ? task.assignedTo : [];
-      // Überprüfen, ob contactEmblem ein Array ist
       const contactEmblemArray = Array.isArray(task.contactEmblem) ? task.contactEmblem : [];
-
-      // Beispiel: Hier kannst du die Felder des Unterobjekts anpassen und in das neue Format überführen
       const formattedTask = {
         label: task.label,
         title: task.title,
@@ -68,7 +60,6 @@ try {
 function renderBoard(){ 
     console.log("render_actice");
     console.log("render_Taskboard Inhalt:", TaskBoard);
-
     toDoContainer();    //render task to do 
     inProgressContainer();       //render tasks in progress 
     awaitFeedbackContainer();    //render task awaiting feedback 
@@ -85,13 +76,26 @@ function overlayTask(id){
 
 }
 
-// TO CODE //
-        
-function uploadData(){} //upload to server -> BackupTaskBoard - TaskBoard // TO CODE
-
-// TO CODE //
-
- 
+async function uploadData() {
+  const databaseURL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app';
+  try {
+    const response = await fetch(`${databaseURL}/tasks.json`, {
+      method: 'PUT', // oder 'PATCH' wenn du nur bestimmte Felder aktualisieren möchtest
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(TaskBoard) // Dein Array, das hochgeladen werden soll
+    });
+    if (!response.ok) {
+      throw new Error('Netzwerkantwort war nicht in Ordnung');
+    }
+    const data = await response.json();
+    console.log('Daten erfolgreich hochgeladen:', data);
+  } catch (error) {
+    console.error('Fehler beim Hochladen der Daten:', error);
+  }
+  downloadData();  
+}
 
 //Search functions  /////////////////////////////////////////
 
@@ -134,16 +138,7 @@ function searchResult(s){
 }
 
 // TO CODE: Functions //////////////////////////////////////
-
-
-
-// function overlayEditTask(idtask){} --> Addtask Page -> load editing Task in Form
                                     //--> Taskpopup slide in
-                                    //--> Edit Task -> changed addTask as Popup, editetTask-> new task, old task -> delete
-// function upload 
-
-
-
 /////////////////////////////////////////////////////////////
 
 
@@ -650,10 +645,10 @@ function toggleCheckboxValue(taskid, position, o) {
 }
 
 function closeOverlay(closeId){ // Close Popup Task/OverlayTask
-    Overlay.innerHTML = ``;
+    Overlay.innerHTML = ``;    
     document.getElementById('mobileTamplateContent').classList.remove('background-fade');
     document.getElementById('Board').classList.remove('background-fade');
-
+    downloadData();
 }                                   
 
 function overlayDeleteTask(idTask, i){          //TO CODE: update to server! -> update BackgroundTaskBoard -> update TaskBoard
@@ -661,10 +656,11 @@ function overlayDeleteTask(idTask, i){          //TO CODE: update to server! -> 
     if (taskToDelete.taskid == idTask){
         closeOverlay(idTask);
         TaskBoard.splice(i, 1);
-        renderBoard();
+        uploadData();
     } else {
         console.log("Taskid & Position Backgroundtaskboard inkongruent.");
     }
+    
 }
 
 // Edit Task function //*css*/`

@@ -344,6 +344,32 @@
 padding-top: 8px;
 }
 
+.edit-ok-button{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding-top: 16px;
+}
+.edit-button{
+    width: 100px;
+    height: 56px;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 21px;
+    line-height: 25.2px;
+    font-weight: 700;
+    background-color: #2A3647;
+    color: white;
+    background-image: url(/assets/svg/check.svg);
+    background-repeat: no-repeat;
+    background-position: calc(100% - 16px);
+    background-size: 24px 24px;
+    box-sizing: border-box;
+    text-align: start;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
 
 
 /* no category */

@@ -1,19 +1,38 @@
 let editContacts = []; //loaded contacts
 let editContactsShow = []; //contacts with id for render
-let EditTask = [];
+let EditTask = []; //task for edit-Array
 let contactListEdit; //liste fürs reinrendern in suche
 let taskboardPosition = 0;
 let searchButton = "/assets/svg/arrow_drop_downaa.svg";
-let newDate;
-let newPriority;
 let choosenContactsEdit = []; //wird befüllt von alt und später neu contacts, variabel
 let newSubtasks = [];
 let taskIdBoard = 0;
+// Kontakte laden
+// Hochladen EditTask
+async function addEditTaskToFirebase() {
+    const databaseURL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app';
 
+    try {
+        const response = await fetch(`${databaseURL}/tasks.json`, {
+            method: 'POST', // 'POST' Methode fügt ein neues Objekt hinzu
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(EditTask)
+        });
 
+        if (!response.ok) {
+            throw new Error('Netzwerkantwort war nicht in Ordnung');
+        }
 
+        const data = await response.json();
+        console.log('Neues Task erfolgreich hinzugefügt:', data);
+    } catch (error) {
+        console.error('Fehler beim Hinzufügen des neuen Tasks:', error);
+    }
+}
 
-processContacts(); // start load contacts and fill array edit contact
+processContacts(); // start load contacts to Array
 
 async function loadContacts() {
     const FIREFIREBASE_URL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app/';
@@ -37,10 +56,10 @@ async function loadContacts() {
 
 // Funktion Profilbild //
 function createContactEdit(vorname, nachname, color) {
-    const vornameInitial = vorname.charAt(0).toUpperCase(); // Erster Buchstabe des Vornamens
-    const nachnameInitial = nachname ? nachname.charAt(0).toUpperCase() : ''; // Erster Buchstabe des Nachnamens, falls vorhanden
+    const vornameInitial = vorname.charAt(0).toUpperCase(); 
+    const nachnameInitial = nachname ? nachname.charAt(0).toUpperCase() : ''; 
 
-    // SVG-Formatierung für das Profilbild
+    // SVG-Formatierung für Profilbild
     const svgTemplate = `<svg class="profile_pic" width="42px" height="42px">
         <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2" fill="${color}"></circle>
         <text x="12" y="25" fill="white" font-size="12px">${vornameInitial}${nachnameInitial}</text>
@@ -78,9 +97,9 @@ async function processContacts() {
             editContactId++;
         });
 
-        console.log('editContacts:', editContacts);
-        console.log('editContactsShow:', editContactsShow);
-        console.log('editContactlength:', editContacts.length); // Länge des editContacts Arrays
+        //console.log('editContacts:', editContacts);
+        //console.log('editContactsShow:', editContactsShow);
+        //console.log('editContactlength:', editContacts.length); 
 
     } catch (error) {
         console.error('Fehler bei der Verarbeitung der Kontakte:', error);
@@ -222,16 +241,16 @@ function getDate(){
     console.log("dateinput", value);
 }
 
-function storeNewData(idTask, i){ //onclick OK BUTTON // delete old task, add new task with old id
-    EditTask.title = newTitle;
-    EditTask.description = newDescription;
-    EditTask.assignedTo = choosenContactsEdit;
-    EditTask.date = newDate;
-    EditTask.priority = newPriority;
-    EditTask.subtask = [];
-    EditTask.subtask = newSubtasks;
-    overlayDeleteTask(idTask, i);
-    TaskBoard.push(); // newTask = editTask
+function showEditTask(){
+    console.log("editTask", EditTask);
+}
+
+
+function storeNewData(taskIdBoard, taskboardPosition){ //onclick OK BUTTON // delete old task, add new task with old id
+    overlayDeleteTask(taskIdBoard, taskboardPosition)
+    addEditTaskToFirebase();
+    downloadData(); 
+    
 }
 
 
@@ -374,6 +393,7 @@ function editTaskRender(){    //use of same container as Overlay/PopupTask
     <input type="text" id="subtaskEdit" class="subtask-edit-input" placeholder="Add new Subtask"><div onclick="editAddSub()" class="edit-subtask-add"><img src="/assets/svg/add.svg" alt="addsubtask" width="14" height="14"></div>
     </div>
     <div id="editRenderSubtasks" class="edit-render-subtasks"></div> 
+    <div class="edit-ok-button"><button onclick="()" class="edit-button">OK</button></div>
     `
     // pre-set date // don´t touch ;)
     let initialDate = editTask.date; //  YYYY-MM-DD-Format (!)
