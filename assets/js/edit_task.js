@@ -247,9 +247,12 @@ function showEditTask(){
 
 
 function storeNewData(taskIdBoard, taskboardPosition){ //onclick OK BUTTON // delete old task, add new task with old id
-    overlayDeleteTask(taskIdBoard, taskboardPosition)
-    addEditTaskToFirebase();
-    downloadData(); 
+    deleteTask(taskboardPosition); //1.
+    TaskBoard.push(EditTask);
+    uploadData();
+    //addEditTaskToFirebase();    
+    //downloadData(); 
+    //closeOverlay();
     
 }
 
@@ -340,6 +343,7 @@ function renderContactListEdit() { //rausgeholt aus render
 function editTaskOverlay(idTask, i){
     EditTask = TaskBoard[i];
     taskboardPosition = i;
+    console.log("taskboardposition", taskboardPosition);
     taskIdBoard = idTask;
     choosenContactsEdit = [];
     testForChoosenContact ();
@@ -393,7 +397,7 @@ function editTaskRender(){    //use of same container as Overlay/PopupTask
     <input type="text" id="subtaskEdit" class="subtask-edit-input" placeholder="Add new Subtask"><div onclick="editAddSub()" class="edit-subtask-add"><img src="/assets/svg/add.svg" alt="addsubtask" width="14" height="14"></div>
     </div>
     <div id="editRenderSubtasks" class="edit-render-subtasks"></div> 
-    <div class="edit-ok-button"><button onclick="()" class="edit-button">OK</button></div>
+    <div class="edit-ok-button"><button onclick="storeNewData(${taskIdBoard}, ${taskboardPosition})" class="edit-button">OK</button></div>
     `
     // pre-set date // don´t touch ;)
     let initialDate = editTask.date; //  YYYY-MM-DD-Format (!)

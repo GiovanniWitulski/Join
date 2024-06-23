@@ -659,8 +659,13 @@ function overlayDeleteTask(idTask, i){          //TO CODE: update to server! -> 
         uploadData();
     } else {
         console.log("Taskid & Position Backgroundtaskboard inkongruent.");
-    }
-    
+    }    
+}
+
+function deleteTask(i){
+    TaskBoard.splice(i, 1);
+    console.log("task aus Taskboard gelöscht stelle", i);
+    console.log(TaskBoard);
 }
 
 // Edit Task function //*css*/`
