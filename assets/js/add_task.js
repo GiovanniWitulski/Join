@@ -200,8 +200,8 @@ function hideContactsToAssign(button){
 }
 
 
-async function getTheDataForPostTask(event) {
-    
+async function getTheDataForPostTask(event, type) {
+
     event.preventDefault();
     const data = {
         title: document.getElementById('title-input').value,
@@ -213,7 +213,7 @@ async function getTheDataForPostTask(event) {
         subtask: getTheSubtasksOfTask(),
         label: getTheCategoryOfTask(),
         subtaskSum: getTheSubtaskStatus(getTheSubtasksOfTask()),
-        type: "0",
+        type: type,
         taskid: await getTheIdOfTask()
     };
     await postData('tasks', data);
@@ -226,7 +226,14 @@ async function showNotification() {
     notificationElement.classList.remove('none');
     
     setTimeout(() => {
-        notificationElement.classList.add('showNotification');
+        if(window.location.href.includes('board.html')){
+            notificationElement.classList.remove('notificationDiv');
+            notificationElement.classList.add('notificationDivShowing');
+
+        }else{
+            notificationElement.classList.add('showNotification');
+        }
+        
     }, 100);
     
     setTimeout(function() {

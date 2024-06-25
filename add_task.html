@@ -13,13 +13,14 @@
     <script src="/assets/js/remoteStorage.js"></script>
     
     <link rel="stylesheet" href="/assets/css/add_task.css">
+    <link rel="stylesheet" href="/assets/css/add_task_formular.css">
 </head>
 <body onload="includeHTML(), loadContacts('contacts'), changeToActive('medium-btn')">
     <div id="mobileTamplateContent" w3-include-html="/assets/templates/mobile_template.html"></div>
     <div class="all-content-div">
         <div class="headline"><p class="headline-text">Add Task</p></div>
     <div class="content-container">
-        <form id="addTaskForm" onsubmit="getTheDataForPostTask(event)">
+        <form id="addTaskForm" onsubmit="getTheDataForPostTask(event, `0`)">
            <div class="leftDiv">
             <div class="titleDiv">
               <div class="subheadlineDiv"><p class="subheadline">Title <p class="marker">*</p></p></div>  
@@ -36,7 +37,7 @@
                 <p class="subheadline">Assigned to</p>
                 <div class="select-wrapper"><input placeholder="Select contacts to assign" type="text" onclick="renderAssignSelector(), showContactsToAssign()" id="contact-selector" class="selector"></input> 
                 
-                  <button id="dropdown-btn" onclick="hideContactsToAssign(this)" class="dropdown-btn"></button>
+                  <button id="dropdown-btn" type="button" onclick="hideContactsToAssign(this)" class="dropdown-btn"></button>
                 </div>
                      
             
@@ -82,7 +83,7 @@
                        <button type="button" onclick="addToSubtasks()" class="correct-btn"></button>   
                     </div>
                     <div id="subtask-plus-button-div" class="subtask-plus-btn-div">
-                        <button class="plus-btn"></button>
+                        <button type="button" class="plus-btn"></button>
                     </div>
                     
                 </div>

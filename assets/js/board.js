@@ -685,3 +685,29 @@ function deleteTask(i){
 
 // Edit Task function //*css*/`
     
+function switchToAddTask(type){
+    if(window.innerWidth < 1250){
+        window.location.href='//127.0.0.1:5500/add_task.html';
+    }else{ 
+        changeToActive('medium-btn');
+        document.getElementById('addTaskOverlayContainer').classList.remove('addTaskOverlayContainer');
+        document.getElementById('addTaskOverlayContainer').classList.add('addTaskOverlayContainerShowing');
+        document.getElementById('addTaskForm').onsubmit = function(event){
+            getTheDataForPostTask(event, type);
+            
+            
+        }
+       
+        document.getElementById('body').classList.add('noScroll');
+        
+    }
+}
+
+function hideOverlay(){
+    document.getElementById('addTaskOverlayContainer').classList.remove('addTaskOverlayContainerShowing');
+    document.getElementById('addTaskOverlayContainer').classList.add('addTaskOverlayContainer');
+    
+    document.getElementById('body').classList.remove('noScroll');
+    changeToActive('medium-btn');
+    clearTheForm();
+}
