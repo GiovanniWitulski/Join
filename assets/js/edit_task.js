@@ -7,8 +7,8 @@ let searchButton = "/assets/svg/arrow_drop_downaa.svg";
 let choosenContactsEdit = []; //wird befüllt von alt und später neu contacts, variabel
 let newSubtasks = [];
 let taskIdBoard = 0;
-let newAssignedToName = []
-let newAssignedToSvg = []
+let newAssignedToName = [];
+let newAssignedToSvg = [];
 // Kontakte laden
 // Hochladen EditTask
 async function addEditTaskToFirebase() {

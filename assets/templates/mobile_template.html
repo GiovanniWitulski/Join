@@ -7,14 +7,17 @@
     <link rel="stylesheet" href="/assets/css/fonts.css">
     <link rel="stylesheet" href="/assets/css/mobile_template.css">
     <title>Join</title>
-    <script src="/assets/js/remoteStorage.js"></script>
+    <script  src="/assets/js/remoteStorage.js"></script>
     <script src="/script.js"></script>
     <script src="/assets/js/w3_include.js"></script>
+    <script src="/assets/js/login.js"></script>
 </head>
-<body class="mobileHTML-body">
+<body onload="setSideMenuCharacters()" class="mobileHTML-body">
     <header>
         <img class="join-logo" src="/assets/svg/join-logo.svg" alt="join logo">
-        <div>
+        <span class="header-title-desktop">Kanban Project Management Tool</span>
+        <div class="header-navigation">
+            <a href="/assets/templates/help.html"><img class="help-img" src="/assets/svg/help.svg" alt=""></a>
             <span onclick="openSideMenu()" id="smBtn" class="sm-btn">SM</span>
             <nav id="sideMenu" class="side-menu">
                 <ul class="ul-side-menu">
@@ -62,7 +65,6 @@
     </footer>
     
     <script>
-
     </script>
 </body>
 </html>

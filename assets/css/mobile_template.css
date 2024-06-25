@@ -161,11 +161,64 @@ a {
     display: none;
 }
 
+.header-title-desktop {
+    display: none;
+}
+
 .nav-footer {
     display: none;
 }
 
-@media (min-width:800px ) {
+.header-navigation {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.help-img {
+    display: none;
+    width: 20px;
+    height: 20px;
+    transition: all 100ms linear;
+}
+
+.help-img:hover {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+
+@media (min-width:800px) {
+
+    header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 96px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 4px 0px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        z-index: 3;
+    }
+
+    .join-logo {
+        display: none;
+    }
+
+    .header-title-desktop {
+        display: block;
+        margin-left: 328px;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 24px;
+    }
+
+    .help-img {
+        display: block;
+    }
 
     .nav-mobile {
         display: flex;
@@ -178,6 +231,10 @@ a {
         padding-right: 0;
         gap: 15px;
         z-index: 3;
+    }
+
+    .side-menu {
+        top: 71px;
     }
 
     .menu-links {
@@ -230,5 +287,10 @@ a {
         padding-right: 0;
         color: rgba(41, 171, 226, 1);
         font-weight: 700;
+    }
+
+    .sm-btn:hover {
+        background-color: rgb(246,247,248);
+        cursor: pointer;
     }
 }

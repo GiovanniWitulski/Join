@@ -15,7 +15,7 @@ function toggleCheckbox(checkboxImg) {
 function openSideMenu() {
     const sideMenu = document.getElementById("sideMenu");
     sideMenu.classList.toggle("side-menu-open");
-
+  
   document.addEventListener('click', handleClickOutside);
 }
 
@@ -27,4 +27,17 @@ function handleClickOutside(event) {
     sideMenu.classList.remove("side-menu-open");
     document.removeEventListener('click', handleClickOutside);
   }
+}
+
+function setSideMenuCharacters() {
+    let sideMenuCharacters = localStorage.getItem('sideMenuCharacters');
+    document.getElementById('smBtn').innerHTML = sideMenuCharacters;
+}
+
+function showPrivacyPolicy() {
+  document.getElementById('mobileTamplateContent').style.display = 'none';
+}
+
+function showLegalNotice() {
+  
 }
