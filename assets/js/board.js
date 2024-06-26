@@ -251,11 +251,11 @@ function toDoContainer (){
     }
     
     if (toDo.innerHTML == ''){
-        toDo.innerHTML = `<img class="placeholder-container-img" src="/assets/svg/No_tasks_feedback_to_do.svg" alt="no-task-to-do">`
+        toDo.innerHTML = `<img class="placeholder-container-img" src="/assets/svg/no_task_to_do.png" alt="no-task-to-do">`
     }
 }
 
-function inProgressContainer (){
+function inProgressContainer(){
   inProgress.innerHTML = '';
 
   for(i=0; i<TaskBoard.length; i++){
@@ -346,7 +346,7 @@ function inProgressContainer (){
   }
 
   if (inProgress.innerHTML == ''){
-      inProgress.innerHTML = `<img class="placeholder-container-img" src="/assets/svg/No_tasks_feedback_in_progress.svg" alt="no-task-in-progress">`
+      inProgress.innerHTML = `<img class="placeholder-container-img" src="/assets/svg/No_tasks_in_progress.png" alt="no-task-in-progress">`
   }
   
 }
@@ -599,7 +599,7 @@ function OverlayTaskPopup(i) {
                 <div id="overlaySubtask1" class="overlay-subtask"><img class="overlay-checkbox-img" onclick="toggleCheckboxValue(${OverlayTask.taskid}, 1, ${i})"  src=${check1}> ${OverlayTask.subtask[1]}</div></div>
                 </div>
                 <div class="overlay-card-delete-edit">
-                <div onclick="overlayDeleteTask(${OverlayTask.taskid}, ${i})" class="overlay-cde"><img class="overlay-cde-img1" src="/assets/svg/delete.svg" alt="delete">Delete</div><div class="placeholder-div">|</div><div onclick="editTaskOverlay(${OverlayTask.taskid}, ${i})" class="overlay-cde"><img class="overlay-cde-img2" src="/assets/svg/edit.svg" alt="Edit">Edit</div>
+                <div onclick="overlayDeleteTask(${OverlayTask.taskid}, ${i})" class="overlay-cde"><img class="overlay-cde-img1" src="/assets/svg/delete.svg" alt="delete">Delete</div><div class="placeholder-div">|</div><div onclick="editTaskOverlay(${OverlayTask.taskid}, ${i})" class="overlay-cde"><img class="overlay-cde-img2" src="/assets/svg/Subtasks%20icons11-4.svg" alt="Edit">Edit</div>
                 </div>
             </div>
         </div>

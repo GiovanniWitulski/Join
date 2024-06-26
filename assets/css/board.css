@@ -79,6 +79,10 @@ body {
     flex-direction: column;
  }
 
+.board-add-button-desktop{
+    display: none;
+}
+
 .board-add-task-title-mobile {
     display: flex;
     justify-content: space-between;
@@ -277,10 +281,17 @@ cursor: pointer;
     margin-bottom: 0px;
     border: none;
     padding-right: 88px;
+    background-color: #F6F7F8
 }
 
 #boardInput{
     height: 38px;
+}
+
+.board-search-mobile-input {
+    margin-left: 0px;
+    margin-right: 0px;
+    background-color: white;
 }
 
 .board-search-mobile-input{
