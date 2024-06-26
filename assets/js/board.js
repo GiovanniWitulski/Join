@@ -159,8 +159,6 @@ function dropAt(newType){
     }
 }
 
-// Board render Tasks container /////////////////
-
   
 // OVERLAY TASK / POPUP ///////////////////////
 
