@@ -60,10 +60,6 @@ h3 {
     margin-top: 128px;
 }
 
-/* .mt-40px {
-    margin-top: 40px;
-} */
-
 .mb-16px {
     margin-bottom: 16px;
 }
@@ -74,4 +70,19 @@ h3 {
 
 .mt-24px {
     margin-top: 24px;
+}
+
+@media (min-width:800px ) {
+    .ml-mr-16px {
+        margin-left: 328px;
+    }
+
+    .mt-128px {
+        margin-top: 206px;
+    }
+
+    h1 {
+        font-size: 61px;
+        line-height: 73.2px;
+    }
 }

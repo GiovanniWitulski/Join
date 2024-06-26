@@ -11,9 +11,9 @@
     <script src="/assets/js/w3_include.js"></script>
     <script src="/assets/js/remoteStorage.js"></script>
     <script src="/assets/js/login.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script> -->
 </head>
 <body onload="landingPageAnimation()" class="login-body">
     <div id="loadAnimation"></div>
@@ -25,7 +25,7 @@
             <div class="login-card">
                 <div class="login-underline-div">
                     <h1>Log in</h1>
-                    <img class="login-underline" src="/assets/svg/underline-lightblue.svg" alt="">
+                    <div class="login-underline"></div>
                 </div>
                 <form id="loginForm" class="form-indexhtml" action="/summary.html" onsubmit="return validateForm()">
                     <div class="login-input-divs">
@@ -69,12 +69,12 @@
                     <div class="empty-div"></div>
                     <div class="login-underline-div">
                         <h1 class="signup-title">Sign up</h1>
-                        <img class="login-underline" src="/assets/svg/underline-lightblue.svg" alt="">
+                        <div class="login-underline"></div>
                     </div>
                     <img onclick="showLoginForm()" class="sign-up-arrow-left" src="/assets/svg/arrow-left-line.svg" alt="Back arrow">
                 </div>
 
-                <form class="form-indexhtml">
+                <form id="signUpForm" class="form-indexhtml" action="/summary.html" onsubmit="return signUp(event)">
                     <div class="login-input-div-indexhtml">
                         <div class="login-input-div-indexhtml">
                             <input class="login-input-indexhtml" id="signUpNameIndexHtml" type="text" placeholder="Name" required>
@@ -109,7 +109,7 @@
                         <p class="remember-me-p">I accept the <a class="privacy-policy-link" href="/assets/templates/privacy_policy.html">Privacy Policy</a></p>
                     </div>
                     <div class="signup-btns-div">
-                        <button type="submit" onclick="signUp()" class="login-btn">Sign up</button>
+                        <button type="submit" class="login-btn">Sign up</button>
                     </div>
                 </form>
             </div>
@@ -117,8 +117,8 @@
     </div>
     
     <footer class="footer-indexhtml">
-        <a class="a-footer-infdexhtml" href="/assets/templates/privacy_policy.html">Privacy Policy</a>
-        <a class="a-footer-infdexhtml" href="/assets/templates/legal_notice.html">Legal Notice</a>
+        <a onclick="showPrivacyPolicy()" class="a-footer-infdexhtml" href="/assets/templates/privacy_policy.html">Privacy Policy</a>
+        <a onclick="showLegalNotice()" class="a-footer-infdexhtml" href="/assets/templates/legal_notice.html">Legal Notice</a>
     </footer>
 </body>
 </html>

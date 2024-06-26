@@ -10,6 +10,8 @@
     <script src="/assets/js/board.js" defer></script> 
     <script src="/assets/js/remoteStorage.js"></script>
     <script src="/assets/js/edit_task.js"></script>
+    <script src="/assets/js/add_task.js"></script>
+    <script src="/assets/js/contacts.js"></script>
 
 
     <link rel="stylesheet" href="/style.css">
@@ -17,9 +19,10 @@
     <link rel="stylesheet" href="/assets/css/card.css">
     <link rel="stylesheet" href="/assets/css/fonts.css">
     <link rel="stylesheet" href="/assets/css/edit_task.css">
+    <link rel="stylesheet" href="/assets/css/add_task.css">
 </head>
     
-<body onload="includeHTML(), downloadData()">
+<body id="body" onload="includeHTML(), downloadData()">
     <div id="mobileTamplateContent" w3-include-html="/assets/templates/mobile_template.html"></div>
     <div id="Board" class="board-titel-add-search">
         <div class="board-add-task-mobile">
@@ -34,20 +37,20 @@
     </div>
         <div class="board-container">
         <div class="to-do-mobile">
-            <div class="to-do-add-mobile"><h2>To do</h2><img onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="add-mobile-small-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
+            <div class="to-do-add-mobile"><h2>To do</h2><img onclick="switchToAddTask('0')" class="add-mobile-small-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
             <div id="toDoContainer" class="to-do-container-mobile" ondrop="dropAt(0)" ondragover="allowDrop(event)"></div>
         </div>
         <div class="in-progress-mobile">
-            <div class="in-progress-title-mobile"><h2>In progress</h2><img onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="add-mobile-small-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
+            <div class="in-progress-title-mobile"><h2>In progress</h2><img onclick="switchToAddTask('1')" class="add-mobile-small-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
             <div id="inProgressContainer" class="in-progress-container-mobile" ondrop="dropAt(1)" ondragover="allowDrop(event)"></div>
         </div>
         <div class="await-feedback-mobile">
-            <div class="await-feedback-title-mobile"><h2>Await Feedback</h2><img onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="add-mobile-small-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
+            <div class="await-feedback-title-mobile"><h2>Await Feedback</h2><img onclick="switchToAddTask('2')" class="add-mobile-small-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
             <div id="awaitFeedbackContainer" class="await-feedback-container" ondrop="dropAt(2)" ondragover="allowDrop(event)">
             </div>        
         </div>
         <div class="done-mobile">
-            <div class="done-title-mobile"><h2>Done</h2><img onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="add-mobile-small-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
+            <div class="done-title-mobile"><h2>Done</h2><img onclick="switchToAddTask('3')" class="add-mobile-small-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
             <div id="doneContainer" class="done-container-mobile" ondrop="dropAt(3)" ondragover="allowDrop(event)">
             </div>        
         </div>
@@ -55,6 +58,103 @@
 
     </div>
     <div id="overlayContainer"></div>
+    <div id="addTaskOverlayContainer" class="addTaskOverlayContainer">
+        <div class="all-content-div">
+            <div class="headline"><p class="headline-text">Add Task</p></div>
+            <div class="closeOverlay-btn" onclick="hideOverlay()"></div>
+        <div class="content-container">
+            <form id="addTaskForm" onsubmit="getTheDataForPostTask(event)">
+               <div class="leftDiv">
+                <div class="titleDiv">
+                  <div class="subheadlineDiv"><p class="subheadline">Title <p class="marker">*</p></p></div>  
+                    <input id="title-input" type="text" required placeholder="Enter a title">
+                    <p class="alert-text none">This field is required</p>
+                </div>
+    
+                <div class="descriptionDiv">
+                    <p class="subheadline">Description</p>
+                    <textarea id="descriptionInput" type="text" placeholder="Enter a Description"></textarea>
+                </div>
+    
+                <div class="assignedDiv">
+                    <p class="subheadline">Assigned to</p>
+                    <div class="select-wrapper"><input placeholder="Select contacts to assign" type="text" onclick="renderAssignSelector(), showContactsToAssign()" id="contact-selector" class="selector"></input> 
+                    
+                      <button id="dropdown-btn" type="button" onclick="hideContactsToAssign(this)" class="dropdown-btn"></button>
+                    </div>
+                         
+                
+              
+                    <div id="optionContainer" class="optionContainer none"></div>
+                    <div id="assignedContactPics" class="assignedContactPics"></div>
+                </div>
+            </div>
+    
+            <div class="addTaskDivider"></div>
+            <div class="rightDiv">
+                <div class="dateDiv">
+                    <div class="subheadlineDiv"><p class="subheadline">Due date <p class="marker">*</p></p></div>
+                        <input id="datePicker" type="date">
+                        <p class="alert-text none">This field is required</p>
+                </div>
+    
+                <div class="prioDiv">
+                    <p class="subheadline">Prio</p>
+                    <div class="buttonDiv">
+                        <button type="button" id="urgent-btn" class="urgent-btn" onclick="changeToActive('urgent-btn')"><p class="prioLabel">Urgent</p></button>
+                        <button type="button" id="medium-btn" class="medium-btn" onclick="changeToActive('medium-btn')"><p class="prioLabel">Medium</p></button>
+                        <button type="button" id="low-btn" class="low-btn" onclick="changeToActive('low-btn')"><p class="prioLabel">Low</p></button>
+                    </div>
+                </div>
+    
+                <div class="category-div">
+                   <div class="subheadlineDiv"><p class="subheadline">Category <p class="marker">*</p></p></div> 
+                    <select class="selector dropdown-img">
+                            <option value="">Select task category</option>
+                            <option value="2">Technical Task</option>
+                            <option value="3">User Story</option>
+                    </select>
+                </div>
+    
+                <div class="subtask-div">
+                    <p class="subheadline">Subtasks</p>
+                    <div id="subtask-wrapper" class="subtask-wrapper">
+                        <input onclick="changeButtons()" id="subtask-input" type="text" placeholder="Add new subtask">
+                        <div id="subtask-buttons" class="subtask-btn-div none">
+                           <button type="button" onclick="cancelSubtask()" class="cancel-btn"></button> 
+                           <div class="btn-divider"></div>
+                           <button type="button" onclick="addToSubtasks()" class="correct-btn"></button>   
+                        </div>
+                        <div id="subtask-plus-button-div" class="subtask-plus-btn-div">
+                            <button type="button" class="plus-btn"></button>
+                        </div>
+                        
+                    </div>
+                    <div class="subtask-div">
+                        <ul id="list-of-subtasks"> 
+                        </ul>
+                       
+                    </div>
+                </div>
+    
+                <div class="createDiv">
+                    <div class="explanation-div"><p class="marker">*<p class="explanation">This field is required</p></p></div>
+                    <div class="addTaskCtrlButtons">
+                        <button type="button" onclick="clearTheForm()" class="cancelTaskBtn">Clear</button>
+                        <button type="submit" class="create-btn">Create Task</button>
+                    </div>
+                    
+                </div>
+    
+                </div>
+            </form>
+            
+            
+           
+        </div>
+    </div>
+</div>
+<div class="notificationDiv none" id="taskAddedNotification"><img class="addedToBoardNotification" src="/assets/svg/Added to board.svg"></div>
 </body>
 </html>
 

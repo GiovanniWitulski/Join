@@ -17,11 +17,6 @@
     background-color: rgb(246,247,248);
 }
 
-.summary-icons {
-    width: 40px;
-    height: 40px;
-}
-
 .summary-container {
     width: 100%;
     margin-top: 40px;
@@ -50,11 +45,46 @@
     background-color: white;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
+    transition: all 225ms ease;
+}
+
+.todo-container:hover {
+    background-color: rgb(42,54,71);
+    color: white;
+    box-shadow: 0 0 0 8px rgb(42, 54, 71);
+
+    .edit-and-check-icon-hover {
+        opacity: 1;
+        width: 40px;
+        height: 40px;
+        transition: all 225ms ease;
+    }
+
+    .edit-and-check-icon {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        transition: all 225ms ease;
+    }
+}
+
+.edit-and-check-icon {
+    opacity: 1;
+    width: 40px;
+    height: 40px;
+    transition: all 225ms ease;
+}
+
+.edit-and-check-icon-hover {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    transition: all 225ms ease;
 }
 
 .urgent-task-container {
-    display: flex;
     justify-content: center;
+    display: flex;
     align-items: center;
     gap: 20px;
     height: 110px;
@@ -65,6 +95,13 @@
     border-radius: 20px;
     margin-top: 30px;
     margin-bottom: 18px;
+    transition: all 225ms ease;
+}
+
+.urgent-task-container:hover {
+    background-color: rgb(42,54,71);
+    color: white;
+    box-shadow: 0 0 0 8px rgb(42, 54, 71);
 }
 
 .urgent-task-counter-container {
@@ -100,6 +137,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transition: all 225ms ease;
+}
+
+.tasks-in-board-container:hover {
+    background-color: rgb(42,54,71);
+    color: white;
+    box-shadow: 0 0 0 8px rgb(42, 54, 71);
 }
 
 .summary-task-numbers {
@@ -109,4 +153,97 @@
     font-weight: 600;
     line-height: 56.4px;
     justify-content: center;
+}
+
+.summary-underline-blue-desktop {
+    display: none;
+    height: 59px;
+    width: 3px;
+}
+
+@media (min-width:800px ) {
+    .summary-body {
+        margin-left: 328px;
+        margin-right: 0;
+        margin-bottom: 0;
+    }
+
+    .summary-container {
+        align-items: flex-start;
+    }
+
+    .summary-container-part {
+        justify-content:  flex-start;
+        width: 100%;
+        max-width: unset;
+        gap: 30px;
+    }
+
+    .urgent-task-container {
+        width: 100%;
+        max-width: 560px;
+        height: 168px;
+    }
+
+    .todo-container {
+        height: 168px;
+        width: 264px;
+        max-width: unset;
+    }
+
+    .summary-title-div {
+        flex-direction: unset;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .tasks-in-board-container {
+        height: 168px;
+        width: 168px;
+        max-width: unset;
+    }
+
+    .summary-underline-blue {
+        display: none;
+    }
+
+    .summary-underline-blue-desktop {
+        display: flex;
+        align-items: center;
+    }
+
+    .summary-subtitle {
+        font-size: 27px;
+        font-weight: 400;
+        line-height: 32.4px;
+    }
+
+    .edit-and-check-icon {
+        opacity: 1;
+        width: 69px;
+        height: 69px;
+        transition: all 225ms ease;
+    }
+
+    .todo-container:hover {
+        .edit-and-check-icon-hover {
+            opacity: 1;
+            width: 69px;
+            height: 69px;
+            transition: all 225ms ease;
+        }
+    }
+
+    .summary-task-numbers {
+        font-size: 64px;
+        line-height: 76.8px;
+    }
+
+    .todo-container {
+        gap: 16px;
+    }
+
+    .summary-sub-text {
+        font-size: 20px;
+    }
 }

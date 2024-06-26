@@ -17,21 +17,24 @@
     <div id="mobileTamplateContent" w3-include-html="/assets/templates/mobile_template.html"></div>
     <div class="mt-128px summary-title-div">
         <h1>Join 360</h1>
-        <span>Key Metrics at a Glance</span>
+        <img class="summary-underline-blue-desktop" src="assets/svg/parting_line_blue.svg" alt="">
+        <span class="summary-subtitle">Key Metrics at a Glance</span>
         <img class="summary-underline-blue" src="assets/svg/underline-lightblue.svg" alt="">
     </div>
     <div class="summary-container">
         <div class="summary-container-part">
-            <div class="todo-container">
-                <img class="summary-icons" src="/assets/svg/pen.svg" alt="">
-                <span class=""><b id="tasksToDoCounter" class="summary-task-numbers">1</b> to-do</span>
-            </div>
-            <div class="todo-container">
-                <img class="summary-icons" src="/assets/svg/doneTasksIcon.svg" alt="">
-                <span class=""><b id="tasksDoneCounter" class="summary-task-numbers">1</b> done</span>
-            </div>
+                <a href="/board.html" class="todo-container">
+                    <img class="edit-and-check-icon-hover" src="/assets/svg/edit_summary.svg" alt="">
+                    <img class="edit-and-check-icon" src="/assets/svg/edit_white_summary.svg" alt="">
+                    <span class="summary-sub-text"><b id="tasksToDoCounter" class="summary-task-numbers">1</b> to-do</span>
+                </a>
+                <a href="/board.html" class="todo-container">
+                    <img class="edit-and-check-icon" src="/assets/svg/check_white_summary.svg" alt="">
+                    <img class="edit-and-check-icon-hover" src="/assets/svg/check_summary.svg" alt="">
+                    <span class="summary-sub-text"><b id="tasksDoneCounter" class="summary-task-numbers">1</b> done</span>
+                </a>
         </div>
-        <div class="summary-container-part urgent-task-container">
+        <a href="/board.html" class="urgent-task-container">
             <div class="urgent-task-counter-container">
                 <img class="summary-icons" src="/assets/svg/urgent.svg" alt="">
                 <span class=""><b id="urgentTasksCounter" class="summary-task-numbers">1</b> urgent</span>
@@ -40,17 +43,23 @@
             <span class=""><b id="urgentTasksDate" class="urgent-task-deadline">October 16, 2022</b>
                 Upcomming Deadline
             </span>
-        </div>
+        </a>    
         <div class="summary-container-part">
-            <span class="tasks-in-board-container">
-                <b id="tasksInBoardCounter" class="summary-task-numbers">1</b> tasks <br> in board
-            </span>
-            <span class="tasks-in-board-container">
-                <b id="tasksInProgressCounter" class="summary-task-numbers">1</b> tasks <br> in Progress
-            </span>
-            <span class="tasks-in-board-container">
-                <b id="tasksInFeedbackCounter" class="summary-task-numbers">1</b> Awaiting <br> feedback
-            </span>
+            <a href="/board.html" class="tasks-in-board-container">
+                <span class="summary-sub-text">
+                    <b id="tasksInBoardCounter" class="summary-task-numbers">1</b> tasks <br> in board
+                </span>
+            </a>
+            <a href="/board.html" class="tasks-in-board-container">
+                <span class="summary-sub-text">
+                    <b id="tasksInProgressCounter" class="summary-task-numbers">1</b> tasks <br> in Progress
+                </span>
+            </a>
+            <a href="/board.html" class="tasks-in-board-container">
+                <span class="summary-sub-text">
+                    <b id="tasksInFeedbackCounter" class="summary-task-numbers">1</b> Awaiting <br> feedback
+                </span>
+            </a>
         </div>
     </div>
 </body>

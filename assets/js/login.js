@@ -55,3 +55,25 @@ function landingPageAnimation() {
         document.getElementById("loadAnimation").classList.add("d-none");
       }, 1000);
 }
+
+function signUp(event) {
+    event.preventDefault();
+    let requiredMsg = document.querySelector('.required-msg');
+    let password = document.getElementById("signUpPasswordIndexHtml").value;
+    let confirmPassword = document.getElementById("signUpConfirmPasswordIndexHtml").value;
+
+    if (password !== confirmPassword) {
+        console.log('ungleich');
+        requiredMsg.style.display = 'block';
+    } else {
+        console.log('gleich');
+        getSideMenuCharacters();
+        window.location.href = document.getElementById("signUpForm").action;
+    }
+}
+
+function getSideMenuCharacters() {
+    let name =  document.getElementById('signUpNameIndexHtml').value
+    let sideMenuCharacters = name.slice(0, 2).toUpperCase();
+    localStorage.setItem('sideMenuCharacters',sideMenuCharacters);    
+}
