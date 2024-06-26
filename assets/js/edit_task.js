@@ -49,7 +49,7 @@ async function loadContacts() {
         }
 
         const data = await response.json();
-        return Object.values(data); // Gibt ein Array der Kontaktdaten zurück
+        return Object.values(data); // return Array der Kontaktdaten 
     } catch (error) {
         console.error('Fehler beim Laden der Kontakte:', error);
         throw error;

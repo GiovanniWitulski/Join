@@ -281,8 +281,7 @@ function toggleCheckboxValue(taskid, position, o) {
 function closeOverlay(closeId){ // Close Popup Task/OverlayTask
     Overlay.innerHTML = ``;    
     document.getElementById('mobileTamplateContent').classList.remove('background-fade');
-    document.getElementById('Board').classList.remove('background-fade');
-    
+    document.getElementById('Board').classList.remove('background-fade');    
     renderBoard();
     uploadData();
 }                                   

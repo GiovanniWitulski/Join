@@ -5,6 +5,10 @@ let toDoTask = []
 let NewLabel;
 let newSumSubtask;
 let newAmountSubtask;
+let newSumSubtaskCalc;
+let newProgressInPercent;
+let newProgressBarId;
+let newEmblems;
 
 
 function label(){
@@ -35,47 +39,57 @@ function amountSubTasks(){     //Anzahl Subtasks
          
 }
 
+function calcProgressBar(){
+    newSumSubtaskCalc = 0;    //Calculation for barchart !!!declared "0"!!! at beginning (svg -reasons)
+    newSumSubtaskCalc = newSumSubtask/newAmountSubtask;
+    
+    newProgressInPercent = newSumSubtaskCalc * 100;  
+    newProgressBarId = toDoTask.taskid; //In toDoTask.taskid ändern ! 'cardToDoBar' + toDoCard.taskid; 
+    console.log("newProgressBarId",newProgressBarId);
+}
+
+function descriptionChar(){
+    let lastChar = toDoTask.description[toDoTask.description.length - 1];
+    if (lastChar === "." || lastChar === "!" || lastChar === "?"){
+        toDoTask.description = toDoTask.description.slice(0, -1);
+    }                                 //preparing optic for description
+}
+
+function emblemSvg() {            //contact-emblems
+    newEmblems = '';                          
+        for (let i = 0; i < toDoTask.contactEmblem.length; i++){
+            const svg = toDoTask.contactEmblem[i];
+            newEmblems += `<div class="card-contact-emblems-icon">${svg}</div>`;
+            if (i === 5){break;}
+        }           
+}
 
 
 function toDoContainer (){             
     toDo.innerHTML = '';
 
     for(i=0; i<TaskBoard.length; i++){
-        const toDoCard = TaskBoard[i];
-        
-        
+        const toDoCard = TaskBoard[i];  
+        toDoTask = toDoCard;
+            newAmountSubtask = toDoTask.subtask.length;
+            label(toDoTask); 
+            amountSubTasks();
+            calcProgressBar();
+            descriptionChar();   
+            emblemSvg();  
        
         // console.log("ToDo ForLoop Durchlauf", i)
         // if todocardtype start... function -> function ->....-> html create
         if (toDoCard.type == 0){
-            toDoTask = toDoCard;
-            newAmountSubtask = toDoTask.subtask.length;
-            label(toDoTask); 
-            amountSubTasks();
-            
+                      
 
             //// bis hierhin alles topi :) 
 
-            let sumSubtaskCalc = 0;    //Calculation for barchart !!!declared "0"!!! at beginning (svg -reasons)
-            sumSubtaskCalc = newSumSubtask/newAmountSubtask;
-            
-            const progressInPercent = sumSubtaskCalc * 100;  
-            const progressBarId = 'cardToDoBar' + toDoCard.taskid; //'cardToDoBar' + toDoCard.taskid;
-            console.log("TaskId",toDoCard.taskid);
 
             
             
-            let lastChar = toDoCard.description[toDoCard.description.length - 1];
-            if (lastChar === "." || lastChar === "!" || lastChar === "?"){
-                toDoCard.description = toDoCard.description.slice(0, -1);
-            }                                 //preparing optic for description
 
-            let emblems = '';                          //contact-emblems
-            for (let i = 0; i < toDoCard.contactEmblem.length; i++){
-                const svg = toDoCard.contactEmblem[i];
-                emblems += `<div class="card-contact-emblems-icon">${svg}</div>`;
-                if (i === 5){break;}
-            }           
+            
 
 
             let priority = '';
@@ -91,20 +105,20 @@ function toDoContainer (){
             <div class="card-body" onclick="overlayTask(${toDoCard.taskid})" ondragstart="startDragging(${toDoCard.taskid})" draggable="true">
             <div id="cardHeader" class="card-header">${NewLabel}</div>
             <div id="cardTitle" class="card-title"><h4>${toDoCard.title}</h4></div>
-            <div id="cardDescription" class="card-description"><h4>${toDoCard.description}...</h4></div>
+            <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
             <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
             <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
-            <rect id="cardToDoBar${toDoCard.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
+            <rect id="${toDoCard.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
             <div class="card-sum-subtask">${newSumSubtask}/${newAmountSubtask} Subtasks</div></div>        
             <div id="cardParticipantsPriority" class="card-participants-priority">
-            <div class="card-contact-emblems">${emblems}</div>
+            <div class="card-contact-emblems">${newEmblems}</div>
             <div><img src="${priority}" alt="priority"></div>
             </div></div>
                     
             `           
-            const progressBar = document.getElementById(progressBarId);
-            progressBar.setAttribute('width', `${progressInPercent}%`);
+            const progressBar = document.getElementById(newProgressBarId);
+            progressBar.setAttribute('width', `${newProgressInPercent}%`);
             
         }
         //console.log("ToDoGerendert",i);
