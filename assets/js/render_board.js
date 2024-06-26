@@ -13,9 +13,7 @@ function label(){
         NewLabel = TechnicalTaskLabel;
     } else {
         NewLabel = UserStoryLabel;
-    }             
-    console.log("Newlabel", NewLabel);
-     
+    }                 
 }
 
 function amountSubTasks(){     //Anzahl Subtasks
@@ -24,7 +22,7 @@ function amountSubTasks(){     //Anzahl Subtasks
         if (newAmountSubtask === 2){         //"if null" - just for data failures securement
         if (toDoTask.subtaskSum[0] === null && toDoTask.subtaskSum[1] === null){
             newSumSubtask = 0; }            
-        if (toDoTask.subtaskSum[0] !== null && toDoCard.subtaskSum[1] !== null){
+        if (toDoTask.subtaskSum[0] !== null && toDoTask.subtaskSum[1] !== null){
             newSumSubtask = toDoTask.subtaskSum[0] + toDoTask.subtaskSum[1]; }
         }
         if (newAmountSubtask === 1){
@@ -33,11 +31,9 @@ function amountSubTasks(){     //Anzahl Subtasks
             }
             if(toDoTask.subtaskSum[0] === null){
             newSumSubtask = 0;} 
-        }      
+        }   
+         
 }
-
-
-
 
 
 
@@ -53,24 +49,19 @@ function toDoContainer (){
         // if todocardtype start... function -> function ->....-> html create
         if (toDoCard.type == 0){
             toDoTask = toDoCard;
-            let newAmountSubtask = toDoTask.subtask.length;
-            console.log(toDoTask);
+            newAmountSubtask = toDoTask.subtask.length;
             label(toDoTask); 
             amountSubTasks();
+            
 
             //// bis hierhin alles topi :) 
-            
-            let sumSubtaskCalc = 0;    //Calculation for barchart !!!declared "0"!!! at beginning (svg -reasons)
 
-            if (newSumSubtask/newAmountSubtask === 1){
-                sumSubtaskCalc = 2;
-            } else if (newSumSubtask/newAmountSubtask === 0.5){
-                sumSubtaskCalc = 1;
-            } else if (newSumSubtask/newAmountSubtask === 0){
-                sumSubtaskCalc = 0;
-            } 
-            const progressInPercent = sumSubtaskCalc * 50;  
-            const progressBarId = 'cardToDoBar' + toDoCard.taskid;
+            let sumSubtaskCalc = 0;    //Calculation for barchart !!!declared "0"!!! at beginning (svg -reasons)
+            sumSubtaskCalc = newSumSubtask/newAmountSubtask;
+            
+            const progressInPercent = sumSubtaskCalc * 100;  
+            const progressBarId = 'cardToDoBar' + toDoCard.taskid; //'cardToDoBar' + toDoCard.taskid;
+            console.log("TaskId",toDoCard.taskid);
 
             
             

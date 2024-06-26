@@ -15,7 +15,7 @@ let awaitFeedback = document.getElementById('awaitFeedbackContainer');
 let done = document.getElementById('doneContainer');
 let Overlay = document.getElementById('overlayContainer');
 
-
+let toDoCard = [];
 
 ////////////Main Start Functions///////////
 async function downloadData() {
@@ -282,7 +282,9 @@ function closeOverlay(closeId){ // Close Popup Task/OverlayTask
     Overlay.innerHTML = ``;    
     document.getElementById('mobileTamplateContent').classList.remove('background-fade');
     document.getElementById('Board').classList.remove('background-fade');
+    
     renderBoard();
+    uploadData();
 }                                   
 
 function overlayDeleteTask(idTask, i){          //TO CODE: update to server! -> update BackgroundTaskBoard -> update TaskBoard
