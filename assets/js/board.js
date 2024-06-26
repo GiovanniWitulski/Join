@@ -80,11 +80,11 @@ async function uploadData() {
   const databaseURL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app';
   try {
     const response = await fetch(`${databaseURL}/tasks.json`, {
-      method: 'PUT', // oder 'PATCH' wenn du nur bestimmte Felder aktualisieren möchtest
+      method: 'PUT', 
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(TaskBoard) // Dein Array, das hochgeladen werden soll
+      body: JSON.stringify(TaskBoard) 
     });
     if (!response.ok) {
       throw new Error('Netzwerkantwort war nicht in Ordnung');
@@ -136,11 +136,6 @@ function searchResult(s){
 
     renderBoard();
 }
-
-// TO CODE: Functions //////////////////////////////////////
-                                    //--> Taskpopup slide in
-/////////////////////////////////////////////////////////////
-
 
 // drag & drop functions  //////////////7
 function startDragging(id){
