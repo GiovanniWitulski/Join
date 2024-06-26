@@ -9,7 +9,40 @@ let newSumSubtaskCalc;
 let newProgressInPercent;
 let newProgressBarId;
 let newEmblems;
+let newPriority;
 
+// content functions //
+
+function startReadinTasks(){
+    for(i=0; i<TaskBoard.length; i++){
+        const toDoCard = TaskBoard[i];  
+        toDoTask = toDoCard;
+            newAmountSubtask = toDoTask.subtask.length;
+            readInTasks();
+        if (toDoCard.type == 0){
+            renderToDo();                    
+        }
+        if (toDoCard.type == 1){
+            renderInProgress();
+        }
+        if (toDoCard.type == 2){            
+            renderAwaitFeedback();                      
+        }
+        if (toDoCard.type == 3){            
+            renderDone();                      
+        }
+
+    }
+}
+
+function readInTasks(){         //reading Tasksinformation
+    label(toDoTask); 
+    amountSubTasks();
+    calcProgressBar();
+    descriptionChar();   
+    emblemSvg();  
+    priorityEmblem();
+}
 
 function label(){
                                   //Labeldiscernment
@@ -41,11 +74,10 @@ function amountSubTasks(){     //Anzahl Subtasks
 
 function calcProgressBar(){
     newSumSubtaskCalc = 0;    //Calculation for barchart !!!declared "0"!!! at beginning (svg -reasons)
-    newSumSubtaskCalc = newSumSubtask/newAmountSubtask;
-    
+    newSumSubtaskCalc = newSumSubtask/newAmountSubtask;    
     newProgressInPercent = newSumSubtaskCalc * 100;  
     newProgressBarId = toDoTask.taskid; //In toDoTask.taskid ändern ! 'cardToDoBar' + toDoCard.taskid; 
-    console.log("newProgressBarId",newProgressBarId);
+    
 }
 
 function descriptionChar(){
@@ -64,72 +96,118 @@ function emblemSvg() {            //contact-emblems
         }           
 }
 
+function priorityEmblem(){
+    newPriority = '';
+            if (toDoTask.priority === "low"){
+                newPriority = "/assets/svg/capa_priority_low.svg";
+            }    else if (toDoTask.priority === "medium"){
+                newPriority = "/assets/svg/capa_1_medium_priority.svg";
+            }   else if(toDoTask.priority === "urgent") {
+                newPriority = "/assets/svg/Capa_2_Burger menue_Arrow_up.svg"}
 
-function toDoContainer (){             
+}
+
+// container html //
+
+
+function renderToDo(){
+    toDo.innerHTML += `
+    <div class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
+    <div id="cardHeader" class="card-header">${NewLabel}</div>
+    <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
+    <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
+    <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
+    <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
+    <rect id="${toDoTask.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
+    <div class="card-sum-subtask">${newSumSubtask}/${newAmountSubtask} Subtasks</div></div>        
+    <div id="cardParticipantsPriority" class="card-participants-priority">
+    <div class="card-contact-emblems">${newEmblems}</div>
+    <div><img src="${newPriority}" alt="priority"></div>
+    </div></div>
+            
+    `           
+    const progressBar = document.getElementById(newProgressBarId);
+    progressBar.setAttribute('width', `${newProgressInPercent}%`);
+}
+
+function renderInProgress(){
+    inProgress.innerHTML += `
+    <div class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
+    <div id="cardHeader" class="card-header">${NewLabel}</div>
+    <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
+    <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
+    <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
+    <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
+    <rect id="${toDoTask.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
+    <div class="card-sum-subtask">${newSumSubtask}/${newAmountSubtask} Subtasks</div></div>        
+    <div id="cardParticipantsPriority" class="card-participants-priority">
+    <div class="card-contact-emblems">${newEmblems}</div>
+    <div><img src="${newPriority}" alt="priority"></div>
+    </div></div>
+            
+    `           
+    const progressBar = document.getElementById(newProgressBarId);
+    progressBar.setAttribute('width', `${newProgressInPercent}%`);
+}
+
+function renderAwaitFeedback(){
+    awaitFeedback.innerHTML += `
+    <div class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
+    <div id="cardHeader" class="card-header">${NewLabel}</div>
+    <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
+    <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
+    <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
+    <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
+    <rect id="${toDoTask.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
+    <div class="card-sum-subtask">${newSumSubtask}/${newAmountSubtask} Subtasks</div></div>        
+    <div id="cardParticipantsPriority" class="card-participants-priority">
+    <div class="card-contact-emblems">${newEmblems}</div>
+    <div><img src="${newPriority}" alt="priority"></div>
+    </div></div>
+            
+    `           
+    const progressBar = document.getElementById(newProgressBarId);
+    progressBar.setAttribute('width', `${newProgressInPercent}%`);
+}
+
+function renderDone(){
+    done.innerHTML += `
+    <div class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
+    <div id="cardHeader" class="card-header">${NewLabel}</div>
+    <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
+    <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
+    <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
+    <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
+    <rect id="${toDoTask.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
+    <div class="card-sum-subtask">${newSumSubtask}/${newAmountSubtask} Subtasks</div></div>        
+    <div id="cardParticipantsPriority" class="card-participants-priority">
+    <div class="card-contact-emblems">${newEmblems}</div>
+    <div><img src="${newPriority}" alt="priority"></div>
+    </div></div>
+            
+    `           
+    const progressBar = document.getElementById(newProgressBarId);
+    progressBar.setAttribute('width', `${newProgressInPercent}%`);
+}
+
+function taskContainer(){             
     toDo.innerHTML = '';
-
-    for(i=0; i<TaskBoard.length; i++){
-        const toDoCard = TaskBoard[i];  
-        toDoTask = toDoCard;
-            newAmountSubtask = toDoTask.subtask.length;
-            label(toDoTask); 
-            amountSubTasks();
-            calcProgressBar();
-            descriptionChar();   
-            emblemSvg();  
-       
-        // console.log("ToDo ForLoop Durchlauf", i)
-        // if todocardtype start... function -> function ->....-> html create
-        if (toDoCard.type == 0){
-                      
-
-            //// bis hierhin alles topi :) 
-
-
-            
-            
-
-            
-
-
-            let priority = '';
-            if (toDoCard.priority === "low"){
-                priority = "/assets/svg/capa_priority_low.svg";
-            }    else if (toDoCard.priority === "medium"){
-                priority = "/assets/svg/capa_1_medium_priority.svg";
-            }   else if(toDoCard.priority === "urgent") {
-                priority = "/assets/svg/Capa_2_Burger menue_Arrow_up.svg"}
-
-
-                toDo.innerHTML += `
-            <div class="card-body" onclick="overlayTask(${toDoCard.taskid})" ondragstart="startDragging(${toDoCard.taskid})" draggable="true">
-            <div id="cardHeader" class="card-header">${NewLabel}</div>
-            <div id="cardTitle" class="card-title"><h4>${toDoCard.title}</h4></div>
-            <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
-            <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
-            <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
-            <rect id="${toDoCard.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
-            <div class="card-sum-subtask">${newSumSubtask}/${newAmountSubtask} Subtasks</div></div>        
-            <div id="cardParticipantsPriority" class="card-participants-priority">
-            <div class="card-contact-emblems">${newEmblems}</div>
-            <div><img src="${priority}" alt="priority"></div>
-            </div></div>
-                    
-            `           
-            const progressBar = document.getElementById(newProgressBarId);
-            progressBar.setAttribute('width', `${newProgressInPercent}%`);
-            
-        }
-        //console.log("ToDoGerendert",i);
-    }
-    
+    inProgress.innerHTML = '';
+    awaitFeedback.innerHTML = '';
+    done.innerHTML = '';
+    startReadinTasks();
     if (toDo.innerHTML == ''){
         toDo.innerHTML = `<img class="placeholder-container-img" src="/assets/svg/no_task_to_do.png" alt="no-task-to-do">`
     }
     
 }
 
+
+/*
 function inProgressContainer(){
   inProgress.innerHTML = '';
 
@@ -414,3 +492,4 @@ function doneContainer(){
         done.innerHTML = `<img class="placeholder-container-img" src="/assets/svg/no_tasks_done.png" class="to-do-container-mobile" alt="no-task-done"></div>`
     }
 }
+*/

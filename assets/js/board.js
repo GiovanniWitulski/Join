@@ -62,10 +62,8 @@ try {
 function renderBoard(){ 
     console.log("render_actice");
     console.log("render_Taskboard Inhalt:", TaskBoard);
-    toDoContainer();    //render task to do 
-    inProgressContainer();       //render tasks in progress 
-    awaitFeedbackContainer();    //render task awaiting feedback 
-    doneContainer();            //render tasks done 
+    taskContainer();    //render task to do 
+    
 }
 
 function overlayTask(id){   
