@@ -141,6 +141,14 @@ cursor: pointer;
     width: 17.58px;
 }
 
+.container-class1{
+
+}
+
+.container-class2{
+
+}
+
 /* TODO */
 
 .to-do-mobile{
@@ -188,9 +196,6 @@ cursor: pointer;
 
 /* FEEDBACK */
 
-.await-feedback-mobile{
-} 
-
 .await-feedback-title-mobile{
     display: flex;
     justify-content: space-between; 
@@ -198,8 +203,6 @@ cursor: pointer;
     padding-bottom: 16px; 
     width: 252px;
 }
-
-/* .await-feedback-mobile-img {} */
 
 .await-feedback-container{
     display: flex;
@@ -244,9 +247,6 @@ cursor: pointer;
 
 /*MEDIA QUERYS */
 
-.board-search-mobile{
-    
-}
 
 @media (min-width: 800px) {
 .to-do-add-mobile{
@@ -280,16 +280,17 @@ cursor: pointer;
     width: 504px;
     margin-bottom: 0px;
     border: none;
-    padding-right: 88px;
+    padding-right: 0px;
     background-color: #F6F7F8
 }
 
 #boardInput{
     height: 38px;
+    margin-left: 16px;
 }
 
 .board-search-mobile-input {
-    margin-left: 0px;
+    margin-left: 8px;
     margin-right: 0px;
     background-color: white;
 }
@@ -300,10 +301,17 @@ cursor: pointer;
     height: 48px;
 }
 
-.board-container{
-    display: flex;
-    flex-direction: row;
+.board-container{    
     padding-left: 296px;
+}
+
+.container-class1{
+display: flex;
+}
+
+.container-class2{
+display: flex;
+padding-top: 24px;
 }
 
 .in-progress-mobile{
@@ -312,16 +320,19 @@ cursor: pointer;
 }
 
 .await-feedback-container{
-    display: block; /* Ändern Sie das Display von flex auf block */
-    overflow-x: hidden; /* Deaktivieren Sie das horizontale Scrollen */
-    white-space: normal; /* Setzen Sie den white-space auf normal, um Zeilenumbrüche zu erlauben */
-    scrollbar-width: none;
-    
+    display: block; 
+    overflow-x: hidden; 
+    white-space: normal; 
+    scrollbar-width: none;    
+}
+
+.await-feedback-cards-container {
+    padding-right: 0px;
 }
 
 .await-feedback-mobile{
     padding-top: 0px;
-    padding-left: 24px;
+    padding-left: 0px;
 }
 
 .await-feedback-title-mobile{
@@ -343,9 +354,7 @@ cursor: pointer;
 
 }
 
-
 /* JOHANNES CODE*/ 
-
 
 .noScroll{
     overflow-y: hidden;
@@ -400,8 +409,23 @@ cursor: pointer;
         margin-left: 64px !important;
         margin-top: 30px !important;
     }
+
+    .board-search-mobile{       /*insert by Andreas*/
+        padding-right: 88px;
+    }
 }
 
+@media (min-width: 1460px){
+.board-container {    
+    flex-direction: row;
+}
+
+.container-class2{
+    padding-left: 24px;
+    padding-top: 0px;
+}
+
+}
 
 
 
