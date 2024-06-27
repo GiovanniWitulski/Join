@@ -2,7 +2,7 @@ async function setSummaryNumbers() {
   try {
     let counts = await Promise.all([countTasksByTypes(), countUrgentTasks(), getNextTaskDate(), countTypeZeroAndThree()]);
     document.getElementById('urgentTasksCount').innerHTML = counts[1];
-    document.getElementById('upcommingDeadline').innerHTML = counts[2];
+    document.getElementById('upcomingDeadline').innerHTML = counts[2];
     document.getElementById('tasksInBoardCount').textContent = counts[3];
 
     for (let type in counts[0]) {
@@ -40,10 +40,10 @@ async function getNextTaskDate() {
       nextDate = date;
     }
   }
-  return nextDate ? nextDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : null;
+  return nextDate ? nextDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'There is no';
 }
 
 async function countTypeZeroAndThree() {
   let types = await countTasksByTypes(); 
-  return (types[0] || 0) + (types[3] || 0);
+  return (types[0] || 0) + (types[1] || 0) + (types[2] || 0) + (types[3] || 0);
 }

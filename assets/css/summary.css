@@ -117,7 +117,7 @@
     text-align: left;
 }
 
-#upcommingDeadline {
+#upcomingDeadline {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -257,7 +257,7 @@
         font-size: 20px;
     }
 
-    #upcommingDeadline {
+    #upcomingDeadline {
         font-size: 20px;
     }
 }
