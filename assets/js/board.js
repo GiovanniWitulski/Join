@@ -226,7 +226,7 @@ function overlayRender(){
         <div id="overlaySubtaskContainer">${overlaySubtaskStorage}</div>
         </div>        
         <div class="overlay-card-delete-edit">
-        <div onclick="overlayDeleteTask(${OverlayTask.taskid}, ${i})" class="overlay-cde"><img class="overlay-cde-img1" src="/assets/svg/delete.svg" alt="delete">Delete</div><div class="placeholder-div">|</div><div onclick="editTaskOverlay(${OverlayTask.taskid}, ${i})" class="overlay-cde"><img class="overlay-cde-img2" src="/assets/svg/Subtasks%20icons11-4.svg" alt="Edit">Edit</div>
+        <div onclick="overlayDeleteTask(${OverlayTask.taskid}, ${OverlayTaskBoardPosition})" class="overlay-cde"><img class="overlay-cde-img1" src="/assets/svg/delete.svg" alt="delete">Delete</div><div class="placeholder-div">|</div><div onclick="editTaskOverlay(${OverlayTask.taskid}, ${OverlayTaskBoardPosition})" class="overlay-cde"><img class="overlay-cde-img2" src="/assets/svg/Subtasks%20icons11-4.svg" alt="Edit">Edit</div>
         </div>
     </div>
     </div>
