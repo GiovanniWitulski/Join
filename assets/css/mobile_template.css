@@ -139,11 +139,13 @@ a {
 
 .menu-links:hover {
     cursor: pointer;
-    background-color: rgb(9, 25, 49);
+    /* background-color: rgb(9, 25, 49); */
+    background-color: rgb(48 62 81);
     color: white;
-   /* .menu-icons {
-        filter: invert(1) brightness(6); fehlerhafter code laut vsCode wg. scss
-    } */
+}
+
+.menu-links-focus {
+    background-color: rgb(9, 25, 49);
 }
 
 .menu-links:hover .menu-icons{
@@ -188,6 +190,17 @@ a {
     height: 24px;
 }
 
+.switch-sequence {
+    display: flex;
+    width: calc(100% - 32px);
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.join-logo-big {
+    display: none;
+}
+
 @media (min-width:800px) {
 
     header {
@@ -209,7 +222,7 @@ a {
     }
 
     .header-title-desktop {
-        display: block;
+        display: unset;
         margin-left: 328px;
         font-size: 20px;
         font-weight: 400;
@@ -292,5 +305,12 @@ a {
     .sm-btn:hover {
         background-color: rgb(246,247,248);
         cursor: pointer;
+    }
+
+    .switch-sequence {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 15px;
+        width: 100% !important; 
     }
 }

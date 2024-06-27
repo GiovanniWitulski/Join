@@ -30,8 +30,12 @@ function handleClickOutside(event) {
 }
 
 function setSideMenuCharacters() {
-    let sideMenuCharacters = localStorage.getItem('sideMenuCharacters');
-    document.getElementById('smBtn').innerHTML = sideMenuCharacters;
+  let sideMenuCharacters = localStorage.getItem('sideMenuCharacters');
+  document.getElementById('smBtn').innerHTML = sideMenuCharacters;
+
+  if (sideMenuCharacters === null) {
+    document.getElementById('smBtn').innerHTML = 'G';
+  }
 }
 
 function showPrivacyPolicy() {
@@ -41,3 +45,21 @@ function showPrivacyPolicy() {
 function showLegalNotice() {
   
 }
+
+function highlightNavigationButton() {
+  let pfad = window.location.pathname; 
+
+  const menuLinks = document.querySelectorAll('.menu-links');
+  menuLinks.forEach(link => link.classList.remove('menu-links-focus'));
+
+  if (pfad.includes('summary')) {
+      document.getElementById('summaryBtn').classList.add('menu-links-focus');
+  } else if (pfad.includes('add_task')) {
+      document.getElementById('addTaskBtn').classList.add('menu-links-focus');
+  } else if (pfad.includes('board')) {
+      document.getElementById('boardBtn').classList.add('menu-links-focus');
+  } else if (pfad.includes('contacts')) {
+      document.getElementById('contactsBtn').classList.add('menu-links-focus');
+  }
+}
+

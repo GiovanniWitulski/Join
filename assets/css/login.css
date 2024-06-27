@@ -120,7 +120,8 @@
 }
 
 .login-input-indexhtml:focus-visible {
-    border-color: rgba(41, 171, 226, 1);
+    border: 2px solid rgba(41, 171, 226, 1);
+    height: 46px;
     outline: none;
 }
 
@@ -134,7 +135,6 @@
     top: 50%;
     transform: translateY(-50%);
     cursor: text;
-    /* cursor: pointer; */
 }
 
 .input-icon img {
@@ -231,6 +231,25 @@
     cursor: pointer;
 }
 
+.signup-btn {
+    width: 180px;
+    border-radius: 8px;
+    height: 51px;
+    background-color: rgba(42, 54, 71, 1);
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19.2px;
+    border: 0;
+    transition: all 100ms ease-in-out;
+}
+
+.signup-btn:hover {
+    background-color: rgba(41, 171, 226, 1);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
 .guest-login-btn {
     background-color: white;
     width: 180px;
@@ -262,12 +281,6 @@
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;
-}
-
-@media (min-width: 355px) {
-    .sign-up-p {
-        margin-right: 35px;
-    }
 }
 
 .sign-up-btn {
@@ -316,6 +329,10 @@
     font-weight: 700;
 }
 
+.join-logo-big {
+    display: none;
+}
+
 /* ////////////////////////////////////////////////////////////////// */
 
 #loadAnimation {
@@ -345,6 +362,16 @@
   height: 78.03px;
 }
 
+#logInHeaderLogoBig {
+    display: none;
+    animation: loading 2s ease-in-out;
+    z-index: 9;
+    top: 80px;
+    left: 77px;
+    width: 100.03px;
+    height: 121.97px;
+}
+
 .loader-hidden {
   opacity: 0;
 }
@@ -370,137 +397,3 @@
 .hide-animation {
   transform: translateY(-100px);
 }
-
-@media (min-width: 800px) {
-
-    .login-card-div {
-        height: 100%;
-        align-items: center;
-    }
-
-    .login-card {
-        width: 652px;
-        max-width: unset;
-        margin-bottom: unset;
-    }
-
-    .login-underline {
-        margin-top: 16px;
-        border-bottom: 3px solid rgba(41, 171, 226, 1);
-        height: 1px;
-        width: 150px;
-    }
-
-    h1 {
-        font-size: 61px;
-        font-weight: 700;
-        line-height: 73.2px;
-    }
-
-    .login-btns-div {
-        width: 100%;
-        height:48px;
-        flex-direction: unset;
-        gap: 35px;
-        margin-bottom: 48px;
-    }
-
-    .login-input-divs {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 32px;
-        margin-bottom: 40px;
-    }
-
-    .login-input-div-indexhtml {
-        margin-left: unset;
-        margin-right: unset;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .login-input-indexhtml {
-        width: 422px;
-    }
-
-    .remember-me-div {
-        margin-left: 120px;
-    }
-
-    .footer-indexhtml {
-        position: fixed;
-        bottom: 40px;
-        left: 0;
-        right: 0;
-    }
-
-    .sign-up-div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        margin-bottom: unset;
-        position: fixed;
-        top: 67px;
-        right: 122px;
-    }
-
-    .login-body {
-        width: unset;
-        margin-top: unset;
-        margin-bottom: unset;
-        margin-left: unset;
-        margin-right: unset;
-        height: 100vh;
-    }
-
-    #loginParentDiv {
-        margin-top: unset;
-        width: 100%;
-        height: 100%;
-    }
-
-    #logInHeaderLogo {
-        animation: loading 2s ease-in-out;
-        z-index: 9;
-        top: 80px;
-        left: 77px;
-        width: 64px;
-        height: 78.03px;
-    }
-
-    #signupParentDiv {
-        margin-top: unset;
-        height: 100%;
-        width: 100%;
-        transition: all;
-    }
-
-    .signup-btns-div {
-        margin-bottom: 48px;
-    }
-
-
-
-
-    @keyframes loading {
-        from {
-          top: 50%;
-          left: 50%;
-          height: 129px;
-          width: 105px;
-          filter: brightness(0) invert(1);
-        }
-      
-        to {
-          top: 80px;
-          left: 77px;
-          width: 64px;
-          height: 78.03px;
-          filter: brightness(1) invert(0);
-        }
-    }
-}
- 

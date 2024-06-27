@@ -6,19 +6,18 @@
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/assets/css/fonts.css">
     <link rel="stylesheet" href="/assets/css/login.css">
+    <link rel="stylesheet" href="/assets/css/login_media.css">
     <title>Join</title>
     <script src="/script.js"></script>
     <script src="/assets/js/w3_include.js"></script>
     <script src="/assets/js/remoteStorage.js"></script>
     <script src="/assets/js/login.js"></script>
-    <!-- <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script> -->
 </head>
 <body onload="landingPageAnimation()" class="login-body">
     <div id="loadAnimation"></div>
     <header>
         <img id="logInHeaderLogo" class="join-logo-indexhtml" src="/assets/svg/join-logo.svg" alt="">
+        <img id="logInHeaderLogoBig" class="join-logo-indexhtml" src="/assets/svg/join_logo_big.svg" alt="">
     </header>
     <div id="loginParentDiv">
         <div class="login-card-div">
@@ -48,7 +47,7 @@
                     </div>
                 <div class="login-btns-div">
                     <button type="submit" class="login-btn">Log in</button>
-                    <a href="/summary.html"><button class="guest-login-btn" type="button">Guest Log in</button></a>
+                    <a href="/summary.html"><button onclick="getSideMenuCharacters('guest')" class="guest-login-btn" type="button">Guest Log in</button></a>
                 </div>
                 </form>
             </div>
@@ -109,7 +108,7 @@
                         <p class="remember-me-p">I accept the <a class="privacy-policy-link" href="/assets/templates/privacy_policy.html">Privacy Policy</a></p>
                     </div>
                     <div class="signup-btns-div">
-                        <button type="submit" class="login-btn">Sign up</button>
+                        <button type="submit" class="signup-btn">Sign up</button>
                     </div>
                 </form>
             </div>
@@ -117,8 +116,10 @@
     </div>
     
     <footer class="footer-indexhtml">
-        <a onclick="showPrivacyPolicy()" class="a-footer-infdexhtml" href="/assets/templates/privacy_policy.html">Privacy Policy</a>
-        <a onclick="showLegalNotice()" class="a-footer-infdexhtml" href="/assets/templates/legal_notice.html">Legal Notice</a>
+        <a onclick="showPrivacyPolicy()" class="a-footer-infdexhtml" href="/assets/templates/privacy_policy_nologin.html">Privacy Policy</a>
+        <!-- <a onclick="showPrivacyPolicy()" class="a-footer-infdexhtml" href="/assets/templates/privacy_policy.html">Privacy Policy</a> -->
+        <a onclick="showLegalNotice()" class="a-footer-infdexhtml" href="/assets/templates/legal_notice_nologin.html">Legal Notice</a>
+        <!-- <a onclick="showLegalNotice()" class="a-footer-infdexhtml" href="/assets/templates/legal_notice.html">Legal Notice</a> -->
     </footer>
 </body>
 </html>

@@ -15,6 +15,7 @@
 <body onload="setSideMenuCharacters()" class="mobileHTML-body">
     <header>
         <img class="join-logo" src="/assets/svg/join-logo.svg" alt="join logo">
+        <img class="join-logo-big" src="/assets/svg/join_logo_big.svg" alt="join logo">
         <span class="header-title-desktop">Kanban Project Management Tool</span>
         <div class="header-navigation">
             <a href="/assets/templates/help.html"><img class="help-img" src="/assets/svg/help.svg" alt=""></a>
@@ -34,25 +35,27 @@
 
     <nav class="nav-mobile">
         <ul class="nav-ul">
-            <a class="menu-links" href="/summary.html">
+            <a id="summaryBtn" class="menu-links" href="/summary.html">
                 <img class="menu-icons" src="/assets/svg/summary-icon.svg" alt="summary">
                 <span class="menu-links-text">Summary</span>
             </a>
         </ul>
+        <div class="switch-sequence">
+            <ul class="nav-ul">
+                <a id="boardBtn" class="menu-links" href="/board.html">
+                    <img class="menu-icons" src="/assets/svg/board-icon.svg" alt="board">
+                    <span class="menu-links-text">Board</span>
+                </a>
+            </ul>
+            <ul class="nav-ul">
+                <a id="addTaskBtn" class="menu-links" href="/add_task.html">
+                    <img class="menu-icons" src="/assets/svg/add-task-icon.svg" alt="add">
+                    <span class="menu-links-text">Add Tasks</span>
+                </a>
+            </ul>
+        </div>
         <ul class="nav-ul">
-            <a class="menu-links" href="/board.html">
-                <img class="menu-icons" src="/assets/svg/board-icon.svg" alt="board">
-                <span class="menu-links-text">Board</span>
-            </a>
-        </ul>
-        <ul class="nav-ul">
-            <a class="menu-links" href="/add_task.html">
-                <img class="menu-icons" src="/assets/svg/add-task-icon.svg" alt="add">
-                <span class="menu-links-text">Add Tasks</span>
-            </a>
-        </ul>
-        <ul class="nav-ul">
-            <a class="menu-links" href="/contacts.html">
+            <a id="contactsBtn" class="menu-links" href="/contacts.html">
                 <img class="menu-icons" src="/assets/svg/contacts-icon.svg" alt="contacts">
                 <span class="menu-links-text">Contacts</span>
             </a>

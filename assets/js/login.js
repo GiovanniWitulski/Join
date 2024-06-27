@@ -41,6 +41,7 @@ function validateForm() {
     // if (!document.getElementById("name").checkValidity()) {
     //   return false; // Formularübermittlung stoppen
     // }
+    getSideMenuCharacters('login');
   
     window.location.href = document.getElementById("loginForm").action;
   
@@ -67,13 +68,23 @@ function signUp(event) {
         requiredMsg.style.display = 'block';
     } else {
         console.log('gleich');
-        getSideMenuCharacters();
+        getSideMenuCharacters('signUp');
         window.location.href = document.getElementById("signUpForm").action;
     }
 }
 
-function getSideMenuCharacters() {
-    let name =  document.getElementById('signUpNameIndexHtml').value
-    let sideMenuCharacters = name.slice(0, 2).toUpperCase();
-    localStorage.setItem('sideMenuCharacters',sideMenuCharacters);    
+function getSideMenuCharacters(loginChoice) {
+    if (loginChoice === 'login') {
+        localStorage.setItem('sideMenuCharacters', 'SM');
+    }
+
+    if (loginChoice === 'signUp') {
+        let name =  document.getElementById('signUpNameIndexHtml').value
+        let sideMenuCharacters = name.slice(0, 2).toUpperCase();
+        localStorage.setItem('sideMenuCharacters', sideMenuCharacters);
+    }
+
+    if (loginChoice === 'guest' || loginChoice === null) {
+        localStorage.setItem('sideMenuCharacters', 'G');
+    }
 }
