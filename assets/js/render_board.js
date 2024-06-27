@@ -14,11 +14,16 @@ let subTaskChecked;
 
 // content functions //
 
-function startReadinTasks(){
+function startReadingTasks(){
     for(i=0; i<TaskBoard.length; i++){
-        
-        const toDoCard = TaskBoard[i];         
+        console.log("taskboardlength", TaskBoard.length);
+        console.log("Taskid", TaskBoard[i].taskid) 
+                    
+
+        const toDoCard = TaskBoard[i];   
+        console.log     
         toDoTask = toDoCard;
+
             subTaskCheck();
             readInTasks();
         if (toDoCard.type == 0){
@@ -43,8 +48,8 @@ function subTaskCheck(){
     subTaskChecked = 1; 
     } else {
         subTaskChecked = 0;
-    }     
-
+    }    
+ 
 }
 
 function readInTasks(){         //reading Tasksinformation
@@ -57,7 +62,7 @@ function readInTasks(){         //reading Tasksinformation
 }
 
 function label(){
-                                 //Labeldiscernment
+     //console.log("label Taskid", toDoTask.taskid)                            //Labeldiscernment
     if(toDoTask.label === 1){
         NewLabel = TechnicalTaskLabel;
     } else {
@@ -66,42 +71,29 @@ function label(){
 }
 
 function amountSubTasks(){     //Anzahl Subtasks 
-
     newAmountSubtask = toDoTask.subtask.length;
     newSumSubtask = 0;
 
     if(subTaskChecked === 1){
     for (i=0;i<newAmountSubtask;i++){
         newSumSubtask += toDoTask.subtaskSum[i];
-        
-        
     }
-    //console.log("AmountSubTasks: erledigte tasks",newSumSubtask, toDoTask.taskid);
     }
-
     if(subTaskChecked === 0){
         newSumSubtask = 0; newAmountSubtask = 0;
-        //console.log("AmountSubTasks: taskidCHECK0",newSumSubtask, toDoTask.taskid);
 
     } //stage one catch null -> stage 2 subsum berechen
-    //console.log("taskid, submsubtaskchecked", toDoTask.taskid, subTaskChecked) ;
-    console.log("AmountSubTasks: taskid, submsubtaskchecked", toDoTask.taskid, subTaskChecked) ;
-
+    //console.log("TaskId, amountSubtasks, newsumSubtask", toDoTask.taskid, newAmountSubtask, newSumSubtask);
 }
 
 function calcProgressBar(){  
-    console.log("calcProgBar: taskid, submsubtaskchecked", toDoTask.taskid, subTaskChecked) ;
-
     newSumSubtaskCalc = 0;    //Calculation for barchart !!!declared "0"!!! at beginning (svg -reasons)    
     newSumSubtaskCalc = newSumSubtask/newAmountSubtask;      
     if (subTaskChecked === 1){
-    newProgressInPercent = newSumSubtaskCalc * 100;  }
+    newProgressInPercent = newSumSubtaskCalc * 100;}
     if (subTaskChecked === 0){
     newProgressInPercent = 0; 
-    console.log("calcProgbar CHECK 0"); 
     }
-    console.log("calcProgressBAr taskid, newProgreessinPercent", toDoTask.taskid, newProgressInPercent) ;
-
     newProgressBarId = toDoTask.taskid; // alt 'cardToDoBar' + toDoCard.taskid; 
     // evtl hier das einfügen der progressbar das streikt. mit if
 }
@@ -226,7 +218,7 @@ function taskContainer(){
     inProgress.innerHTML = '';
     awaitFeedback.innerHTML = '';
     done.innerHTML = '';
-    startReadinTasks();
+    startReadingTasks();
     if (toDo.innerHTML == ''){
         toDo.innerHTML = `<img class="placeholder-container-img" src="/assets/svg/no_task_to_do.png" alt="no-task-to-do">`
     }
