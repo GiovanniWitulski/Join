@@ -37,12 +37,14 @@ function startReadinTasks(){
     }
 }
 
-function subTaskCheck(){    
-    if (toDoTask.subtaskSum[0] === undefined || toDoTask.subtaskSum[0] === null){
-        subTaskChecked = 0;
-    } else {
+function subTaskCheck(){ 
+    subTaskChecked = 0;
+    if (toDoTask.subtaskSum.length > 0){
     subTaskChecked = 1; 
-    }
+    } else {
+        subTaskChecked = 0;
+    }     
+
 }
 
 function readInTasks(){         //reading Tasksinformation
@@ -64,25 +66,42 @@ function label(){
 }
 
 function amountSubTasks(){     //Anzahl Subtasks 
+
     newAmountSubtask = toDoTask.subtask.length;
     newSumSubtask = 0;
 
-    if(subTaskChecked = 1){
+    if(subTaskChecked === 1){
     for (i=0;i<newAmountSubtask;i++){
         newSumSubtask += toDoTask.subtaskSum[i];
-    }}
-    if(subTaskChecked = 0){newSumSubtask = 0; newAmountSubtask = 0;} //stage one catch null -> stage 2 subsum berechen
-    
+        
+        
+    }
+    //console.log("AmountSubTasks: erledigte tasks",newSumSubtask, toDoTask.taskid);
+    }
+
+    if(subTaskChecked === 0){
+        newSumSubtask = 0; newAmountSubtask = 0;
+        //console.log("AmountSubTasks: taskidCHECK0",newSumSubtask, toDoTask.taskid);
+
+    } //stage one catch null -> stage 2 subsum berechen
+    //console.log("taskid, submsubtaskchecked", toDoTask.taskid, subTaskChecked) ;
+    console.log("AmountSubTasks: taskid, submsubtaskchecked", toDoTask.taskid, subTaskChecked) ;
+
 }
 
 function calcProgressBar(){  
-      
+    console.log("calcProgBar: taskid, submsubtaskchecked", toDoTask.taskid, subTaskChecked) ;
+
     newSumSubtaskCalc = 0;    //Calculation for barchart !!!declared "0"!!! at beginning (svg -reasons)    
     newSumSubtaskCalc = newSumSubtask/newAmountSubtask;      
-    if (subTaskChecked = 1){
+    if (subTaskChecked === 1){
     newProgressInPercent = newSumSubtaskCalc * 100;  }
-    if (subTaskChecked = 0){newProgressInPercent = 0;}
-    console.log("newProgressinpercent", newProgressInPercent);
+    if (subTaskChecked === 0){
+    newProgressInPercent = 0; 
+    console.log("calcProgbar CHECK 0"); 
+    }
+    console.log("calcProgressBAr taskid, newProgreessinPercent", toDoTask.taskid, newProgressInPercent) ;
+
     newProgressBarId = toDoTask.taskid; // alt 'cardToDoBar' + toDoCard.taskid; 
     // evtl hier das einfügen der progressbar das streikt. mit if
 }
