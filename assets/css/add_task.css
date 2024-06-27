@@ -277,6 +277,7 @@ input[type="date"]::-moz-focus-inner:hover{
     border-radius: 10px;
     padding: 16px;
     font-size: 21px;
+    border: 0 !important;
     line-height: 25.2px;
     font-weight: 700;
     background-color:  #2A3647;
