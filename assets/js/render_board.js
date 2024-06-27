@@ -10,14 +10,16 @@ let newProgressInPercent;
 let newProgressBarId;
 let newEmblems;
 let newPriority;
+let subTaskChecked;
 
 // content functions //
 
 function startReadinTasks(){
     for(i=0; i<TaskBoard.length; i++){
-        const toDoCard = TaskBoard[i];  
+        
+        const toDoCard = TaskBoard[i];         
         toDoTask = toDoCard;
-            newAmountSubtask = toDoTask.subtask.length;
+            subTaskCheck();
             readInTasks();
         if (toDoCard.type == 0){
             renderToDo();                    
@@ -35,6 +37,14 @@ function startReadinTasks(){
     }
 }
 
+function subTaskCheck(){    
+    if (toDoTask.subtaskSum[0] === undefined || toDoTask.subtaskSum[0] === null){
+        subTaskChecked = 0;
+    } else {
+    subTaskChecked = 1; 
+    }
+}
+
 function readInTasks(){         //reading Tasksinformation
     label(toDoTask); 
     amountSubTasks();
@@ -45,7 +55,7 @@ function readInTasks(){         //reading Tasksinformation
 }
 
 function label(){
-                                  //Labeldiscernment
+                                 //Labeldiscernment
     if(toDoTask.label === 1){
         NewLabel = TechnicalTaskLabel;
     } else {
@@ -53,31 +63,28 @@ function label(){
     }                 
 }
 
-function amountSubTasks(){     //Anzahl Subtasks
-        
-                                   //amount solved subtasks
-        if (newAmountSubtask === 2){         //"if null" - just for data failures securement
-        if (toDoTask.subtaskSum[0] === null && toDoTask.subtaskSum[1] === null){
-            newSumSubtask = 0; }            
-        if (toDoTask.subtaskSum[0] !== null && toDoTask.subtaskSum[1] !== null){
-            newSumSubtask = toDoTask.subtaskSum[0] + toDoTask.subtaskSum[1]; }
-        }
-        if (newAmountSubtask === 1){
-            if(toDoTask.subtaskSum[0] !== null){
-                newSumSubtask = toDoTask.subtaskSum[0];
-            }
-            if(toDoTask.subtaskSum[0] === null){
-            newSumSubtask = 0;} 
-        }   
-         
+function amountSubTasks(){     //Anzahl Subtasks 
+    newAmountSubtask = toDoTask.subtask.length;
+    newSumSubtask = 0;
+
+    if(subTaskChecked = 1){
+    for (i=0;i<newAmountSubtask;i++){
+        newSumSubtask += toDoTask.subtaskSum[i];
+    }}
+    if(subTaskChecked = 0){newSumSubtask = 0; newAmountSubtask = 0;} //stage one catch null -> stage 2 subsum berechen
+    
 }
 
-function calcProgressBar(){
-    newSumSubtaskCalc = 0;    //Calculation for barchart !!!declared "0"!!! at beginning (svg -reasons)
-    newSumSubtaskCalc = newSumSubtask/newAmountSubtask;    
-    newProgressInPercent = newSumSubtaskCalc * 100;  
-    newProgressBarId = toDoTask.taskid; //In toDoTask.taskid ändern ! 'cardToDoBar' + toDoCard.taskid; 
-    
+function calcProgressBar(){  
+      
+    newSumSubtaskCalc = 0;    //Calculation for barchart !!!declared "0"!!! at beginning (svg -reasons)    
+    newSumSubtaskCalc = newSumSubtask/newAmountSubtask;      
+    if (subTaskChecked = 1){
+    newProgressInPercent = newSumSubtaskCalc * 100;  }
+    if (subTaskChecked = 0){newProgressInPercent = 0;}
+    console.log("newProgressinpercent", newProgressInPercent);
+    newProgressBarId = toDoTask.taskid; // alt 'cardToDoBar' + toDoCard.taskid; 
+    // evtl hier das einfügen der progressbar das streikt. mit if
 }
 
 function descriptionChar(){
@@ -106,6 +113,7 @@ function priorityEmblem(){
                 newPriority = "/assets/svg/Capa_2_Burger menue_Arrow_up.svg"}
 
 }
+
 
 // container html-functions //
 
