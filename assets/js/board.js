@@ -277,16 +277,22 @@ function OverlayTaskPopup(i) {
             </div>
         </div>
     `;
+    ifOverlay();
+}
 
+function label(){
+    
+}
+
+
+function ifOverlay(){
     if (OverlayTask.subtask[0] === undefined) {
-        document.getElementById('overlaySubtask0').style.display = 'none';
-    }
+        document.getElementById('overlaySubtask0').style.display = 'none';  }
     if (OverlayTask.subtask[1] === undefined || OverlayTask.subtask[1] === null) {
         console.log("subtask1=0");
         document.getElementById('overlaySubtask1').style.display = 'none';
         document.getElementById('overlaySubtask1').classList.add('hide');
     }
-
     if (OverlayTask.label === 1) {
         document.getElementById('overlayDueDate').style.cssText = 'font-weight: 700; color: #42526E;';
         document.getElementById('overlayAssignedToText').style.cssText = 'font-weight: 700; color: #42526E;';

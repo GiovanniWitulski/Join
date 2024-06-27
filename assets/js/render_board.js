@@ -23,12 +23,12 @@ function startReadingTasks(){
         const toDoCard = TaskBoard[i];   
         console.log     
         toDoTask = toDoCard;
-
             subTaskCheck();
             readInTasks();
-        if (toDoCard.type == 0){
+        if (toDoCard.type === 0 || toDoCard.type === "0"){
             renderToDo();                    
         }
+
         if (toDoCard.type == 1){
             renderInProgress();
         }
