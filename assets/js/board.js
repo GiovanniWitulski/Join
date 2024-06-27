@@ -3,12 +3,16 @@ let BackgroundTaskBoard = []
 let OverlayTask;
 let overlayContacts;
 let overlayPriority;
+let OverlayLabel;
+let OverlaySubtasks;
+let OverlayTaskBoardPosition;
+let overlaySubtaskStorage;
 let check0;
 let check1;
 let check = "/assets/svg/checkmark.svg";
 let nocheck = "/assets/svg/rectangle.svg";
 
-//global variables & Elementtargets
+
 const databaseURL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app';
 
 let currentDraggedTask;
@@ -26,6 +30,7 @@ let overlaySub = document.getElementById('overlaySubCheckbox');
 let toDoCard = [];
 
 ////////////Main Start Functions///////////
+
 async function downloadData() {
 TaskBoard = [];
 BackgroundTaskBoard = [];
@@ -167,9 +172,18 @@ function dropAt(newType){
         }
     }
 }
-
   
 // OVERLAY TASK / POPUP ///////////////////////
+
+function OverlayTaskPopup(i) {
+    OverlayTask = TaskBoard[i];
+    OverlayTaskBoardPosition = i;
+    overlayContactsRead();
+    overlayPrio();
+    overlayLabelCheck();
+    overlaySubtaskCheck();  
+    overlayRender();
+}
 
 function overlayContactsRead(){
     overlayContacts = '';
@@ -193,6 +207,34 @@ function overlayPrio(){
     }
 }
 
+function overlayRender(){
+    Overlay.innerHTML = `
+    <div id="${OverlayTask.taskid}" class="overlay-container">
+    <div class="overlay-task">
+        <div id="overlayHeader" class="overlay-card-header">${OverlayLabel}<img onclick="closeOverlay()" src="/assets/svg/close_black.svg" alt="close"></div>
+        <div id="overlayTitle" class="overlay-card-title">${OverlayTask.title}</div>
+        <div id="overlayDescription" class="overlay-card-description">${OverlayTask.description}</div>
+        <div id="overlaydueDate" class="overlay-card-due-date"><div id="overlayDueDate">Due date:</div><div class="overlay-due-date">${OverlayTask.date}</div></div>
+        <div id="overlaypriority" class="overlay-card-priority"><div id="overlayPriorityText" class="overlay-card-priority-text">
+        Priority</div><div class="overlay-card-priority-text-img"><img src="${overlayPriority}" alt="priority">${OverlayTask.priority}</div>
+        </div>
+        <div id="overlayAssignedTo" class="overlay-assigned-to">
+        <div id="overlayAssignedToText" class="overlay-assigned-to-text">Assigned to:</div><div id="overlayParticipants" class="overlay-participants">${overlayContacts}</div>
+        </div>
+        <div class="overlay-card-subtasks">
+        <div id="overlaySubstasksText" class="overlay-substasks-text">Subtasks:</div>
+        <div id="overlaySubtaskContainer">${overlaySubtaskStorage}</div>
+        </div>        
+        <div class="overlay-card-delete-edit">
+        <div onclick="overlayDeleteTask(${OverlayTask.taskid}, ${i})" class="overlay-cde"><img class="overlay-cde-img1" src="/assets/svg/delete.svg" alt="delete">Delete</div><div class="placeholder-div">|</div><div onclick="editTaskOverlay(${OverlayTask.taskid}, ${i})" class="overlay-cde"><img class="overlay-cde-img2" src="/assets/svg/Subtasks%20icons11-4.svg" alt="Edit">Edit</div>
+        </div>
+    </div>
+    </div>
+`;
+ifOverlay();       
+
+}
+
 function overlayCheckmark(){
     const checkmark0 = OverlayTask.subtaskSum[0];
     const checkmark1 = OverlayTask.subtaskSum[1];
@@ -204,95 +246,32 @@ function overlayCheckmark(){
     if (checkmark1 == 0) { check1 = nocheck; } else { check1 = check; }
 }
 
-
-///////////////////////////////////////////////////////////
-
-
-function overlaySubtask(){
-    overlaySub.innerHTML = '';
+function overlaySubtaskCheck(){
+    overlaySubtaskStorage = '';
+    if (OverlayTask.subtask.length > 0){
     for(i=0;i<OverlayTask.subtaskSum.length; i++){
-        let checkmark = overlayTask.subtaskSum[i];
-        let checkSign;
+        let checkmark = OverlayTask.subtaskSum[i];        
         if (checkmark == 1){
-            overlaySub.innerHTML += `<div id="overlaySubtask0" class="overlay-subtask"><img class="overlay-checkbox-img" onclick="toggleCheckboxValue(${OverlayTask.taskid}, ${i})"  src=${check}> ${OverlayTask.subtask[i]}</div>
-            `; 
-        }
+            overlaySubtaskStorage += `<div id="overlaySubtask4" class="overlay-subtask"><img class="overlay-checkbox-img" onclick="toggleCheckboxValue(${OverlayTask.taskid}, ${i})"  src=${check}> ${OverlayTask.subtask[i]}</div>
+            `;}
         if (checkmark == 0){
-            overlaySub.innerHTML += `<div id="overlaySubtask0" class="overlay-subtask"><img class="overlay-checkbox-img" onclick="toggleCheckboxValue(${OverlayTask.taskid}, ${i})"  src=${nocheckcheck}> ${OverlayTask.subtask[i]}</div>
-            `; 
+            overlaySubtaskStorage += `<div id="overlaySubtask4" class="overlay-subtask"><img class="overlay-checkbox-img" onclick="toggleCheckboxValue(${OverlayTask.taskid}, ${i})"  src=${nocheck}> ${OverlayTask.subtask[i]}</div>
+            `;}
         }
     }
-
 }
-/// mit toggle checkboxvalue verknüpfen.
-/////////////////////////////////////////////////////7777777
 
-
-function OverlayTaskPopup(i) {
-    //andere effekte siehe notizen -> effektdiv über alles, darein OverlaTaskPopup
-    //document.getElementById('mobileTamplateContent').classList.add('background-fade');
-    // document.getElementById('Board').classList.add('background-fade');
-    OverlayTask = TaskBoard[i];
-    overlayContactsRead();
-    overlayPrio();
-
-    
-
-    const checkmark0 = OverlayTask.subtaskSum[0];
-    const checkmark1 = OverlayTask.subtaskSum[1];
-    let check0 = '';
-    let check1 = '';
-    let check = "/assets/svg/checkmark.svg";
-    let nocheck = "/assets/svg/rectangle.svg";
-    if (checkmark0 == 0) { check0 = nocheck; } else { check0 = check; }
-    if (checkmark1 == 0) { check1 = nocheck; } else { check1 = check; }
-
-    let label;
+function overlayLabelCheck(){
     if (OverlayTask.label == 1) {
-        label = TechnicalTaskLabel;
+        OverlayLabel = TechnicalTaskLabel;
     } else {
-        label = UserStoryLabel;
+        OverlayLabel = UserStoryLabel;
     }
-
-    Overlay.innerHTML = `
-        <div id="${OverlayTask.taskid}" class="overlay-container">
-            <div class="overlay-task">
-                <div id="overlayHeader" class="overlay-card-header">${label}<img onclick="closeOverlay()" src="/assets/svg/close_black.svg" alt="close"></div>
-                <div id="overlayTitle" class="overlay-card-title">${OverlayTask.title}</div>
-                <div id="overlayDescription" class="overlay-card-description">${OverlayTask.description}</div>
-                <div id="overlaydueDate" class="overlay-card-due-date"><div id="overlayDueDate">Due date:</div><div class="overlay-due-date">${OverlayTask.date}</div></div>
-                <div id="overlaypriority" class="overlay-card-priority"><div id="overlayPriorityText" class="overlay-card-priority-text">
-                Priority</div><div class="overlay-card-priority-text-img"><img src="${overlayPriority}" alt="priority">${OverlayTask.priority}</div>
-                </div>
-                <div id="overlayAssignedTo" class="overlay-assigned-to">
-                <div id="overlayAssignedToText" class="overlay-assigned-to-text">Assigned to:</div><div id="overlayParticipants" class="overlay-participants">${overlayContacts}</div>
-                </div>
-                <div class="overlay-card-subtasks">
-                <div id="overlaySubstasksText" class="overlay-substasks-text">Subtasks:</div><div id="overlaySubCheckbox" class="overlay-checkbox"><div id="overlaySubtask0" class="overlay-subtask"><img class="overlay-checkbox-img" onclick="toggleCheckboxValue(${OverlayTask.taskid}, 0, ${i})"  src=${check0}> ${OverlayTask.subtask[0]}</div>
-                <div id="overlaySubtask1" class="overlay-subtask"><img class="overlay-checkbox-img" onclick="toggleCheckboxValue(${OverlayTask.taskid}, 1, ${i})"  src=${check1}> ${OverlayTask.subtask[1]}</div></div>
-                </div>
-                <div class="overlay-card-delete-edit">
-                <div onclick="overlayDeleteTask(${OverlayTask.taskid}, ${i})" class="overlay-cde"><img class="overlay-cde-img1" src="/assets/svg/delete.svg" alt="delete">Delete</div><div class="placeholder-div">|</div><div onclick="editTaskOverlay(${OverlayTask.taskid}, ${i})" class="overlay-cde"><img class="overlay-cde-img2" src="/assets/svg/Subtasks%20icons11-4.svg" alt="Edit">Edit</div>
-                </div>
-            </div>
-        </div>
-    `;
-    ifOverlay();
 }
-
-function label(){
-    
-}
-
 
 function ifOverlay(){
-    if (OverlayTask.subtask[0] === undefined) {
-        document.getElementById('overlaySubtask0').style.display = 'none';  }
-    if (OverlayTask.subtask[1] === undefined || OverlayTask.subtask[1] === null) {
-        console.log("subtask1=0");
-        document.getElementById('overlaySubtask1').style.display = 'none';
-        document.getElementById('overlaySubtask1').classList.add('hide');
-    }
+    if (OverlayTask.subtask === undefined || OverlayTask.subtask === null) {
+        document.getElementById('overlaySubtaskContainer').classList.add('hide'); }
     if (OverlayTask.label === 1) {
         document.getElementById('overlayDueDate').style.cssText = 'font-weight: 700; color: #42526E;';
         document.getElementById('overlayAssignedToText').style.cssText = 'font-weight: 700; color: #42526E;';
@@ -301,35 +280,19 @@ function ifOverlay(){
     }
 }
 
-function toggleCheckboxValue(taskid, position, o) {
-    console.log("toggleCheckboxValue id: position:", taskid, position);
+function toggleCheckboxValue(taskid, position) {
     for (let i = 0; i < TaskBoard.length; i++) {
         const findTask = TaskBoard[i].taskid;
         let subtaskValue = TaskBoard[i].subtaskSum[position];
         if (findTask == taskid) {
-            console.log("task found at array position:", i);
-            console.log("old subtaskSum value:", subtaskValue);
             if (subtaskValue === 0) {
                 TaskBoard[i].subtaskSum[position] = 1;
             } else {
                 TaskBoard[i].subtaskSum[position] = 0;
             }
-            console.log("new subtaskSum value:", TaskBoard[i].subtaskSum[position]);
         }
     }
-
-    // Aktualisiere die Anzeigeeigenschaften der Subtasks vor dem Aufruf von OverlayTaskPopup
-    const OverlayTask = TaskBoard[o];
-    if (OverlayTask.subtask[0] === undefined) {
-        document.getElementById('overlaySubtask0').style.display = 'none';
-    }
-    if (OverlayTask.subtask[1] === undefined || OverlayTask.subtask[1] === null) {
-        console.log("subtask1=0");
-        document.getElementById('overlaySubtask1').style.display = 'none';
-        document.getElementById('overlaySubtask1').classList.add('hide');
-    }
-
-    OverlayTaskPopup(o);
+    OverlayTaskPopup(OverlayTaskBoardPosition);
     renderBoard();
 }
 
@@ -341,7 +304,7 @@ function closeOverlay(closeId){ // Close Popup Task/OverlayTask
     uploadData();
 }                                   
 
-function overlayDeleteTask(idTask, i){          //TO CODE: update to server! -> update BackgroundTaskBoard -> update TaskBoard
+function overlayDeleteTask(idTask, i){         
     let taskToDelete = BackgroundTaskBoard[i];
     if (taskToDelete.taskid == idTask){
         TaskBoard.splice(i, 1);
@@ -357,7 +320,7 @@ function deleteTask(i){
     console.log(TaskBoard);
 }
 
-// Edit Task function //*css*/`
+// Edit Task function //*css*/` added by Johannes
     
 function switchToAddTask(type){
     if(window.innerWidth < 1250){
