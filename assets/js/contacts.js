@@ -85,11 +85,13 @@ function showAddContact(){
 
 document.addEventListener('DOMContentLoaded', checkIfLoadContactIsNeeded);
 
+
 function checkIfLoadContactIsNeeded(){
-    if(window.location.href.includes('contact')){
+    if(window.location.href.includes('contact') || window.location.href.includes('board')){
         loadContacts('contacts');
     }
 }
+
 
 function hideTheFormular(elementToHide){
     document.getElementById('contact-name').value = ``;

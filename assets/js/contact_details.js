@@ -93,7 +93,10 @@ async function fillEditContactForm(id){
     document.getElementById('contact-mail').value = `${currentContact['mail']}`;
     document.getElementById('contact-phone').value = `${currentContact['mobile']}`;
     document.getElementById('closeEditContactButton').outerHTML = `<button id="closeEditContactButton" class="close-btn" onclick="hideEditOverlay()"></button>`
-    document.getElementById('save-edits-btn').setAttribute('onclick',`saveEditsToContact('${currentContact['id']}')`);
+    document.getElementById('edit-contact-form').onsubmit = function(event) {
+        event.preventDefault(); // Verhindert das Standard-Formular-Absenden
+        saveEditsToContact(`${currentContact['id']}`);
+    };
     document.getElementById('delete-contact-btn').setAttribute('onclick',`deleteContact(${id})`);
     showEditOverlay();
     document.getElementById('editContactPic').outerHTML = await drawContactEditPic(currentContact);
@@ -107,7 +110,11 @@ async function fillEditContactFormDesktop(id){
     document.getElementById('contact-mail-desktop').value = `${currentContact['mail']}`;
     document.getElementById('contact-phone-desktop').value = `${currentContact['mobile']}`;
     document.getElementById('closeEditContactButton').outerHTML = `<button id="closeEditContactButton" class="close-btn" onclick="hideEditOverlayDesktop()"></button>`
-    document.getElementById('save-edits-btn-desktop').setAttribute('onclick',`saveEditsToContact('${currentContact['id']}')`);
+    document.getElementById('edit-contact-form-desktop').onsubmit = function(event) {
+        event.preventDefault(); // Verhindert das Standard-Formular-Absenden
+        saveEditsToContact(`${currentContact['id']}`);
+    };
+    
     document.getElementById('delete-contact-btn-desktop').setAttribute('onclick',`deleteContact(${id})`);
     showEditOverlayDesktop();
     document.getElementById('editContactPic-desktop').outerHTML = await drawContactEditPicDesktop(currentContact);

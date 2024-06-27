@@ -63,9 +63,10 @@
     <div class="down-container">
         <form id="edit-contact-form"  class="create-contact-form">
             <input id="contact-name" type="text" required placeholder="Name">
-            <input id="contact-mail" type="email" required placeholder="Email">
-            <input id="contact-phone" type="tel" required placeholder="Phone">
-            <div class="button-div"><button id="delete-contact-btn" type="button" class="delete-contact-btn">Delete</button><button id="save-edits-btn" type="button" class="save-contact-btn">Save<img src="/assets/svg/check.svg"></button>
+            <input id="contact-mail" type="email" required placeholder="Email" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$">
+            <input id="contact-phone" type="tel" required placeholder="Phone" pattern="[0-9+]{3,}">
+            <div class="button-div"><button id="delete-contact-btn" type="button" class="delete-contact-btn">Delete</button>
+                <button id="save-edits-btn" type="submit" class="save-contact-btn">Save<img src="/assets/svg/check.svg"></button>
             </div>
          
         </form>
