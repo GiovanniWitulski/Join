@@ -168,9 +168,8 @@
 
 .edit-btn{
     background-image: url("/assets/svg/edit_black_font.svg");
-    width: 96px;
+    width: 62px;
     height: 40px;
-    padding: 8px;
     border: unset;
     background-color: transparent;
     background-repeat: no-repeat;
@@ -185,10 +184,10 @@
 
 .del-btn{
     background-image: url("/assets/svg/Delete\ contact\ m.svg");
-    width: 96px;
+    width: 81px;
     height: 40px;
-    padding: 8px;
     border: unset;
+    margin-left: 16px;
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: center;
@@ -212,6 +211,8 @@
 
 .bottom-container-desktop{
     padding-left: 134px;
+    width: 159px;
+    display: flex;
 }
 
 .middle-container-desktop{
@@ -262,7 +263,7 @@
     
     #contact-div{
         width: 400px;
-        margin-top: 86px;
+        margin-top: 100px;
         padding-left: 28px;
         height: unset;
         margin-left: 0px;
@@ -270,7 +271,7 @@
     
     .add-contact-btn{
         position: absolute;
-        top: 22.5px;
+        top: 40px;
         left: 52px;
         width: 352px;
         height: 56px;
@@ -293,6 +294,7 @@
     #contact-details-desktop{
         position: absolute;
         left: 432px;
+        top: 110px;
     }
 }
 

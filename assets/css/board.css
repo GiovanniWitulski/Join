@@ -79,13 +79,24 @@ body {
     flex-direction: column;
  }
 
+
 .board-add-button-desktop{
     display: none;
+    
+}
+
+.board-add-button-desktop:hover {           /*Hoovereffekt noch fertig machen */
+    background-color: rgba(41, 171, 226, 1);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    border-radius: 10px;
+    
 }
 
 .board-add-task-title-mobile {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding-top: 48px;
     padding-bottom: 40px;
 }
@@ -93,6 +104,13 @@ body {
 .board-add-task-mobile-img {
 cursor: pointer;
 } 
+
+.board-add-task-mobile-img:hover{
+    background-color: rgba(41, 171, 226, 1);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    border-radius: 10px;
+}
 
 .add-mobile-small-img{
     cursor: pointer;
@@ -141,15 +159,8 @@ cursor: pointer;
     width: 17.58px;
 }
 
-.container-class1{
 
-}
-
-.container-class2{
-
-}
-
-/* TODO */
+/* container */
 
 .to-do-mobile{
     width: 252px;
@@ -161,15 +172,11 @@ cursor: pointer;
     padding-bottom: 16px;
 }
 
-/* .to-do-add-mobile-img{} */
-
 .to-do-container-mobile{
     display: flex;
     flex-wrap: wrap;
     width: 252px;
 }
-
-/* PROGRESS */
 
 .in-progress-mobile{
     display: flex;
@@ -194,8 +201,6 @@ cursor: pointer;
     width: 100%;
 }
 
-/* FEEDBACK */
-
 .await-feedback-title-mobile{
     display: flex;
     justify-content: space-between; 
@@ -219,8 +224,6 @@ cursor: pointer;
     width: 252px;
     padding-right: 16px;
 }
-
-/* DONE */
 
 .done-mobile{
     padding-bottom: 110px;
@@ -247,11 +250,7 @@ cursor: pointer;
 
 /*MEDIA QUERYS */
 
-
 @media (min-width: 800px) {
-.to-do-add-mobile{
-    
-}
 
 .render_board_mobile{
     padding-left: 296px;
@@ -351,7 +350,6 @@ padding-top: 24px;
 .board-add-mobile{
     display: none;
 }
-
 }
 
 /* JOHANNES CODE*/ 
@@ -394,7 +392,6 @@ padding-top: 24px;
        height: 750px !important;
        border-radius: 20px;
        scrollbar-width: none !important;
-
     }
 
     .headline{

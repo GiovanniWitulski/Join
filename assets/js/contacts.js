@@ -83,7 +83,14 @@ function showAddContact(){
 }
 
 
-document.addEventListener('DOMContentLoaded', loadContacts('contacts'));
+document.addEventListener('DOMContentLoaded', checkIfLoadContactIsNeeded);
+
+
+function checkIfLoadContactIsNeeded(){
+    if(window.location.href.includes('contact') || window.location.href.includes('board')){
+        loadContacts('contacts');
+    }
+}
 
 
 function hideTheFormular(elementToHide){
