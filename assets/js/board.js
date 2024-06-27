@@ -338,9 +338,8 @@ function closeOverlay(closeId){ // Close Popup Task/OverlayTask
 function overlayDeleteTask(idTask, i){          //TO CODE: update to server! -> update BackgroundTaskBoard -> update TaskBoard
     let taskToDelete = BackgroundTaskBoard[i];
     if (taskToDelete.taskid == idTask){
-        closeOverlay(idTask);
         TaskBoard.splice(i, 1);
-        uploadData();
+        closeOverlay(idTask);
     } else {
         console.log("Taskid & Position Backgroundtaskboard inkongruent.");
     }    
