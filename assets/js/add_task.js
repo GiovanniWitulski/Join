@@ -200,7 +200,9 @@ function hideContactsToAssign(button){
 }
 
 
-async function getTheDataForPostTask(event, type) {
+async function getTheDataForPostTask(event, tasktype) {
+    
+    let type = Number(tasktype);
 
     event.preventDefault();
     const data = {

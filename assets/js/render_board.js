@@ -15,12 +15,12 @@ let subTaskChecked;
 // content functions //
 
 function startReadingTasks(){
-    for(i=0; i<TaskBoard.length; i++){
-        console.log("taskboardlength", TaskBoard.length);
-        console.log("Taskid", TaskBoard[i].taskid)                     
+    for(x=0; x<TaskBoard.length; x++){
+        // console.log("taskboardlength", TaskBoard.length);
+        // console.log("Taskid", TaskBoard[x].taskid)                     
 
-        const toDoCard = TaskBoard[i];   
-        console.log     
+        const toDoCard = TaskBoard[x];   
+        //console.log     
         toDoTask = toDoCard;
             subTaskCheck();
             readInTasks();
