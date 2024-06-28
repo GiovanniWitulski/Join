@@ -109,7 +109,11 @@
     right: 16px; 
     padding: 32px 24px 32px 24px;
     margin: 0 auto;                 /* so bleibt es dauerhaft zentiert */  
-    
+    transition: all 120ms ease-in-out;
+}
+
+.transition{
+    transform: translatex(100vw);
 }
 
 .overlay-card-header {

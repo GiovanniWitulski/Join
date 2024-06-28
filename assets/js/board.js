@@ -13,6 +13,7 @@ let check = "/assets/svg/checkmark.svg";
 let nocheck = "/assets/svg/rectangle.svg";
 
 
+
 const databaseURL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app';
 
 let currentDraggedTask;
@@ -181,15 +182,16 @@ function dropAt(newType){
 
 // OVERLAY TASK / POPUP ///////////////////////
 
-async function OverlayTaskPopup(i) {
+function OverlayTaskPopup(i) {
     OverlayTask = TaskBoard[i];
     OverlayTaskBoardPosition = i;
     overlayContactsRead(i);
     overlayPrio();
     overlayLabelCheck();
     overlaySubtaskCheck();  
-    await overlayRender();
+    overlayRender();
     removeTranslate();
+    showShadow();
 }
 
 function overlayContactsRead(i){
@@ -205,7 +207,7 @@ function overlayContactsRead(i){
             overlayContacts += '<div class="overlay-assigned-to-contacts">' + emblem + '<div class="overlay-contact-name">' + contactName + '</div></div>';
         }
     }else{
-        console.log('keine Embleme vorhanden');
+        // console.log('keine Embleme vorhanden');
     }
     
 }
@@ -219,13 +221,13 @@ function overlayPrio(){
     } else if (OverlayTask.priority === "urgent") {
         overlayPriority = "/assets/svg/Capa_2_Burger menue_Arrow_up.svg"
     }
-    console.log('keine prio da');
+    //console.log('keine prio da');
 }
 
 async function overlayRender(){
     Overlay.innerHTML = `
     <div id="${OverlayTask.taskid}" class="overlay-container">
-    <div class="overlay-task">
+    <div id= "overlayBoard" class="overlay-task transition">
     <div id="overlayHeader" class="overlay-card-header">${OverlayLabel}<img onclick="closeOverlay()" src="/assets/svg/close_black.svg" alt="close"></div>
     <div id="overlayTitle" class="overlay-card-title">${OverlayTask.title}</div>
     <div id="overlayDescription" class="overlay-card-description">${OverlayTask.description}</div>
@@ -252,8 +254,14 @@ async function overlayRender(){
     
 }
 
-function removeTranslate(){
-    document.getElementById('overlayContainer').classList.remove('translate');
+async function removeTranslate(){
+    await new Promise(resolve => setTimeout(resolve, 200));
+    document.getElementById('overlayBoard').classList.remove('transition');
+}
+
+async function addTranslate(){
+    await new Promise(resolve => setTimeout(resolve, 200));
+    document.getElementById('overlayBoard').classList.add('transition');
 }
 
 function overlayCheckmark(){
@@ -282,89 +290,104 @@ function overlaySubtaskCheck(){
             }
         }
         
-        function overlayLabelCheck(){
-            if (OverlayTask.label == 1) {
-                OverlayLabel = TechnicalTaskLabel;
+function overlayLabelCheck(){
+    if (OverlayTask.label == 1) {
+        OverlayLabel = TechnicalTaskLabel;
+    } else {
+        OverlayLabel = UserStoryLabel;
+    }
+}
+
+function ifOverlay(){
+    if (OverlayTask.subtask === undefined || OverlayTask.subtask === null) {
+        document.getElementById('overlaySubtaskContainer').classList.add('hide'); }
+        if (OverlayTask.label === 1) {
+            document.getElementById('overlayDueDate').style.cssText = 'font-weight: 700; color: #42526E;';
+            document.getElementById('overlayAssignedToText').style.cssText = 'font-weight: 700; color: #42526E;';
+            document.getElementById('overlayPriorityText').style.cssText = 'font-weight: 700; color: #42526E;';
+            document.getElementById('overlaySubstasksText').style.cssText = 'font-weight: 700; color: #42526E;';
+        }
+    }
+            
+function toggleCheckboxValue(taskid, position) {
+    for (let i = 0; i < TaskBoard.length; i++) {
+        const findTask = TaskBoard[i].taskid;
+        let subtaskValue = TaskBoard[i].subtaskSum[position];
+        if (findTask == taskid) {
+            if (subtaskValue === 0) {
+                TaskBoard[i].subtaskSum[position] = 1;
             } else {
-                OverlayLabel = UserStoryLabel;
+                TaskBoard[i].subtaskSum[position] = 0;
             }
         }
+    }
+    OverlayTaskPopup(OverlayTaskBoardPosition);
+    document.getElementById('overlayBoard').classList.remove('transition');
+    renderBoard();
+}
+
+function showShadow(){ 
+    document.getElementById('mainContainerOverlay').classList.add('addTaskOverlayContainerShowing');
+}
+
+function removeShadow(){ 
+    document.getElementById('mainContainerOverlay').classList.remove('addTaskOverlayContainerShowing');
+}
+
+
+async function closeOverlay(closeId){ // Close Popup Task/OverlayTask
+    if (document.getElementById('overlayBoard')) {
+        document.getElementById('overlayBoard').classList.add('transition');}
+    if (document.getElementById('boardEditTask')) {
+        document.getElementById('boardEditTask').classList.add('transition');}        
+    await new Promise(resolve => setTimeout(resolve, 200));
+    Overlay.innerHTML = ``;    
+    renderBoard();
+    uploadData();
+    removeShadow();
+}        
+
+
+
+function overlayDeleteTask(idTask, i){         
+    let taskToDelete = BackgroundTaskBoard[i];
+    if (taskToDelete.taskid == idTask){
+        TaskBoard.splice(i, 1);
+        closeOverlay(idTask);
+    } else {
+        console.log("Taskid & Position Backgroundtaskboard inkongruent.");
+    }    
+}
+
+function deleteTask(i){
+    TaskBoard.splice(i, 1);
+    console.log(TaskBoard);
+}
+
+// Edit Task function //*css*/` added by Johannes
+
+function switchToAddTask(type){
+    if(window.innerWidth < 1250){
+        window.location.href='//127.0.0.1:5500/add_task.html';
+    }else{ 
+        changeToActive('medium-btn');
+        document.getElementById('addTaskOverlayContainer').classList.remove('addTaskOverlayContainer');
+        document.getElementById('addTaskOverlayContainer').classList.add('addTaskOverlayContainerShowing');
+        document.getElementById('addTaskForm').onsubmit = function(event){
+            getTheDataForPostTask(event, type);
+            
+            
+        }
         
-        function ifOverlay(){
-            if (OverlayTask.subtask === undefined || OverlayTask.subtask === null) {
-                document.getElementById('overlaySubtaskContainer').classList.add('hide'); }
-                if (OverlayTask.label === 1) {
-                    document.getElementById('overlayDueDate').style.cssText = 'font-weight: 700; color: #42526E;';
-                    document.getElementById('overlayAssignedToText').style.cssText = 'font-weight: 700; color: #42526E;';
-                    document.getElementById('overlayPriorityText').style.cssText = 'font-weight: 700; color: #42526E;';
-                    document.getElementById('overlaySubstasksText').style.cssText = 'font-weight: 700; color: #42526E;';
-                }
-            }
-            
-            function toggleCheckboxValue(taskid, position) {
-                for (let i = 0; i < TaskBoard.length; i++) {
-                    const findTask = TaskBoard[i].taskid;
-                    let subtaskValue = TaskBoard[i].subtaskSum[position];
-                    if (findTask == taskid) {
-                        if (subtaskValue === 0) {
-                            TaskBoard[i].subtaskSum[position] = 1;
-                        } else {
-                            TaskBoard[i].subtaskSum[position] = 0;
-                        }
-                    }
-                }
-                OverlayTaskPopup(OverlayTaskBoardPosition);
-                renderBoard();
-            }
-            
-            function closeOverlay(closeId){ // Close Popup Task/OverlayTask
-                Overlay.innerHTML = ``;    
-                document.getElementById('mobileTamplateContent').classList.remove('background-fade');
-                document.getElementById('Board').classList.remove('background-fade');    
-                renderBoard();
-                uploadData();
-            }                                   
-            
-            function overlayDeleteTask(idTask, i){         
-                let taskToDelete = BackgroundTaskBoard[i];
-                if (taskToDelete.taskid == idTask){
-                    TaskBoard.splice(i, 1);
-                    closeOverlay(idTask);
-                } else {
-                    console.log("Taskid & Position Backgroundtaskboard inkongruent.");
-                }    
-            }
-            
-            function deleteTask(i){
-                TaskBoard.splice(i, 1);
-                console.log("task aus Taskboard gelöscht stelle", i);
-                console.log(TaskBoard);
-            }
-            
-            // Edit Task function //*css*/` added by Johannes
-            
-            function switchToAddTask(type){
-                if(window.innerWidth < 1250){
-                    window.location.href='//127.0.0.1:5500/add_task.html';
-                }else{ 
-                    changeToActive('medium-btn');
-                    document.getElementById('addTaskOverlayContainer').classList.remove('addTaskOverlayContainer');
-                    document.getElementById('addTaskOverlayContainer').classList.add('addTaskOverlayContainerShowing');
-                    document.getElementById('addTaskForm').onsubmit = function(event){
-                        getTheDataForPostTask(event, type);
-                        
-                        
-                    }
-                    
-                    document.getElementById('body').classList.add('noScroll');
-                    
-                }
-            }
-            
-            function hideOverlay(){
-                document.getElementById('addTaskOverlayContainer').classList.remove('addTaskOverlayContainerShowing');
-                document.getElementById('addTaskOverlayContainer').classList.add('addTaskOverlayContainer');
-                document.getElementById('body').classList.remove('noScroll');
-                changeToActive('medium-btn');
-                clearTheForm();
-            }
+        document.getElementById('body').classList.add('noScroll');
+        
+    }
+}
+
+function hideOverlay(){
+    document.getElementById('addTaskOverlayContainer').classList.remove('addTaskOverlayContainerShowing');
+    document.getElementById('addTaskOverlayContainer').classList.add('addTaskOverlayContainer');
+    document.getElementById('body').classList.remove('noScroll');
+    changeToActive('medium-btn');
+    clearTheForm();
+}
