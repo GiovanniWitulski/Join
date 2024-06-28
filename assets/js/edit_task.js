@@ -208,7 +208,7 @@ function editAddSub(){
 
 function editEditSub(toEditSub){
     let number = toEditSub;
-    let addID = number - 10; //identification which sub (subtaskid)
+    let addID = number - 10; //identification which subtask (subtaskposition)
     const inputField = document.getElementById('subtaskEdit');
     let toEdit = EditTask.subtask[addID];
     inputField.value = toEdit;
@@ -255,9 +255,9 @@ function storeNewData(taskIdBoard, taskboardPosition){ //onclick OK BUTTON // de
 }
 
 ///////// RENDER EDIT TASK ////////// 
-function editRenderSubtask(){        
+function editRenderSubtask(){            
         let editSubtask = document.getElementById('editRenderSubtasks');
-        editSubtask.innerHTML = ``;
+        editSubtask.innerHTML = ``;        
         let idCounter = 9;
     for (i=0; i<EditTask.subtask.length; i++){
         let editSubAdd = EditTask.subtask[i];
