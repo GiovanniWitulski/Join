@@ -63,11 +63,7 @@ async function downloadData() {
             };
             BackgroundTaskBoard.push(formattedTask);
         });
-        
-        console.log("Download BackgroundTaskBoard",BackgroundTaskBoard);
         TaskBoard = BackgroundTaskBoard;
-        console.log("Download Taskboard", TaskBoard);
-        
     } catch (error) {
         console.error('Fehler beim Abrufen und Formatieren der Daten:', error);
     }
@@ -81,15 +77,6 @@ function renderBoard(){
     
 }
 
-// function overlayTask(id){   
-//     for (i = 0; i < TaskBoard.length; i++){
-//         const TaskId = TaskBoard[i].taskid;
-//         if (TaskId == id){
-//             OverlayTaskPopup(i);
-//         }
-//     }
-    
-// }
 
 function overlayTask(id){
     
@@ -111,7 +98,7 @@ async function uploadData() {
             throw new Error('Netzwerkantwort war nicht in Ordnung');
         }
         const data = await response.json();
-        console.log('Daten erfolgreich hochgeladen:', data);
+        //console.log('Daten erfolgreich hochgeladen:', data);
     } catch (error) {
         console.error('Fehler beim Hochladen der Daten:', error);
     }
@@ -161,20 +148,21 @@ function searchResult(s){
 // drag & drop functions  //////////////7
 function startDragging(id){
     currentDraggedTask = id;
+    highlight(id);
 }
 
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
-function dropAt(newType){
-    console.log ("dataUploadDrop");
+function dropAt(newType, id){
     for (i=0; i<TaskBoard.length; i++){
         taskToMove = TaskBoard[i].taskid;
         if (taskToMove == currentDraggedTask){
-            TaskBoard[i].type = newType;
+            TaskBoard[i].type = newType;   
+                  
             uploadData();
-            renderBoard();            
+            renderBoard();       
             return;
         }
     }
@@ -255,12 +243,12 @@ async function overlayRender(){
 }
 
 async function removeTranslate(){
-    await new Promise(resolve => setTimeout(resolve, 200));
+    await new Promise(resolve => setTimeout(resolve, 120));
     document.getElementById('overlayBoard').classList.remove('transition');
 }
 
 async function addTranslate(){
-    await new Promise(resolve => setTimeout(resolve, 200));
+    await new Promise(resolve => setTimeout(resolve, 120));
     document.getElementById('overlayBoard').classList.add('transition');
 }
 
@@ -340,13 +328,12 @@ async function closeOverlay(closeId){ // Close Popup Task/OverlayTask
         document.getElementById('overlayBoard').classList.add('transition');}
     if (document.getElementById('boardEditTask')) {
         document.getElementById('boardEditTask').classList.add('transition');}        
-    await new Promise(resolve => setTimeout(resolve, 200));
+    await new Promise(resolve => setTimeout(resolve, 120));
     Overlay.innerHTML = ``;    
     renderBoard();
     uploadData();
     removeShadow();
 }        
-
 
 
 function overlayDeleteTask(idTask, i){         

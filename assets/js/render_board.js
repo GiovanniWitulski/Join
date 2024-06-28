@@ -16,29 +16,18 @@ let subTaskChecked;
 
 function startReadingTasks(){
     for(x=0; x<TaskBoard.length; x++){
-        // console.log("taskboardlength", TaskBoard.length);
-        // console.log("Taskid", TaskBoard[x].taskid)                     
-
-        const toDoCard = TaskBoard[x];   
-        //console.log     
+        const toDoCard = TaskBoard[x];              
         toDoTask = toDoCard;
             subTaskCheck();
             readInTasks();
         if (toDoCard.type === 0 || toDoCard.type === "0"){
-            renderToDo();                    
-        }
-
+            renderToDo();       }
         if (toDoCard.type === 1 || toDoCard.type === "1"){
-            renderInProgress();
-        }
+            renderInProgress();    }
         if (toDoCard.type === 2 || toDoCard.type === "2"){            
-            renderAwaitFeedback();                      
-        }
+            renderAwaitFeedback();  }
         if (toDoCard.type === 3 || toDoCard.type === "3"){            
-            renderDone();                      
-        }
-
-    }
+            renderDone();   }  }
 }
 
 function subTaskCheck(){ 
@@ -236,4 +225,13 @@ function taskContainer(){
 
 }
 
+/// hightligt container ///
 
+function highlight(id) {
+    document.getElementById(id).classList.add('drag-area-highlight');
+}
+
+function removeHighlight(id) {
+    document.getElementById(id).classList.remove('drag-area-highlight');
+    console.log("removehighlight active");
+}

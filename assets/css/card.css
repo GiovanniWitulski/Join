@@ -255,7 +255,18 @@
 }
 
 
-/* Potential - Classes */
+/* special - Classes */
+
+.drag-area-highlight{
+     background-color: rgba(0, 0, 0, 0.1); 
+     outline: 4px solid rgba(0, 0, 0, 0.1);
+     border-radius: 24px;    
+}
+
+.dragging {
+    opacity: 0.5; 
+    transform: rotate(30deg); 
+}
 
 .hidden {
     display: none;
