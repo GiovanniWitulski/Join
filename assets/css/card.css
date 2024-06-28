@@ -16,6 +16,13 @@
     width: 220px;
 }
 
+
+.translate{
+
+    transform: translateX(100vw);
+    transition: all 120ms ease-in-out;
+}
+
 .card-title{
     padding-bottom: 8px;
 }

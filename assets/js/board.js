@@ -91,6 +91,7 @@ function renderBoard(){
 // }
 
 function overlayTask(id){
+    
     task = TaskBoard.findIndex(t => t.taskid === id);
     OverlayTaskPopup(task);
 }
@@ -180,14 +181,15 @@ function dropAt(newType){
 
 // OVERLAY TASK / POPUP ///////////////////////
 
-function OverlayTaskPopup(i) {
+async function OverlayTaskPopup(i) {
     OverlayTask = TaskBoard[i];
     OverlayTaskBoardPosition = i;
     overlayContactsRead(i);
     overlayPrio();
     overlayLabelCheck();
     overlaySubtaskCheck();  
-    overlayRender();
+    await overlayRender();
+    removeTranslate();
 }
 
 function overlayContactsRead(i){
@@ -220,7 +222,7 @@ function overlayPrio(){
     console.log('keine prio da');
 }
 
-function overlayRender(){
+async function overlayRender(){
     Overlay.innerHTML = `
     <div id="${OverlayTask.taskid}" class="overlay-container">
     <div class="overlay-task">
@@ -244,8 +246,14 @@ function overlayRender(){
     </div>
     </div>
     `;
-    ifOverlay();       
+
+    ifOverlay();     
+   
     
+}
+
+function removeTranslate(){
+    document.getElementById('overlayContainer').classList.remove('translate');
 }
 
 function overlayCheckmark(){
