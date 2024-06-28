@@ -17,8 +17,7 @@ let subTaskChecked;
 function startReadingTasks(){
     for(i=0; i<TaskBoard.length; i++){
         console.log("taskboardlength", TaskBoard.length);
-        console.log("Taskid", TaskBoard[i].taskid) 
-                    
+        console.log("Taskid", TaskBoard[i].taskid)                     
 
         const toDoCard = TaskBoard[i];   
         console.log     
@@ -29,13 +28,13 @@ function startReadingTasks(){
             renderToDo();                    
         }
 
-        if (toDoCard.type == 1){
+        if (toDoCard.type === 1 || toDoCard.type === "1"){
             renderInProgress();
         }
-        if (toDoCard.type == 2){            
+        if (toDoCard.type === 2 || toDoCard.type === "2"){            
             renderAwaitFeedback();                      
         }
-        if (toDoCard.type == 3){            
+        if (toDoCard.type === 3 || toDoCard.type === "3"){            
             renderDone();                      
         }
 
@@ -43,13 +42,14 @@ function startReadingTasks(){
 }
 
 function subTaskCheck(){ 
-    subTaskChecked = 0;
+    subTaskChecked = 0;  /// evt rausnehmen
+    if(toDoTask.subtaskSum){
     if (toDoTask.subtaskSum.length > 0){
     subTaskChecked = 1; 
     } else {
         subTaskChecked = 0;
     }    
- 
+    }
 }
 
 function readInTasks(){         //reading Tasksinformation
@@ -76,14 +76,13 @@ function amountSubTasks(){     //Anzahl Subtasks
 
     if(subTaskChecked === 1){
     for (i=0;i<newAmountSubtask;i++){
-        newSumSubtask += toDoTask.subtaskSum[i];
+        newSumSubtask += toDoTask.subtaskSum[i]; //
     }
     }
     if(subTaskChecked === 0){
         newSumSubtask = 0; newAmountSubtask = 0;
 
-    } //stage one catch null -> stage 2 subsum berechen
-    //console.log("TaskId, amountSubtasks, newsumSubtask", toDoTask.taskid, newAmountSubtask, newSumSubtask);
+    } 
 }
 
 function calcProgressBar(){  
@@ -106,23 +105,25 @@ function descriptionChar(){
 }
 
 function emblemSvg() {            //contact-emblems
-    newEmblems = '';                          
+    newEmblems = '';  
+        if (toDoTask.contactEmblem.length > 0){                        
         for (let i = 0; i < toDoTask.contactEmblem.length; i++){
             const svg = toDoTask.contactEmblem[i];
             newEmblems += `<div class="card-contact-emblems-icon">${svg}</div>`;
             if (i === 5){break;}
-        }           
-}
+        } }          
+ }
 
 function priorityEmblem(){
     newPriority = '';
+            if (toDoTask.priority){
             if (toDoTask.priority === "low"){
                 newPriority = "/assets/svg/capa_priority_low.svg";
             }    else if (toDoTask.priority === "medium"){
                 newPriority = "/assets/svg/capa_1_medium_priority.svg";
             }   else if(toDoTask.priority === "urgent") {
                 newPriority = "/assets/svg/Capa_2_Burger menue_Arrow_up.svg"}
-
+            }
 }
 
 

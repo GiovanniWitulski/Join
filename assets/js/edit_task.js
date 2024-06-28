@@ -208,7 +208,7 @@ function editAddSub(){
 
 function editEditSub(toEditSub){
     let number = toEditSub;
-    let addID = number - 10;
+    let addID = number - 10; //identification which sub (subtaskid)
     const inputField = document.getElementById('subtaskEdit');
     let toEdit = EditTask.subtask[addID];
     inputField.value = toEdit;
@@ -251,11 +251,7 @@ function storeNewData(taskIdBoard, taskboardPosition){ //onclick OK BUTTON // de
     deleteTask(taskboardPosition); //1.
     TaskBoard.push(EditTask);
     closeOverlay();
-    renderBoard();
-    //addEditTaskToFirebase();    
-    //downloadData(); 
-    //closeOverlay();
-    
+    renderBoard();    
 }
 
 ///////// RENDER EDIT TASK ////////// 
@@ -266,7 +262,7 @@ function editRenderSubtask(){
     for (i=0; i<EditTask.subtask.length; i++){
         let editSubAdd = EditTask.subtask[i];
         idCounter++;
-        editSubtask.innerHTML += `<div class="editSubtask"><div>&bull; ${editSubAdd}</div><div class="edit-subtask-buttons"><img onclick="editEditSub(${idCounter})"src="/assets/svg/edit.svg" alt="edit"><div class="placeholder-div">|</div><img onclick="editDeleteSub(${idCounter})" src="/assets/svg/delete.svg" alt="delete"></div></div>`
+        editSubtask.innerHTML += `<div class="editSubtask"><div>&bull; ${editSubAdd}</div><div class="edit-subtask-buttons-2"><img onclick="editEditSub(${idCounter})"src="/assets/svg/Subtasks%20icons11-4.svg" alt="edit"><div class="placeholder-div">|</div><img onclick="editDeleteSub(${idCounter})" src="/assets/svg/delete.svg" alt="delete"></div></div>`
     }
 }
 
