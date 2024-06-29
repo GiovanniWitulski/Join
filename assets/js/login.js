@@ -38,9 +38,6 @@ function showPassword(inputFieldImg) {
 }
 
 function validateForm() {
-    // if (!document.getElementById("name").checkValidity()) {
-    //   return false; // Formularübermittlung stoppen
-    // }
     getSideMenuCharacters('login');
   
     window.location.href = document.getElementById("loginForm").action;
@@ -76,15 +73,18 @@ function signUp(event) {
 function getSideMenuCharacters(loginChoice) {
     if (loginChoice === 'login') {
         localStorage.setItem('sideMenuCharacters', 'SM');
+        localStorage.setItem('welcomeMsg', '!');
     }
 
     if (loginChoice === 'signUp') {
         let name =  document.getElementById('signUpNameIndexHtml').value
         let sideMenuCharacters = name.slice(0, 2).toUpperCase();
         localStorage.setItem('sideMenuCharacters', sideMenuCharacters);
+        localStorage.setItem('welcomeMsg', name);
     }
 
     if (loginChoice === 'guest' || loginChoice === null) {
         localStorage.setItem('sideMenuCharacters', 'G');
+        localStorage.setItem('welcomeMsg', '!');
     }
 }

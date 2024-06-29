@@ -77,8 +77,12 @@ h3 {
         margin-left: 328px;
     }
 
-    .mt-128px {
+    /* .mt-128px {
         margin-top: 162.61px;
+    } */
+
+    .mt-128px {
+        margin-top: 206px;
     }
 
     h1 {
@@ -88,7 +92,7 @@ h3 {
 }
 
 @media (min-width: 1000px) {
-    .mt-128px {
+    /* .mt-128px {
         margin-top: 206px;
-    }
+    } */
 }

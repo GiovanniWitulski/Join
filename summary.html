@@ -14,7 +14,8 @@
     <script src="assets/js/remoteStorage.js"></script>
     <script src="assets/js/summary.js"></script>
 </head>
-<body class="summary-body" onload="includeHTML(); setSummaryNumbers()">
+<body class="summary-body" onload="init(); setSummaryNumbers(); greetingMsg()">
+    <div id="greetingMsgAnimation" class="greetingMsgAnimation"></div>
     <div id="mobileTamplateContent" w3-include-html="/assets/templates/mobile_template.html"></div>
     <div class="mt-128px summary-title-div">
         <h1>Join 360</h1>

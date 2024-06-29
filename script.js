@@ -38,18 +38,10 @@ function setSideMenuCharacters() {
   }
 }
 
-function showPrivacyPolicy() {
-  document.getElementById('mobileTamplateContent').style.display = 'none';
-}
-
-function showLegalNotice() {
-  
-}
-
 function highlightNavigationButton() {
   let pfad = window.location.pathname; 
 
-  const menuLinks = document.querySelectorAll('.menu-links');
+  let menuLinks = document.querySelectorAll('.menu-links');
   menuLinks.forEach(link => link.classList.remove('menu-links-focus'));
 
   if (pfad.includes('summary')) {
@@ -63,3 +55,34 @@ function highlightNavigationButton() {
   }
 }
 
+function greetingMsg() {
+  let greetingMsg = getTimeOfDayGreeting();
+  greetingElement = document.getElementById('greetingMsgAnimation');
+  if (greetingMsg != null) {
+      greetingElement.innerHTML = greetingMsg;
+  } else {
+      greetingElement.style.display = 'none'; 
+  }
+
+  localStorage.removeItem("welcomeMsg"); 
+  
+  greetingElement.addEventListener('animationend', () => {
+      greetingElement.classList.remove('greetingMsgAnimation');
+      greetingElement.style.display = 'none';
+  });
+}
+
+function getTimeOfDayGreeting() {
+  let welcomneMsg = localStorage.getItem('welcomeMsg');
+  let now = new Date();
+  let hour = now.getHours();
+  if (welcomneMsg != null && hour >= 5 && hour < 12) {
+    return `Good Morning ${welcomneMsg}`;
+  } else if (welcomneMsg && hour >= 12 && hour < 18) {
+    return `Good Afternoon ${welcomneMsg}`;
+  } else if (welcomneMsg && hour > 18) {
+    return `Good Evening ${welcomneMsg}`;
+  } else {
+    return null;
+  }
+}

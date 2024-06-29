@@ -52,6 +52,28 @@ p {
     line-height: 19.2px;
 }
 
-@media (min-width:800px ) {
-    
+.info-title-and-img {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-arrow-left {
+    width: 32px;
+    height: 32px;
+    transition: all 100ms ease-in-out;
+}
+
+.info-arrow-left:hover {
+    width: 36px;
+    height: 36px;
+    border-radius: 360px;
+    background-color: rgb(243, 243, 244);
+    cursor: pointer;
+}
+
+@media (min-width: 800px) {
+    .ml-mr-16px {
+        margin-right: 98px !important;
+    }
 }
