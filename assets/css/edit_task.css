@@ -25,8 +25,7 @@
         overflow-y: auto;
         height: calc(100% - 18%);
         overflow-x: hidden;
-    }
-    }
+    }    }
 
 .edit-title{
     width: 100%;
@@ -74,16 +73,9 @@
     text-align: left; 
 }
 
-
 .description-card-edit{
     padding-bottom: 8px;
 }
-
-.subtask-card-edit{
-    
-}
-
-/*DATE CALENDER */
 
 .date-input {
     width: 100%;    height: 40px; 
@@ -148,8 +140,6 @@
     opacity: 1;
 }
 
-/*PRIORITY-BUTTONS*/
-
 .edit-priority-buttons-div{
     display: flex;
     align-items: center;
@@ -159,7 +149,6 @@
     padding-bottom: 24px;
     padding-top: 8px;
 }
-
 
 .edit-priority-buttons{
     display: flex;
@@ -190,8 +179,6 @@
     background-color: #FF3D00;
     color: white;
 }
-
-/* ContactList Edit */
 
 .edit-contact-list{
     position: relative;
@@ -298,8 +285,6 @@
     margin-bottom: 2px;
 }
 
-/* Subtask */
-
 .editSubtask{
     display: flex;
     justify-content: space-between;
@@ -315,7 +300,6 @@
     border-radius: 8px;
 }
 
-
 .edit-subtask {
     width: 100%;
     display: flex;
@@ -329,8 +313,6 @@
     margin-top: 8px;
 }
 
-
-
 .edit-subtask-input {
     width: 100%;
     display: flex;
@@ -343,7 +325,6 @@
     background-color: white;
     margin-top: 8px;
 }
-
 
 .subtask-edit-input{
     width: 100%;
@@ -373,6 +354,7 @@
     padding-right: 8px;
     
 }
+
 .edit-render-subtasks{
 padding-top: 8px;
 }
@@ -383,6 +365,7 @@ padding-top: 8px;
     justify-content: right;
     padding-top: 16px;
 }
+
 .edit-button{
     width: 100px;
     height: 56px;
@@ -410,8 +393,6 @@ padding-top: 8px;
     cursor: pointer;
     border-radius: 10px;  
 }
-
-/* no category */
 
 .hiddenMenue{
     display: none;

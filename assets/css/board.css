@@ -73,18 +73,16 @@ body {
     transition: all 120ms ease-in-out;
 }
 
-
 .board-add-task-mobile{    
     display: flex;
     flex-direction: column;
  }
 
-
 .board-add-button-desktop{
     display: none;    
 }
 
-.board-add-button-desktop:hover {           /*Hoovereffekt noch fertig machen */
+.board-add-button-desktop:hover {           
     background-color: rgba(41, 171, 226, 1);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     cursor: pointer;
@@ -102,7 +100,6 @@ body {
 .board-add-task-mobile-img {
 cursor: pointer;
 } 
-
 
 
 .board-add-task-mobile-img:hover{
@@ -130,7 +127,6 @@ cursor: pointer;
 .add-mobile-small-img:hover{
     opacity: 0.5;
 }
-
 
 .board-search-mobile {
     height: 48px;        
@@ -175,95 +171,8 @@ cursor: pointer;
     width: 17.58px;
 }
 
-
 /* container */
 
-.to-do-mobile{
-    width: 252px;
-}
-
-.to-do-add-mobile{
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 16px;
-}
-
-.to-do-container-mobile{
-    display: flex;
-    flex-wrap: wrap;
-    width: 252px;
-    min-height: 270px;
-}
-
-.in-progress-mobile{
-    display: flex;
-    flex-direction: column;
-    padding-top: 26px;
-    width: 252px;
-}
-
-.in-progress-title-mobile{
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 16px;
-}
-
-.in-progress-container-mobile{ 
-    display: flex;
-    flex-direction: column;
-    width: 100%; 
-    min-height: 270px;
-} 
-
-.no-task-progress {
-    width: 100%;
-}
-
-.await-feedback-title-mobile{
-    display: flex;
-    justify-content: space-between; 
-    padding-top: 26px; 
-    padding-bottom: 16px; 
-    width: 252px;
-}
-
-.await-feedback-container{
-    display: flex;
-    overflow-x: auto;
-    white-space: nowrap;
-    scrollbar-width: none;
-    max-width: 252px;
-    min-height: 270px;
-
-}
-
-.await-feedback-container::-webkit-scrollbar{
-    display: none;
-} /* in addition, bc of different browerser */
-
-.await-feedback-cards-container{
-    width: 252px;
-    padding-right: 16px;
-}
-
-.done-mobile{
-    padding-bottom: 110px;
-    width: 252px;
-}
-
-.done-title-mobile{
-    display: flex;
-    justify-content: space-between; 
-    padding-top: 26px; 
-    padding-bottom: 16px; 
-}
-
-.done-container-mobile{
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    min-height: 270px;
-}
 
 /* OTHERS */
 .hide{
@@ -271,14 +180,6 @@ cursor: pointer;
 }
 
 /*MEDIA QUERYS */
-
-@media (max-width: 799px){
-.board-edit-task{
-    overflow-y: auto;
-    height: calc(100% - 18%);
-    overflow-x: hidden;
-}
-}
 
 @media (min-width: 800px) {
 

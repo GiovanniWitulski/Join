@@ -17,7 +17,6 @@ let editTask;
 // Hochladen EditTask
 async function addEditTaskToFirebase() {
     const databaseURL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app';
-
     try {
         const response = await fetch(`${databaseURL}/tasks.json`, {
             method: 'POST', // 'POST' Methode fügt ein neues Objekt hinzu
@@ -26,11 +25,9 @@ async function addEditTaskToFirebase() {
             },
             body: JSON.stringify(EditTask)
         });
-
         if (!response.ok) {
             throw new Error('Netzwerkantwort war nicht in Ordnung');
         }
-
         const data = await response.json();
         console.log('Neues Task erfolgreich hinzugefügt:', data);
     } catch (error) {
@@ -44,28 +41,24 @@ async function loadContacts() {
     const FIREFIREBASE_URL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app/';
     const endpoint = 'contacts';
     const url = `${FIREFIREBASE_URL}${endpoint}.json`;
-
     try {
         const response = await fetch(url);
-
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-
         const data = await response.json();
         return Object.values(data); // return Array der Kontaktdaten 
     } catch (error) {
         console.error('Fehler beim Laden der Kontakte:', error);
         throw error;
-    }
-}
+    } }
 
-// Funktion Profilbild //
+
 function createContactEdit(vorname, nachname, color) {
     const vornameInitial = vorname.charAt(0).toUpperCase(); 
     const nachnameInitial = nachname ? nachname.charAt(0).toUpperCase() : ''; 
 
-    // SVG-Formatierung für Profilbild
+    //// SVG-Formatierung der ProfilInitialen
     const svgTemplate = `<svg class="profile_pic" width="42px" height="42px">
         <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2" fill="${color}"></circle>
         <text x="12" y="25" fill="white" font-size="12px">${vornameInitial}${nachnameInitial}</text>
@@ -76,9 +69,8 @@ function createContactEdit(vorname, nachname, color) {
 
 async function processContacts() {
     editContacts = [];
-    editContactsShow = []; // 
-    let editContactId = 0; // 
-
+    editContactsShow = []; 
+    let editContactId = 0; 
     try {
         const contacts = await loadContacts();
         contacts.forEach(contact => {
@@ -102,11 +94,6 @@ async function processContacts() {
 
             editContactId++;
         });
-
-        //console.log('editContacts:', editContacts);
-        //console.log('editContactsShow:', editContactsShow);
-        //console.log('editContactlength:', editContacts.length); 
-
     } catch (error) {
         console.error('Fehler bei der Verarbeitung der Kontakte:', error);
         throw error;
@@ -133,13 +120,11 @@ function filterContactsEdit(eventOrValue) {
     for (let i = 0; i < editContacts.length; i++) {
         let prename = editContacts[i].assignedTo[0].toLowerCase(); 
         let name = editContacts[i].assignedTo[1].toLowerCase();    
-
         if (prename.includes(searchedContact) || name.includes(searchedContact)) {
             const foundContact = editContacts[i];
             editContactsShow.push(foundContact);
         }
     }
-    // testForChoosenContact();
     document.getElementById('contact-list-container').classList.remove('hiddenMenue');
     const SearchList = document.getElementById('contact-list-container');
     SearchList.innerHTML = contactListEdit;    
@@ -163,19 +148,14 @@ function clickButtonSearch(){
 function editSelectPriority (priority){
     EditTask.priority = priority;
     editRenderPriority();
-    console.log("EditTAsk", EditTask);
 }
 
 function selectContact (contactId){    
-    //1. Schleife, ist es im choosen contacts 2. if not add + set check=1
-
     for (i=0; i<editContacts.length; i++){
         let compareId = editContacts[i].id;
         let compareCheck = editContacts[i].checked;
         if (compareId === contactId && compareCheck === 1){
             editContacts[i].checked = 0;
-            console.log("afterCheck0eD",editContacts);
-            console.log("afterCheck1choosenC",choosenContactsEdit);
             choosenContacts();
             renderContactListEdit();
             filterContactsEdit();
@@ -188,12 +168,8 @@ function selectContact (contactId){
             filterContactsEdit();
             renderChoosenContactsEmblems();
             return;
-         } 
-         
-    }
-    
-    filterContactsEdit();
-    
+         }          
+    }       filterContactsEdit();    
 }
 
 function editAddSub(){
@@ -214,7 +190,6 @@ function editEditSub(toEditSub){
     inputField.value = toEdit;
     editDeleteSub(toEditSub);
 }
-
 
 function editDeleteSub(toDeleteId){
     let number = toDeleteId
@@ -293,33 +268,26 @@ function testForChoosenContact (){
         fullname = vorname + ' ' + nachname;
         if (fullname === taskAssignedto){
             editContacts[c].checked = 1;
-        }        
-    } 
-    } choosenContacts();
+        }  }  } choosenContacts();
 }  
 
 function choosenContacts(){
-    console.log("choosenContactsstarted");
     choosenContactsEdit = [];
     for (i=0; i<editContacts.length; i++){
         let checktest = editContacts[i].checked;
         let testedContact = editContacts[i];
         if (checktest === 1){            
             choosenContactsEdit.push(testedContact);
-        }
-    }    
-     // EditTask.assignedTo =[];
+        }    }    
     EditTask.contactEmblem = []; 
     EditTask.assignedTo = [];
     for (let i = 0; i < choosenContactsEdit.length; i++) {
         let fullName = choosenContactsEdit[i].assignedTo.join(' ');
         EditTask.assignedTo.push(fullName);
-        EditTask.contactEmblem.push(choosenContactsEdit[i].contactEmblem);
-    }
+        EditTask.contactEmblem.push(choosenContactsEdit[i].contactEmblem);    }
 }
 
 function renderChoosenContactsEmblems(){
-    console.log("renderChoosencontacsActive");
     let editEmblems = document.getElementById('choosenContacts');
     editEmblems.innerHTML = ``;
     for (i=0; i<choosenContactsEdit.length; i++){
@@ -367,6 +335,20 @@ function editTaskRender(){    //use of same container as Overlay/PopupTask
 }
 
 function editTaskHtml(){
+    renderEditTask();
+    // pre-set date with eventlistener // 
+    let initialDate = editTask.date; //  YYYY-MM-DD-Format (!)
+    let dateInput = document.getElementById("edit_input");
+    dateInput.value = initialDate;    
+    //
+    document.getElementById('InputSearchEdit').addEventListener('input', filterContactsEdit);
+    document.getElementById('titleEdit').addEventListener('input', getTitle);
+    document.getElementById('descriptionEdit').addEventListener('input', getDescription);
+    dateInput.addEventListener('change', function() {
+    let selectedDate = dateInput.value; EditTask.date = selectedDate;}); 
+}
+
+function renderEditTask(){
     Overlay.innerHTML = `
     <div id="boardEditTask" class="board-edit-task">
     <div class="close-edit"><img onclick="closeOverlay(${taskIdBoard}, ${taskboardPosition})" class ="close-overlay" src="/assets/svg/close_black.svg" alt="close"></div>
@@ -405,14 +387,9 @@ function editTaskHtml(){
     <div id="editRenderSubtasks" class="edit-render-subtasks"></div> 
     <div class="edit-ok-button"><button onclick="storeNewData(${taskIdBoard}, ${taskboardPosition})" class="edit-button">OK</button></div>
     `
-    // pre-set date // don´t touch ;)
-    let initialDate = editTask.date; //  YYYY-MM-DD-Format (!)
-    let dateInput = document.getElementById("edit_input");
-    dateInput.value = initialDate;
-    //
-    document.getElementById('InputSearchEdit').addEventListener('input', filterContactsEdit);
-    document.getElementById('titleEdit').addEventListener('input', getTitle);
-    document.getElementById('descriptionEdit').addEventListener('input', getDescription);
-    dateInput.addEventListener('change', function() {
-    let selectedDate = dateInput.value; EditTask.date = selectedDate;}); 
-}
+
+} 
+
+
+
+

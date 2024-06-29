@@ -1,6 +1,5 @@
 // Board render Tasks container /////////////////
 
-//RenderArrays -> nach innerHTML+= leeren!
 let toDoTask = []
 let NewLabel;
 let newSumSubtask;
@@ -32,7 +31,7 @@ function startReadingTasks(){
 }
 
 function subTaskCheck(){ 
-    subTaskChecked = 0;  /// evt rausnehmen
+    subTaskChecked = 0;  
     if(toDoTask.subtaskSum){
     if (toDoTask.subtaskSum.length > 0){
     subTaskChecked = 1; 
@@ -51,8 +50,7 @@ function readInTasks(){         //reading Tasksinformation
     priorityEmblem();
 }
 
-function label(){
-     //console.log("label Taskid", toDoTask.taskid)                            //Labeldiscernment
+function label(){     
     if(toDoTask.label === 1){
         NewLabel = TechnicalTaskLabel;
     } else {
@@ -60,10 +58,9 @@ function label(){
     }                 
 }
 
-function amountSubTasks(){     //Anzahl Subtasks 
+function amountSubTasks(){     
     newAmountSubtask = toDoTask.subtask.length;
     newSumSubtask = 0;
-
     if(subTaskChecked === 1){
     for (i=0;i<newAmountSubtask;i++){
         newSumSubtask += toDoTask.subtaskSum[i]; //
@@ -71,30 +68,28 @@ function amountSubTasks(){     //Anzahl Subtasks
     }
     if(subTaskChecked === 0){
         newSumSubtask = 0; newAmountSubtask = 0;
-
     } 
 }
 
 function calcProgressBar(){  
-    newSumSubtaskCalc = 0;    //Calculation for barchart !!!declared "0"!!! at beginning (svg -reasons)    
+    newSumSubtaskCalc = 0;     
     newSumSubtaskCalc = newSumSubtask/newAmountSubtask;      
     if (subTaskChecked === 1){
     newProgressInPercent = newSumSubtaskCalc * 100;}
     if (subTaskChecked === 0){
     newProgressInPercent = 0; 
     }
-    newProgressBarId = toDoTask.taskid; // alt 'cardToDoBar' + toDoCard.taskid; 
-    // evtl hier das einfügen der progressbar das streikt. mit if
+    newProgressBarId = toDoTask.taskid; 
 }
 
 function descriptionChar(){
     let lastChar = toDoTask.description[toDoTask.description.length - 1];
     if (lastChar === "." || lastChar === "!" || lastChar === "?"){
         toDoTask.description = toDoTask.description.slice(0, -1);
-    }                                 //preparing optic for description
+    }                                 
 }
 
-function emblemSvg() {            //contact-emblems
+function emblemSvg() {            
     newEmblems = '';  
         if (toDoTask.contactEmblem.length > 0){                        
         for (let i = 0; i < toDoTask.contactEmblem.length; i++){
@@ -102,7 +97,7 @@ function emblemSvg() {            //contact-emblems
             newEmblems += `<div class="card-contact-emblems-icon">${svg}</div>`;
             if (i === 5){break;}
         } }          
- }
+}
 
 function priorityEmblem(){
     newPriority = '';
@@ -116,9 +111,7 @@ function priorityEmblem(){
             }
 }
 
-
-// container html-functions //
-
+// container render-functions //
 
 function renderToDo(){
     toDo.innerHTML += `
@@ -210,6 +203,10 @@ function taskContainer(){
     awaitFeedback.innerHTML = '';
     done.innerHTML = '';
     startReadingTasks();
+    ifContainerEmpty();
+}
+
+function ifContainerEmpty(){
     if (toDo.innerHTML == ''){
         toDo.innerHTML = `<img class="placeholder-container-img" src="/assets/svg/no_task_to_do.png" alt="no-task-to-do">`
     }
@@ -222,11 +219,9 @@ function taskContainer(){
     if (done.innerHTML === '') {
         done.innerHTML = `<img class="placeholder-container-img" src="/assets/svg/no_tasks_done.png" class="to-do-container-mobile" alt="no-task-done"></div>`
     }
-
-
 }
 
-/// hightligt container ///
+/// highlight drop container ///
 
 function highlight(id) {
     document.getElementById(id).classList.add('drag-area-highlight');
@@ -234,6 +229,5 @@ function highlight(id) {
 
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
-    console.log("removehighlight active");
 }
 

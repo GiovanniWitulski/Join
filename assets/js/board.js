@@ -12,8 +12,6 @@ let check1;
 let check = "/assets/svg/checkmark.svg";
 let nocheck = "/assets/svg/rectangle.svg";
 
-
-
 const databaseURL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app';
 
 let currentDraggedTask;
@@ -32,9 +30,13 @@ let toDoCard = [];
 
 ////////////Main Start Functions///////////
 
-async function downloadData() {
+function cleanArrays(){
     TaskBoard = [];
     BackgroundTaskBoard = [];
+}
+
+async function downloadData() {
+    cleanArrays()
     try {
         const response = await fetch(`${databaseURL}/tasks.json`);
         if (!response.ok) {
@@ -71,44 +73,34 @@ async function downloadData() {
 }
 
 function renderBoard(){ 
-    // console.log("render_actice");
-    // console.log("render_Taskboard Inhalt:", TaskBoard);
-    taskContainer();    //render task to do 
-    
+    taskContainer();    //render taskcontainers // in case of empty taskboard -> 
+                        // put in BackgroundTaskboard = TaskBoard   
 }
 
-
-function overlayTask(id){
-    
+function overlayTask(id){    
     task = TaskBoard.findIndex(t => t.taskid === id);
     OverlayTaskPopup(task);
 }
 
 async function uploadData() {
     const databaseURL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app';
-    try {
-        const response = await fetch(`${databaseURL}/tasks.json`, {
+    try {   const response = await fetch(`${databaseURL}/tasks.json`, {
             method: 'PUT', 
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(TaskBoard) 
         });
         if (!response.ok) {
             throw new Error('Netzwerkantwort war nicht in Ordnung');
-        }
+        } 
         const data = await response.json();
-        //console.log('Daten erfolgreich hochgeladen:', data);
     } catch (error) {
         console.error('Fehler beim Hochladen der Daten:', error);
-    }
-    downloadData();  
+    }    downloadData();  
 }
 
 //Search functions  /////////////////////////////////////////
 
 function findTask(event){
-    console.log("findTaskStarted");
     const SearchedTask = event.target.value;
     if (SearchedTask == ""){
         console.log("input field empty");
@@ -117,9 +109,7 @@ function findTask(event){
         awaitFeedback.innerHTML = '';
         TaskBoard = BackgroundTaskBoard;
         renderBoard();                //Searchfield empty again -> reload up do date status
-        return;                       //Taskboard = BackgroundTaskBoard einfügen
-    }
-    console.log("Aktueller Suchfeldwert:",SearchedTask);
+        return;  }                    //Taskboard = BackgroundTaskBoard einfügen
     toDo.innerHTML = '';
     inProgress.innerHTML = '';
     awaitFeedback.innerHTML = '';
@@ -127,12 +117,9 @@ function findTask(event){
 }
 
 function searchResult(s){    
-    console.log("an SearchResult übergeben:", s);
     TaskBoard = [];
-    console.log("Taskboard:", TaskBoard);
     for (let i = 0; i < BackgroundTaskBoard.length; i++) {
-        const task = BackgroundTaskBoard[i];
-        
+        const task = BackgroundTaskBoard[i];        
         if (task.title.toLowerCase().includes(s.toLowerCase()) || task.description.toLowerCase().includes(s.toLowerCase())) {
             console.log("Found at i = ", i);
             TaskBoard.push(task);       
@@ -140,8 +127,7 @@ function searchResult(s){
     }
     if (TaskBoard.length === 0){
         alert("No matching Task found!");
-    }
-    
+    }    
     renderBoard();
 }
 
@@ -195,9 +181,7 @@ function overlayContactsRead(i){
             overlayContacts += '<div class="overlay-assigned-to-contacts">' + emblem + '<div class="overlay-contact-name">' + contactName + '</div></div>';
         }
     }else{
-        // console.log('keine Embleme vorhanden');
-    }
-    
+    }    
 }
 
 function overlayPrio(){
@@ -209,7 +193,6 @@ function overlayPrio(){
     } else if (OverlayTask.priority === "urgent") {
         overlayPriority = "/assets/svg/Capa_2_Burger menue_Arrow_up.svg"
     }
-    //console.log('keine prio da');
 }
 
 async function overlayRender(){
@@ -322,7 +305,6 @@ function removeShadow(){
     document.getElementById('mainContainerOverlay').classList.remove('addTaskOverlayContainerShowing');
 }
 
-
 async function closeOverlay(closeId){ // Close Popup Task/OverlayTask
     if (document.getElementById('overlayBoard')) {
         document.getElementById('overlayBoard').classList.add('transition');}
@@ -334,7 +316,6 @@ async function closeOverlay(closeId){ // Close Popup Task/OverlayTask
     uploadData();
     removeShadow();
 }        
-
 
 function overlayDeleteTask(idTask, i){         
     let taskToDelete = BackgroundTaskBoard[i];
@@ -361,11 +342,9 @@ function switchToAddTask(type){
         document.getElementById('addTaskOverlayContainer').classList.remove('addTaskOverlayContainer');
         document.getElementById('addTaskOverlayContainer').classList.add('addTaskOverlayContainerShowing');
         document.getElementById('addTaskForm').onsubmit = function(event){
-            getTheDataForPostTask(event, type);
+            getTheDataForPostTask(event, type);            
             
-            
-        }
-        
+        }        
         document.getElementById('body').classList.add('noScroll');
         
     }
