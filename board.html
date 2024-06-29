@@ -18,14 +18,17 @@
 
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/assets/css/board.css">
+    <link rel="stylesheet" href="/assets/css/board_2.css">
     <link rel="stylesheet" href="/assets/css/card.css">
     <link rel="stylesheet" href="/assets/css/fonts.css">
     <link rel="stylesheet" href="/assets/css/edit_task.css">
     <link rel="stylesheet" href="/assets/css/add_task.css">
+    
 </head>
     
 <body id="body" onload="init(), downloadData()">
     <div id="mobileTamplateContent" w3-include-html="/assets/templates/mobile_template.html"></div>
+    
     <div id="Board" class="board-titel-add-search">
         <div class="board-add-task-mobile">
          <div class="board-add-task-title-mobile">
@@ -34,36 +37,36 @@
         </div>
         <div class="board-search-mobile">
             <div class="board-search-mobile-input"><input id="boardInput" type="text" placeholder="Find task..."><div class="board-search-icon-mobile"><img onclick="findTask()" class="board-search-icon-mobile-img" src="/assets/svg/search.svg" alt="search"></div></div>
-            <div class="board-add-button-desktop"><img onclick="window.location.href='//127.0.0.1:5500/add_task.html'" class="board-desktop-add-button" src="/assets/svg/add_task_board_desktop.svg" alt="addTask"></div>
+            <div class="board-add-button-desktop"><img onclick="switchToAddTask('0')" class="board-desktop-add-button" src="/assets/svg/add_task_board_desktop.svg" alt="addTask"></div>
         </div>
     </div>
     <div class="board-container">
         <div class="container-class1">
         <div class="to-do-mobile">
             <div class="to-do-add-mobile"><h2>To do</h2><img onclick="switchToAddTask('0')" class="add-mobile-small-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
-            <div id="toDoContainer" class="to-do-container-mobile" ondrop="dropAt(0)" ondragover="allowDrop(event)"></div>
+            <div id="toDoContainer" class="to-do-container-mobile" ondrop="dropAt(0, 'toDoContainer')" ondragleave="removeHighlight('toDoContainer')" ondragover="allowDrop(event); highlight('toDoContainer')"  ></div>
         </div>
         <div class="in-progress-mobile">
             <div class="in-progress-title-mobile"><h2>In progress</h2><img onclick="switchToAddTask('1')" class="add-mobile-small-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
-            <div id="inProgressContainer" class="in-progress-container-mobile" ondrop="dropAt(1)" ondragover="allowDrop(event)"></div>
+            <div id="inProgressContainer" class="in-progress-container-mobile" ondrop="dropAt(1, 'inProgressContainer')" ondragleave="removeHighlight('inProgressContainer')" ondragover="allowDrop(event); highlight('inProgressContainer')"></div>
         </div>
         </div>
         <div class="container-class2">
         <div class="await-feedback-mobile">
             <div class="await-feedback-title-mobile"><h2>Await Feedback</h2><img onclick="switchToAddTask('2')" class="add-mobile-small-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
-            <div id="awaitFeedbackContainer" class="await-feedback-container" ondrop="dropAt(2)" ondragover="allowDrop(event)">
+            <div id="awaitFeedbackContainer" class="await-feedback-container" ondrop="dropAt(2, 'awaitFeedbackContainer')" ondragleave="removeHighlight('awaitFeedbackContainer')" ondragover="allowDrop(event); highlight('awaitFeedbackContainer')">
             </div>        
         </div>
         <div class="done-mobile">
             <div class="done-title-mobile"><h2>Done</h2><img onclick="switchToAddTask('3')" class="add-mobile-small-img" src="/assets/svg/plus button mobile.svg" alt="add"></div>
-            <div id="doneContainer" class="done-container-mobile" ondrop="dropAt(3)" ondragover="allowDrop(event)">
+            <div id="doneContainer" class="done-container-mobile" ondrop="dropAt(3, 'doneContainer')" ondragleave="removeHighlight('doneContainer')" ondragover="allowDrop(event); highlight('doneContainer')">
             </div>        
         </div>
         </div>
     </div>
 
     </div>
-    <div id="overlayContainer"></div>
+    <div id="mainContainerOverlay"><div id="overlayContainer"></div></div>
     <div id="addTaskOverlayContainer" class="addTaskOverlayContainer">
         <div class="all-content-div">
             <div class="headline"><p class="headline-text">Add Task</p></div>

@@ -37,7 +37,7 @@ async function loadSingleContact(id){
         }
     }
     document.getElementsByClassName('name-headline')[0].innerHTML = `${user['vorname']} ${user['name']}`;
-    document.getElementsByClassName('email')[0].innerHTML = `${user['mail']}`;
+    document.getElementsByClassName('email')[0].innerHTML = `<a href="mailto:${user['mail']}">${user['mail']}</a>`;
     document.getElementsByClassName('phone')[0].innerHTML = `${user['mobile']}`;
     document.getElementsByClassName('name-pic')[0].outerHTML = drawContactDetailPic(user);
     document.getElementsByClassName('del-btn')[0].outerHTML = `<button class="del-btn" onclick="deleteContact(${id})"></button>`
@@ -54,7 +54,7 @@ async function loadSingleContactDesktop(id){
         }
     }
     document.getElementsByClassName('name-headline')[0].innerHTML = `${user['vorname']} ${user['name']}`;
-    document.getElementsByClassName('email')[0].innerHTML = `${user['mail']}`;
+    document.getElementsByClassName('email')[0].innerHTML = `<a href="mailto:${user['mail']}">${user['mail']}</a>`;
     document.getElementsByClassName('phone')[0].innerHTML = `${user['mobile']}`;
     document.getElementsByClassName('name-pic')[0].outerHTML = drawContactDetailPic(user);
     document.getElementsByClassName('del-btn')[0].outerHTML = `<button class="del-btn" onclick="deleteContact(${id})"></button>`
@@ -114,7 +114,6 @@ async function fillEditContactFormDesktop(id){
         event.preventDefault(); // Verhindert das Standard-Formular-Absenden
         saveEditsToContact(`${currentContact['id']}`);
     };
-    
     document.getElementById('delete-contact-btn-desktop').setAttribute('onclick',`deleteContact(${id})`);
     showEditOverlayDesktop();
     document.getElementById('editContactPic-desktop').outerHTML = await drawContactEditPicDesktop(currentContact);
@@ -161,6 +160,16 @@ async function saveEditsToContact(token){
     let words = editedName.split(" ");
     let surname = words[0];
     let lastName = words[1];
+    await getTheNewName(surname, lastName);
+    let indexOfCurrentContact = contactsAsJson.findIndex(element => element.id === token);
+    let contactToUpdate = contactsAsJson[indexOfCurrentContact];
+    let data = await getTheReadyData(editedMail,editedPhone,newLastName,newSurname,contactToUpdate);
+        await putData(`contacts/${token}/`, data);
+        await submitForm(indexOfCurrentContact);
+    }
+    
+
+async function getTheNewName(surname, lastName){
     if(surname && lastName){
         newSurname = surname.charAt(0).toUpperCase() + surname.slice(1);
         newLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1);
@@ -168,19 +177,20 @@ async function saveEditsToContact(token){
         newSurname = surname.charAt(0).toUpperCase() + surname.slice(1);
         newLastName = ""
     }
-    let indexOfCurrentContact = contactsAsJson.findIndex(element => element.id === token);
-    let contactToUpdate = contactsAsJson[indexOfCurrentContact];
-    let data = { 
+}
+
+
+async function getTheReadyData(editedMail,editedPhone,newLastName,newSurname,contactToUpdate){
+   let data = { 
         "mail": editedMail,
         "mobile": editedPhone,
         "name": newLastName,
         "vorname": newSurname,
         "id": contactToUpdate['id'],
         "color": contactToUpdate['color']}
-        await putData(`contacts/${token}/`, data);
-        await submitForm(indexOfCurrentContact);
-    }
-    
+        return data;
+}
+
     
     async function submitForm(){
         if(window.innerWidth < 1250){

@@ -113,7 +113,6 @@ function deleteElementById(elementId){
 function renderAssignSelector(){
     if(document.getElementById('optionContainer').innerHTML == ``){
         document.getElementById('optionContainer').innerHTML = ``;
-        
         for (let i = 0; i < contactsAsJson.length; i++) {
             const contact = contactsAsJson[i];
             
@@ -200,42 +199,44 @@ function hideContactsToAssign(button){
 }
 
 
-async function getTheDataForPostTask(event, type) {
-
+async function getTheDataForPostTask(event, tasktype) {
+    let type = Number(tasktype);
     event.preventDefault();
-    const data = {
-        title: document.getElementById('title-input').value,
-        description: document.getElementById('descriptionInput').value,
-        priority: priorityOfTask,
-        assignedTo: fetchAllAssignedContacts(),
-        contactEmblem: getTheEmblemsOfAssignedContacts(),
-        date: document.getElementById('datePicker').value,
-        subtask: getTheSubtasksOfTask(),
-        label: getTheCategoryOfTask(),
-        subtaskSum: getTheSubtaskStatus(getTheSubtasksOfTask()),
-        type: type,
-        taskid: await getTheIdOfTask()
-    };
+    const data = await fetchTheData(type);
     await postData('tasks', data);
     await showNotification();
+}
+
+
+async function fetchTheData(type){
+let data = {
+    title: document.getElementById('title-input').value,
+    description: document.getElementById('descriptionInput').value,
+    priority: priorityOfTask,
+    assignedTo: fetchAllAssignedContacts(),
+    contactEmblem: getTheEmblemsOfAssignedContacts(),
+    date: document.getElementById('datePicker').value,
+    subtask: getTheSubtasksOfTask(),
+    label: getTheCategoryOfTask(),
+    subtaskSum: getTheSubtaskStatus(getTheSubtasksOfTask()),
+    type: type,
+    taskid: await getTheIdOfTask()
+};
+return data;
 }
 
 
 async function showNotification() {
     const notificationElement = document.getElementById('taskAddedNotification');
     notificationElement.classList.remove('none');
-    
     setTimeout(() => {
         if(window.location.href.includes('board.html')){
             notificationElement.classList.remove('notificationDiv');
             notificationElement.classList.add('notificationDivShowing');
-
         }else{
             notificationElement.classList.add('showNotification');
         }
-        
     }, 100);
-    
     setTimeout(function() {
         window.location.href = "/board.html";
     }, 1000);
@@ -327,6 +328,7 @@ document.addEventListener('click', function(event){
         showContactsToAssign();
     }
 })
+
 
 function clearTheForm(){
     window.location.reload();

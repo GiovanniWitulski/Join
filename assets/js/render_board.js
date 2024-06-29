@@ -1,8 +1,7 @@
 // Board render Tasks container /////////////////
 
-//RenderArrays -> nach innerHTML+= leeren!
 let toDoTask = []
-let NewLabel;
+let NewLabel;   //used as Array ff.
 let newSumSubtask;
 let newAmountSubtask;
 let newSumSubtaskCalc;
@@ -10,28 +9,35 @@ let newProgressInPercent;
 let newProgressBarId;
 let newEmblems;
 let newPriority;
+let subTaskChecked;
+
 
 // content functions //
 
-function startReadinTasks(){
-    for(i=0; i<TaskBoard.length; i++){
-        const toDoCard = TaskBoard[i];  
+function startReadingTasks(){
+    for(x=0; x<TaskBoard.length; x++){
+        const toDoCard = TaskBoard[x];              
         toDoTask = toDoCard;
-            newAmountSubtask = toDoTask.subtask.length;
+            subTaskCheck();
             readInTasks();
-        if (toDoCard.type == 0){
-            renderToDo();                    
-        }
-        if (toDoCard.type == 1){
-            renderInProgress();
-        }
-        if (toDoCard.type == 2){            
-            renderAwaitFeedback();                      
-        }
-        if (toDoCard.type == 3){            
-            renderDone();                      
-        }
+        if (toDoCard.type === 0 || toDoCard.type === "0"){
+            renderToDo();       }
+        if (toDoCard.type === 1 || toDoCard.type === "1"){
+            renderInProgress();    }
+        if (toDoCard.type === 2 || toDoCard.type === "2"){            
+            renderAwaitFeedback();  }
+        if (toDoCard.type === 3 || toDoCard.type === "3"){            
+            renderDone();   }  }
+}
 
+function subTaskCheck(){ 
+    subTaskChecked = 0;  
+    if(toDoTask.subtaskSum){
+    if (toDoTask.subtaskSum.length > 0){
+    subTaskChecked = 1; 
+    } else {
+        subTaskChecked = 0;
+    }    
     }
 }
 
@@ -44,8 +50,7 @@ function readInTasks(){         //reading Tasksinformation
     priorityEmblem();
 }
 
-function label(){
-                                  //Labeldiscernment
+function label(){     
     if(toDoTask.label === 1){
         NewLabel = TechnicalTaskLabel;
     } else {
@@ -53,62 +58,60 @@ function label(){
     }                 
 }
 
-function amountSubTasks(){     //Anzahl Subtasks
-        
-                                   //amount solved subtasks
-        if (newAmountSubtask === 2){         //"if null" - just for data failures securement
-        if (toDoTask.subtaskSum[0] === null && toDoTask.subtaskSum[1] === null){
-            newSumSubtask = 0; }            
-        if (toDoTask.subtaskSum[0] !== null && toDoTask.subtaskSum[1] !== null){
-            newSumSubtask = toDoTask.subtaskSum[0] + toDoTask.subtaskSum[1]; }
-        }
-        if (newAmountSubtask === 1){
-            if(toDoTask.subtaskSum[0] !== null){
-                newSumSubtask = toDoTask.subtaskSum[0];
-            }
-            if(toDoTask.subtaskSum[0] === null){
-            newSumSubtask = 0;} 
-        }   
-         
+function amountSubTasks(){     
+    newAmountSubtask = toDoTask.subtask.length;
+    newSumSubtask = 0;
+    if(subTaskChecked === 1){
+    for (i=0;i<newAmountSubtask;i++){
+        newSumSubtask += toDoTask.subtaskSum[i]; //
+    }
+    }
+    if(subTaskChecked === 0){
+        newSumSubtask = 0; newAmountSubtask = 0;
+    } 
 }
 
-function calcProgressBar(){
-    newSumSubtaskCalc = 0;    //Calculation for barchart !!!declared "0"!!! at beginning (svg -reasons)
-    newSumSubtaskCalc = newSumSubtask/newAmountSubtask;    
-    newProgressInPercent = newSumSubtaskCalc * 100;  
-    newProgressBarId = toDoTask.taskid; //In toDoTask.taskid ändern ! 'cardToDoBar' + toDoCard.taskid; 
-    
+function calcProgressBar(){  
+    newSumSubtaskCalc = 0;     
+    newSumSubtaskCalc = newSumSubtask/newAmountSubtask;      
+    if (subTaskChecked === 1){
+    newProgressInPercent = newSumSubtaskCalc * 100;}
+    if (subTaskChecked === 0){
+    newProgressInPercent = 0; 
+    }
+    newProgressBarId = toDoTask.taskid; 
 }
 
 function descriptionChar(){
     let lastChar = toDoTask.description[toDoTask.description.length - 1];
     if (lastChar === "." || lastChar === "!" || lastChar === "?"){
         toDoTask.description = toDoTask.description.slice(0, -1);
-    }                                 //preparing optic for description
+    }                                 
 }
 
-function emblemSvg() {            //contact-emblems
-    newEmblems = '';                          
+function emblemSvg() {            
+    newEmblems = '';  
+        if (toDoTask.contactEmblem.length > 0){                        
         for (let i = 0; i < toDoTask.contactEmblem.length; i++){
             const svg = toDoTask.contactEmblem[i];
             newEmblems += `<div class="card-contact-emblems-icon">${svg}</div>`;
             if (i === 5){break;}
-        }           
+        } }          
 }
 
 function priorityEmblem(){
     newPriority = '';
+            if (toDoTask.priority){
             if (toDoTask.priority === "low"){
                 newPriority = "/assets/svg/capa_priority_low.svg";
             }    else if (toDoTask.priority === "medium"){
                 newPriority = "/assets/svg/capa_1_medium_priority.svg";
             }   else if(toDoTask.priority === "urgent") {
                 newPriority = "/assets/svg/Capa_2_Burger menue_Arrow_up.svg"}
-
+            }
 }
 
-// container html-functions //
-
+// container render-functions //
 
 function renderToDo(){
     toDo.innerHTML += `
@@ -199,7 +202,11 @@ function taskContainer(){
     inProgress.innerHTML = '';
     awaitFeedback.innerHTML = '';
     done.innerHTML = '';
-    startReadinTasks();
+    startReadingTasks();
+    ifContainerEmpty();
+}
+
+function ifContainerEmpty(){
     if (toDo.innerHTML == ''){
         toDo.innerHTML = `<img class="placeholder-container-img" src="/assets/svg/no_task_to_do.png" alt="no-task-to-do">`
     }
@@ -212,8 +219,15 @@ function taskContainer(){
     if (done.innerHTML === '') {
         done.innerHTML = `<img class="placeholder-container-img" src="/assets/svg/no_tasks_done.png" class="to-do-container-mobile" alt="no-task-done"></div>`
     }
-
-
 }
 
+/// highlight drop container ///
+
+function highlight(id) {
+    document.getElementById(id).classList.add('drag-area-highlight');
+}
+
+function removeHighlight(id) {
+    document.getElementById(id).classList.remove('drag-area-highlight');
+}
 

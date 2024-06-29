@@ -1,0 +1,86 @@
+.to-do-mobile{
+    width: 252px;
+    padding-top: 24px;
+}
+
+.to-do-add-mobile{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 16px;
+}
+
+.to-do-container-mobile{
+    display: flex;
+    flex-wrap: wrap;
+    width: 252px;
+    min-height: 270px;
+}
+
+.in-progress-mobile{
+    display: flex;
+    flex-direction: column;
+    padding-top: 26px;
+    width: 252px;
+}
+
+.in-progress-title-mobile{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 16px;
+}
+
+.in-progress-container-mobile{ 
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+    min-height: 270px;
+} 
+
+.no-task-progress {
+    width: 100%;
+}
+
+.await-feedback-title-mobile{
+    display: flex;
+    justify-content: space-between; 
+    padding-top: 26px; 
+    padding-bottom: 16px; 
+    width: 252px;
+}
+
+.await-feedback-container{
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    max-width: 252px;
+    min-height: 270px;
+}
+
+.await-feedback-container::-webkit-scrollbar{
+    display: none;
+} /* in addition, bc of different browerser */
+
+.await-feedback-cards-container{
+    width: 252px;
+    padding-right: 16px;
+}
+
+.done-mobile{
+    padding-bottom: 110px;
+    width: 252px;
+}
+
+.done-title-mobile{
+    display: flex;
+    justify-content: space-between; 
+    padding-top: 26px; 
+    padding-bottom: 16px; 
+}
+
+.done-container-mobile{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: 270px;
+}
