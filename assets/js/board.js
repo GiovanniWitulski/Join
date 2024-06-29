@@ -1,6 +1,6 @@
 let TaskBoard = []
 let BackgroundTaskBoard = [] 
-let OverlayTask;
+let OverlayTask; //used as arrays ff.
 let overlayContacts;
 let overlayPriority;
 let OverlayLabel;

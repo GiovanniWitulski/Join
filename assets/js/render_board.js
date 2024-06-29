@@ -1,7 +1,7 @@
 // Board render Tasks container /////////////////
 
 let toDoTask = []
-let NewLabel;
+let NewLabel;   //used as Array ff.
 let newSumSubtask;
 let newAmountSubtask;
 let newSumSubtaskCalc;
