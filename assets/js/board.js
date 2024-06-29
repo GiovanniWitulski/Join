@@ -216,7 +216,7 @@ async function overlayRender(){
     Overlay.innerHTML = `
     <div id="${OverlayTask.taskid}" class="overlay-container">
     <div id= "overlayBoard" class="overlay-task transition">
-    <div id="overlayHeader" class="overlay-card-header">${OverlayLabel}<img onclick="closeOverlay()" src="/assets/svg/close_black.svg" alt="close"></div>
+    <div id="overlayHeader" class="overlay-card-header">${OverlayLabel}<img class="close-overlay" onclick="closeOverlay()" src="/assets/svg/close_black.svg" alt="close"></div>
     <div id="overlayTitle" class="overlay-card-title">${OverlayTask.title}</div>
     <div id="overlayDescription" class="overlay-card-description">${OverlayTask.description}</div>
     <div id="overlaydueDate" class="overlay-card-due-date"><div id="overlayDueDate">Due date:</div><div class="overlay-due-date">${OverlayTask.date}</div></div>

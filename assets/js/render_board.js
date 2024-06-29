@@ -12,6 +12,7 @@ let newEmblems;
 let newPriority;
 let subTaskChecked;
 
+
 // content functions //
 
 function startReadingTasks(){
@@ -235,3 +236,4 @@ function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
     console.log("removehighlight active");
 }
+

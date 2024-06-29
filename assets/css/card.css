@@ -37,9 +37,6 @@
     text-overflow: ellipsis;
 }
 
-.due-date{}
-
-.assigned-to{}
 
 .card-subtasks {
     display: flex;
@@ -213,12 +210,18 @@
     display: flex;
     align-items: center;
     padding-bottom: 4px;
+    padding-left: 8px;
 }
 
 .overlay-checkbox-img{
     width: 16px;
     height: 16px;
     padding-right: 16px;
+}
+
+.overlay-checkbox-img:hover{
+    cursor: pointer;
+    opacity: 0.5;
 }
 
 .overlay-card-checklist{
@@ -232,6 +235,15 @@
     height: 24px;
 }
 
+.close-overlay{
+    position: relative;
+    border-radius: 50%;
+}
+
+.close-overlay:hover{
+    opacity: 0.5;
+}
+
 .overlay-cde{
     display: flex;
     align-items: center;
@@ -239,6 +251,10 @@
     padding-left: 8px;
     height: 24px;
     cursor: pointer;
+}
+
+.overlay-cde:hover{
+    opacity: 0.5;
 }
 
 .overlay-cde-img1{
