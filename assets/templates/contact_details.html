@@ -29,7 +29,7 @@
         <p class="contact-info">Contact Information</p>
         <div>
             <p class="category-headline">Email</p>
-            <p class="email">wolf@gmail.com</p>
+            <p class="email"><a href="mailto:wolf@gmail.com">wolf@gmail.com</a></p>
             <p class="category-headline">Phone</p>
             <p class="phone">+49 2222 222 22 2</p>
         </div>
@@ -64,7 +64,7 @@
         <form id="edit-contact-form"  class="create-contact-form">
             <input id="contact-name" type="text" required placeholder="Name">
             <input id="contact-mail" type="email" required placeholder="Email" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$">
-            <input id="contact-phone" type="tel" required placeholder="Phone" pattern="[0-9+]{3,}">
+            <input id="contact-phone" type="tel" required placeholder="Phone" pattern="[0-9+ ]{3,}">
             <div class="button-div"><button id="delete-contact-btn" type="button" class="delete-contact-btn">Delete</button>
                 <button id="save-edits-btn" type="submit" class="save-contact-btn">Save<img src="/assets/svg/check.svg"></button>
             </div>

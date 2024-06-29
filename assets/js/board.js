@@ -355,7 +355,7 @@ function deleteTask(i){
 
 function switchToAddTask(type){
     if(window.innerWidth < 1250){
-        window.location.href='//127.0.0.1:5500/add_task.html';
+        window.location.href="/add_task.html";
     }else{ 
         changeToActive('medium-btn');
         document.getElementById('addTaskOverlayContainer').classList.remove('addTaskOverlayContainer');
