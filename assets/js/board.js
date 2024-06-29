@@ -159,10 +159,10 @@ function dropAt(newType, id){
     for (i=0; i<TaskBoard.length; i++){
         taskToMove = TaskBoard[i].taskid;
         if (taskToMove == currentDraggedTask){
-            TaskBoard[i].type = newType;   
-                  
+            TaskBoard[i].type = newType;                     
             uploadData();
             renderBoard();       
+            removeHighlight(id);
             return;
         }
     }

@@ -176,6 +176,7 @@ cursor: pointer;
     display: flex;
     flex-wrap: wrap;
     width: 252px;
+    min-height: 270px;
 }
 
 .in-progress-mobile{
@@ -195,6 +196,7 @@ cursor: pointer;
     display: flex;
     flex-direction: column;
     width: 100%; 
+    min-height: 270px;
 } 
 
 .no-task-progress {
@@ -214,6 +216,9 @@ cursor: pointer;
     overflow-x: auto;
     white-space: nowrap;
     scrollbar-width: none;
+    max-width: 252px;
+    min-height: 270px;
+
 }
 
 .await-feedback-container::-webkit-scrollbar{
@@ -241,6 +246,8 @@ cursor: pointer;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    min-height: 270px;
+
 }
 
 /* OTHERS */

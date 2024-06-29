@@ -257,10 +257,9 @@
 
 /* special - Classes */
 
-.drag-area-highlight{
-     background-color: rgba(0, 0, 0, 0.1); 
-     outline: 4px solid rgba(0, 0, 0, 0.1);
-     border-radius: 24px;    
+.drag-area-highlight{    
+    outline: 4px dashed rgba(0, 0, 0, 0.1);
+    border-radius: 24px;
 }
 
 .dragging {
