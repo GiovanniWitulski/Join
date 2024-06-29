@@ -24,7 +24,6 @@
     width: 100%;
 }
 
-
 input {
     box-sizing: border-box;
     background-color: white;
@@ -757,7 +756,7 @@ cursor: pointer;
 
     .headline{
         height: 73px;
-        width: 278px;
+        width: 400px;
         margin-top: 175px;
         margin-left: calc(232px + 96px);
         font-size: 61px;

@@ -42,7 +42,7 @@ async function getId(){
 
 
 async function getTheInformation(event){
-    event.preventDefault(); //formular wird von sofortigem reload aufgehalten
+    event.preventDefault(); 
     await createName();
     await getMail();
     await getPhoneNumber();

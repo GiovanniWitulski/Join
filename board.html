@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="/assets/css/fonts.css">
     <link rel="stylesheet" href="/assets/css/edit_task.css">
     <link rel="stylesheet" href="/assets/css/add_task.css">
+    
 </head>
     
 <body id="body" onload="includeHTML(), downloadData()">
@@ -36,7 +37,7 @@
         </div>
         <div class="board-search-mobile">
             <div class="board-search-mobile-input"><input id="boardInput" type="text" placeholder="Find task..."><div class="board-search-icon-mobile"><img onclick="findTask()" class="board-search-icon-mobile-img" src="/assets/svg/search.svg" alt="search"></div></div>
-            <div class="board-add-button-desktop"><button onclick="window.location.href='//127.0.0.1:5500/add_task.html'" type="submit" class="board-add-task-desktop">Add Task</button></div>
+            <div class="board-add-button-desktop"><img onclick="switchToAddTask('0')" class="board-desktop-add-button" src="/assets/svg/add_task_board_desktop.svg" alt="addTask"></div>
         </div>
     </div>
     <div class="board-container">
