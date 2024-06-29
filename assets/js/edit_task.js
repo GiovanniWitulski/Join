@@ -347,7 +347,6 @@ function renderContactListEdit() { //rausgeholt aus render
 function editTaskOverlay(idTask, i){
     EditTask = TaskBoard[i];
     taskboardPosition = i;
-    console.log("taskboardposition", taskboardPosition);
     taskIdBoard = idTask;
     choosenContactsEdit = [];
     testForChoosenContact ();
@@ -370,7 +369,7 @@ function editTaskRender(){    //use of same container as Overlay/PopupTask
 function editTaskHtml(){
     Overlay.innerHTML = `
     <div id="boardEditTask" class="board-edit-task">
-    <div class="close-edit"><img onclick="closeOverlay(${taskIdBoard}, ${taskboardPosition})" src="/assets/svg/close_black.svg" alt="close"></div>
+    <div class="close-edit"><img onclick="closeOverlay(${taskIdBoard}, ${taskboardPosition})" class ="close-overlay" src="/assets/svg/close_black.svg" alt="close"></div>
     <h4 style="font-weight: 400;">Title</h4>
     <div id="edit-title" class="edit-title">
     <input type="text" id="titleEdit" class="edit-title-input" placeholder="${placeholderTitle}">
@@ -400,7 +399,7 @@ function editTaskHtml(){
     <div id="choosenContacts" class="choosen-contacts">
     </div>
     <h4 style="font-weight: 400;">Subtasks</h4>
-    <div id="editSubtaskInput" class="edit-subtask">
+    <div id="editSubtaskInput" class="edit-subtask-input">
     <input type="text" id="subtaskEdit" class="subtask-edit-input" placeholder="Add new Subtask"><div onclick="editAddSub()" class="edit-subtask-add"><img src="/assets/svg/add.svg" alt="addsubtask" width="14" height="14"></div>
     </div>
     <div id="editRenderSubtasks" class="edit-render-subtasks"></div> 
