@@ -67,8 +67,8 @@
         <div class="bottom-container">
             <form onsubmit="getTheInformation(event)" class="create-contact-form">
                 <input id="contact-name" type="text" required placeholder="Name">
-                <input id="contact-mail" type="email" required placeholder="Email" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$">
-                <input id="contact-phone" type="tel" required placeholder="Phone" pattern="[0-9+ ]{3,}" minlength="3">
+                <input id="contact-mail" type="email" required placeholder="Email" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" title="Geben sie eine gültige Mail an. Es muss ein @-Zeichen, sowie ein . und Text jeweils vor und hinter diesen Zeichen stehen.">
+                <input id="contact-phone" type="tel" required placeholder="Phone" pattern="[0-9+ ]{3,}" minlength="3" title="Erlaubt sind Ziffern 0-9, das + Zeichen sowie Leerzeichen. Geben Sie mindestens 3 Stellen an">
                 <div class="addContact-btn-div">
                     <button onclick="hideTheFormular('overlay-container')" type="button" class="cancel-addContact-btn">Cancel</button>
                     <button type="submit" class="create-contact-btn">Create contact <img src="/assets/svg/check.svg"></button>
@@ -96,8 +96,8 @@
         <div class="bottom-container">
             <form id="edit-contact-form-desktop" class="create-contact-form" onsubmit="">
                 <input id="contact-name-desktop" type="text" required placeholder="Name">
-                <input id="contact-mail-desktop" type="email" required placeholder="Email" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$">
-                <input id="contact-phone-desktop" type="tel" pattern="[0-9+ ]{3,}" minlength="3" required placeholder="Phone">
+                <input id="contact-mail-desktop" type="email" required placeholder="Email" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" title="Geben sie eine gültige Mail an. Es muss ein @-Zeichen, sowie ein . und Text jeweils vor und hinter diesen Zeichen stehen.">
+                <input id="contact-phone-desktop" type="tel" pattern="[0-9+ ]{3,}" minlength="3" required placeholder="Phone" title="Erlaubt sind Ziffern 0-9, das + Zeichen sowie Leerzeichen. Geben Sie mindestens 3 Stellen an"">
                 <div class="addContact-btn-div">
                     <button id="delete-contact-btn-desktop" onclick="hideTheFormular('overlay-container')" type="button" class="delete-contact-btn-desktop">Delete</button>
                     <button id="save-edits-btn-desktop" type="submit" class="create-contact-btn-desktop">Save<img src="/assets/svg/check.svg"></button>

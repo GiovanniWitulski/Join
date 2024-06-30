@@ -331,5 +331,23 @@ document.addEventListener('click', function(event){
 
 
 function clearTheForm(){
-    window.location.reload();
+    document.getElementById('list-of-subtasks').innerHTML=``; 
+    setTimeout(() => {
+         document.getElementById('addTaskForm').reset();
+    }, 20);
+    changeToActive('medium-btn');
+    let options = document.getElementsByClassName('checked');
+    for (let index = 0; index < options.length;) {
+        const element = options[index];
+        let value = getTheValueForFunction(element);
+        assignTheContact(element,value);
+    }
+    document.getElementById('assignedContactPics').innerHTML = ``;
+}
+
+
+function getTheValueForFunction(element){
+let id = element.id;
+let newValue = parseInt(id.charAt(id.length - 1), 10);
+return newValue;
 }

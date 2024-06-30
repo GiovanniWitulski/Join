@@ -52,11 +52,22 @@ function createDivs(){
 
 
 function generateHTMLcodeForContacts(contact, j){
-    return `<a  onclick="refreshContactToLoad(${j}, 'currentContact')"  id="${j}" class="singleContact"><svg class="profile_pic" width="42px" height="42px">
+    return `<a  onclick="refreshContactToLoad(${j}, 'currentContact'), changeToClicked('singleContact${j}')"  id="singleContact${j}" class="singleContact"><svg class="profile_pic" width="42px" height="42px">
     <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2" fill="${contact['color']}" />
     <text x="12" y="25" fill="white" font-size="12px">${contact['vorname'].charAt(0)}${contact['name'].charAt(0)}</text>
     </svg>
     <div><p class="names">${contact['vorname']} ${contact['name']}</p><p class="mail">${contact['mail']}</p></div></a>`
+}
+
+
+function changeToClicked(element){
+let singleContacts = document.getElementsByClassName('singleContact');
+for (let index = 0; index < singleContacts.length; index++) {
+    const singleContact = singleContacts[index];
+    singleContact.classList.remove('clicked');
+    
+}
+document.getElementById(element).classList.add('clicked');
 }
 
 
@@ -65,16 +76,47 @@ async function refreshContactToLoad(id, path) {
     await putData(path,id)
     if (window.innerWidth >= 1250){
         loadCurrentContactId('desktop');
+       await hideContactDetails();
+       setTimeout(() => {
         showContactDetails();
+    }, 50);
+        
     }else{
         window.location.href = "/assets/templates/contact_details.html";
     }
 }
 
 
-function showContactDetails(){
-    document.getElementById('middle-container-desktop').classList.add('show');
+async function hideContactDetails(){
+    let contactContainer = document.getElementById('middle-container-desktop');
+    contactContainer.classList.add('none');
+    await addTranslate(contactContainer);
+    
 }
+
+
+async function showContactDetails(){
+    let contactContainer = document.getElementById('middle-container-desktop');
+    contactContainer.classList.remove('none');
+    await removeTranslate(contactContainer);
+
+    
+  
+}
+
+
+async function addTranslate(element){
+    element.classList.remove('show');
+}
+
+
+async function removeTranslate(element){
+    setTimeout(() => {
+        element.classList.add('show');
+    }, 50);
+    
+}
+
 
 
 function showAddContact(){

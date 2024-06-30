@@ -113,5 +113,18 @@
     </div>
 </div>
     <div class="notificationDiv none" id="taskAddedNotification"><img class="addedToBoardNotification" src="/assets/svg/Added to board.svg"></div>
+
+    <script>
+        function getTheCurrentDate(){
+            let today = new Date();
+            let day = String(today.getDate()).padStart(2, '0');
+            let month = String(today.getMonth() + 1).padStart(2, '0')
+            let year = today.getFullYear();
+
+            return year + '-' + month + '-' + day;
+        }
+
+        document.getElementById('datePicker').setAttribute('min', getTheCurrentDate());
+    </script>
 </body>
 </html>

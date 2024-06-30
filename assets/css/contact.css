@@ -19,6 +19,12 @@
     align-items: center;  
 }
 
+.clicked{
+
+    background-color: #2A3647;
+    color: white; 
+}
+
 .singleContact{
     width: 100%;
     height: 78px;
