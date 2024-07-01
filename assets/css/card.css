@@ -95,18 +95,19 @@
 .overlay-task {
     max-width: 396px;   
     height: fit-content;
-    max-height: 724px;
+    /* max-height: 724px; */
     z-index: 1;
     background-color:   #FFFFFF; 
     border-radius: 30px;
     position: fixed;
-    top: 96px;
+    top: 4%;
     bottom: 96px;  
     left: 16px; 
     right: 16px; 
     padding: 32px 24px 32px 24px;
     margin: 0 auto;                 /* so bleibt es dauerhaft zentiert */  
     transition: all 120ms ease-in-out;
+    overflow-y: auto;
 }
 
 .transition{
@@ -292,6 +293,14 @@
     filter: blur(1px); 
 }
 
+@media (max-width: 800px){
+   
+.overlay-task{
+    overflow-y: auto;
+    max-height: calc(100% - 18%);
+    overflow-x: hidden;}    
+    
+}
 
 
 

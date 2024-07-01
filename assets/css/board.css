@@ -171,7 +171,7 @@ cursor: pointer;
     width: 17.58px;
 }
 
-/* container */
+/* container --> inserted to board_2.css*/
 
 
 /* OTHERS */
@@ -180,6 +180,8 @@ cursor: pointer;
 }
 
 /*MEDIA QUERYS */
+
+
 
 @media (min-width: 800px) {
 
@@ -366,6 +368,7 @@ padding-top: 24px;
 }
 
 @media (min-width: 1460px){
+
 .board-container {    
     flex-direction: row;
 }
@@ -376,6 +379,10 @@ padding-top: 24px;
 }
 
 }
+
+
+
+
 
 
 

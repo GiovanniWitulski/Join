@@ -13,7 +13,7 @@
     display: flex;
     flex-wrap: wrap;
     width: 252px;
-    min-height: 270px;
+    min-height: 135px;
 }
 
 .in-progress-mobile{
@@ -33,7 +33,7 @@
     display: flex;
     flex-direction: column;
     width: 100%; 
-    min-height: 270px;
+    min-height: 135px;
 } 
 
 .no-task-progress {
@@ -54,7 +54,8 @@
     white-space: nowrap;
     scrollbar-width: none;
     max-width: 252px;
-    min-height: 270px;
+    min-height: 135px;
+    flex-direction: column;
 }
 
 .await-feedback-container::-webkit-scrollbar{
@@ -82,5 +83,38 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    min-height: 270px;
+    min-height: 135px;
+}
+
+@media (max-width: 1460px){
+
+.to-do-container-mobile{
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+
+.in-progress-container-mobile{
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    flex-direction: row;
+    scrollbar-width: none;
+}
+
+.await-feedback-container {
+    flex-direction: row;
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+
+.done-container-mobile{
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+
+.card-body{
+    margin-right: 24px;
+}
+
 }
