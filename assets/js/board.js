@@ -235,7 +235,7 @@ async function addTranslate(){
     document.getElementById('overlayBoard').classList.add('transition');
 }
 
-function overlayCheckmark(){
+function overlayCheckmark(){                    //funktioniert, nochmal überprüfen
     const checkmark0 = OverlayTask.subtaskSum[0];
     const checkmark1 = OverlayTask.subtaskSum[1];
     check0 = '';
@@ -292,8 +292,18 @@ function toggleCheckboxValue(taskid, position) {
             }
         }
     }
-    OverlayTaskPopup(OverlayTaskBoardPosition);
+    overlayCheckmark()
+    overlaySubtaskCheck()
+    toggleSubstaskRender()
+
+    /* OverlayTaskPopup(OverlayTaskBoardPosition);
     document.getElementById('overlayBoard').classList.remove('transition');
+    renderBoard(); */
+}
+
+function toggleSubstaskRender(){            //new
+    let toggledSubtasks = document.getElementById('overlaySubtaskContainer');
+    toggledSubtasks.innerHTML = `${overlaySubtaskStorage}`;
     renderBoard();
 }
 
@@ -305,7 +315,7 @@ function removeShadow(){
     document.getElementById('mainContainerOverlay').classList.remove('addTaskOverlayContainerShowing');
 }
 
-async function closeOverlay(closeId){ // Close Popup Task/OverlayTask
+async function closeOverlay(){ // Close Overlay Task/Edit Task
     if (document.getElementById('overlayBoard')) {
         document.getElementById('overlayBoard').classList.add('transition');}
     if (document.getElementById('boardEditTask')) {
