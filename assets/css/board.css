@@ -82,6 +82,33 @@ body {
     display: none;    
 }
 
+.board-add-task-mobile-button{
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 21px;
+    border: 0 !important;
+    line-height: 25.2px;
+    background-color: #2A3647;
+    color: white;
+    background-image: url(/assets/svg/add_white.svg);
+    background-repeat: no-repeat;
+    background-position: calc(100% - 12px);
+    background-size: 24px 24px;
+    box-sizing: border-box;
+    text-align: start;
+    display: flex;
+    align-items: center;      
+}
+
+.board-add-task-mobile-button:hover{
+    background-color: rgba(41, 171, 226, 1);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    border-radius: 10px;  
+}
+
 .board-add-button-desktop:hover {           
     background-color: rgba(41, 171, 226, 1);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -175,12 +202,28 @@ cursor: pointer;
 
 
 /* OTHERS */
+
+.taskOverlayContainerShadow {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    backdrop-filter: brightness(0.4);
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(0);
+    transition: all 120ms ease-in-out;
+}
+
 .hide{
     display: none;
 }
 
 /*MEDIA QUERYS */
-
 
 
 @media (min-width: 800px) {

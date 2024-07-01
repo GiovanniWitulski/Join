@@ -41,6 +41,13 @@ function subTaskCheck(){
     }
 }
 
+function subTaskNoShow(){
+    if (subTaskChecked === 0){       
+       let idSubtask = 'cardSubtasks' + toDoTask.taskid;
+       document.getElementById(idSubtask).classList.add('hidden');
+    } 
+}
+
 function readInTasks(){         //reading Tasksinformation
     label(toDoTask); 
     amountSubTasks();
@@ -95,7 +102,13 @@ function emblemSvg() {
         for (let i = 0; i < toDoTask.contactEmblem.length; i++){
             const svg = toDoTask.contactEmblem[i];
             newEmblems += `<div class="card-contact-emblems-icon">${svg}</div>`;
-            if (i === 5){break;}
+            if (i === 3){
+                if(toDoTask.contactEmblem.length > 3){
+                    let otherEmblems = toDoTask.contactEmblem.length - 4;
+                    if (otherEmblems === 0){break;}
+                    newEmblems+= `<div class="card-contact-emblems-others" style="font-weight: bold; font-size: 16px;">+${otherEmblems}</div>`
+                }                
+                break;}
         } }          
 }
 
@@ -119,7 +132,7 @@ function renderToDo(){
     <div id="cardHeader" class="card-header">${NewLabel}</div>
     <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
     <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
-    <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
+    <div id="cardSubtasks${toDoTask.taskid}" class="card-subtasks"><div class="card-progress-bar">
     <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
     <rect id="${toDoTask.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
@@ -132,6 +145,7 @@ function renderToDo(){
     `           
     const progressBar = document.getElementById(newProgressBarId);
     progressBar.setAttribute('width', `${newProgressInPercent}%`);
+    subTaskNoShow();
 }
 
 function renderInProgress(){
@@ -140,7 +154,7 @@ function renderInProgress(){
     <div id="cardHeader" class="card-header">${NewLabel}</div>
     <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
     <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
-    <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
+    <div id="cardSubtasks${toDoTask.taskid}" class="card-subtasks"><div class="card-progress-bar">
     <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
     <rect id="${toDoTask.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
@@ -153,6 +167,7 @@ function renderInProgress(){
     `           
     const progressBar = document.getElementById(newProgressBarId);
     progressBar.setAttribute('width', `${newProgressInPercent}%`);
+    subTaskNoShow();
 }
 
 function renderAwaitFeedback(){
@@ -161,7 +176,7 @@ function renderAwaitFeedback(){
     <div id="cardHeader" class="card-header">${NewLabel}</div>
     <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
     <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
-    <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
+    <div id="cardSubtasks${toDoTask.taskid}" class="card-subtasks"><div class="card-progress-bar">
     <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
     <rect id="${toDoTask.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
@@ -174,6 +189,7 @@ function renderAwaitFeedback(){
     `           
     const progressBar = document.getElementById(newProgressBarId);
     progressBar.setAttribute('width', `${newProgressInPercent}%`);
+    subTaskNoShow();
 }
 
 function renderDone(){
@@ -182,7 +198,7 @@ function renderDone(){
     <div id="cardHeader" class="card-header">${NewLabel}</div>
     <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
     <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
-    <div id="cardSubtasks" class="card-subtasks"><div class="card-progress-bar">
+    <div id="cardSubtasks${toDoTask.taskid}" class="card-subtasks"><div class="card-progress-bar">
     <svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
     <rect id="${toDoTask.taskid}" width="0" height="8" rx="4" fill="#4589FF"/></svg> </div> 
@@ -195,6 +211,7 @@ function renderDone(){
     `           
     const progressBar = document.getElementById(newProgressBarId);
     progressBar.setAttribute('width', `${newProgressInPercent}%`);
+    subTaskNoShow();
 }
 
 function taskContainer(){             

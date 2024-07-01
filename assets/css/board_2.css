@@ -86,6 +86,10 @@
     min-height: 135px;
 }
 
+.card-contact-emblems-others{
+    padding-left: 2px;
+}
+
 @media (max-width: 1460px){
 
 .to-do-container-mobile{

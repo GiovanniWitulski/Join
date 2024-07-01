@@ -92,6 +92,10 @@
     height: 100%;
 }
 
+.overlay-task-container{
+    z-index: 210;
+}
+
 .overlay-task {
     max-width: 396px;   
     height: fit-content;
