@@ -275,36 +275,40 @@
 }
 
 
-.overlay-cde-edit:hover{
-    color:#29ABE2;
-}
-
 .overlay-cde-edit-svg{
+    display: flex;
+    align-items: center;
+    gap: 2px; /* Abstand zwischen SVG und Text */
     height: 24px;
-    width: 24px;
     cursor: pointer;
-    background-image: url('/assets/svg/edit_black.svg'); 
-    background-size: cover; 
+    background-image: url('/assets/svg/edit_black.svg'); /* Pfad zur SVG-Datei */
+    background-size: 24px 24px; /* Größe des SVG-Hintergrundbilds */
     background-repeat: no-repeat;
+    padding-left: 28px; /* Platz für das SVG plus Abstand */
         
 }
 
 .overlay-cde-edit-svg:hover {
-    background-image: url('/assets/svg/edit_blue.svg')
+    background-image: url('/assets/svg/edit_blue.svg');
+    color: #29ABE2;
 }
 
 .overlay-cde-delete-svg{
-    height: 18x;
-    width: 18px;
+    display: flex;
+    align-items: center;
+    gap: 2px; /* Abstand zwischen SVG und Text */
+    height: 24px;
     cursor: pointer;
-    background-image: url('/assets/svg/delete.svg'); 
-    background-size: cover; 
+    background-image: url('/assets/svg/delete.svg'); /* Pfad zur SVG-Datei */
+    background-size: 20px 20px; /* Größe des SVG-Hintergrundbilds */
     background-repeat: no-repeat;
+    padding-left: 28px; /* Platz für das SVG plus Abstand */
     
 }
 
 .overlay-cde-delete-svg:hover {
-    background-image: url('/assets/svg/delete_blue.svg')
+    background-image: url('/assets/svg/delete_blue.svg');    
+    color: #29ABE2;
 }
 
 .overlay-cde{
@@ -314,8 +318,14 @@
 
 .overlay-cde:hover{
     
-    color: #29ABE2;
+   
 }
+
+
+
+
+
+
 
 
 /* special - Classes */

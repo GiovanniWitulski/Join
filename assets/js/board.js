@@ -104,7 +104,6 @@ function findTask(){
     const inputfield = document.getElementById('boardInput');
     const SearchedTask = inputfield.value;
     if (SearchedTask == ""){
-        console.log("input field empty");
         toDo.innerHTML = '';
         inProgress.innerHTML = '';
         awaitFeedback.innerHTML = '';
@@ -214,7 +213,7 @@ async function overlayRender(){
     <div id="overlaySubtaskContainer">${overlaySubtaskStorage}</div>
     </div>        
     <div class="overlay-card-delete-edit">
-    <div onclick="overlayDeleteTask(${OverlayTask.taskid}, ${OverlayTaskBoardPosition})" class="overlay-cde"><div class="overlay-cde-delete-svg"></div>Delete</div><div class="placeholder-div">|</div><div onclick="editTaskOverlay(${OverlayTask.taskid}, ${OverlayTaskBoardPosition})" class="overlay-cde-edit"><div class="overlay-cde-edit-svg"></div>Edit</div>
+    <div onclick="overlayDeleteTask(${OverlayTask.taskid}, ${OverlayTaskBoardPosition})" class="overlay-cde"><div class="overlay-cde-delete-svg">Delete</div></div><div class="placeholder-div">|</div><div onclick="editTaskOverlay(${OverlayTask.taskid}, ${OverlayTaskBoardPosition})" class="overlay-cde-edit"><div class="overlay-cde-edit-svg">Edit</div></div>
     </div>
     </div>
     </div>
@@ -365,3 +364,4 @@ function hideOverlay(){
     changeToActive('medium-btn');
     clearTheForm();
 }
+
