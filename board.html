@@ -66,8 +66,16 @@
     </div>
 
     </div>
-    <div id="mainContainerOverlay" onclick = "closeOverlaySideClick()"></div>
-    <div id="overlayContainer"><div class="task-switch-category"></div></div>
+    <div id="mainContainerOverlay" onclick ="closeOverlaySideClick(); closeMoveTask();"></div>
+    <div id="taskSwitchCategory" class="task-switch-category hide">
+        <div class="close-switch-category"></div> 
+        <div class="task-switch-title">Move Task to:</div>
+        <button class="switch-category-button">To do</button>
+        <button class="switch-category-button">In progress</button>
+        <button class="switch-category-button">Await Feedback</button>
+        <button class="switch-category-button">Done</button>
+    </div>
+    <div id="overlayContainer"></div>
     <div id="addTaskOverlayContainer" class="addTaskOverlayContainer">
         <div class="all-content-div">
             <div class="headline"><p class="headline-text">Add Task</p></div>

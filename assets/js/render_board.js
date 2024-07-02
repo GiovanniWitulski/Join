@@ -243,8 +243,13 @@ function ifContainerEmpty(){
 function renderMoveTask(event, i){
     event.stopPropagation();
     console.log("renderMoveTask, taskid", i);
-    // document.getElementById(id).classList.add('drag-area-highlight');
+    document.getElementById('taskSwitchCategory').classList.remove('hide');
+    showShadow();
+}
 
+function closeMoveTask(){
+    document.getElementById('taskSwitchCategory').classList.add('hide');
+    removeShadow();
 }
 
 /// highlight drop container ///
