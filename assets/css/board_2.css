@@ -94,6 +94,11 @@
 
 /* Move Task Category */
 
+.close-switch-div{
+    display: flex;
+    justify-content: end;
+}
+
 .close-switch-category{
     height: 32px;
     width: 32px;

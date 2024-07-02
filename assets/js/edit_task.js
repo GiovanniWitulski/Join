@@ -225,8 +225,7 @@ function showEditTask(){
 function storeNewData(taskIdBoard, taskboardPosition){ //onclick OK BUTTON // delete old task, add new task with old id
     deleteTask(taskboardPosition); //1.
     TaskBoard.push(EditTask);
-    closeOverlay();
-    renderBoard();    
+    closeOverlay();   
 }
 
 ///////// RENDER EDIT TASK ////////// 

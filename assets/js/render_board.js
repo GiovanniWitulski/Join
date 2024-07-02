@@ -10,6 +10,7 @@ let newProgressBarId;
 let newEmblems;
 let newPriority;
 let subTaskChecked;
+let taskToMove;
 
 
 // content functions //
@@ -128,7 +129,7 @@ function priorityEmblem(){
 
 function renderToDo(){
     toDo.innerHTML += `
-    <div class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
+    <div id="Task${toDoTask.taskid}" class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
     <div id="cardHeader" class="card-header">${NewLabel}<div><img onclick="renderMoveTask(event, ${x})" class="edit-task-category-svg" src="/assets/svg/arrow-left-line.svg" alt="editCategory"></div></div>
     <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
     <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
@@ -150,7 +151,7 @@ function renderToDo(){
 
 function renderInProgress(){
     inProgress.innerHTML += `
-    <div class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
+    <div id="Task${toDoTask.taskid}" class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
     <div id="cardHeader" class="card-header">${NewLabel}<img onclick="renderMoveTask(event, ${x})" class="edit-task-category-svg" src="/assets/svg/arrow-left-line.svg" alt="editCategory"></div>
     <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
     <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
@@ -172,7 +173,7 @@ function renderInProgress(){
 
 function renderAwaitFeedback(){
     awaitFeedback.innerHTML += `
-    <div class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
+    <div id="Task${toDoTask.taskid}" class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
     <div id="cardHeader" class="card-header">${NewLabel}<img onclick="renderMoveTask(event, ${x})" class="edit-task-category-svg" src="/assets/svg/arrow-left-line.svg" alt="editCategory"></div>
     <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
     <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
@@ -194,7 +195,7 @@ function renderAwaitFeedback(){
 
 function renderDone(){
     done.innerHTML += `
-    <div class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
+    <div id="Task${toDoTask.taskid}" class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
     <div id="cardHeader" class="card-header">${NewLabel}<img onclick="renderMoveTask(event, ${x})" class="edit-task-category-svg" src="/assets/svg/arrow-left-line.svg" alt="editCategory"></div>
     <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
     <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
@@ -220,7 +221,7 @@ function taskContainer(){
     awaitFeedback.innerHTML = '';
     done.innerHTML = '';
     startReadingTasks();
-    ifContainerEmpty();
+    ifContainerEmpty();    
 }
 
 function ifContainerEmpty(){
@@ -238,18 +239,31 @@ function ifContainerEmpty(){
     }
 }
 
-/// Move Task Popup ///
+/// Move Task Popup /// --> Move out functions if space need for other render (then ggf. render_board at least load )
 
-function renderMoveTask(event, i){
+async function renderMoveTask(event, i){
     event.stopPropagation();
-    console.log("renderMoveTask, taskid", i);
+    taskToMove = i;
     document.getElementById('taskSwitchCategory').classList.remove('hide');
+    console.log("renderMoveTask, taskid", i);
+    await new Promise(resolve => setTimeout(resolve, 200));
+    document.getElementById('taskSwitchCategory').classList.remove('transition')
     showShadow();
 }
 
-function closeMoveTask(){
-    document.getElementById('taskSwitchCategory').classList.add('hide');
+async function closeMoveTask(){
+    document.getElementById('taskSwitchCategory').classList.add('transition')    
+    await new Promise(resolve => setTimeout(resolve, 120));
+    document.getElementById('taskSwitchCategory').classList.add('hide');    
     removeShadow();
+}
+
+function moveCategoryTask(newType){
+    console.log("stelle i Taskboard, newtyp", taskToMove, newType);
+    TaskBoard[taskToMove].type = newType
+    uploadData();
+    renderBoard();
+    findTask();
 }
 
 /// highlight drop container ///

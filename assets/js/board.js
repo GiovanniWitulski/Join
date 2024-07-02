@@ -74,7 +74,7 @@ async function downloadData() {
 
 function renderBoard(){ 
     taskContainer();    //render taskcontainers // in case of empty taskboard -> 
-                        // put in BackgroundTaskboard = TaskBoard   
+                       // put in BackgroundTaskboard = TaskBoard   
 }
 
 function overlayTask(id){    
@@ -95,13 +95,14 @@ async function uploadData() {
         const data = await response.json();
     } catch (error) {
         console.error('Fehler beim Hochladen der Daten:', error);
-    }    downloadData();  
+    }    // downloadData();  
 }
 
 //Search functions  /////////////////////////////////////////
 
-function findTask(event){
-    const SearchedTask = event.target.value;
+function findTask(){
+    const inputfield = document.getElementById('boardInput');
+    const SearchedTask = inputfield.value;
     if (SearchedTask == ""){
         console.log("input field empty");
         toDo.innerHTML = '';
@@ -110,25 +111,24 @@ function findTask(event){
         TaskBoard = BackgroundTaskBoard;
         renderBoard();                //Searchfield empty again -> reload up do date status
         return;  }                    //Taskboard = BackgroundTaskBoard einfügen
-    toDo.innerHTML = '';
-    inProgress.innerHTML = '';
-    awaitFeedback.innerHTML = '';
-    searchResult(SearchedTask);
+    
+    showSearchResults(SearchedTask);    
 }
 
-function searchResult(s){    
-    TaskBoard = [];
+
+function showSearchResults(s){
     for (let i = 0; i < BackgroundTaskBoard.length; i++) {
-        const task = BackgroundTaskBoard[i];        
+        const task = BackgroundTaskBoard[i];   
+        let taskShowId = "Task" + task.taskid;
+        document.getElementById(taskShowId).classList.add('hidden');     
         if (task.title.toLowerCase().includes(s.toLowerCase()) || task.description.toLowerCase().includes(s.toLowerCase())) {
-            console.log("Found at i = ", i);
-            TaskBoard.push(task);       
-        }
+            let taskShowId = "Task" + task.taskid;
+            document.getElementById(taskShowId).classList.remove('hidden');    
+        } 
     }
     if (TaskBoard.length === 0){
         alert("No matching Task found!");
     }    
-    renderBoard();
 }
 
 // drag & drop functions  //////////////7
@@ -220,9 +220,7 @@ async function overlayRender(){
     </div>
     `;
 
-    ifOverlay();     
-   
-    
+    ifOverlay();      
 }
 
 async function removeTranslate(){
@@ -303,7 +301,7 @@ function removeShadow(){
     document.getElementById('mainContainerOverlay').classList.remove('taskOverlayContainerShadow');
 }
 
-async function closeOverlay(){ // Close Overlay Task/Edit Task
+async function closeOverlay(){ // Close Overlay Task/Edit Task --> ggf. renderBoard rausnehmen
     if (document.getElementById('overlayBoard')) {
         document.getElementById('overlayBoard').classList.add('transition');}
     if (document.getElementById('boardEditTask')) {
@@ -311,6 +309,7 @@ async function closeOverlay(){ // Close Overlay Task/Edit Task
     await new Promise(resolve => setTimeout(resolve, 120));
     overlay.innerHTML = ``;    
     renderBoard();
+    findTask();
     uploadData();
     removeShadow();
 }    
@@ -321,9 +320,10 @@ async function closeOverlaySideClick(){     //Close by sideclick
     if (document.getElementById('boardEditTask')) {
         document.getElementById('boardEditTask').classList.add('transition');}        
     await new Promise(resolve => setTimeout(resolve, 120));
-    overlay.innerHTML = ``; 
-    renderBoard();
+    overlay.innerHTML = ``;     
     removeShadow();
+    renderBoard();
+    findTask();
 }
 
 function overlayDeleteTask(idTask, i){         
@@ -354,8 +354,7 @@ function switchToAddTask(type){
             getTheDataForPostTask(event, type);            
             
         }        
-        document.getElementById('body').classList.add('noScroll');
-        
+        document.getElementById('body').classList.add('noScroll');        
     }
 }
 
