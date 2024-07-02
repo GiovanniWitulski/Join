@@ -128,7 +128,6 @@ body {
 cursor: pointer;
 } 
 
-
 .board-add-task-mobile-img:hover{
     background-color: rgba(41, 171, 226, 1);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -198,33 +197,9 @@ cursor: pointer;
     width: 17.58px;
 }
 
-/* container --> inserted to board_2.css*/
+/* Task - container --> board_2.css*/
 
-
-/* OTHERS */
-
-.taskOverlayContainerShadow {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100vh;
-    backdrop-filter: brightness(0.4);
-    z-index: 5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform: translateX(0);
-    transition: all 120ms ease-in-out;
-}
-
-.hide{
-    display: none;
-}
-
-/*MEDIA QUERYS */
-
+/*MEDIA QUERYS 1/2 */
 
 @media (min-width: 800px) {
 
@@ -419,6 +394,10 @@ padding-top: 24px;
 .container-class2{
     padding-left: 24px;
     padding-top: 0px;
+}
+
+.edit-task-category-svg{
+    display: none;
 }
 
 }

@@ -7,7 +7,7 @@
 .board-edit-task{
     max-width: 396px;
     height: fit-content;
-    z-index: 3;
+    z-index: 8;
     background-color: white;
     border-radius: 30px;
     position: fixed;

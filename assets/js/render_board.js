@@ -129,7 +129,7 @@ function priorityEmblem(){
 function renderToDo(){
     toDo.innerHTML += `
     <div class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
-    <div id="cardHeader" class="card-header">${NewLabel}</div>
+    <div id="cardHeader" class="card-header">${NewLabel}<div><img onclick="renderMoveTask(event, ${x})" class="edit-task-category-svg" src="/assets/svg/arrow-left-line.svg" alt="editCategory"></div></div>
     <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
     <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
     <div id="cardSubtasks${toDoTask.taskid}" class="card-subtasks"><div class="card-progress-bar">
@@ -151,7 +151,7 @@ function renderToDo(){
 function renderInProgress(){
     inProgress.innerHTML += `
     <div class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
-    <div id="cardHeader" class="card-header">${NewLabel}</div>
+    <div id="cardHeader" class="card-header">${NewLabel}<img onclick="renderMoveTask(event, ${x})" class="edit-task-category-svg" src="/assets/svg/arrow-left-line.svg" alt="editCategory"></div>
     <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
     <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
     <div id="cardSubtasks${toDoTask.taskid}" class="card-subtasks"><div class="card-progress-bar">
@@ -173,7 +173,7 @@ function renderInProgress(){
 function renderAwaitFeedback(){
     awaitFeedback.innerHTML += `
     <div class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
-    <div id="cardHeader" class="card-header">${NewLabel}</div>
+    <div id="cardHeader" class="card-header">${NewLabel}<img onclick="renderMoveTask(event, ${x})" class="edit-task-category-svg" src="/assets/svg/arrow-left-line.svg" alt="editCategory"></div>
     <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
     <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
     <div id="cardSubtasks${toDoTask.taskid}" class="card-subtasks"><div class="card-progress-bar">
@@ -195,7 +195,7 @@ function renderAwaitFeedback(){
 function renderDone(){
     done.innerHTML += `
     <div class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
-    <div id="cardHeader" class="card-header">${NewLabel}</div>
+    <div id="cardHeader" class="card-header">${NewLabel}<img onclick="renderMoveTask(event, ${x})" class="edit-task-category-svg" src="/assets/svg/arrow-left-line.svg" alt="editCategory"></div>
     <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
     <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
     <div id="cardSubtasks${toDoTask.taskid}" class="card-subtasks"><div class="card-progress-bar">
@@ -238,6 +238,15 @@ function ifContainerEmpty(){
     }
 }
 
+/// Move Task Popup ///
+
+function renderMoveTask(event, i){
+    event.stopPropagation();
+    console.log("renderMoveTask, taskid", i);
+    // document.getElementById(id).classList.add('drag-area-highlight');
+
+}
+
 /// highlight drop container ///
 
 function highlight(id) {
@@ -247,4 +256,6 @@ function highlight(id) {
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
 }
+
+
 

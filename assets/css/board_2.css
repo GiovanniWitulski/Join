@@ -1,3 +1,5 @@
+/* Task - container */
+
 .to-do-mobile{
     width: 252px;
     padding-top: 24px;
@@ -89,6 +91,38 @@
 .card-contact-emblems-others{
     padding-left: 2px;
 }
+
+/* Move Task Category */
+
+.task-switch-category{
+    display: none;
+}
+
+/* OTHERS */
+
+.taskOverlayContainerShadow {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    backdrop-filter: brightness(0.4);
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(0);
+    transition: all 120ms ease-in-out;
+}
+
+.hide{
+    display: none;
+}
+
+
+
+/* MEDIA QUERYS 2/2 */
 
 @media (max-width: 1460px){
 

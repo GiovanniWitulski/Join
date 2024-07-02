@@ -23,7 +23,7 @@ let toDo = document.getElementById('toDoContainer');
 let inProgress = document.getElementById('inProgressContainer');
 let awaitFeedback = document.getElementById('awaitFeedbackContainer');
 let done = document.getElementById('doneContainer');
-let Overlay = document.getElementById('overlayContainer');
+let overlay = document.getElementById('overlayContainer');
 let overlaySub = document.getElementById('overlaySubCheckbox');
 
 let toDoCard = [];
@@ -196,7 +196,7 @@ function overlayPrio(){
 }
 
 async function overlayRender(){
-    Overlay.innerHTML = `
+    overlay.innerHTML = `
     <div id="${OverlayTask.taskid}" class="overlay-container">
     <div id= "overlayBoard" class="overlay-task transition">
     <div id="overlayHeader" class="overlay-card-header">${OverlayLabel}<img class="close-overlay" onclick="closeOverlay()" src="/assets/svg/close_black.svg" alt="close"></div>
@@ -233,17 +233,6 @@ async function removeTranslate(){
 async function addTranslate(){
     await new Promise(resolve => setTimeout(resolve, 120));
     document.getElementById('overlayBoard').classList.add('transition');
-}
-
-function overlayCheckmark(){                    //funktioniert, nochmal überprüfen
-    const checkmark0 = OverlayTask.subtaskSum[0];
-    const checkmark1 = OverlayTask.subtaskSum[1];
-    check0 = '';
-    check1 = '';
-    let check = "/assets/svg/checkmark.svg";
-    let nocheck = "/assets/svg/rectangle.svg";
-    if (checkmark0 == 0) { check0 = nocheck; } else { check0 = check; }
-    if (checkmark1 == 0) { check1 = nocheck; } else { check1 = check; }
 }
 
 function overlaySubtaskCheck(){
@@ -292,7 +281,6 @@ function toggleCheckboxValue(taskid, position) {
             }
         }
     }
-    overlayCheckmark()
     overlaySubtaskCheck()
     toggleSubstaskRender()
 
@@ -308,11 +296,11 @@ function toggleSubstaskRender(){            //new
 }
 
 function showShadow(){ 
-    document.getElementById('mainContainerOverlay').classList.add('addTaskOverlayContainerShowing');
+    document.getElementById('mainContainerOverlay').classList.add('taskOverlayContainerShadow');
 }
 
 function removeShadow(){ 
-    document.getElementById('mainContainerOverlay').classList.remove('addTaskOverlayContainerShowing');
+    document.getElementById('mainContainerOverlay').classList.remove('taskOverlayContainerShadow');
 }
 
 async function closeOverlay(){ // Close Overlay Task/Edit Task
@@ -321,11 +309,22 @@ async function closeOverlay(){ // Close Overlay Task/Edit Task
     if (document.getElementById('boardEditTask')) {
         document.getElementById('boardEditTask').classList.add('transition');}        
     await new Promise(resolve => setTimeout(resolve, 120));
-    Overlay.innerHTML = ``;    
+    overlay.innerHTML = ``;    
     renderBoard();
     uploadData();
     removeShadow();
-}        
+}    
+
+async function closeOverlaySideClick(){     //Close by sideclick
+    if (document.getElementById('overlayBoard')) {
+        document.getElementById('overlayBoard').classList.add('transition');}
+    if (document.getElementById('boardEditTask')) {
+        document.getElementById('boardEditTask').classList.add('transition');}        
+    await new Promise(resolve => setTimeout(resolve, 120));
+    overlay.innerHTML = ``; 
+    renderBoard();
+    removeShadow();
+}
 
 function overlayDeleteTask(idTask, i){         
     let taskToDelete = BackgroundTaskBoard[i];

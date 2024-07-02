@@ -330,7 +330,7 @@ function editTaskRender(){    //use of same container as Overlay/PopupTask
     editTask = EditTask;
     placeholderTitle = editTask.title;
     placeholderDescription = editTask.description;    
-    Overlay.innerHTML = '';
+    overlay.innerHTML = '';
     editTaskHtml();
 }
 
@@ -349,7 +349,7 @@ function editTaskHtml(){
 }
 
 function renderEditTask(){
-    Overlay.innerHTML = `
+    overlay.innerHTML = `
     <div id="boardEditTask" class="board-edit-task">
     <div class="close-edit"><img onclick="closeOverlay(${taskIdBoard}, ${taskboardPosition})" class ="close-overlay" src="/assets/svg/close_black.svg" alt="close"></div>
     <h4 style="font-weight: 400;">Title</h4>
