@@ -197,8 +197,6 @@ cursor: pointer;
     width: 17.58px;
 }
 
-/* Task - container --> board_2.css*/
-
 /*MEDIA QUERYS 1/2 */
 
 @media (min-width: 800px) {
@@ -399,7 +397,6 @@ padding-top: 24px;
 .edit-task-category-svg{
     display: none;
 }
-
 }
 
 

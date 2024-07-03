@@ -254,6 +254,37 @@ function ifContainerEmpty(){
     }
 }
 
+
+/// render Overlay Task /// 
+
+
+function overlayRender(){
+    overlay.innerHTML = `
+    <div id="${OverlayTask.taskid}" class="overlay-container">
+    <div id= "overlayBoard" class="overlay-task transition">
+    <div id="overlayHeader" class="overlay-card-header">${OverlayLabel}<img class="close-overlay" onclick="closeOverlay()" src="/assets/svg/close_black.svg" alt="close"></div>
+    <div id="overlayTitle" class="overlay-card-title">${OverlayTask.title}</div>
+    <div id="overlayDescription" class="overlay-card-description">${OverlayTask.description}</div>
+    <div id="overlaydueDate" class="overlay-card-due-date"><div id="overlayDueDate">Due date:</div><div class="overlay-due-date">${OverlayTask.date}</div></div>
+    <div id="overlaypriority" class="overlay-card-priority"><div id="overlayPriorityText" class="overlay-card-priority-text">
+    Priority</div><div class="overlay-card-priority-text-img"><img src="${overlayPriority}" alt="priority">${OverlayTask.priority}</div>
+    </div>
+    <div id="overlayAssignedTo" class="overlay-assigned-to">
+    <div id="overlayAssignedToText" class="overlay-assigned-to-text">Assigned to:</div><div id="overlayParticipants" class="overlay-participants">${overlayContacts}</div>
+    </div>
+    <div class="overlay-card-subtasks">
+    <div id="overlaySubstasksText" class="overlay-substasks-text">Subtasks:</div>
+    <div id="overlaySubtaskContainer">${overlaySubtaskStorage}</div>
+    </div>        
+    <div class="overlay-card-delete-edit">
+    <div onclick="overlayDeleteTask(${OverlayTask.taskid}, ${OverlayTaskBoardPosition})" class="overlay-cde"><div class="overlay-cde-delete-svg">Delete</div></div><div class="placeholder-div">|</div><div onclick="editTaskOverlay(${OverlayTask.taskid}, ${OverlayTaskBoardPosition})" class="overlay-cde-edit"><div class="overlay-cde-edit-svg">Edit</div></div>
+    </div>
+    </div>
+    </div>
+    `;        
+}
+
+
 /// render - EditTask - container ///
 
 
@@ -263,11 +294,11 @@ function renderEditTask(){
     <div class="close-edit"><img onclick="closeOverlay(${taskIdBoard}, ${taskboardPosition})" class ="close-overlay" src="/assets/svg/close_black.svg" alt="close"></div>
     <h4 style="font-weight: 400;">Title</h4>
     <div id="edit-title" class="edit-title">
-    <input type="text" id="titleEdit" class="edit-title-input" placeholder="${placeholderTitle}">
+    <input type="text" id="titleEdit" class="edit-title-input" value="${editTitle}">
     </div>
     <h4 style="font-weight: 400;">Description</h4>
     <div id="edit-description" class="edit-description">
-    <textarea id="descriptionEdit" class="edit-description-input" placeholder="${placeholderDescription}"></textarea>
+    <textarea id="descriptionEdit" class="edit-description-input">${editDescription}</textarea>
     </div>
     <h4 style="font-weight: 400;">Due date</h4>
     <form action="/action_page.php">

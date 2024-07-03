@@ -35,6 +35,7 @@ function cleanArrays(){
     BackgroundTaskBoard = [];
 }
 
+
 async function downloadData() {
     cleanArrays()
     try {
@@ -72,15 +73,18 @@ async function downloadData() {
     renderBoard();
 }
 
+
 function renderBoard(){ 
     taskContainer();    //render taskcontainers // in case of empty taskboard -> 
                        // put in BackgroundTaskboard = TaskBoard   
 }
 
+
 function overlayTask(id){    
     task = TaskBoard.findIndex(t => t.taskid === id);
     OverlayTaskPopup(task);
 }
+
 
 async function uploadData() {
     const databaseURL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app';
@@ -98,7 +102,9 @@ async function uploadData() {
     }    // downloadData();  
 }
 
+
 //Search functions  /////////////////////////////////////////
+
 
 function findTask(){
     const inputfield = document.getElementById('boardInput');
@@ -130,15 +136,20 @@ function showSearchResults(s){
     }    
 }
 
+
 // drag & drop functions  //////////////7
+
+
 function startDragging(id){
     currentDraggedTask = id;
     highlight(id);
 }
 
+
 function allowDrop(ev) {
     ev.preventDefault();
 }
+
 
 function dropAt(newType, id){
     for (i=0; i<TaskBoard.length; i++){
@@ -153,7 +164,9 @@ function dropAt(newType, id){
     }
 }
 
+
 // OVERLAY TASK / POPUP ///////////////////////
+
 
 function OverlayTaskPopup(i) {
     OverlayTask = TaskBoard[i];
@@ -163,9 +176,11 @@ function OverlayTaskPopup(i) {
     overlayLabelCheck();
     overlaySubtaskCheck();  
     overlayRender();
+    ifOverlay();
     removeTranslate();
     showShadow();
 }
+
 
 function overlayContactsRead(i){
     
@@ -183,6 +198,7 @@ function overlayContactsRead(i){
     }    
 }
 
+
 function overlayPrio(){
     overlayPriority = '';
     if (OverlayTask.priority === "low") {
@@ -194,43 +210,18 @@ function overlayPrio(){
     }
 }
 
-async function overlayRender(){
-    overlay.innerHTML = `
-    <div id="${OverlayTask.taskid}" class="overlay-container">
-    <div id= "overlayBoard" class="overlay-task transition">
-    <div id="overlayHeader" class="overlay-card-header">${OverlayLabel}<img class="close-overlay" onclick="closeOverlay()" src="/assets/svg/close_black.svg" alt="close"></div>
-    <div id="overlayTitle" class="overlay-card-title">${OverlayTask.title}</div>
-    <div id="overlayDescription" class="overlay-card-description">${OverlayTask.description}</div>
-    <div id="overlaydueDate" class="overlay-card-due-date"><div id="overlayDueDate">Due date:</div><div class="overlay-due-date">${OverlayTask.date}</div></div>
-    <div id="overlaypriority" class="overlay-card-priority"><div id="overlayPriorityText" class="overlay-card-priority-text">
-    Priority</div><div class="overlay-card-priority-text-img"><img src="${overlayPriority}" alt="priority">${OverlayTask.priority}</div>
-    </div>
-    <div id="overlayAssignedTo" class="overlay-assigned-to">
-    <div id="overlayAssignedToText" class="overlay-assigned-to-text">Assigned to:</div><div id="overlayParticipants" class="overlay-participants">${overlayContacts}</div>
-    </div>
-    <div class="overlay-card-subtasks">
-    <div id="overlaySubstasksText" class="overlay-substasks-text">Subtasks:</div>
-    <div id="overlaySubtaskContainer">${overlaySubtaskStorage}</div>
-    </div>        
-    <div class="overlay-card-delete-edit">
-    <div onclick="overlayDeleteTask(${OverlayTask.taskid}, ${OverlayTaskBoardPosition})" class="overlay-cde"><div class="overlay-cde-delete-svg">Delete</div></div><div class="placeholder-div">|</div><div onclick="editTaskOverlay(${OverlayTask.taskid}, ${OverlayTaskBoardPosition})" class="overlay-cde-edit"><div class="overlay-cde-edit-svg">Edit</div></div>
-    </div>
-    </div>
-    </div>
-    `;
-
-    ifOverlay();      
-}
 
 async function removeTranslate(){
     await new Promise(resolve => setTimeout(resolve, 120));
     document.getElementById('overlayBoard').classList.remove('transition');
 }
 
+
 async function addTranslate(){
     await new Promise(resolve => setTimeout(resolve, 120));
     document.getElementById('overlayBoard').classList.add('transition');
 }
+
 
 function overlaySubtaskCheck(){
     overlaySubtaskStorage = '';
@@ -245,8 +236,9 @@ function overlaySubtaskCheck(){
                     `;}
                 }
             }
-        }
-        
+}
+     
+
 function overlayLabelCheck(){
     if (OverlayTask.label == 1) {
         OverlayLabel = TechnicalTaskLabel;
@@ -264,7 +256,8 @@ function ifOverlay(){
             document.getElementById('overlayPriorityText').style.cssText = 'font-weight: 700; color: #42526E;';
             document.getElementById('overlaySubstasksText').style.cssText = 'font-weight: 700; color: #42526E;';
         }
-    }
+}
+
             
 function toggleCheckboxValue(taskid, position) {
     for (let i = 0; i < TaskBoard.length; i++) {
@@ -286,19 +279,23 @@ function toggleCheckboxValue(taskid, position) {
     renderBoard(); */
 }
 
+
 function toggleSubstaskRender(){            //new
     let toggledSubtasks = document.getElementById('overlaySubtaskContainer');
     toggledSubtasks.innerHTML = `${overlaySubtaskStorage}`;
     renderBoard();
 }
 
+
 function showShadow(){ 
     document.getElementById('mainContainerOverlay').classList.add('taskOverlayContainerShadow');
 }
 
+
 function removeShadow(){ 
     document.getElementById('mainContainerOverlay').classList.remove('taskOverlayContainerShadow');
 }
+
 
 async function closeOverlay(){ // Close Overlay Task/Edit Task --> ggf. renderBoard rausnehmen
     if (document.getElementById('overlayBoard')) {
@@ -313,6 +310,7 @@ async function closeOverlay(){ // Close Overlay Task/Edit Task --> ggf. renderBo
     removeShadow();
 }    
 
+
 async function closeOverlaySideClick(){     //Close by sideclick
     if (document.getElementById('overlayBoard')) {
         document.getElementById('overlayBoard').classList.add('transition');}
@@ -325,6 +323,7 @@ async function closeOverlaySideClick(){     //Close by sideclick
     findTask();
 }
 
+
 function overlayDeleteTask(idTask, i){         
     let taskToDelete = BackgroundTaskBoard[i];
     if (taskToDelete.taskid == idTask){
@@ -335,11 +334,14 @@ function overlayDeleteTask(idTask, i){
     }    
 }
 
+
 function deleteTask(i){
     TaskBoard.splice(i, 1);
 }
 
+
 // Edit Task function //*css*/` added by Johannes
+
 
 function switchToAddTask(type){
     if(window.innerWidth < 1250){
@@ -354,6 +356,7 @@ function switchToAddTask(type){
         document.getElementById('body').classList.add('noScroll');        
     }
 }
+
 
 function hideOverlay(){
     document.getElementById('addTaskOverlayContainer').classList.remove('addTaskOverlayContainerShowing');

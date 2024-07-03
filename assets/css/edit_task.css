@@ -21,7 +21,7 @@
     max-height: calc(100% - 18%);
 }
 
-@media (max-width: 800px){
+@media (max-width: 1460px){
     .board-edit-task{
         overflow-y: auto;
         max-height: calc(100% - 18%);

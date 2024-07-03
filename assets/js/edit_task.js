@@ -9,8 +9,8 @@ let newSubtasks = [];
 let taskIdBoard = 0;
 let newAssignedToName = [];
 let newAssignedToSvg = [];
-let placeholderTitle;
-let placeholderDescription;
+let editTitle;
+let editDescription;
 let editTask;
 
 
@@ -202,7 +202,6 @@ function editDeleteSub(toDeleteId){
     let deleteID = number - 10;  //so wird die Stelle im Array gefunden.
     EditTask.subtask.splice(deleteID, 1);
     EditTask.subtaskSum.splice(deleteID, 1);
-    console.log(EditTask);
     editRenderSubtask();
 }
 
@@ -233,7 +232,7 @@ function showEditTask(){
 }
 
 
-function storeNewData(taskIdBoard, taskboardPosition){ //onclick OK BUTTON // delete old task, add new task with old id
+function storeNewData(taskIdBoard, taskboardPosition){ 
     deleteTask(taskboardPosition); //1.
     TaskBoard.push(EditTask);
     closeOverlay();   
@@ -241,6 +240,7 @@ function storeNewData(taskIdBoard, taskboardPosition){ //onclick OK BUTTON // de
 
 
 ///////// RENDER EDIT TASK ////////// 
+
 
 function editTaskOverlay(idTask, i){
     EditTask = TaskBoard[i];
@@ -337,7 +337,7 @@ function renderChoosenContactsEmblems(){
 }
 
 
-function renderContactListEdit() { //rausgeholt aus render
+function renderContactListEdit() { 
     contactListEdit = ''
     for (i=0; i<editContactsShow.length;i++){  
         let contactCheck = editContactsShow[i].checked;   
@@ -357,8 +357,8 @@ function renderContactListEdit() { //rausgeholt aus render
 function emptyEditTask(){    //use of same container as Overlay/PopupTask
     editTask = '';
     editTask = EditTask;
-    placeholderTitle = editTask.title;
-    placeholderDescription = editTask.description;    
+    editTitle = editTask.title;
+    editDescription = editTask.description;    
     overlay.innerHTML = '';    
 }
 
@@ -388,6 +388,7 @@ function getTheCurrentDate() {
 
     return year + '-' + month + '-' + day;
 }
+
 
 /// renderEditTask() --> render_board ///
 
