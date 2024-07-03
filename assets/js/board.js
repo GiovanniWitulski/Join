@@ -1,11 +1,12 @@
 let TaskBoard = []
 let BackgroundTaskBoard = [] 
-let OverlayTask; //used as arrays ff.
+let toDoCard = [];
+let OverlayTask = []; 
 let overlayContacts;
 let overlayPriority;
-let OverlayLabel;
+let overlayLabel;
 let OverlaySubtasks;
-let OverlayTaskBoardPosition;
+let overlayTaskBoardPosition;
 let overlaySubtaskStorage;
 let check0;
 let check1;
@@ -26,7 +27,7 @@ let done = document.getElementById('doneContainer');
 let overlay = document.getElementById('overlayContainer');
 let overlaySub = document.getElementById('overlaySubCheckbox');
 
-let toDoCard = [];
+
 
 ////////////Main Start Functions///////////
 
@@ -37,46 +38,62 @@ function cleanArrays(){
 
 
 async function downloadData() {
-    cleanArrays()
+    cleanArrays();
     try {
-        const response = await fetch(`${databaseURL}/tasks.json`);
-        if (!response.ok) {
-            throw new Error('Netzwerkantwort war nicht in Ordnung');
-        }
-        const data = await response.json();
-        
-        Object.values(data).forEach(task => {
-            const subtaskArray = Array.isArray(task.subtask) ? task.subtask : [];
-            const subtaskSumArray = Array.isArray(task.subtaskSum) ? task.subtaskSum : [];
-            const priorityArray = Array.isArray(task.priority) ? task.priority : [];
-            const assignedToArray = Array.isArray(task.assignedTo) ? task.assignedTo : [];
-            const contactEmblemArray = Array.isArray(task.contactEmblem) ? task.contactEmblem : [];
-            const formattedTask = {
-                label: task.label,
-                title: task.title,
-                description: task.description,
-                date: task.date,
-                subtask: subtaskArray,
-                subtaskSum: subtaskSumArray,
-                priority: task.priority,
-                assignedTo: assignedToArray,
-                contactEmblem: contactEmblemArray,
-                type: task.type,
-                taskid: task.taskid
-            };
-            BackgroundTaskBoard.push(formattedTask);
-        });
-        TaskBoard = BackgroundTaskBoard;
+        const data = await fetchData();
+        formatTasks(data);
     } catch (error) {
-        console.error('Fehler beim Abrufen und Formatieren der Daten:', error);
+        handleError(error);
     }
     renderBoard();
 }
 
 
+async function fetchData() {
+    const response = await fetch(`${databaseURL}/tasks.json`);
+    if (!response.ok) {
+        throw new Error('Netzwerkantwort war nicht in Ordnung');
+    }
+    return await response.json();
+}
+
+
+function formatTasks(data) {
+    const formattedTasks = Object.values(data).map(formatTask);
+    updateTaskBoard(formattedTasks);
+}
+
+
+function formatTask(task) {
+    return {
+        label: task.label,
+        title: task.title,
+        description: task.description,
+        date: task.date,
+        subtask: Array.isArray(task.subtask) ? task.subtask : [],
+        subtaskSum: Array.isArray(task.subtaskSum) ? task.subtaskSum : [],
+        priority: task.priority || "", 
+        assignedTo: Array.isArray(task.assignedTo) ? task.assignedTo : [],
+        contactEmblem: Array.isArray(task.contactEmblem) ? task.contactEmblem : [],
+        type: task.type,
+        taskid: task.taskid
+    };
+}
+
+
+function updateTaskBoard(formattedTasks) {
+    BackgroundTaskBoard.push(...formattedTasks);
+    TaskBoard = BackgroundTaskBoard;
+}
+
+
+function handleError(error) {
+    console.error('Fehler beim Abrufen und Formatieren der Daten:', error);
+}
+
+
 function renderBoard(){ 
-    taskContainer();    //render taskcontainers // in case of empty taskboard -> 
-                       // put in BackgroundTaskboard = TaskBoard   
+    taskContainer();                          
 }
 
 
@@ -170,7 +187,7 @@ function dropAt(newType, id){
 
 function OverlayTaskPopup(i) {
     OverlayTask = TaskBoard[i];
-    OverlayTaskBoardPosition = i;
+    overlayTaskBoardPosition = i;
     overlayContactsRead(i);
     overlayPrio();
     overlayLabelCheck();
@@ -241,9 +258,9 @@ function overlaySubtaskCheck(){
 
 function overlayLabelCheck(){
     if (OverlayTask.label == 1) {
-        OverlayLabel = TechnicalTaskLabel;
+        overlayLabel = TechnicalTaskLabel;
     } else {
-        OverlayLabel = UserStoryLabel;
+        overlayLabel = UserStoryLabel;
     }
 }
 
@@ -273,14 +290,10 @@ function toggleCheckboxValue(taskid, position) {
     }
     overlaySubtaskCheck()
     toggleSubstaskRender()
-
-    /* OverlayTaskPopup(OverlayTaskBoardPosition);
-    document.getElementById('overlayBoard').classList.remove('transition');
-    renderBoard(); */
 }
 
 
-function toggleSubstaskRender(){            //new
+function toggleSubstaskRender(){            
     let toggledSubtasks = document.getElementById('overlaySubtaskContainer');
     toggledSubtasks.innerHTML = `${overlaySubtaskStorage}`;
     renderBoard();
@@ -297,7 +310,7 @@ function removeShadow(){
 }
 
 
-async function closeOverlay(){ // Close Overlay Task/Edit Task --> ggf. renderBoard rausnehmen
+async function closeOverlay(){ 
     if (document.getElementById('overlayBoard')) {
         document.getElementById('overlayBoard').classList.add('transition');}
     if (document.getElementById('boardEditTask')) {
@@ -311,7 +324,7 @@ async function closeOverlay(){ // Close Overlay Task/Edit Task --> ggf. renderBo
 }    
 
 
-async function closeOverlaySideClick(){     //Close by sideclick
+async function closeOverlaySideClick(){     
     if (document.getElementById('overlayBoard')) {
         document.getElementById('overlayBoard').classList.add('transition');}
     if (document.getElementById('boardEditTask')) {

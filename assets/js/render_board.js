@@ -262,7 +262,7 @@ function overlayRender(){
     overlay.innerHTML = `
     <div id="${OverlayTask.taskid}" class="overlay-container">
     <div id= "overlayBoard" class="overlay-task transition">
-    <div id="overlayHeader" class="overlay-card-header">${OverlayLabel}<img class="close-overlay" onclick="closeOverlay()" src="/assets/svg/close_black.svg" alt="close"></div>
+    <div id="overlayHeader" class="overlay-card-header">${overlayLabel}<img class="close-overlay" onclick="closeOverlay()" src="/assets/svg/close_black.svg" alt="close"></div>
     <div id="overlayTitle" class="overlay-card-title">${OverlayTask.title}</div>
     <div id="overlayDescription" class="overlay-card-description">${OverlayTask.description}</div>
     <div id="overlaydueDate" class="overlay-card-due-date"><div id="overlayDueDate">Due date:</div><div class="overlay-due-date">${OverlayTask.date}</div></div>
@@ -277,7 +277,7 @@ function overlayRender(){
     <div id="overlaySubtaskContainer">${overlaySubtaskStorage}</div>
     </div>        
     <div class="overlay-card-delete-edit">
-    <div onclick="overlayDeleteTask(${OverlayTask.taskid}, ${OverlayTaskBoardPosition})" class="overlay-cde"><div class="overlay-cde-delete-svg">Delete</div></div><div class="placeholder-div">|</div><div onclick="editTaskOverlay(${OverlayTask.taskid}, ${OverlayTaskBoardPosition})" class="overlay-cde-edit"><div class="overlay-cde-edit-svg">Edit</div></div>
+    <div onclick="overlayDeleteTask(${OverlayTask.taskid}, ${overlayTaskBoardPosition})" class="overlay-cde"><div class="overlay-cde-delete-svg">Delete</div></div><div class="placeholder-div">|</div><div onclick="editTaskOverlay(${OverlayTask.taskid}, ${overlayTaskBoardPosition})" class="overlay-cde-edit"><div class="overlay-cde-edit-svg">Edit</div></div>
     </div>
     </div>
     </div>
