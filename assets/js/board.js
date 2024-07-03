@@ -337,7 +337,6 @@ function overlayDeleteTask(idTask, i){
 
 function deleteTask(i){
     TaskBoard.splice(i, 1);
-    console.log(TaskBoard);
 }
 
 // Edit Task function //*css*/` added by Johannes
@@ -351,7 +350,6 @@ function switchToAddTask(type){
         document.getElementById('addTaskOverlayContainer').classList.add('addTaskOverlayContainerShowing');
         document.getElementById('addTaskForm').onsubmit = function(event){
             getTheDataForPostTask(event, type);            
-            
         }        
         document.getElementById('body').classList.add('noScroll');        
     }

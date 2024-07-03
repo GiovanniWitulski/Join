@@ -13,29 +13,27 @@ let placeholderTitle;
 let placeholderDescription;
 let editTask;
 
-// Kontakte laden
+
 // Hochladen EditTask
 async function addEditTaskToFirebase() {
     const databaseURL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app';
     try {
         const response = await fetch(`${databaseURL}/tasks.json`, {
-            method: 'POST', // 'POST' Methode fügt ein neues Objekt hinzu
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(EditTask)
+            method: 'POST', 
+            headers: { 'Content-Type': 'application/json'
+            }, body: JSON.stringify(EditTask)
         });
-        if (!response.ok) {
-            throw new Error('Netzwerkantwort war nicht in Ordnung');
+        if (!response.ok) { throw new Error('Netzwerkantwort war nicht in Ordnung');
         }
         const data = await response.json();
         console.log('Neues Task erfolgreich hinzugefügt:', data);
     } catch (error) {
-        console.error('Fehler beim Hinzufügen des neuen Tasks:', error);
-    }
+        console.error('Fehler beim Hinzufügen des neuen Tasks:', error); }
 }
 
+
 processContacts(); // start load contacts to Array
+
 
 async function loadContacts() {
     const FIREFIREBASE_URL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app/';
@@ -50,8 +48,8 @@ async function loadContacts() {
         return Object.values(data); // return Array der Kontaktdaten 
     } catch (error) {
         console.error('Fehler beim Laden der Kontakte:', error);
-        throw error;
-    } }
+        throw error; }
+    }
 
 
 function createContactEdit(vorname, nachname, color) {
@@ -66,6 +64,7 @@ function createContactEdit(vorname, nachname, color) {
 
     return svgTemplate;
 }
+
 
 async function processContacts() {
     editContacts = [];
@@ -102,6 +101,7 @@ async function processContacts() {
 
 //search functions //
 
+
 function filterContactsEdit(eventOrValue) {
     let searchedContact = '';
     if (eventOrValue && eventOrValue.target) {
@@ -130,6 +130,7 @@ function filterContactsEdit(eventOrValue) {
     SearchList.innerHTML = contactListEdit;    
 }
 
+
 function clickButtonSearch(){
     if (searchButton === "/assets/svg/arrow_drop_downaa.svg"){
         searchButton = "/assets/svg/arrow_drop_up.svg";
@@ -143,12 +144,15 @@ function clickButtonSearch(){
     return searchButton;
 }
 
+
 // Edit Task  // later upload complete EditTask -> Taskboard
+
 
 function editSelectPriority (priority){
     EditTask.priority = priority;
     editRenderPriority();
 }
+
 
 function selectContact (contactId){    
     for (i=0; i<editContacts.length; i++){
@@ -172,15 +176,16 @@ function selectContact (contactId){
     }       filterContactsEdit();    
 }
 
+
 function editAddSub(){
     const inputField = document.getElementById('subtaskEdit');
     const addSub = inputField.value;
     EditTask.subtask.push(addSub);
     EditTask.subtaskSum.push(0);
     inputField.value = '';
-    console.log(EditTask);
     editRenderSubtask();
 }
+
 
 function editEditSub(toEditSub){
     let number = toEditSub;
@@ -191,6 +196,7 @@ function editEditSub(toEditSub){
     editDeleteSub(toEditSub);
 }
 
+
 function editDeleteSub(toDeleteId){
     let number = toDeleteId
     let deleteID = number - 10;  //so wird die Stelle im Array gefunden.
@@ -200,11 +206,13 @@ function editDeleteSub(toDeleteId){
     editRenderSubtask();
 }
 
+
 function getTitle(){
     const inputField = document.getElementById('titleEdit'); 
     const value = inputField.value.trim();
     EditTask.title = value;
 }
+
 
 function getDescription(){
     const inputField = document.getElementById('descriptionEdit');
@@ -212,15 +220,18 @@ function getDescription(){
     EditTask.description = value;
 }
 
+
 function getDate(){ 
     const inputField = document.getElementById('Edit_Input');
     const value = inputField.value;
     console.log("dateinput", value);
 }
 
+
 function showEditTask(){
     console.log("editTask", EditTask);
 }
+
 
 function storeNewData(taskIdBoard, taskboardPosition){ //onclick OK BUTTON // delete old task, add new task with old id
     deleteTask(taskboardPosition); //1.
@@ -228,7 +239,26 @@ function storeNewData(taskIdBoard, taskboardPosition){ //onclick OK BUTTON // de
     closeOverlay();   
 }
 
+
 ///////// RENDER EDIT TASK ////////// 
+
+function editTaskOverlay(idTask, i){
+    EditTask = TaskBoard[i];
+    taskboardPosition = i;
+    taskIdBoard = idTask;
+    choosenContactsEdit = [];
+    emptyEditTask();
+    testForChoosenContact ();
+    renderContactListEdit();    
+    renderEditTask();
+    renderEditDate();
+    setDateListener();
+    renderChoosenContactsEmblems();
+    editRenderPriority();
+    editRenderSubtask();
+}
+
+
 function editRenderSubtask(){            
         let editSubtask = document.getElementById('editRenderSubtasks');
         editSubtask.innerHTML = ``;        
@@ -239,6 +269,7 @@ function editRenderSubtask(){
         editSubtask.innerHTML += `<div class="editSubtask"><div>&bull; ${editSubAdd}</div><div class="edit-subtask-buttons-2"><img onclick="editEditSub(${idCounter})"src="/assets/svg/Subtasks%20icons11-4.svg" alt="edit"><div class="placeholder-div">|</div><img onclick="editDeleteSub(${idCounter})" src="/assets/svg/delete.svg" alt="delete"></div></div>`
     }
 }
+
 
 function editRenderPriority(){
     let editTaskPriority = EditTask.priority;  
@@ -252,7 +283,9 @@ function editRenderPriority(){
     } else if (editTaskPriority === "low"){editPriority.innerHTML =`<button onclick="editSelectPriority('urgent')" class="edit-priority-buttons"><h4 style="font-weight: 400;">Urgent</h4><img src="/assets/svg/Capa_2_Burger menue_Arrow_up.svg" alt="urgent">
         <button onclick="editSelectPriority('medium')" id="editButtonMedium"class="edit-priority-buttons"><h4 style="font-weight: 400;">Medium</h4><img src="/assets/svg/capa_1_medium_priority.svg" alt="medium"></button>
         <button onclick="editSelectPriority('low')" id="editButtonLow" class="edit-priority-buttons background-color-green"><h4 style="font-weight: 400;">Low</h4><img src="/assets/svg/Prio baja-2.svg" alt="low"></button>`;    
-    } }
+    } 
+}
+
 
 function testForChoosenContact (){
     for (i=0; i<editContactsShow.length; i++){
@@ -270,6 +303,7 @@ function testForChoosenContact (){
         }  }  } choosenContacts();
 }  
 
+
 function choosenContacts(){
     choosenContactsEdit = [];
     for (i=0; i<editContacts.length; i++){
@@ -286,14 +320,22 @@ function choosenContacts(){
         EditTask.contactEmblem.push(choosenContactsEdit[i].contactEmblem);    }
 }
 
+
 function renderChoosenContactsEmblems(){
     let editEmblems = document.getElementById('choosenContacts');
     editEmblems.innerHTML = ``;
     for (i=0; i<choosenContactsEdit.length; i++){
         let choosenEmblem = choosenContactsEdit[i].contactEmblem;  
-        editEmblems.innerHTML += `${choosenEmblem}`;              
+        editEmblems.innerHTML += `${choosenEmblem}`;         
+        if (i===3){
+            let amountEmblems = choosenContactsEdit.length - 4;
+            if (amountEmblems === 0){break;}
+            editEmblems.innerHTML+= `<div class="card-contact-emblems-others" style="font-weight: bold; font-size: 16px;">+${amountEmblems}</div>`
+            break;
+        }     
     }    
 }
+
 
 function renderContactListEdit() { //rausgeholt aus render
     contactListEdit = ''
@@ -311,83 +353,43 @@ function renderContactListEdit() { //rausgeholt aus render
     return contactListEdit;
 }    
 
-function editTaskOverlay(idTask, i){
-    EditTask = TaskBoard[i];
-    taskboardPosition = i;
-    taskIdBoard = idTask;
-    choosenContactsEdit = [];
-    testForChoosenContact ();
-    renderContactListEdit();
-    editTaskRender();
-    renderChoosenContactsEmblems();
-    editRenderPriority();
-    editRenderSubtask();
-}
 
-function editTaskRender(){    //use of same container as Overlay/PopupTask
+function emptyEditTask(){    //use of same container as Overlay/PopupTask
     editTask = '';
     editTask = EditTask;
     placeholderTitle = editTask.title;
     placeholderDescription = editTask.description;    
-    overlay.innerHTML = '';
-    editTaskHtml();
+    overlay.innerHTML = '';    
 }
 
-function editTaskHtml(){
-    renderEditTask();
-    // pre-set date with eventlistener // 
-    let initialDate = editTask.date; //  YYYY-MM-DD-Format (!)
-    let dateInput = document.getElementById("edit_input");
-    dateInput.value = initialDate;    
-    //
+
+function setDateListener(){
     document.getElementById('InputSearchEdit').addEventListener('input', filterContactsEdit);
     document.getElementById('titleEdit').addEventListener('input', getTitle);
     document.getElementById('descriptionEdit').addEventListener('input', getDescription);
+}
+
+
+function renderEditDate(){
+    let initialDate = editTask.date; //  YYYY-MM-DD-Format (!)
+    let dateInput = document.getElementById("edit_input");
+    dateInput.value = initialDate;    
+    dateInput.setAttribute('min', getTheCurrentDate());
     dateInput.addEventListener('change', function() {
     let selectedDate = dateInput.value; EditTask.date = selectedDate;}); 
 }
 
-function renderEditTask(){
-    overlay.innerHTML = `
-    <div id="boardEditTask" class="board-edit-task">
-    <div class="close-edit"><img onclick="closeOverlay(${taskIdBoard}, ${taskboardPosition})" class ="close-overlay" src="/assets/svg/close_black.svg" alt="close"></div>
-    <h4 style="font-weight: 400;">Title</h4>
-    <div id="edit-title" class="edit-title">
-    <input type="text" id="titleEdit" class="edit-title-input" placeholder="${placeholderTitle}">
-    </div>
-    <h4 style="font-weight: 400;">Description</h4>
-    <div id="edit-description" class="edit-description">
-    <textarea id="descriptionEdit" class="edit-description-input" placeholder="${placeholderDescription}"></textarea>
-    </div>
-    <h4 style="font-weight: 400;">Due date</h4>
-    <form action="/action_page.php">
-    <label for="calender_input" class="calendar-icon-label">
-    <input type="date" id="edit_input" name="date_input" class="date-input" placeholder="tt.mm.jjj">
-    </label>
-    </form>   
-    <h4 style="font-weight: 400;">Priority</h4>
-    <div id="editPriorityButtonsdiv" class="edit-priority-buttons-div"></div>
-    <h4 style="font-weight: 400;">Assigned to</h4>
-    <div onclick="clickButtonSearch(); filterContactsEdit();" class="SearchContactEdit">
-        <input type="text" id="InputSearchEdit" class="InputSearchEdit" placeholder="Select contacts to assign">
-        <div id="ContactListEditButton" class="contact-list-edit-button">
-        <img  src="${searchButton}" alt="openContactList"></div>
-    </div>    
-    <div class="edit-contact-list">
-    <div id="contact-list-container" class="contact-list-container hiddenMenue">
-    ${contactListEdit}
-    </div></div> 
-    <div id="choosenContacts" class="choosen-contacts">
-    </div>
-    <h4 style="font-weight: 400;">Subtasks</h4>
-    <div id="editSubtaskInput" class="edit-subtask-input">
-    <input type="text" id="subtaskEdit" class="subtask-edit-input" placeholder="Add new Subtask"><div onclick="editAddSub()" class="edit-subtask-add"><img src="/assets/svg/add.svg" alt="addsubtask" width="14" height="14"></div>
-    </div>
-    <div id="editRenderSubtasks" class="edit-render-subtasks"></div> 
-    <div class="edit-ok-button"><button onclick="storeNewData(${taskIdBoard}, ${taskboardPosition})" class="edit-button">OK</button></div>
-    `
 
-} 
+function getTheCurrentDate() {
+    let today = new Date();
+    let day = String(today.getDate()).padStart(2, '0');
+    let month = String(today.getMonth() + 1).padStart(2, '0');
+    let year = today.getFullYear();
+
+    return year + '-' + month + '-' + day;
+}
+
+/// renderEditTask() --> render_board ///
 
 
 

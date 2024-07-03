@@ -12,7 +12,6 @@ let newPriority;
 let subTaskChecked;
 let taskToMove;
 
-
 // content functions //
 
 function startReadingTasks(){
@@ -31,6 +30,7 @@ function startReadingTasks(){
             renderDone();   }  }
 }
 
+
 function subTaskCheck(){ 
     subTaskChecked = 0;  
     if(toDoTask.subtaskSum){
@@ -42,12 +42,14 @@ function subTaskCheck(){
     }
 }
 
+
 function subTaskNoShow(){
     if (subTaskChecked === 0){       
        let idSubtask = 'cardSubtasks' + toDoTask.taskid;
        document.getElementById(idSubtask).classList.add('hidden');
     } 
 }
+
 
 function readInTasks(){         //reading Tasksinformation
     label(toDoTask); 
@@ -58,6 +60,7 @@ function readInTasks(){         //reading Tasksinformation
     priorityEmblem();
 }
 
+
 function label(){     
     if(toDoTask.label === 1){
         NewLabel = TechnicalTaskLabel;
@@ -65,6 +68,7 @@ function label(){
         NewLabel = UserStoryLabel;
     }                 
 }
+
 
 function amountSubTasks(){     
     newAmountSubtask = toDoTask.subtask.length;
@@ -79,6 +83,7 @@ function amountSubTasks(){
     } 
 }
 
+
 function calcProgressBar(){  
     newSumSubtaskCalc = 0;     
     newSumSubtaskCalc = newSumSubtask/newAmountSubtask;      
@@ -90,12 +95,14 @@ function calcProgressBar(){
     newProgressBarId = toDoTask.taskid; 
 }
 
+
 function descriptionChar(){
     let lastChar = toDoTask.description[toDoTask.description.length - 1];
     if (lastChar === "." || lastChar === "!" || lastChar === "?"){
         toDoTask.description = toDoTask.description.slice(0, -1);
     }                                 
 }
+
 
 function emblemSvg() {            
     newEmblems = '';  
@@ -113,6 +120,7 @@ function emblemSvg() {
         } }          
 }
 
+
 function priorityEmblem(){
     newPriority = '';
             if (toDoTask.priority){
@@ -125,7 +133,9 @@ function priorityEmblem(){
             }
 }
 
+
 // container render-functions //
+
 
 function renderToDo(){
     toDo.innerHTML += `
@@ -149,6 +159,7 @@ function renderToDo(){
     subTaskNoShow();
 }
 
+
 function renderInProgress(){
     inProgress.innerHTML += `
     <div id="Task${toDoTask.taskid}" class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
@@ -170,6 +181,7 @@ function renderInProgress(){
     progressBar.setAttribute('width', `${newProgressInPercent}%`);
     subTaskNoShow();
 }
+
 
 function renderAwaitFeedback(){
     awaitFeedback.innerHTML += `
@@ -193,6 +205,7 @@ function renderAwaitFeedback(){
     subTaskNoShow();
 }
 
+
 function renderDone(){
     done.innerHTML += `
     <div id="Task${toDoTask.taskid}" class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
@@ -215,6 +228,7 @@ function renderDone(){
     subTaskNoShow();
 }
 
+
 function taskContainer(){             
     toDo.innerHTML = '';
     inProgress.innerHTML = '';
@@ -223,6 +237,7 @@ function taskContainer(){
     startReadingTasks();
     ifContainerEmpty();    
 }
+
 
 function ifContainerEmpty(){
     if (toDo.innerHTML == ''){
@@ -239,7 +254,54 @@ function ifContainerEmpty(){
     }
 }
 
+/// render - EditTask - container ///
+
+
+function renderEditTask(){
+    overlay.innerHTML = `
+    <div id="boardEditTask" class="board-edit-task">
+    <div class="close-edit"><img onclick="closeOverlay(${taskIdBoard}, ${taskboardPosition})" class ="close-overlay" src="/assets/svg/close_black.svg" alt="close"></div>
+    <h4 style="font-weight: 400;">Title</h4>
+    <div id="edit-title" class="edit-title">
+    <input type="text" id="titleEdit" class="edit-title-input" placeholder="${placeholderTitle}">
+    </div>
+    <h4 style="font-weight: 400;">Description</h4>
+    <div id="edit-description" class="edit-description">
+    <textarea id="descriptionEdit" class="edit-description-input" placeholder="${placeholderDescription}"></textarea>
+    </div>
+    <h4 style="font-weight: 400;">Due date</h4>
+    <form action="/action_page.php">
+    <label for="calender_input" class="calendar-icon-label">
+    <input type="date" id="edit_input" name="date_input" class="date-input" placeholder="tt.mm.jjj">
+    </label>
+    </form>   
+    <h4 style="font-weight: 400;">Priority</h4>
+    <div id="editPriorityButtonsdiv" class="edit-priority-buttons-div"></div>
+    <h4 style="font-weight: 400;">Assigned to</h4>
+    <div onclick="clickButtonSearch(); filterContactsEdit();" class="SearchContactEdit">
+        <input type="text" id="InputSearchEdit" class="InputSearchEdit" placeholder="Select contacts to assign">
+        <div id="ContactListEditButton" class="contact-list-edit-button">
+        <img  src="${searchButton}" alt="openContactList"></div>
+    </div>    
+    <div class="edit-contact-list">
+    <div id="contact-list-container" class="contact-list-container hiddenMenue">
+    ${contactListEdit}
+    </div></div> 
+    <div id="choosenContacts" class="choosen-contacts">
+    </div>
+    <h4 style="font-weight: 400;">Subtasks</h4>
+    <div id="editSubtaskInput" class="edit-subtask-input">
+    <input type="text" id="subtaskEdit" class="subtask-edit-input" placeholder="Add new Subtask"><div onclick="editAddSub()" class="edit-subtask-add"><img src="/assets/svg/add.svg" alt="addsubtask" width="14" height="14"></div>
+    </div>
+    <div id="editRenderSubtasks" class="edit-render-subtasks"></div> 
+    <div class="edit-ok-button"><button onclick="storeNewData(${taskIdBoard}, ${taskboardPosition})" class="edit-button">OK</button></div>
+    `
+
+} 
+
+
 /// Move Task Popup /// --> Move out functions if space need for other render (then ggf. render_board at least load )
+
 
 async function renderMoveTask(event, i){
     event.stopPropagation();
@@ -251,12 +313,14 @@ async function renderMoveTask(event, i){
     showShadow();
 }
 
+
 async function closeMoveTask(){
     document.getElementById('taskSwitchCategory').classList.add('transition')    
     await new Promise(resolve => setTimeout(resolve, 120));
     document.getElementById('taskSwitchCategory').classList.add('hide');    
     removeShadow();
 }
+
 
 function moveCategoryTask(newType){
     console.log("stelle i Taskboard, newtyp", taskToMove, newType);
@@ -266,11 +330,13 @@ function moveCategoryTask(newType){
     findTask();
 }
 
+
 /// highlight drop container ///
 
 function highlight(id) {
     document.getElementById(id).classList.add('drag-area-highlight');
 }
+
 
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
