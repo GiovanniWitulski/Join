@@ -12,7 +12,7 @@ body {
     align-items: center;
     top: 0px;
     display: flex;
-    transform: translateY(100vh);
+    transform: translateY(200vh);
     transition: all 100ms ease-in-out;
 }
 
