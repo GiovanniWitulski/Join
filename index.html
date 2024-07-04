@@ -27,7 +27,7 @@
                     <h1>Log in</h1>
                     <div class="login-underline"></div>
                 </div>
-                <form id="loginForm" class="form-indexhtml" action="/summary.html" onsubmit="return validateForm()">
+                <form id="loginForm" class="form-indexhtml" action="/summary.html" onsubmit="return false">
                     <div class="login-input-divs">
                         <div class="login-input-div-indexhtml mb-40px">
                             <input class="login-input-indexhtml" id="loginEmailIndexHtml" type="email" placeholder="Email" required>
@@ -47,7 +47,7 @@
                         <p class="remember-me-p">Remember me</p>
                     </div>
                 <div class="login-btns-div">
-                    <button type="submit" class="login-btn">Log in</button>
+                    <button type="button" onclick="validateForm()" class="login-btn">Log in</button>
                     <a href="/summary.html"><button onclick="getSideMenuCharacters('guest')" class="guest-login-btn" type="button">Guest Log in</button></a>
                 </div>
                 </form>
@@ -101,18 +101,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="required-msg">
+                    <div class="required-msg-div">
                         <p id="passwordDontMatch" class="required-msg d-none">Ups! your password don't match</p>
                     </div>
                     <div class="accept-privacy-policy-div">
                         <img id="acceptPrivacyPolicy" onclick="toggleCheckbox(this)" class="remember-me-checkbox" src="/assets/svg/rectangle.svg">
-                        <p class="remember-me-p">I accept the <a class="privacy-policy-link" href="/assets/templates/privacy_policy.html">Privacy Policy</a></p>
+                        <p class="remember-me-p">I accept the <a class="privacy-policy-link" href="/assets/templates/privacy_policy_nologin.html">Privacy Policy</a></p>
                     </div>
                     <div class="signup-btns-div">
                         <button type="submit" class="signup-btn">Sign up</button>
                     </div>
                 </form>
             </div>
+        </div>
+        <div class="d-none" id="signupSuccessfullContainer">
+            <img id="signupSuccessfull" src="/assets/svg/signup_successfull.svg">
         </div>
     </div>
     

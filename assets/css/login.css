@@ -144,15 +144,17 @@
 
 .required-msg-div {
     height: 15px;
-    margin-left: 16px;
-    margin-bottom: 32px;
+    margin-left: 32px;
+    /* margin-bottom: 32px; */
 }
 
 .required-msg {
+    /* display: none; */
     font-family: 'Poppins';
-    font-weight: 400px;
+    font-weight: 400;
     font-size: 12px;
     line-height: 14.4px;
+    /* margin-left: 16px; */
 }
 
 .accept-privacy-policy-div {
@@ -331,6 +333,37 @@
 
 .join-logo-big {
     display: none;
+}
+
+#signupSuccessfullContainer {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#signupSuccessfull {
+    animation: signupSuccessfull 140ms ease-in-out;
+    width: 312px;
+    height: 74px;
+}
+
+@keyframes signupSuccessfull {
+    from {
+        transform: translateY(100vh);
+    }
+
+    to {
+        transform: translateY(0);
+    }
 }
 
 /* ////////////////////////////////////////////////////////////////// */

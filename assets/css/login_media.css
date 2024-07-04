@@ -6,6 +6,16 @@
 
 @media (min-width: 800px) {
 
+    .required-msg-div {
+        margin-left: 0;
+        justify-content: center;
+        display: flex;
+    }
+    
+    .required-msg {
+        width: 505px;
+    }
+
     .login-card-div {
         height: 100%;
         align-items: center;

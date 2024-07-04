@@ -66,10 +66,10 @@ a {
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     box-shadow: 0 0px 4px 0px rgba(0, 0, 0, 0.1);
-    transition: all 100ms ease-in-out;
 }
     
 .side-menu-open {
+    transition: transform 100ms ease-in-out;
     transform: translateX(0px); 
 }
 

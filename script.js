@@ -13,10 +13,18 @@ function toggleCheckbox(checkboxImg) {
 }
 
 function openSideMenu() {
-    const sideMenu = document.getElementById("sideMenu");
+    let sideMenu = document.getElementById("sideMenu");
     sideMenu.classList.toggle("side-menu-open");
   
   document.addEventListener('click', handleClickOutside);
+}
+
+function dNoneSideMenu() {
+  let sideMenu = document.getElementById("sideMenu");
+
+  setTimeout(() => {
+    sideMenu.classList.add("d-none");
+}, 1000);
 }
 
 function handleClickOutside(event) {

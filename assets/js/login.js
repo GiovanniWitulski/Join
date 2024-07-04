@@ -37,14 +37,6 @@ function showPassword(inputFieldImg) {
     }
 }
 
-function validateForm() {
-    getSideMenuCharacters('login');
-  
-    window.location.href = document.getElementById("loginForm").action;
-  
-    return false;
-}
-
 function landingPageAnimation() {
     setTimeout(() => {
         document.getElementById("loadAnimation").classList.add("loader-hidden");
@@ -56,20 +48,23 @@ function landingPageAnimation() {
 
 function signUp(event) {
     event.preventDefault();
-    let requiredMsg = document.querySelector('.required-msg');
+    let passwordDontMatchMsg = document.getElementById('passwordDontMatch');
     let password = document.getElementById("signUpPasswordIndexHtml").value;
     let confirmPassword = document.getElementById("signUpConfirmPasswordIndexHtml").value;
+    let privacyPolicyCheck = document.getElementById('acceptPrivacyPolicy');
 
-    if (password !== confirmPassword) {
-        console.log('ungleich');
-        requiredMsg.style.display = 'block';
-    } else {
+    if (password === confirmPassword && privacyPolicyCheck.src.includes(`/assets/svg/checkmark.svg`)) {
         console.log('gleich');
         getSideMenuCharacters('signUp');
-        window.location.href = document.getElementById("signUpForm").action;
+        setProfile();
+        signupSuccessfullAnimation();
+    } else {
+        console.log('ungleich');
+        passwordDontMatchMsg.classList.remove('d-none');
     }
 }
 
+// getSideMenuCharacters BEARBEITEN
 function getSideMenuCharacters(loginChoice) {
     if (loginChoice === 'login') {
         localStorage.setItem('sideMenuCharacters', 'SM');
@@ -86,5 +81,112 @@ function getSideMenuCharacters(loginChoice) {
     if (loginChoice === 'guest' || loginChoice === null) {
         localStorage.setItem('sideMenuCharacters', 'G');
         localStorage.setItem('welcomeMsg', '!');
+    }
+}
+
+function signupSuccessfullAnimation() {
+    let signupSuccessfullContainer = document.getElementById('signupSuccessfullContainer');
+    signupSuccessfullContainer.style.display = 'flex';
+
+    setTimeout(() => {
+        signupSuccessfullContainer.style.display = 'none';
+        showLoginForm();
+    }, 1000);
+}
+
+
+async function setProfile() {
+    let data = await getDataForProfile();
+    postData('user', data)
+}
+
+async function getDataForProfile() {
+    userData = {
+        mail: document.getElementById('signUpEmailIndexHtml').value,
+        name: document.getElementById('signUpNameIndexHtml').value,
+        password: document.getElementById('signUpPasswordIndexHtml').value,
+    };
+    return userData;
+}
+
+async function getUsers() {
+    try {
+      let data = await loadData('user');
+      let user = [];
+      for (const key in data) { 
+        if (data.hasOwnProperty(key)) { 
+            user.push({ id: key, ...data[key] });
+        }
+      }
+    
+      return user;
+
+    } catch (error) {
+      console.error('Fehler beim Laden des User:', error);
+      throw error;
+    }
+}
+
+async function getSignedUpMail() {
+    let users = await getUsers();
+    let userMails = [];
+    for (let i = 0; i < users.length; i++) {
+        const user = users[i];
+        userMails.push(user.mail);
+    }
+    return userMails;
+}
+
+async function getSignedUpPssword() {
+    let users = await getUsers()
+    let userPasswords = [];
+    for (let i = 0; i < users.length; i++) {
+        const user = users[i];
+        userPasswords.push(user.password);
+    }
+    return userPasswords;
+}
+
+async function comparePasswords() {
+    let signedUpPsswords = await getSignedUpPssword();
+    let enteredPassword =  document.getElementById('loginPasswordIndexHtml').value;
+    for (let i = 0; i < signedUpPsswords.length; i++) {
+        const signedUpPssword = signedUpPsswords[i];
+        if (signedUpPssword === enteredPassword) {
+            console.log('gleiches Password');
+            return 'mailIsEqual';
+        } else {
+            console.log('ungleiches Passwort');
+            return false;
+        }
+    }
+}
+
+async function compareMails() {
+    let signedUpMails = await getSignedUpMail();
+    let enteredMail =  document.getElementById('loginEmailIndexHtml').value;
+    console.log(enteredMail);
+    for (let i = 0; i < signedUpMails.length; i++) {
+        const signedUpMail = signedUpMails[i];
+        if (signedUpMail === enteredMail) {
+            console.log('gleiche Mail');
+            return 'passwordIsEqual';
+        } else {
+            console.log('ungleiche Mail');
+            return false;
+        } 
+    }
+}
+
+async function validateForm() {
+    let passwordIsEqual = await comparePasswords();
+    let mailIsEqual = await compareMails();
+    if (passwordIsEqual === false || mailIsEqual === false) {
+        console.log('nein');
+        return false;
+    } else {
+        console.log('ja');
+        window.location.href = document.getElementById("loginForm").action
+        return true;
     }
 }
