@@ -88,7 +88,7 @@ function updateTaskBoard(formattedTasks) {
 
 
 function handleError(error) {
-    console.error('Fehler beim Abrufen und Formatieren der Daten:', error);
+ console.error('Fehler beim Abrufen und Formatieren der Daten:', error);
 }
 
 
