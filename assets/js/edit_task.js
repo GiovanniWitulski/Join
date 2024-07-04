@@ -14,7 +14,8 @@ let editDescription;
 let editTask;
 
 
-// Hochladen EditTask
+// upload EditTask
+
 async function addEditTaskToFirebase() {
     const databaseURL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app';
     try {
@@ -32,7 +33,9 @@ async function addEditTaskToFirebase() {
 }
 
 
-processContacts(); // start load contacts to Array
+// load & procress contacts for Edit Task
+
+processContacts(); // load & process before Edit Task started
 
 
 async function loadContacts() {
@@ -49,54 +52,34 @@ async function loadContacts() {
     } catch (error) {
         console.error('Fehler beim Laden der Kontakte:', error);
         throw error; }
-    }
+}
 
 
 function createContactEdit(vorname, nachname, color) {
     const vornameInitial = vorname.charAt(0).toUpperCase(); 
     const nachnameInitial = nachname ? nachname.charAt(0).toUpperCase() : ''; 
-
-    //// SVG-Formatierung der ProfilInitialen
     const svgTemplate = `<svg class="profile_pic" width="42px" height="42px">
         <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2" fill="${color}"></circle>
         <text x="12" y="25" fill="white" font-size="12px">${vornameInitial}${nachnameInitial}</text>
     </svg>`;
-
     return svgTemplate;
 }
 
 
 async function processContacts() {
     editContacts = [];
-    editContactsShow = []; 
-    let editContactId = 0; 
-    try {
-        const contacts = await loadContacts();
-        contacts.forEach(contact => {
-            const { vorname, name, color } = contact;
-            const nachname = name || ''; 
-            const svg = createContactEdit(vorname, nachname, color);
-
-            editContacts.push({
-                checked: 0,
-                id: editContactId,
-                assignedTo: [vorname, nachname], 
-                contactEmblem: svg
-            });
-
-            editContactsShow.push({
-                checked: 0,
-                id: editContactId,
-                assignedTo: [vorname, nachname], 
-                contactEmblem: svg
-            });
-
-            editContactId++;
+    editContactsShow = [];
+    let editContactId = 0;
+    try {   const contacts = await loadContacts();
+            contacts.forEach(contact => {
+            const { vorname, name = '', color } = contact;
+            const svg = createContactEdit(vorname, name, color);
+            const contactData = { checked: 0, id: editContactId++, assignedTo: [vorname, name], contactEmblem: svg };
+            editContacts.push(contactData);
+            editContactsShow.push(contactData);
         });
-    } catch (error) {
-        console.error('Fehler bei der Verarbeitung der Kontakte:', error);
-        throw error;
-    }
+    } catch (error) { console.error('Fehler bei der Verarbeitung der Kontakte:', error);
+        throw error; }
 }
 
 //search functions //
@@ -115,7 +98,11 @@ function filterContactsEdit(eventOrValue) {
         const SearchList = document.getElementById('contact-list-container');
         SearchList.innerHTML = contactListEdit;    
         return;
-    }
+    } filteredContacts(searchedContact);       
+}
+
+
+function filteredContacts(searchedContact){
     editContactsShow = [];
     for (let i = 0; i < editContacts.length; i++) {
         let prename = editContacts[i].assignedTo[0].toLowerCase(); 
@@ -125,9 +112,10 @@ function filterContactsEdit(eventOrValue) {
             editContactsShow.push(foundContact);
         }
     }
+    renderContactListEdit();
     document.getElementById('contact-list-container').classList.remove('hiddenMenue');
     const SearchList = document.getElementById('contact-list-container');
-    SearchList.innerHTML = contactListEdit;    
+    SearchList.innerHTML = contactListEdit;  
 }
 
 
@@ -140,7 +128,6 @@ function clickButtonSearch(){
         searchButton = "/assets/svg/arrow_drop_downaa.svg";
         document.getElementById('contact-list-container').classList.add('hiddenMenue');
     }    
-
     return searchButton;
 }
 
@@ -160,20 +147,37 @@ function selectContact (contactId){
         let compareCheck = editContacts[i].checked;
         if (compareId === contactId && compareCheck === 1){
             editContacts[i].checked = 0;
-            choosenContacts();
-            renderContactListEdit();
-            filterContactsEdit();
-            renderChoosenContactsEmblems();
+            selectContactIf();
             return;
         } else if (compareId === contactId && compareCheck === 0){
             editContacts[i].checked = 1;
-            choosenContacts();
-            renderContactListEdit();
-            filterContactsEdit();
-            renderChoosenContactsEmblems();
+            selectContactIf();
             return;
          }          
-    }       filterContactsEdit();    
+    }  filterContactsEdit();    
+}
+
+
+function selectContactIf(){
+    choosenContacts();
+    renderContactListEdit();
+    filterContactsEdit();
+    renderChoosenContactsEmblems();   
+    checkInputFieldValue();
+}
+
+
+function checkInputFieldValue(){
+    const inputElement = document.getElementById('InputSearchEdit');
+    const value = inputElement.value.trim(); 
+    if (value) {
+    filterContactsEdit({ target: { value } }); 
+}
+}
+
+
+function clearInputField() {
+    document.getElementById('InputSearchEdit').value = '';
 }
 
 
@@ -189,7 +193,7 @@ function editAddSub(){
 
 function editEditSub(toEditSub){
     let number = toEditSub;
-    let addID = number - 10; //identification which subtask (subtaskposition)
+    let addID = number - 10; //identification which subtask (the subtaskposition)
     const inputField = document.getElementById('subtaskEdit');
     let toEdit = EditTask.subtask[addID];
     inputField.value = toEdit;
@@ -199,7 +203,7 @@ function editEditSub(toEditSub){
 
 function editDeleteSub(toDeleteId){
     let number = toDeleteId
-    let deleteID = number - 10;  //so wird die Stelle im Array gefunden.
+    let deleteID = number - 10; //identification which subtask (the subtaskposition)
     EditTask.subtask.splice(deleteID, 1);
     EditTask.subtaskSum.splice(deleteID, 1);
     editRenderSubtask();
@@ -227,12 +231,7 @@ function getDate(){
 }
 
 
-function showEditTask(){
-    console.log("editTask", EditTask);
-}
-
-
-function storeNewData(taskIdBoard, taskboardPosition){ 
+function storeNewData(taskboardPosition){ 
     deleteTask(taskboardPosition); //1.
     TaskBoard.push(EditTask);
     closeOverlay();   
@@ -242,7 +241,7 @@ function storeNewData(taskIdBoard, taskboardPosition){
 ///////// RENDER EDIT TASK ////////// 
 
 
-function editTaskOverlay(idTask, i){
+function editTaskOverlay(idTask, i){    
     EditTask = TaskBoard[i];
     taskboardPosition = i;
     taskIdBoard = idTask;
@@ -266,7 +265,7 @@ function editRenderSubtask(){
     for (i=0; i<EditTask.subtask.length; i++){
         let editSubAdd = EditTask.subtask[i];
         idCounter++;
-        editSubtask.innerHTML += `<div class="editSubtask"><div>&bull; ${editSubAdd}</div><div class="edit-subtask-buttons-2"><img onclick="editEditSub(${idCounter})"src="/assets/svg/Subtasks%20icons11-4.svg" alt="edit"><div class="placeholder-div">|</div><img onclick="editDeleteSub(${idCounter})" src="/assets/svg/delete.svg" alt="delete"></div></div>`
+        editSubtask.innerHTML += `<div class="edit-task-subtask"><div>&bull; ${editSubAdd}</div><div class="edit-subtask-buttons-2"><img class="edit-subtask-buttons-img" onclick="editEditSub(${idCounter})"src="/assets/svg/Subtasks%20icons11-4.svg" alt="edit"><div class="placeholder-div">|</div><img class="edit-subtask-buttons-img" onclick="editDeleteSub(${idCounter})" src="/assets/svg/delete.svg" alt="delete"></div></div>`
     }
 }
 
@@ -385,12 +384,10 @@ function getTheCurrentDate() {
     let day = String(today.getDate()).padStart(2, '0');
     let month = String(today.getMonth() + 1).padStart(2, '0');
     let year = today.getFullYear();
-
     return year + '-' + month + '-' + day;
 }
 
-
-/// renderEditTask() --> render_board ///
+/// renderEditTask() --> render_board.js ///
 
 
 

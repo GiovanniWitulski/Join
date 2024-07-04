@@ -312,7 +312,7 @@ function renderEditTask(){
     <div onclick="clickButtonSearch(); filterContactsEdit();" class="SearchContactEdit">
         <input type="text" id="InputSearchEdit" class="InputSearchEdit" placeholder="Select contacts to assign">
         <div id="ContactListEditButton" class="contact-list-edit-button">
-        <img  src="${searchButton}" alt="openContactList"></div>
+        <img src="${searchButton}" alt="openContactList"></div>
     </div>    
     <div class="edit-contact-list">
     <div id="contact-list-container" class="contact-list-container hiddenMenue">
@@ -325,7 +325,7 @@ function renderEditTask(){
     <input type="text" id="subtaskEdit" class="subtask-edit-input" placeholder="Add new Subtask"><div onclick="editAddSub()" class="edit-subtask-add"><img src="/assets/svg/add.svg" alt="addsubtask" width="14" height="14"></div>
     </div>
     <div id="editRenderSubtasks" class="edit-render-subtasks"></div> 
-    <div class="edit-ok-button"><button onclick="storeNewData(${taskIdBoard}, ${taskboardPosition})" class="edit-button">OK</button></div>
+    <div class="edit-ok-button"><button onclick="storeNewData(${taskboardPosition})" class="edit-button">OK</button></div>
     `
 
 } 
