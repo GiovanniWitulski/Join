@@ -319,7 +319,7 @@
     max-width: 396px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
-    display: flex;
+    margin-bottom: 8px;
     align-items: center;
     background-color: white;
     margin-top: 8px;

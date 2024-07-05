@@ -1,10 +1,10 @@
-let editContacts = []; //loaded contacts
-let editContactsShow = []; //contacts with id for render
-let EditTask = []; //task for edit-Array
-let contactListEdit; //liste fürs reinrendern in suche
+let editContacts = []; 
+let editContactsShow = []; 
+let EditTask = []; 
+let contactListEdit; 
 let taskboardPosition = 0;
-let searchButton = "/assets/svg/arrow_drop_downaa.svg";
-let choosenContactsEdit = []; //wird befüllt von alt und später neu contacts, variabel
+let searchButton = 0;
+let choosenContactsEdit = []; 
 let newSubtasks = [];
 let taskIdBoard = 0;
 let newAssignedToName = [];
@@ -120,15 +120,19 @@ function filteredContacts(searchedContact){
 
 
 function clickButtonSearch(){
-    if (searchButton === "/assets/svg/arrow_drop_downaa.svg"){
-        searchButton = "/assets/svg/arrow_drop_up.svg";
+    let inputButton = document.getElementById('ContactListEditButton');
+    if (searchButton === 0){
+        searchButton = 1;
         document.getElementById('contact-list-container').classList.remove('hiddenMenue');
-    }
-    else if (searchButton === "/assets/svg/arrow_drop_up.svg"){
-        searchButton = "/assets/svg/arrow_drop_downaa.svg";
+        inputButton.innerHTML = `<img onclick="clickButtonSearch();" src="/assets/svg/arrow_drop_up.svg" alt="openContactList">`
+    }   else if (searchButton === 1){
+        searchButton = 0;
         document.getElementById('contact-list-container').classList.add('hiddenMenue');
-    }    
-    return searchButton;
+        let inputElement = document.getElementById('InputSearchEdit');
+        inputElement.value = '';
+        inputButton.innerHTML = `<img onclick="clickButtonSearch();" src="/assets/svg/arrow_drop_downaa.svg" alt="openContactList">`
+        filterContactsEdit();     
+    }   return searchButton;
 }
 
 
@@ -353,7 +357,7 @@ function renderContactListEdit() {
 }    
 
 
-function emptyEditTask(){    //use of same container as Overlay/PopupTask
+function emptyEditTask(){    
     editTask = '';
     editTask = EditTask;
     editTitle = editTask.title;

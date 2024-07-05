@@ -309,10 +309,10 @@ function renderEditTask(){
     <h4 style="font-weight: 400;">Priority</h4>
     <div id="editPriorityButtonsdiv" class="edit-priority-buttons-div"></div>
     <h4 style="font-weight: 400;">Assigned to</h4>
-    <div onclick="clickButtonSearch(); filterContactsEdit();" class="SearchContactEdit">
-        <input type="text" id="InputSearchEdit" class="InputSearchEdit" placeholder="Select contacts to assign">
+    <div class="SearchContactEdit">
+        <input onclick="checkInputFieldValue();"type="text" id="InputSearchEdit" class="InputSearchEdit" placeholder="Select contacts to assign">
         <div id="ContactListEditButton" class="contact-list-edit-button">
-        <img src="${searchButton}" alt="openContactList"></div>
+        <img onclick="clickButtonSearch();" src="/assets/svg/arrow_drop_downaa.svg" alt="openContactList"></div>
     </div>    
     <div class="edit-contact-list">
     <div id="contact-list-container" class="contact-list-container hiddenMenue">

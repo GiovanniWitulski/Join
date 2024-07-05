@@ -30,8 +30,7 @@ body {
 .placeholder-container-img{
     height: 48px; 
     width: 100%;
-    max-width: 246px;
-    
+    max-width: 246px;    
 }
 
 .board-titel-add-search{
@@ -342,7 +341,7 @@ padding-top: 24px;
 
 .closeOverlay-btn:hover{
     cursor: pointer;
-   border-radius: 100px;
+    border-radius: 100px;
     background-color: #29ABE2;
 }
 
@@ -397,6 +396,7 @@ padding-top: 24px;
 .edit-task-category-svg{
     display: none;
 }
+
 }
 
 
