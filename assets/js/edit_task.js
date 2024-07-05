@@ -91,8 +91,7 @@ function filterContactsEdit(eventOrValue) {
         searchedContact = eventOrValue.target.value.toLowerCase(); 
     } else {
         searchedContact = ''; 
-    }
-    if (searchedContact === "") {
+    }   if (searchedContact === "") {
         editContactsShow = editContacts;
         renderContactListEdit();
         const SearchList = document.getElementById('contact-list-container');
@@ -109,17 +108,18 @@ function filteredContacts(searchedContact){
         let name = editContacts[i].assignedTo[1].toLowerCase();    
         if (prename.includes(searchedContact) || name.includes(searchedContact)) {
             const foundContact = editContacts[i];
-            editContactsShow.push(foundContact);
-        }
-    }
-    renderContactListEdit();
-    document.getElementById('contact-list-container').classList.remove('hiddenMenue');
-    const SearchList = document.getElementById('contact-list-container');
-    SearchList.innerHTML = contactListEdit;  
+            editContactsShow.push(foundContact);  }
+    }       renderContactListEdit();
+        document.getElementById('contact-list-container').classList.remove('hiddenMenue');
+        const SearchList = document.getElementById('contact-list-container');
+        SearchList.innerHTML = contactListEdit;  
+        searchButton = 0;
+        clickButtonSearch();
 }
 
 
 function clickButtonSearch(){
+    let inputElement = document.getElementById('InputSearchEdit');
     let inputButton = document.getElementById('ContactListEditButton');
     if (searchButton === 0){
         searchButton = 1;
@@ -128,7 +128,6 @@ function clickButtonSearch(){
     }   else if (searchButton === 1){
         searchButton = 0;
         document.getElementById('contact-list-container').classList.add('hiddenMenue');
-        let inputElement = document.getElementById('InputSearchEdit');
         inputElement.value = '';
         inputButton.innerHTML = `<img onclick="clickButtonSearch();" src="/assets/svg/arrow_drop_downaa.svg" alt="openContactList">`
         filterContactsEdit();     
@@ -174,7 +173,9 @@ function selectContactIf(){
 function checkInputFieldValue(){
     const inputElement = document.getElementById('InputSearchEdit');
     const value = inputElement.value.trim(); 
-    if (value) {
+    if (value) {    
+    searchButton = 0;
+    clickButtonSearch();
     filterContactsEdit({ target: { value } }); 
 }
 }
@@ -241,9 +242,7 @@ function storeNewData(taskboardPosition){
     closeOverlay();   
 }
 
-
 ///////// RENDER EDIT TASK ////////// 
-
 
 function editTaskOverlay(idTask, i){    
     EditTask = TaskBoard[i];

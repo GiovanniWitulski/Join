@@ -261,10 +261,11 @@
 .close-overlay{
     position: relative;
     border-radius: 50%;
+    transition: background-color 0.3s ease;
 }
 
 .close-overlay:hover{
-    opacity: 0.5;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .overlay-cde-edit{
