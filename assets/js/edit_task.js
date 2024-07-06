@@ -205,6 +205,10 @@ function editEditSub(toEditSub){
     editDeleteSub(toEditSub);
 }
 
+function emptyEditSub(){
+    document.getElementById('subtaskEdit').value = '';
+}
+
 
 function editDeleteSub(toDeleteId){
     let number = toDeleteId

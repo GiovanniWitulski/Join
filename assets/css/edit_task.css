@@ -340,6 +340,8 @@
 .edit-subtask-add{
     padding-right: 16px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 .edit-subtask-buttons-2{

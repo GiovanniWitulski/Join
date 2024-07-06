@@ -276,6 +276,7 @@
 }
 
 
+
 .overlay-cde-edit-svg{
     display: flex;
     align-items: center;
@@ -317,6 +318,33 @@
     gap: 2px;
 }
 
+.placeholder-div-edit-subtask{
+    padding-left: 5px;
+}
+
+.edit-subtask-buttons-img-delete{
+    height: 25px;
+    width: 25px;
+    position: relative;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.edit-subtask-buttons-img-delete:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.edit-subtask-buttons-img-add{
+    height: 20px;
+    width: 20px;
+    position: relative;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.edit-subtask-buttons-img-add:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
 
 /* special - Classes */
 

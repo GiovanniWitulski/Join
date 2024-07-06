@@ -1,7 +1,7 @@
 // Board render Tasks container /////////////////
 
 let toDoTask = []
-let NewLabel;   //used as Array ff.
+let newLabel;   
 let newSumSubtask;
 let newAmountSubtask;
 let newSumSubtaskCalc;
@@ -63,9 +63,9 @@ function readInTasks(){         //reading Tasksinformation
 
 function label(){     
     if(toDoTask.label === 1){
-        NewLabel = TechnicalTaskLabel;
+        newLabel = technicalTaskLabel;
     } else {
-        NewLabel = UserStoryLabel;
+        newLabel = userStoryLabel;
     }                 
 }
 
@@ -140,7 +140,7 @@ function priorityEmblem(){
 function renderToDo(){
     toDo.innerHTML += `
     <div id="Task${toDoTask.taskid}" class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
-    <div id="cardHeader" class="card-header">${NewLabel}<div><img onclick="renderMoveTask(event, ${x})" class="edit-task-category-svg" src="/assets/svg/arrow-left-line.svg" alt="editCategory"></div></div>
+    <div id="cardHeader" class="card-header">${newLabel}<div><img onclick="renderMoveTask(event, ${x})" class="edit-task-category-svg" src="/assets/svg/arrow-left-line.svg" alt="editCategory"></div></div>
     <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
     <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
     <div id="cardSubtasks${toDoTask.taskid}" class="card-subtasks"><div class="card-progress-bar">
@@ -163,7 +163,7 @@ function renderToDo(){
 function renderInProgress(){
     inProgress.innerHTML += `
     <div id="Task${toDoTask.taskid}" class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
-    <div id="cardHeader" class="card-header">${NewLabel}<img onclick="renderMoveTask(event, ${x})" class="edit-task-category-svg" src="/assets/svg/arrow-left-line.svg" alt="editCategory"></div>
+    <div id="cardHeader" class="card-header">${newLabel}<img onclick="renderMoveTask(event, ${x})" class="edit-task-category-svg" src="/assets/svg/arrow-left-line.svg" alt="editCategory"></div>
     <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
     <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
     <div id="cardSubtasks${toDoTask.taskid}" class="card-subtasks"><div class="card-progress-bar">
@@ -186,7 +186,7 @@ function renderInProgress(){
 function renderAwaitFeedback(){
     awaitFeedback.innerHTML += `
     <div id="Task${toDoTask.taskid}" class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
-    <div id="cardHeader" class="card-header">${NewLabel}<img onclick="renderMoveTask(event, ${x})" class="edit-task-category-svg" src="/assets/svg/arrow-left-line.svg" alt="editCategory"></div>
+    <div id="cardHeader" class="card-header">${newLabel}<img onclick="renderMoveTask(event, ${x})" class="edit-task-category-svg" src="/assets/svg/arrow-left-line.svg" alt="editCategory"></div>
     <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
     <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
     <div id="cardSubtasks${toDoTask.taskid}" class="card-subtasks"><div class="card-progress-bar">
@@ -209,7 +209,7 @@ function renderAwaitFeedback(){
 function renderDone(){
     done.innerHTML += `
     <div id="Task${toDoTask.taskid}" class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
-    <div id="cardHeader" class="card-header">${NewLabel}<img onclick="renderMoveTask(event, ${x})" class="edit-task-category-svg" src="/assets/svg/arrow-left-line.svg" alt="editCategory"></div>
+    <div id="cardHeader" class="card-header">${newLabel}<img onclick="renderMoveTask(event, ${x})" class="edit-task-category-svg" src="/assets/svg/arrow-left-line.svg" alt="editCategory"></div>
     <div id="cardTitle" class="card-title"><h4>${toDoTask.title}</h4></div>
     <div id="cardDescription" class="card-description"><h4>${toDoTask.description}...</h4></div>
     <div id="cardSubtasks${toDoTask.taskid}" class="card-subtasks"><div class="card-progress-bar">
@@ -322,7 +322,7 @@ function renderEditTask(){
     </div>
     <h4 style="font-weight: 400;">Subtasks</h4>
     <div id="editSubtaskInput" class="edit-subtask-input">
-    <input type="text" id="subtaskEdit" class="subtask-edit-input" placeholder="Add new Subtask"><div onclick="editAddSub()" class="edit-subtask-add"><img src="/assets/svg/add.svg" alt="addsubtask" width="14" height="14"></div>
+    <input type="text" id="subtaskEdit" class="subtask-edit-input" placeholder="Add new Subtask"><div  class="edit-subtask-add"><img class="edit-subtask-buttons-img-add" onclick="editAddSub()" src="/assets/svg/check_black.svg" alt="addsubtask" width="14" height="14"><div class="placeholder-div-edit-subtask">|</div><img class="edit-subtask-buttons-img-delete" onclick="emptyEditSub();" src="/assets/svg/Close_black.svg" alt="delete"></div>
     </div>
     <div id="editRenderSubtasks" class="edit-render-subtasks"></div> 
     <div class="edit-ok-button"><button onclick="storeNewData(${taskboardPosition})" class="edit-button">OK</button></div>

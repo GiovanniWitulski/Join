@@ -5,21 +5,18 @@ let OverlayTask = [];
 let overlayContacts;
 let overlayPriority;
 let overlayLabel;
-let OverlaySubtasks;
 let overlayTaskBoardPosition;
 let overlaySubtaskStorage;
-let check0;
-let check1;
 let check = "/assets/svg/checkmark.svg";
 let nocheck = "/assets/svg/rectangle.svg";
 
 const databaseURL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app';
 
 let currentDraggedTask;
-const TechnicalTaskLabel = '<img src="/assets/svg/Labels_Board_card_label_tourquise_Technical_Task.svg" alt="">'
-const UserStoryLabel = '<img src="/assets/svg/Labels_Board_card_label_blue_User_Story.svg" alt="">'
+const technicalTaskLabel = '<img src="/assets/svg/Labels_Board_card_label_tourquise_Technical_Task.svg" alt="">'
+const userStoryLabel = '<img src="/assets/svg/Labels_Board_card_label_blue_User_Story.svg" alt="">'
 
-const Searchfield = document.getElementById('boardInput').addEventListener('input', findTask);
+const searchfield = document.getElementById('boardInput').addEventListener('input', findTask);
 let toDo = document.getElementById('toDoContainer');
 let inProgress = document.getElementById('inProgressContainer');
 let awaitFeedback = document.getElementById('awaitFeedbackContainer');
@@ -131,8 +128,8 @@ function findTask(){
         inProgress.innerHTML = '';
         awaitFeedback.innerHTML = '';
         TaskBoard = BackgroundTaskBoard;
-        renderBoard();                //Searchfield empty again -> reload up do date status
-        return;  }                    //Taskboard = BackgroundTaskBoard einfügen
+        renderBoard();                
+        return;  }                   
     
     showSearchResults(SearchedTask);    
 }
@@ -258,9 +255,9 @@ function overlaySubtaskCheck(){
 
 function overlayLabelCheck(){
     if (OverlayTask.label == 1) {
-        overlayLabel = TechnicalTaskLabel;
+        overlayLabel = technicalTaskLabel;
     } else {
-        overlayLabel = UserStoryLabel;
+        overlayLabel = userStoryLabel;
     }
 }
 
