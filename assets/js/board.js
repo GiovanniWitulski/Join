@@ -339,9 +339,7 @@ function overlayDeleteTask(idTask, i){
     if (taskToDelete.taskid == idTask){
         TaskBoard.splice(i, 1);
         closeOverlay(idTask);
-    } else {
-        console.log("Taskid & Position Backgroundtaskboard inkongruent.");
-    }    
+    }
 }
 
 

@@ -67,8 +67,6 @@ function editSubtask(id){
         inputToEdit.classList.add('renameSubtaskDiv');
         inputToEdit.focus();
         subtaskToChange.parentNode.replaceChild(inputToEdit, subtaskToChange);
-    }else{
-        console.log('The list item could not be found');
     }
 }
 
@@ -81,8 +79,6 @@ function confirmEditedSubtask(id, functionValue){
         subtaskToConfirm.setAttribute('id', id);
         subtaskToConfirm.innerHTML = `<div class="content-of-subtask"><div id="textOfSubtask${functionValue}">${editedText}</div><div class="edit-subtask-div"><button class="edit-btn" onclick="editSubtask('${functionValue}')"></button><div class="btn-divider"></div><button class="trash-btn" onclick="deleteElementById('subtask${functionValue}')"></button></div></div>`
         subtask.parentNode.replaceChild(subtaskToConfirm, subtask);
-    }else{
-        console.log("error");
     }
 }
 
@@ -104,8 +100,6 @@ function deleteElementById(elementId){
     let element = document.getElementById(elementId);
     if (element){
         element.parentNode.removeChild(element);   
-    }else{
-        console.log("The Element with the inserted ID can´t be found");
     }
 }
 

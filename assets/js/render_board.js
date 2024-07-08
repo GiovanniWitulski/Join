@@ -338,7 +338,7 @@ async function renderMoveTask(event, i){
     event.stopPropagation();
     taskToMove = i;
     document.getElementById('taskSwitchCategory').classList.remove('hide');
-    console.log("renderMoveTask, taskid", i);
+
     await new Promise(resolve => setTimeout(resolve, 200));
     document.getElementById('taskSwitchCategory').classList.remove('transition')
     showShadow();
@@ -354,7 +354,6 @@ async function closeMoveTask(){
 
 
 function moveCategoryTask(newType){
-    console.log("stelle i Taskboard, newtyp", taskToMove, newType);
     TaskBoard[taskToMove].type = newType
     uploadData();
     renderBoard();

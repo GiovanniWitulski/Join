@@ -12,7 +12,6 @@ function changeInputFieldImg(inputField) {
     let passwordValue = inputField.value
     let inputIconDiv = inputField.nextElementSibling;
     let inputFieldImg = inputIconDiv.querySelector("img");
-    console.log(passwordValue);
     if (passwordValue !== '') {
         inputFieldImg.src = 'assets/svg/visibility_off.svg';
         inputFieldImg.classList.add('cursor-pointer');
@@ -54,7 +53,6 @@ async function signUp(event) {
     let privacyPolicyCheck = document.getElementById('acceptPrivacyPolicy');
 
     if (password === confirmPassword && privacyPolicyCheck.src.includes(`/assets/svg/checkmark.svg`)) {
-        console.log('gleich');
         localStorage.setItem('isSignedUp', true);
         let userName = document.getElementById('signUpNameIndexHtml').value;
         localStorage.setItem('userName', userName);
@@ -82,7 +80,6 @@ async function getDataForProfile() {
         password: document.getElementById('signUpPasswordIndexHtml').value,
         initialUserLetters: await getInitialLettersFromInput(),
     };
-    console.log(userData);
     return userData;
 }
 
@@ -111,7 +108,6 @@ async function getUserName() {
         const user = users[i];
         userNames.push(user.name);
     }
-    console.log(userNames[userNames.length - 1]);
     return userNames[userNames.length - 1];
 }
 
@@ -120,11 +116,9 @@ async function validateForm() {
     let passwordIsEqual = await comparePasswords();
     let mailIsEqual = await compareMails();
     if (passwordIsEqual != 'passwordIsEqual' || mailIsEqual != 'mailIsEqual') {
-        console.log('nein');
         incorrectMailOrPasswordMsg.classList.remove('d-none');
         return false;
     } else {
-        console.log('ja');
         localStorage.setItem('userName', await getUserName());
         localStorage.setItem('isSignedUp', true);
         await getSideMenuCharacters('login')
@@ -140,7 +134,6 @@ async function getSignedUpMail() {
         const user = users[i];
         userMails.push(user.mail);
     }
-    console.log(userMails);
     return userMails;
 }
 
@@ -160,10 +153,7 @@ async function comparePasswords() {
     for (let i = 0; i < signedUpPsswords.length; i++) {
         const signedUpPssword = signedUpPsswords[i];
         if (signedUpPssword === enteredPassword) {
-            console.log('gleiches Password');
             return 'passwordIsEqual';
-        } else {
-            console.log('ungleiches Passwort');
         }
     }
 }
@@ -171,15 +161,11 @@ async function comparePasswords() {
 async function compareMails() {
     let signedUpMails = await getSignedUpMail();
     let enteredMail =  document.getElementById('loginEmailIndexHtml').value;
-    console.log(enteredMail);
     for (let i = 0; i < signedUpMails.length; i++) {
         const signedUpMail = signedUpMails[i];
         if (signedUpMail === enteredMail) {
-            console.log('gleiche Mail');
             return 'mailIsEqual';
-        } else {
-            console.log('ungleiche Mail');
-        } 
+        }
     }
 }
 
@@ -213,7 +199,6 @@ async function getInitialLetters() {
         const user = users[i];
         initialLetters.push(user.initialUserLetters);
     }
-    console.log(initialLetters);
     return initialLetters;
 }
 
@@ -224,7 +209,6 @@ async function getSignedUpMail() {
         const user = users[i];
         userMails.push(user.mail);
     }
-    console.log(userMails);
     return userMails;
 }
 

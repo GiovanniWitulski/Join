@@ -34,8 +34,7 @@ async function getPhoneNumber(){
 async function getId(){
     if(contactsAsJson){
         contactId = contactsAsJson.findIndex(element => element.vorname === (vornameCapitalized));
-        console.log(contactId);
-    }else{
+    }else{ 
         contactId = 0;
     } 
 }

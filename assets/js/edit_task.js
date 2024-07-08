@@ -27,7 +27,6 @@ async function addEditTaskToFirebase() {
         if (!response.ok) { throw new Error('Netzwerkantwort war nicht in Ordnung');
         }
         const data = await response.json();
-        console.log('Neues Task erfolgreich hinzugefügt:', data);
     } catch (error) {
         console.error('Fehler beim Hinzufügen des neuen Tasks:', error); }
 }
@@ -236,7 +235,6 @@ function getDescription(){
 function getDate(){ 
     const inputField = document.getElementById('Edit_Input');
     const value = inputField.value;
-    console.log("dateinput", value);
 }
 
 
