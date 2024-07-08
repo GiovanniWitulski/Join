@@ -38,15 +38,15 @@ function showPassword(inputFieldImg) {
 }
 
 function landingPageAnimation() {
-    setTimeout(() => {
-        document.getElementById("loadAnimation").classList.add("loader-hidden");
-      }, 200);
-      setTimeout(() => {
-        document.getElementById("loadAnimation").classList.add("d-none");
-      }, 1000);
+        setTimeout(() => {
+            document.getElementById("loadAnimation").classList.add("loader-hidden");
+          }, 200);
+          setTimeout(() => {
+            document.getElementById("loadAnimation").classList.add("d-none");
+          }, 1000);
 }
 
-function signUp(event) {
+async function signUp(event) {
     event.preventDefault();
     let passwordDontMatchMsg = document.getElementById('passwordDontMatch');
     let password = document.getElementById("signUpPasswordIndexHtml").value;
@@ -55,49 +55,24 @@ function signUp(event) {
 
     if (password === confirmPassword && privacyPolicyCheck.src.includes(`/assets/svg/checkmark.svg`)) {
         console.log('gleich');
-        getSideMenuCharacters('signUp');
+        localStorage.setItem('isSignedUp', true);
+        let userName = document.getElementById('signUpNameIndexHtml').value;
+        localStorage.setItem('userName', userName);
         setProfile();
+        getSideMenuCharacters('signUp');
         signupSuccessfullAnimation();
-    } else {
-        console.log('ungleich');
+    } else if (password != confirmPassword ){
         passwordDontMatchMsg.classList.remove('d-none');
+        passwordDontMatchMsg.innerHTML = `Ups! your password doesnt match`;
+    } else {
+        passwordDontMatchMsg.classList.remove('d-none');
+        passwordDontMatchMsg.innerHTML = `Agree to our privacy policy!`;
     }
 }
-
-// getSideMenuCharacters BEARBEITEN
-function getSideMenuCharacters(loginChoice) {
-    if (loginChoice === 'login') {
-        localStorage.setItem('sideMenuCharacters', 'SM');
-        localStorage.setItem('welcomeMsg', '!');
-    }
-
-    if (loginChoice === 'signUp') {
-        let name =  document.getElementById('signUpNameIndexHtml').value
-        let sideMenuCharacters = name.slice(0, 2).toUpperCase();
-        localStorage.setItem('sideMenuCharacters', sideMenuCharacters);
-        localStorage.setItem('welcomeMsg', name);
-    }
-
-    if (loginChoice === 'guest' || loginChoice === null) {
-        localStorage.setItem('sideMenuCharacters', 'G');
-        localStorage.setItem('welcomeMsg', '!');
-    }
-}
-
-function signupSuccessfullAnimation() {
-    let signupSuccessfullContainer = document.getElementById('signupSuccessfullContainer');
-    signupSuccessfullContainer.style.display = 'flex';
-
-    setTimeout(() => {
-        signupSuccessfullContainer.style.display = 'none';
-        showLoginForm();
-    }, 1000);
-}
-
 
 async function setProfile() {
     let data = await getDataForProfile();
-    postData('user', data)
+    postData('user', data);
 }
 
 async function getDataForProfile() {
@@ -105,7 +80,9 @@ async function getDataForProfile() {
         mail: document.getElementById('signUpEmailIndexHtml').value,
         name: document.getElementById('signUpNameIndexHtml').value,
         password: document.getElementById('signUpPasswordIndexHtml').value,
+        initialUserLetters: await getInitialLettersFromInput(),
     };
+    console.log(userData);
     return userData;
 }
 
@@ -127,6 +104,35 @@ async function getUsers() {
     }
 }
 
+async function getUserName() {
+    let users = await getUsers();
+    let userNames = [];
+    for (let i = 0; i < users.length; i++) {
+        const user = users[i];
+        userNames.push(user.name);
+    }
+    console.log(userNames[userNames.length - 1]);
+    return userNames[userNames.length - 1];
+}
+
+async function validateForm() {
+    let incorrectMailOrPasswordMsg = document.getElementById('incorrectMailOrPassword');
+    let passwordIsEqual = await comparePasswords();
+    let mailIsEqual = await compareMails();
+    if (passwordIsEqual != 'passwordIsEqual' || mailIsEqual != 'mailIsEqual') {
+        console.log('nein');
+        incorrectMailOrPasswordMsg.classList.remove('d-none');
+        return false;
+    } else {
+        console.log('ja');
+        localStorage.setItem('userName', await getUserName());
+        localStorage.setItem('isSignedUp', true);
+        await getSideMenuCharacters('login')
+        window.location.href = document.getElementById("loginForm").action;
+        return true;
+    }
+}
+
 async function getSignedUpMail() {
     let users = await getUsers();
     let userMails = [];
@@ -134,6 +140,7 @@ async function getSignedUpMail() {
         const user = users[i];
         userMails.push(user.mail);
     }
+    console.log(userMails);
     return userMails;
 }
 
@@ -154,10 +161,9 @@ async function comparePasswords() {
         const signedUpPssword = signedUpPsswords[i];
         if (signedUpPssword === enteredPassword) {
             console.log('gleiches Password');
-            return 'mailIsEqual';
+            return 'passwordIsEqual';
         } else {
             console.log('ungleiches Passwort');
-            return false;
         }
     }
 }
@@ -170,23 +176,64 @@ async function compareMails() {
         const signedUpMail = signedUpMails[i];
         if (signedUpMail === enteredMail) {
             console.log('gleiche Mail');
-            return 'passwordIsEqual';
+            return 'mailIsEqual';
         } else {
             console.log('ungleiche Mail');
-            return false;
         } 
     }
 }
 
-async function validateForm() {
-    let passwordIsEqual = await comparePasswords();
-    let mailIsEqual = await compareMails();
-    if (passwordIsEqual === false || mailIsEqual === false) {
-        console.log('nein');
-        return false;
+async function getInitialLettersFromInput() {
+    let inputText = document.getElementById('signUpNameIndexHtml').value.trim();
+    let words = inputText.split(" ");
+  
+    if (words.length === 1) {
+      return words[0].charAt(0);
     } else {
-        console.log('ja');
-        window.location.href = document.getElementById("loginForm").action
-        return true;
+      let initialLetters = words.map(word => word.charAt(0));
+      return initialLetters.join("").toUpperCase();
     }
+}
+
+async function getSideMenuCharacters(loginChoice) {
+    localStorage.removeItem('sideMenuCharacters');
+    if (loginChoice === 'guest') {
+        localStorage.setItem('sideMenuCharacters', 'G');
+    } else if (loginChoice === 'login' || loginChoice === 'signUp') {
+        let initialLetters = await getInitialLetters();
+        let lastInitialLetter = initialLetters[initialLetters.length - 1];
+        localStorage.setItem('sideMenuCharacters', lastInitialLetter); 
+    }
+}
+
+async function getInitialLetters() {
+    let users = await getUsers();
+    let initialLetters = [];
+    for (let i = 0; i < users.length; i++) {
+        const user = users[i];
+        initialLetters.push(user.initialUserLetters);
+    }
+    console.log(initialLetters);
+    return initialLetters;
+}
+
+async function getSignedUpMail() {
+    let users = await getUsers();
+    let userMails = [];
+    for (let i = 0; i < users.length; i++) {
+        const user = users[i];
+        userMails.push(user.mail);
+    }
+    console.log(userMails);
+    return userMails;
+}
+
+function signupSuccessfullAnimation() {
+    let signupSuccessfullContainer = document.getElementById('signupSuccessfullContainer');
+    signupSuccessfullContainer.style.display = 'flex';
+
+    setTimeout(() => {
+        signupSuccessfullContainer.style.display = 'none';
+        showLoginForm();
+    }, 1000);
 }

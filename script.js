@@ -28,8 +28,8 @@ function dNoneSideMenu() {
 }
 
 function handleClickOutside(event) {
-  const sideMenu = document.getElementById("sideMenu");
-  const smBtn = document.getElementById("smBtn");
+  let sideMenu = document.getElementById("sideMenu");
+  let smBtn = document.getElementById("smBtn");
 
   if (!sideMenu.contains(event.target) && event.target !== smBtn) {
     sideMenu.classList.remove("side-menu-open");
@@ -37,7 +37,7 @@ function handleClickOutside(event) {
   }
 }
 
-function setSideMenuCharacters() {
+async function setSideMenuCharacters() {
   let sideMenuCharacters = localStorage.getItem('sideMenuCharacters');
   document.getElementById('smBtn').innerHTML = sideMenuCharacters;
 
@@ -63,34 +63,40 @@ function highlightNavigationButton() {
   }
 }
 
-function greetingMsg() {
-  let greetingMsg = getTimeOfDayGreeting();
-  greetingElement = document.getElementById('greetingMsgAnimation');
-  if (greetingMsg != null) {
-      greetingElement.innerHTML = greetingMsg;
-  } else {
-      greetingElement.style.display = 'none'; 
-  }
 
-  localStorage.removeItem("welcomeMsg"); 
-  
-  greetingElement.addEventListener('animationend', () => {
+function greetingMsg() {
+  let greetingElement = document.getElementById('greetingMsgAnimation');
+  if (localStorage.getItem('isSignedUp') === 'true') {
+    let userName = localStorage.getItem('userName');
+    let greetingMsg = getTimeOfDayGreeting();
+    if (greetingMsg != null) {
+        greetingElement.innerHTML = `${greetingMsg} ${userName}`;
+        greetingElement.classList.add('greetingMsgAnimation');
+    }
+    greetingElement.addEventListener('animationend', () => {
+      localStorage.removeItem('isSignedUp');
       greetingElement.classList.remove('greetingMsgAnimation');
       greetingElement.style.display = 'none';
-  });
+  }); 
+  } else {
+    greetingElement.style.display = 'none'; 
+}
 }
 
 function getTimeOfDayGreeting() {
-  let welcomneMsg = localStorage.getItem('welcomeMsg');
   let now = new Date();
   let hour = now.getHours();
-  if (welcomneMsg != null && hour >= 5 && hour < 12) {
-    return `Good Morning ${welcomneMsg}`;
-  } else if (welcomneMsg && hour >= 12 && hour < 18) {
-    return `Good Afternoon ${welcomneMsg}`;
-  } else if (welcomneMsg && hour > 18) {
-    return `Good Evening ${welcomneMsg}`;
+  if (hour >= 5 && hour < 12) {
+    return `Good Morning`;
+  } else if (hour >= 12 && hour < 18) {
+    return `Good Afternoon`;
+  } else if (hour > 18) {
+    return `Good Evening`;
   } else {
     return null;
   }
+}
+
+function backToLoginPage() {
+  history.back();
 }

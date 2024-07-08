@@ -180,6 +180,10 @@
     font-weight: 500;
 }
 
+#greetingName {
+    color: rgb(41,171,226);
+}
+
 @keyframes loading {
     0% {
         opacity: 1; 

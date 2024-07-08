@@ -11,8 +11,6 @@
     margin-bottom: 47px;
     position: absolute;
     z-index: 50;
-    position: absolute;
-    z-index: 50;
 }
 
 .login-card-div {
@@ -99,7 +97,6 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
-    margin-bottom: 40px;
 }
 
 .login-input-div-indexhtml {
@@ -145,16 +142,26 @@
 .required-msg-div {
     height: 15px;
     margin-left: 32px;
-    /* margin-bottom: 32px; */
+}
+
+.incorrect-msg-div {
+    height: 15px;
+    margin-bottom: 25px;
+    margin-left: 16px;
 }
 
 .required-msg {
-    /* display: none; */
     font-family: 'Poppins';
     font-weight: 400;
     font-size: 12px;
     line-height: 14.4px;
-    /* margin-left: 16px; */
+}
+
+.incorrect-msg {
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14.4px;
 }
 
 .accept-privacy-policy-div {

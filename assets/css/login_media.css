@@ -11,6 +11,16 @@
         justify-content: center;
         display: flex;
     }
+
+    .incorrect-msg-div {
+        margin-left: 0;
+        justify-content: center;
+        display: flex;
+    }
+
+    .incorrect-msg {
+        width: 505px;
+    }
     
     .required-msg {
         width: 505px;
@@ -54,7 +64,6 @@
         justify-content: center;
         align-items: center;
         gap: 32px;
-        margin-bottom: 40px;
     }
 
     .login-input-div-indexhtml {
