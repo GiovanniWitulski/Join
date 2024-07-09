@@ -4,7 +4,6 @@ function init() {
 
 function toggleCheckbox(checkboxImg) {
     const currentSrc = checkboxImg.src;
-
     if (currentSrc.endsWith('rectangle.svg')) {
         checkboxImg.src = '/assets/svg/checkmark.svg';
     } else {
@@ -15,13 +14,11 @@ function toggleCheckbox(checkboxImg) {
 function openSideMenu() {
     let sideMenu = document.getElementById("sideMenu");
     sideMenu.classList.toggle("side-menu-open");
-  
   document.addEventListener('click', handleClickOutside);
 }
 
 function dNoneSideMenu() {
   let sideMenu = document.getElementById("sideMenu");
-
   setTimeout(() => {
     sideMenu.classList.add("d-none");
 }, 1000);
@@ -30,7 +27,6 @@ function dNoneSideMenu() {
 function handleClickOutside(event) {
   let sideMenu = document.getElementById("sideMenu");
   let smBtn = document.getElementById("smBtn");
-
   if (!sideMenu.contains(event.target) && event.target !== smBtn) {
     sideMenu.classList.remove("side-menu-open");
     document.removeEventListener('click', handleClickOutside);
@@ -40,7 +36,6 @@ function handleClickOutside(event) {
 async function setSideMenuCharacters() {
   let sideMenuCharacters = localStorage.getItem('sideMenuCharacters');
   document.getElementById('smBtn').innerHTML = sideMenuCharacters;
-
   if (sideMenuCharacters === null) {
     document.getElementById('smBtn').innerHTML = 'G';
   }
@@ -48,10 +43,8 @@ async function setSideMenuCharacters() {
 
 function highlightNavigationButton() {
   let pfad = window.location.pathname; 
-
   let menuLinks = document.querySelectorAll('.menu-links');
   menuLinks.forEach(link => link.classList.remove('menu-links-focus'));
-
   if (pfad.includes('summary')) {
       document.getElementById('summaryBtn').classList.add('menu-links-focus');
   } else if (pfad.includes('add_task')) {
@@ -62,7 +55,6 @@ function highlightNavigationButton() {
       document.getElementById('contactsBtn').classList.add('menu-links-focus');
   }
 }
-
 
 function greetingMsg() {
   let greetingElement = document.getElementById('greetingMsgAnimation');

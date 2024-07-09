@@ -391,8 +391,6 @@ input[type="date"]::-moz-focus-inner:hover{
     border: 1px solid #D1D1D1; 
 }
 
-
-
 #list-of-subtasks{
 padding-top: 8px;
 padding-left: 40px;
@@ -643,14 +641,11 @@ cursor: pointer;
     }
 }
 
-
 @media(min-width: 1250px){
     #addTaskForm{
         display: flex;
         gap: 48.62px;
     }
-
-  
 
     .leftDiv{
         width: 440px;
@@ -765,6 +760,3 @@ cursor: pointer;
         font-size: 61px;
     }
 }
-
-
-

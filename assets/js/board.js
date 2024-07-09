@@ -333,7 +333,6 @@ async function closeOverlaySideClick(){
     findTask();
 }
 
-
 function overlayDeleteTask(idTask, i){         
     let taskToDelete = BackgroundTaskBoard[i];
     if (taskToDelete.taskid == idTask){
@@ -342,14 +341,11 @@ function overlayDeleteTask(idTask, i){
     }
 }
 
-
 function deleteTask(i){
     TaskBoard.splice(i, 1);
 }
 
-
 // Edit Task function //*css*/` added by Johannes
-
 
 function switchToAddTask(type){
     if(window.innerWidth < 1250){
@@ -365,7 +361,6 @@ function switchToAddTask(type){
     }
 }
 
-
 function hideOverlay(){
     document.getElementById('addTaskOverlayContainer').classList.remove('addTaskOverlayContainerShowing');
     document.getElementById('addTaskOverlayContainer').classList.add('addTaskOverlayContainer');
@@ -373,4 +368,3 @@ function hideOverlay(){
     changeToActive('medium-btn');
     clearTheForm();
 }
-

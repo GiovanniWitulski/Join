@@ -139,7 +139,6 @@
     display: flex;
     align-items: center;
     padding-bottom: 21px;
-    
 }
 
 .category-headline{
@@ -213,7 +212,6 @@
 .top-container-desktop{
     padding-bottom: 32px;
 }
-
 
 .bottom-container-desktop{
     padding-left: 134px;
@@ -303,4 +301,3 @@
         top: 110px;
     }
 }
-

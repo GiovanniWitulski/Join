@@ -30,7 +30,9 @@
                 <form id="loginForm" class="form-indexhtml" action="/summary.html" onsubmit="return false">
                     <div class="login-input-divs">
                         <div class="login-input-div-indexhtml mb-40px">
-                            <input class="login-input-indexhtml" id="loginEmailIndexHtml" type="email" placeholder="Email" required>
+                            <input class="login-input-indexhtml" id="loginEmailIndexHtml" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" type="email"  
+                            title="Geben sie eine gültige Mail an. Es muss ein @-Zeichen, sowie ein . und Text jeweils vor und hinter diesen Zeichen stehen." 
+                            placeholder="Email" required>
                             <div class="input-icon">
                                 <img src="/assets/svg/mail.svg" alt="Email Icon">
                             </div>
@@ -86,7 +88,9 @@
                             </div>
                         </div>
                         <div class="login-input-div-indexhtml">
-                            <input class="login-input-indexhtml" id="signUpEmailIndexHtml" type="email" placeholder="Email" required>
+                            <input class="login-input-indexhtml" id="signUpEmailIndexHtml" type="email" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" 
+                            title="Geben sie eine gültige Mail an. Es muss ein @-Zeichen, sowie ein . und Text jeweils vor und hinter diesen Zeichen stehen." 
+                            placeholder="Email" required>
                             <div class="input-icon">
                                 <img src="/assets/svg/mail.svg" alt="Email Icon">
                             </div>

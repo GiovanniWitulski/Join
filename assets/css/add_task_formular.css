@@ -6,7 +6,6 @@ body {
     overflow: hidden;
 }
 
-
 @media(min-width: 1250px){
     body{
         overflow-y: hidden;

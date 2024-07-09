@@ -24,7 +24,6 @@ function changeInputFieldImg(inputField) {
 
 function showPassword(inputFieldImg) {
     let inputField = inputFieldImg.parentNode.previousElementSibling;
-  
     if (inputFieldImg.src.includes('visibility_off.svg')) {
       inputFieldImg.src = '/assets/svg/visibility.svg';   
       inputField.type = "text";                           
@@ -51,7 +50,6 @@ async function signUp(event) {
     let password = document.getElementById("signUpPasswordIndexHtml").value;
     let confirmPassword = document.getElementById("signUpConfirmPasswordIndexHtml").value;
     let privacyPolicyCheck = document.getElementById('acceptPrivacyPolicy');
-
     if (password === confirmPassword && privacyPolicyCheck.src.includes(`/assets/svg/checkmark.svg`)) {
         localStorage.setItem('isSignedUp', true);
         let userName = document.getElementById('signUpNameIndexHtml').value;
@@ -92,9 +90,7 @@ async function getUsers() {
             user.push({ id: key, ...data[key] });
         }
       }
-    
       return user;
-
     } catch (error) {
       console.error('Fehler beim Laden des User:', error);
       throw error;
@@ -172,7 +168,6 @@ async function compareMails() {
 async function getInitialLettersFromInput() {
     let inputText = document.getElementById('signUpNameIndexHtml').value.trim();
     let words = inputText.split(" ");
-  
     if (words.length === 1) {
       return words[0].charAt(0);
     } else {

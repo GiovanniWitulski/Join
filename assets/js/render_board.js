@@ -30,7 +30,6 @@ function startReadingTasks(){
             renderDone();   }  }
 }
 
-
 function subTaskCheck(){ 
     subTaskChecked = 0;  
     if(toDoTask.subtaskSum){
@@ -42,14 +41,12 @@ function subTaskCheck(){
     }
 }
 
-
 function subTaskNoShow(){
     if (subTaskChecked === 0){       
        let idSubtask = 'cardSubtasks' + toDoTask.taskid;
        document.getElementById(idSubtask).classList.add('hidden');
     } 
 }
-
 
 function readInTasks(){         //reading Tasksinformation
     label(toDoTask); 
@@ -60,7 +57,6 @@ function readInTasks(){         //reading Tasksinformation
     priorityEmblem();
 }
 
-
 function label(){     
     if(toDoTask.label === 1){
         newLabel = technicalTaskLabel;
@@ -68,7 +64,6 @@ function label(){
         newLabel = userStoryLabel;
     }                 
 }
-
 
 function amountSubTasks(){     
     newAmountSubtask = toDoTask.subtask.length;
@@ -83,7 +78,6 @@ function amountSubTasks(){
     } 
 }
 
-
 function calcProgressBar(){  
     newSumSubtaskCalc = 0;     
     newSumSubtaskCalc = newSumSubtask/newAmountSubtask;      
@@ -95,14 +89,12 @@ function calcProgressBar(){
     newProgressBarId = toDoTask.taskid; 
 }
 
-
 function descriptionChar(){
     let lastChar = toDoTask.description[toDoTask.description.length - 1];
     if (lastChar === "." || lastChar === "!" || lastChar === "?"){
         toDoTask.description = toDoTask.description.slice(0, -1);
     }                                 
 }
-
 
 function emblemSvg() {            
     newEmblems = '';  
@@ -120,7 +112,6 @@ function emblemSvg() {
         } }          
 }
 
-
 function priorityEmblem(){
     newPriority = '';
             if (toDoTask.priority){
@@ -133,9 +124,7 @@ function priorityEmblem(){
             }
 }
 
-
 // container render-functions //
-
 
 function renderToDo(){
     toDo.innerHTML += `
@@ -159,7 +148,6 @@ function renderToDo(){
     subTaskNoShow();
 }
 
-
 function renderInProgress(){
     inProgress.innerHTML += `
     <div id="Task${toDoTask.taskid}" class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
@@ -181,7 +169,6 @@ function renderInProgress(){
     progressBar.setAttribute('width', `${newProgressInPercent}%`);
     subTaskNoShow();
 }
-
 
 function renderAwaitFeedback(){
     awaitFeedback.innerHTML += `
@@ -205,7 +192,6 @@ function renderAwaitFeedback(){
     subTaskNoShow();
 }
 
-
 function renderDone(){
     done.innerHTML += `
     <div id="Task${toDoTask.taskid}" class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
@@ -227,7 +213,6 @@ function renderDone(){
     progressBar.setAttribute('width', `${newProgressInPercent}%`);
     subTaskNoShow();
 }
-
 
 function taskContainer(){             
     toDo.innerHTML = '';
@@ -254,9 +239,7 @@ function ifContainerEmpty(){
     }
 }
 
-
 /// render Overlay Task /// 
-
 
 function overlayRender(){
     overlay.innerHTML = `
@@ -284,9 +267,7 @@ function overlayRender(){
     `;        
 }
 
-
 /// render - EditTask - container ///
-
 
 function renderEditTask(){
     overlay.innerHTML = `
@@ -329,10 +310,7 @@ function renderEditTask(){
     `
 
 } 
-
-
 /// Move Task Popup /// --> Move out functions if space need for other render (then ggf. render_board at least load )
-
 
 async function renderMoveTask(event, i){
     event.stopPropagation();
@@ -344,14 +322,12 @@ async function renderMoveTask(event, i){
     showShadow();
 }
 
-
 async function closeMoveTask(){
     document.getElementById('taskSwitchCategory').classList.add('transition')    
     await new Promise(resolve => setTimeout(resolve, 120));
     document.getElementById('taskSwitchCategory').classList.add('hide');    
     removeShadow();
 }
-
 
 function moveCategoryTask(newType){
     TaskBoard[taskToMove].type = newType
@@ -360,17 +336,12 @@ function moveCategoryTask(newType){
     findTask();
 }
 
-
 /// highlight drop container ///
 
 function highlight(id) {
     document.getElementById(id).classList.add('drag-area-highlight');
 }
 
-
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
 }
-
-
-

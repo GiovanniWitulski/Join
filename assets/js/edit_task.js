@@ -13,7 +13,6 @@ let editTitle;
 let editDescription;
 let editTask;
 
-
 // upload EditTask
 
 async function addEditTaskToFirebase() {
@@ -31,11 +30,9 @@ async function addEditTaskToFirebase() {
         console.error('Fehler beim Hinzufügen des neuen Tasks:', error); }
 }
 
-
 // load & procress contacts for Edit Task
 
 processContacts(); // load & process before Edit Task started
-
 
 async function loadContacts() {
     const FIREFIREBASE_URL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app/';
@@ -53,7 +50,6 @@ async function loadContacts() {
         throw error; }
 }
 
-
 function createContactEdit(vorname, nachname, color) {
     const vornameInitial = vorname.charAt(0).toUpperCase(); 
     const nachnameInitial = nachname ? nachname.charAt(0).toUpperCase() : ''; 
@@ -63,7 +59,6 @@ function createContactEdit(vorname, nachname, color) {
     </svg>`;
     return svgTemplate;
 }
-
 
 async function processContacts() {
     editContacts = [];
@@ -82,8 +77,6 @@ async function processContacts() {
 }
 
 //search functions //
-
-
 function filterContactsEdit(eventOrValue) {
     let searchedContact = '';
     if (eventOrValue && eventOrValue.target) {
@@ -98,7 +91,6 @@ function filterContactsEdit(eventOrValue) {
         return;
     } filteredContacts(searchedContact);       
 }
-
 
 function filteredContacts(searchedContact){
     editContactsShow = [];
@@ -116,7 +108,6 @@ function filteredContacts(searchedContact){
         clickButtonSearch();
 }
 
-
 function clickButtonSearch(){
     let inputElement = document.getElementById('InputSearchEdit');
     let inputButton = document.getElementById('ContactListEditButton');
@@ -133,15 +124,11 @@ function clickButtonSearch(){
     }   return searchButton;
 }
 
-
 // Edit Task  // later upload complete EditTask -> Taskboard
-
-
 function editSelectPriority (priority){
     EditTask.priority = priority;
     editRenderPriority();
 }
-
 
 function selectContact (contactId){    
     for (i=0; i<editContacts.length; i++){
@@ -159,7 +146,6 @@ function selectContact (contactId){
     }  filterContactsEdit();    
 }
 
-
 function selectContactIf(){
     choosenContacts();
     renderContactListEdit();
@@ -167,7 +153,6 @@ function selectContactIf(){
     renderChoosenContactsEmblems();   
     checkInputFieldValue();
 }
-
 
 function checkInputFieldValue(){
     const inputElement = document.getElementById('InputSearchEdit');
@@ -179,11 +164,9 @@ function checkInputFieldValue(){
 }
 }
 
-
 function clearInputField() {
     document.getElementById('InputSearchEdit').value = '';
 }
-
 
 function editAddSub(){
     const inputField = document.getElementById('subtaskEdit');
@@ -193,7 +176,6 @@ function editAddSub(){
     inputField.value = '';
     editRenderSubtask();
 }
-
 
 function editEditSub(toEditSub){
     let number = toEditSub;
@@ -208,7 +190,6 @@ function emptyEditSub(){
     document.getElementById('subtaskEdit').value = '';
 }
 
-
 function editDeleteSub(toDeleteId){
     let number = toDeleteId
     let deleteID = number - 10; //identification which subtask (the subtaskposition)
@@ -217,13 +198,11 @@ function editDeleteSub(toDeleteId){
     editRenderSubtask();
 }
 
-
 function getTitle(){
     const inputField = document.getElementById('titleEdit'); 
     const value = inputField.value.trim();
     EditTask.title = value;
 }
-
 
 function getDescription(){
     const inputField = document.getElementById('descriptionEdit');
@@ -231,12 +210,10 @@ function getDescription(){
     EditTask.description = value;
 }
 
-
 function getDate(){ 
     const inputField = document.getElementById('Edit_Input');
     const value = inputField.value;
 }
-
 
 function storeNewData(taskboardPosition){ 
     deleteTask(taskboardPosition); //1.
@@ -262,7 +239,6 @@ function editTaskOverlay(idTask, i){
     editRenderSubtask();
 }
 
-
 function editRenderSubtask(){            
         let editSubtask = document.getElementById('editRenderSubtasks');
         editSubtask.innerHTML = ``;        
@@ -273,7 +249,6 @@ function editRenderSubtask(){
         editSubtask.innerHTML += `<div class="edit-task-subtask"><div>&bull; ${editSubAdd}</div><div class="edit-subtask-buttons-2"><img class="edit-subtask-buttons-img" onclick="editEditSub(${idCounter})"src="/assets/svg/Subtasks%20icons11-4.svg" alt="edit"><div class="placeholder-div">|</div><img class="edit-subtask-buttons-img" onclick="editDeleteSub(${idCounter})" src="/assets/svg/delete.svg" alt="delete"></div></div>`
     }
 }
-
 
 function editRenderPriority(){
     let editTaskPriority = EditTask.priority;  
@@ -289,7 +264,6 @@ function editRenderPriority(){
         <button onclick="editSelectPriority('low')" id="editButtonLow" class="edit-priority-buttons background-color-green"><h4 style="font-weight: 400;">Low</h4><img src="/assets/svg/Prio baja-2.svg" alt="low"></button>`;    
     } 
 }
-
 
 function testForChoosenContact (){
     for (i=0; i<editContactsShow.length; i++){
@@ -307,7 +281,6 @@ function testForChoosenContact (){
         }  }  } choosenContacts();
 }  
 
-
 function choosenContacts(){
     choosenContactsEdit = [];
     for (i=0; i<editContacts.length; i++){
@@ -324,7 +297,6 @@ function choosenContacts(){
         EditTask.contactEmblem.push(choosenContactsEdit[i].contactEmblem);    }
 }
 
-
 function renderChoosenContactsEmblems(){
     let editEmblems = document.getElementById('choosenContacts');
     editEmblems.innerHTML = ``;
@@ -339,7 +311,6 @@ function renderChoosenContactsEmblems(){
         }     
     }    
 }
-
 
 function renderContactListEdit() { 
     contactListEdit = ''
@@ -357,7 +328,6 @@ function renderContactListEdit() {
     return contactListEdit;
 }    
 
-
 function emptyEditTask(){    
     editTask = '';
     editTask = EditTask;
@@ -366,13 +336,11 @@ function emptyEditTask(){
     overlay.innerHTML = '';    
 }
 
-
 function setDateListener(){
     document.getElementById('InputSearchEdit').addEventListener('input', filterContactsEdit);
     document.getElementById('titleEdit').addEventListener('input', getTitle);
     document.getElementById('descriptionEdit').addEventListener('input', getDescription);
 }
-
 
 function renderEditDate(){
     let initialDate = editTask.date; //  YYYY-MM-DD-Format (!)
@@ -383,7 +351,6 @@ function renderEditDate(){
     let selectedDate = dateInput.value; EditTask.date = selectedDate;}); 
 }
 
-
 function getTheCurrentDate() {
     let today = new Date();
     let day = String(today.getDate()).padStart(2, '0');
@@ -393,7 +360,3 @@ function getTheCurrentDate() {
 }
 
 /// renderEditTask() --> render_board.js ///
-
-
-
-

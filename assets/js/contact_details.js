@@ -1,4 +1,3 @@
-
 let newSurname;
 let newLastName;
 const moreButton = document.getElementById('more-button');
@@ -17,7 +16,6 @@ if (moreButton && moreBtnMenu) {
     document.addEventListener('click', closeMenuOnClickOutside);
 } 
 
-
 async function loadCurrentContactId(){
     let userId = await loadData('currentContact');
     if(window.innerWidth >= 1250){
@@ -26,7 +24,6 @@ async function loadCurrentContactId(){
         await loadSingleContact(userId);
     }
 }
-
 
 async function loadSingleContact(id){
     let user;
@@ -44,7 +41,6 @@ async function loadSingleContact(id){
     document.getElementsByClassName('edit-btn')[0].outerHTML = `<button class="edit-btn" onclick="fillEditContactForm(${id})"></button>`
 }
 
-
 async function loadSingleContactDesktop(id){
     let user;
     for (let i = 0; i < contactsAsJson.length; i++) {
@@ -61,31 +57,26 @@ async function loadSingleContactDesktop(id){
     document.getElementsByClassName('edit-btn')[0].outerHTML = `<button class="edit-btn" onclick="fillEditContactFormDesktop(${id})"></button>`
 }
 
-
 async function deleteContact(id){
     tokenToDelete = contactsAsJson[id]['id'];
     await deleteData(`contacts/${tokenToDelete}`);
     window.location.href = "/contacts.html";
 }
 
-
 function drawContactDetailPic(user){
     return `<svg class="name-pic" width="42px" height="42px"><circle cx="40" cy="40" r="40" stroke="white" stroke-width="2" fill="${user['color']}" />
     <text x="20" y="48" fill="white" font-size="27px">${user['vorname'].charAt(0)}${user['name'].charAt(0)}</text></svg>`;
 }
-
 
 async function drawContactEditPic(user){
     return `<svg class="contact-pic-edit" width="62px" height="62px"><circle class="circle" cx="60" cy="60" r="58" stroke="white" stroke-width="2" fill="${user['color']}" />
     <text class="circle-text" x="50%" y="55%" fill="white" font-size="47px">${user['vorname'].charAt(0)}${user['name'].charAt(0)}</text></svg>`;
 }
 
-
 async function drawContactEditPicDesktop(user){
     return `<svg id="editContactPic-desktop" class="contact-pic" width="62px" height="62px"><circle class="circle" cx="60" cy="60" r="58" stroke="white" stroke-width="2" fill="${user['color']}" />
     <text class="circle-text" x="20%" y="60%" fill="white" font-size="47px">${user['vorname'].charAt(0)}${user['name'].charAt(0)}</text></svg>`;
 }
-
 
 async function fillEditContactForm(id){
     idToFind = id;
@@ -103,7 +94,6 @@ async function fillEditContactForm(id){
     document.getElementById('editContactPic').outerHTML = await drawContactEditPic(currentContact);
 }
 
-
 async function fillEditContactFormDesktop(id){
     idToFind = id;
     currentContact = contactsAsJson[idToFind];
@@ -120,30 +110,25 @@ async function fillEditContactFormDesktop(id){
     document.getElementById('editContactPic-desktop').outerHTML = await drawContactEditPicDesktop(currentContact);
 }
 
-
 function showEditOverlay(){
     document.getElementById('overlayVeil').classList.remove('displayNone');
     document.getElementById('overlay-editContact').classList.add('showEditContact');
 }
-
 
 function hideEditOverlay(){
     document.getElementById('overlayVeil').classList.add('displayNone');
     document.getElementById('overlay-editContact').classList.remove('showEditContact');
 }
 
-
 function showEditOverlayDesktop(){
     document.getElementById('edit-contact-container').classList.add('show');
     document.getElementById('overlayVeilAddContact').classList.remove('none');
 }
 
-
 function hideEditOverlayDesktop(){
     document.getElementById('edit-contact-container').classList.remove('show');
     document.getElementById('overlayVeilAddContact').classList.add('none');
 }
-
 
 async function getTheEditedData(element){
     if(window.innerWidth >= 1250){
@@ -152,7 +137,6 @@ async function getTheEditedData(element){
         return document.getElementById(element).value;
     }
 }
-
 
 async function saveEditsToContact(token){
     let editedName = await getTheEditedData('contact-name');
@@ -169,7 +153,6 @@ async function saveEditsToContact(token){
         await submitForm(indexOfCurrentContact);
     }
     
-
 async function getTheNewName(surname, lastName){
     if(surname && lastName){
         newSurname = surname.charAt(0).toUpperCase() + surname.slice(1);
@@ -179,7 +162,6 @@ async function getTheNewName(surname, lastName){
         newLastName = ""
     }
 }
-
 
 async function getTheReadyData(editedMail,editedPhone,newLastName,newSurname,contactToUpdate){
    let data = { 
@@ -193,40 +175,39 @@ async function getTheReadyData(editedMail,editedPhone,newLastName,newSurname,con
 }
 
     
-    async function submitForm(){
-        if(window.innerWidth < 1250){
-            document.getElementById('edit-contact-form').submit();
-        }else{
-            await blendItOut(); 
-            loadContacts();
-            await loadCurrentContactId();  
-        }   
-    }
-    
-    
-    async function blendItOut(){
-        document.getElementById('edit-contact-container').classList.add('fade');
-        document.getElementById('overlayVeilAddContact').classList.add('none');
-        document.getElementById('edit-contact-container').classList.remove('show');
-        document.getElementById('edit-contact-container').classList.remove('fade');
-    }
-    
-    
-    async function checkIfContactWasCreated(){
-        let wasContactCreated = localStorage.getItem('contactWasCreated');
-        if(wasContactCreated == "true"){
-            await showTheNotificaiton();
-        }
-    }
-    
-    
-    async function showTheNotificaiton(){
-        document.getElementById('notificationAddContact').classList.add('showContactAdded');
-        setTimeout(() => {
-            document.getElementById('notificationAddContact').classList.remove('showContactAdded');
-        }, 1000);
-        localStorage.clear();
-    }
-    
+async function submitForm(){
+    if(window.innerWidth < 1250){
+        document.getElementById('edit-contact-form').submit();
+    }else{
+        await blendItOut(); 
+        loadContacts();
+        await loadCurrentContactId();  
+    }   
+}
 
-    document.addEventListener('DOMContentLoaded', checkIfContactWasCreated);
+
+async function blendItOut(){
+    document.getElementById('edit-contact-container').classList.add('fade');
+    document.getElementById('overlayVeilAddContact').classList.add('none');
+    document.getElementById('edit-contact-container').classList.remove('show');
+    document.getElementById('edit-contact-container').classList.remove('fade');
+}
+
+
+async function checkIfContactWasCreated(){
+    let wasContactCreated = localStorage.getItem('contactWasCreated');
+    if(wasContactCreated == "true"){
+        await showTheNotificaiton();
+    }
+}
+
+
+async function showTheNotificaiton(){
+    document.getElementById('notificationAddContact').classList.add('showContactAdded');
+    setTimeout(() => {
+        document.getElementById('notificationAddContact').classList.remove('showContactAdded');
+    }, 1000);
+    localStorage.clear();
+}
+    
+document.addEventListener('DOMContentLoaded', checkIfContactWasCreated);

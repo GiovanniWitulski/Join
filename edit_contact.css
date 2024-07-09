@@ -1,8 +1,8 @@
-
 body{
     margin: 0;
     overflow-y: hidden;
 }
+
 .overlay-container{
     width: 396px;
     height: calc(100% - 160px);
