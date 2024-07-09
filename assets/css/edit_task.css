@@ -188,6 +188,7 @@
     position: absolute;
     scrollbar-width: none;
     border-radius: 8px;
+    z-index: 3;
 }
 
 .contactFieldEdit{

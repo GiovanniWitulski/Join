@@ -24,16 +24,21 @@ let done = document.getElementById('doneContainer');
 let overlay = document.getElementById('overlayContainer');
 let overlaySub = document.getElementById('overlaySubCheckbox');
 
-
-
-////////////Main Start Functions///////////
-
+/**
+ * This function emptys the download and the working array.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function cleanArrays(){
     TaskBoard = [];
     BackgroundTaskBoard = [];
 }
 
-
+/**
+ * This function starts the downloading and processing of the tasks stored at the firebase.
+ * 
+ * @returns {void} This function returns no value.
+ */
 async function downloadData() {
     cleanArrays();
     try {
@@ -45,7 +50,11 @@ async function downloadData() {
     renderBoard();
 }
 
-
+/**
+ * This function fetches the data of the firebase data storage and saves them as .jsonfile.
+ * 
+ * @returns {json} This function returns a json.file.
+ */
 async function fetchData() {
     const response = await fetch(`${databaseURL}/tasks.json`);
     if (!response.ok) {
@@ -54,13 +63,22 @@ async function fetchData() {
     return await response.json();
 }
 
-
+/**
+ * This function restructures the downloaded data to fit into the usable format.
+ * 
+ * @param {object} data the downloaded data.
+ */
 function formatTasks(data) {
     const formattedTasks = Object.values(data).map(formatTask);
     updateTaskBoard(formattedTasks);
 }
 
-
+/**
+ * This "sub" function  of formatTasks(); restructures the downloaded data to fit into the usable format.
+ * 
+ * @param   {object} task the downloaded data.
+ * @returns {Array} the array is repeatedly retured to formatTask();     
+ */
 function formatTask(task) {
     return {
         label: task.label,
@@ -77,29 +95,49 @@ function formatTask(task) {
     };
 }
 
-
+/**
+ * This function pushes the downloaded and formatted task to the relating arrays.
+ * 
+ * @param {Array} formattedTasks includes the task in similar form to the arrays used.   
+ */
 function updateTaskBoard(formattedTasks) {
     BackgroundTaskBoard.push(...formattedTasks);
     TaskBoard = BackgroundTaskBoard;
 }
 
-
+/**
+ * This function shows a console log information if the downloading & restructurin process failed.
+ * 
+ * @param {error} error if the download failed.   
+ */
 function handleError(error) {
  console.error('Fehler beim Abrufen und Formatieren der Daten:', error);
 }
 
-
+/**
+ * This function starts the render process of the board.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function renderBoard(){ 
     taskContainer();                          
 }
 
-
+/**
+ * This function starts the process of rendering the surface of the clicked on task.
+ * 
+ * @param {number} id the id of the task clicked on.
+ */
 function overlayTask(id){    
     task = TaskBoard.findIndex(t => t.taskid === id);
     OverlayTaskPopup(task);
 }
 
-
+/**
+ * This function updates the firebase storage with the lates changes at the task board.
+ * 
+ * @returns {void} This function returns no value.
+ */
 async function uploadData() {
     const databaseURL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app';
     try {   const response = await fetch(`${databaseURL}/tasks.json`, {
@@ -113,13 +151,14 @@ async function uploadData() {
         const data = await response.json();
     } catch (error) {
         console.error('Fehler beim Hochladen der Daten:', error);
-    }    // downloadData();  
+    }     
 }
 
-
-//Search functions  /////////////////////////////////////////
-
-
+/**
+ * This function checks if the search field is empty, otherwise it starts the result showing function.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function findTask(){
     const inputfield = document.getElementById('boardInput');
     const SearchedTask = inputfield.value;
@@ -134,7 +173,12 @@ function findTask(){
     showSearchResults(SearchedTask);    
 }
 
-
+/**
+ * This function compares the title and description of existing tasks with the serch input.
+ * It also hides the one not matching, with adding a class for it to do so.
+ * 
+ * @param {string} s searched text to compare with the existing tasks.
+ */
 function showSearchResults(s){
     for (let i = 0; i < BackgroundTaskBoard.length; i++) {
         const task = BackgroundTaskBoard[i];   
@@ -150,21 +194,31 @@ function showSearchResults(s){
     }    
 }
 
-
-// drag & drop functions  //////////////7
-
-
+/**
+ * This function starts the highlightning.
+ * 
+ * @param {number} id the id of the area to be higlightened.
+ */
 function startDragging(id){
     currentDraggedTask = id;
     highlight(id);
 }
 
-
+/**
+ * This function establishes the ability to drop a task.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
-
+/**
+ * This function sets the type (status) of the dropped area to the dropped task.
+ * 
+ * @param {number} newType the new type (status) of the task.
+ * @param {number} id  the id of the dropped task.
+ */
 function dropAt(newType, id){
     for (i=0; i<TaskBoard.length; i++){
         taskToMove = TaskBoard[i].taskid;
@@ -178,10 +232,11 @@ function dropAt(newType, id){
     }
 }
 
-
-// OVERLAY TASK / POPUP ///////////////////////
-
-
+/**
+ * This function starts the rendering of the task popup.
+ * 
+ * @param {number} i  the id of the choosen/clicked task.
+ */
 function OverlayTaskPopup(i) {
     OverlayTask = TaskBoard[i];
     overlayTaskBoardPosition = i;
@@ -195,9 +250,12 @@ function OverlayTaskPopup(i) {
     showShadow();
 }
 
-
-function overlayContactsRead(i){
-    
+/**
+ * This function sets the emblems of the popup task.
+ * 
+ * @param {number} i  the id of the choosen/clicked task.
+ */
+function overlayContactsRead(i){    
     overlayContacts = '';
     let emblem = '';
     if(TaskBoard[i].contactEmblem.length > 0){
@@ -212,7 +270,11 @@ function overlayContactsRead(i){
     }    
 }
 
-
+/**
+ * This function sets the priority emblems of the popup task.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function overlayPrio(){
     overlayPriority = '';
     if (OverlayTask.priority === "low") {
@@ -224,19 +286,31 @@ function overlayPrio(){
     }
 }
 
-
+/**
+ * This function sets a timeout for removing a the class (slide - in - effect).
+ * 
+ * @returns {void} This function returns no value.
+ */
 async function removeTranslate(){
     await new Promise(resolve => setTimeout(resolve, 120));
     document.getElementById('overlayBoard').classList.remove('transition');
 }
 
-
+/**
+ * This function sets a timeout for adding a the class (slide - in - effect).
+ * 
+ * @returns {void} This function returns no value.
+ */
 async function addTranslate(){
     await new Promise(resolve => setTimeout(resolve, 120));
     document.getElementById('overlayBoard').classList.add('transition');
 }
 
-
+/**
+ * This function renders the subtasks for the poupup task.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function overlaySubtaskCheck(){
     overlaySubtaskStorage = '';
     if (OverlayTask.subtask.length > 0){
@@ -252,7 +326,11 @@ function overlaySubtaskCheck(){
             }
 }
      
-
+/**
+ * This function checks and sets the label for the popup task.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function overlayLabelCheck(){
     if (OverlayTask.label == 1) {
         overlayLabel = technicalTaskLabel;
@@ -261,6 +339,11 @@ function overlayLabelCheck(){
     }
 }
 
+/**
+ * This function checks which kind of label is existing, and so it sets the different text properties.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function ifOverlay(){
     if (OverlayTask.subtask === undefined || OverlayTask.subtask === null) {
         document.getElementById('overlaySubtaskContainer').classList.add('hide'); }
@@ -272,7 +355,12 @@ function ifOverlay(){
         }
 }
 
-            
+/**
+ * This function sets sets the changed value of the subtask when clicked on the checkmark.
+ * 
+ * @param {number} position position of the task at the taskboard array.
+ * @param {number} taskid id of the task.
+ */           
 function toggleCheckboxValue(taskid, position) {
     for (let i = 0; i < TaskBoard.length; i++) {
         const findTask = TaskBoard[i].taskid;
@@ -289,24 +377,40 @@ function toggleCheckboxValue(taskid, position) {
     toggleSubstaskRender()
 }
 
-
+/**
+ * This function renders the subtask into the popup task.
+ * 
+ * @returns {void} This function returns no value.
+ */          
 function toggleSubstaskRender(){            
     let toggledSubtasks = document.getElementById('overlaySubtaskContainer');
     toggledSubtasks.innerHTML = `${overlaySubtaskStorage}`;
     renderBoard();
 }
 
-
+/**
+ * This function enables the backgroundshadow.
+ * 
+ * @returns {void} This function returns no value.
+ */          
 function showShadow(){ 
     document.getElementById('mainContainerOverlay').classList.add('taskOverlayContainerShadow');
 }
 
-
+/**
+ * This function removes the shadow of the background.
+ * 
+ * @returns {void} This function returns no value.
+ */    
 function removeShadow(){ 
     document.getElementById('mainContainerOverlay').classList.remove('taskOverlayContainerShadow');
 }
 
-
+/**
+ * This function cloeses the popup task and starts the upload of the changes.
+ * 
+ * @returns {void} This function returns no value.
+ */
 async function closeOverlay(){ 
     if (document.getElementById('overlayBoard')) {
         document.getElementById('overlayBoard').classList.add('transition');}
@@ -320,7 +424,11 @@ async function closeOverlay(){
     removeShadow();
 }    
 
-
+/**
+ * This function cloeses the popup task and removes the optical effects.
+ * 
+ * @returns {void} This function returns no value.
+ */
 async function closeOverlaySideClick(){     
     if (document.getElementById('overlayBoard')) {
         document.getElementById('overlayBoard').classList.add('transition');}
@@ -333,6 +441,11 @@ async function closeOverlaySideClick(){
     findTask();
 }
 
+/**
+ * This function deletes the current popup task.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function overlayDeleteTask(idTask, i){         
     let taskToDelete = BackgroundTaskBoard[i];
     if (taskToDelete.taskid == idTask){
@@ -341,12 +454,20 @@ function overlayDeleteTask(idTask, i){
     }
 }
 
+/**
+ * This function deletes the task off the Taskboard array.
+ * 
+ * @param {number} i positoin at the Array.
+ */
 function deleteTask(i){
     TaskBoard.splice(i, 1);
 }
 
-// Edit Task function //*css*/` added by Johannes
-
+/**
+ * This function is for adding a task with pre-set type (status).
+ * 
+ * @param {number} type new type (status) of the task to be created.
+ */
 function switchToAddTask(type){
     if(window.innerWidth < 1250){
         window.location.href="/add_task.html";
@@ -361,6 +482,11 @@ function switchToAddTask(type){
     }
 }
 
+/**
+ * This function removes added effects via adding a new task.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function hideOverlay(){
     document.getElementById('addTaskOverlayContainer').classList.remove('addTaskOverlayContainerShowing');
     document.getElementById('addTaskOverlayContainer').classList.add('addTaskOverlayContainer');

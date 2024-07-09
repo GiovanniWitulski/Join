@@ -13,8 +13,11 @@ let editTitle;
 let editDescription;
 let editTask;
 
-// upload EditTask
-
+/**
+* Adds a task in the Firebase database.
+* 
+* @returns {void} This function does not return a value.
+*/
 async function addEditTaskToFirebase() {
     const databaseURL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app';
     try {
@@ -30,10 +33,13 @@ async function addEditTaskToFirebase() {
         console.error('Fehler beim Hinzufügen des neuen Tasks:', error); }
 }
 
-// load & procress contacts for Edit Task
+processContacts(); 
 
-processContacts(); // load & process before Edit Task started
-
+/**
+* The function loads and processes contacts for editing a task.
+* 
+* @returns {Array} An array of contact data.
+*/
 async function loadContacts() {
     const FIREFIREBASE_URL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app/';
     const endpoint = 'contacts';
@@ -50,6 +56,14 @@ async function loadContacts() {
         throw error; }
 }
 
+/**
+* The function creates the SVG template for a contact.
+* 
+* @param {string} vorname - The first name of the contact.
+* @param {string} nachname - The last name of the contact.
+* @param {string} color - The color of the profile picture.
+* @returns {string} The SVG template for the contact.
+*/
 function createContactEdit(vorname, nachname, color) {
     const vornameInitial = vorname.charAt(0).toUpperCase(); 
     const nachnameInitial = nachname ? nachname.charAt(0).toUpperCase() : ''; 
@@ -60,6 +74,11 @@ function createContactEdit(vorname, nachname, color) {
     return svgTemplate;
 }
 
+/**
+* The function prepares every contacts into a usable format for the edit task.
+* 
+* @returns {void} This function does not return a value.
+*/
 async function processContacts() {
     editContacts = [];
     editContactsShow = [];
@@ -76,7 +95,12 @@ async function processContacts() {
         throw error; }
 }
 
-//search functions //
+/**
+* The function filters contacts based on the search input value or event.
+* 
+* @param {Event | string} eventOrValue - The event object or search value.
+* @returns {void} This function does not return a value.
+*/
 function filterContactsEdit(eventOrValue) {
     let searchedContact = '';
     if (eventOrValue && eventOrValue.target) {
@@ -92,6 +116,12 @@ function filterContactsEdit(eventOrValue) {
     } filteredContacts(searchedContact);       
 }
 
+/**
+* The function filters contacts based on the searched contact.
+* 
+* @param {string} searchedContact - The contact to search for.
+* @returns {void} This function does not return a value.
+*/
 function filteredContacts(searchedContact){
     editContactsShow = [];
     for (let i = 0; i < editContacts.length; i++) {
@@ -108,6 +138,11 @@ function filteredContacts(searchedContact){
         clickButtonSearch();
 }
 
+/**
+* The function toggles the search button and updates the search display.
+* 
+* @returns {number} The current state of the search button.
+*/
 function clickButtonSearch(){
     let inputElement = document.getElementById('InputSearchEdit');
     let inputButton = document.getElementById('ContactListEditButton');
@@ -124,12 +159,23 @@ function clickButtonSearch(){
     }   return searchButton;
 }
 
-// Edit Task  // later upload complete EditTask -> Taskboard
+/**
+* The function sets the priority of the edited task.
+* 
+* @param {string} priority - The priority level to set.
+* @returns {void} This function does not return a value.
+*/
 function editSelectPriority (priority){
     EditTask.priority = priority;
     editRenderPriority();
 }
 
+/**
+* The function selects or deselects a contact for the edited task.
+* 
+* @param {number} contactId - The ID of the contact to select.
+* @returns {void} This function does not return a value.
+*/
 function selectContact (contactId){    
     for (i=0; i<editContacts.length; i++){
         let compareId = editContacts[i].id;
@@ -146,6 +192,11 @@ function selectContact (contactId){
     }  filterContactsEdit();    
 }
 
+/**
+* The function processes contacts if selected and updates the the edited task.
+* 
+* @returns {void} This function does not return a value.
+*/
 function selectContactIf(){
     choosenContacts();
     renderContactListEdit();
@@ -154,6 +205,11 @@ function selectContactIf(){
     checkInputFieldValue();
 }
 
+/**
+* The function checks the input field value and triggers search filtering.
+* 
+* @returns {void} This function does not return a value.
+*/
 function checkInputFieldValue(){
     const inputElement = document.getElementById('InputSearchEdit');
     const value = inputElement.value.trim(); 
@@ -164,10 +220,20 @@ function checkInputFieldValue(){
 }
 }
 
+/**
+* The function clears the input field.
+* 
+* @returns {void} This function does not return a value.
+*/
 function clearInputField() {
     document.getElementById('InputSearchEdit').value = '';
 }
 
+/**
+* The function adds a new/edited subtask to the edited task.
+* 
+* @returns {void} This function does not return a value.
+*/
 function editAddSub(){
     const inputField = document.getElementById('subtaskEdit');
     const addSub = inputField.value;
@@ -177,6 +243,12 @@ function editAddSub(){
     editRenderSubtask();
 }
 
+/**
+* The function edits the subtask of the edited task.
+* 
+* @param {number} toEditSub - The subtask to edit.
+* @returns {void} This function does not return a value.
+*/
 function editEditSub(toEditSub){
     let number = toEditSub;
     let addID = number - 10; //identification which subtask (the subtaskposition)
@@ -186,10 +258,21 @@ function editEditSub(toEditSub){
     editDeleteSub(toEditSub);
 }
 
+/**
+* The function clears the subtask input field.
+* 
+* @returns {void} This function does not return a value.
+*/
 function emptyEditSub(){
     document.getElementById('subtaskEdit').value = '';
 }
 
+/**
+* The function deletes a subtask from the edited task.
+* 
+* @param {number} toDeleteId - The ID of the subtask to delete.
+* @returns {void} This function does not return a value.
+*/
 function editDeleteSub(toDeleteId){
     let number = toDeleteId
     let deleteID = number - 10; //identification which subtask (the subtaskposition)
@@ -198,31 +281,57 @@ function editDeleteSub(toDeleteId){
     editRenderSubtask();
 }
 
+/**
+* The function sets the title of the current task to edit.
+* 
+* @returns {void} This function does not return a value.
+*/
 function getTitle(){
     const inputField = document.getElementById('titleEdit'); 
     const value = inputField.value.trim();
     EditTask.title = value;
 }
 
+/**
+* The function sets the description of the task to edit.
+* 
+* @returns {void} This function does not return a value.
+*/
 function getDescription(){
     const inputField = document.getElementById('descriptionEdit');
     const value = inputField.value.trim();
     EditTask.description = value;
 }
 
+/**
+* The function gets the date of the task to edit.
+* 
+* @returns {void} This function does not return a value.
+*/
 function getDate(){ 
     const inputField = document.getElementById('Edit_Input');
     const value = inputField.value;
 }
 
+/**
+* The function stores the new data for the edited task.
+* 
+* @param {number} taskboardPosition - The position of the task on the board.
+* @returns {void} This function does not return a value.
+*/
 function storeNewData(taskboardPosition){ 
     deleteTask(taskboardPosition); //1.
     TaskBoard.push(EditTask);
     closeOverlay();   
 }
 
-///////// RENDER EDIT TASK ////////// 
-
+/**
+* The function starts the processes of the edit task overlay for loading the specific task.
+* 
+* @param {number} idTask - The ID of the task.
+* @param {number} i - The index of the task.
+* @returns {void} This function does not return a value.
+*/
 function editTaskOverlay(idTask, i){    
     EditTask = TaskBoard[i];
     taskboardPosition = i;
@@ -239,6 +348,12 @@ function editTaskOverlay(idTask, i){
     editRenderSubtask();
 }
 
+/**
+* The function renders the subtasks of the edited task.
+* The idCounter preserves a speific id for the rendered subtask.
+* 
+* @returns {void} This function does not return a value.
+*/
 function editRenderSubtask(){            
         let editSubtask = document.getElementById('editRenderSubtasks');
         editSubtask.innerHTML = ``;        
@@ -250,6 +365,11 @@ function editRenderSubtask(){
     }
 }
 
+/**
+* The function renders the priority buttons for the edited task.
+* 
+* @returns {void} This function does not return a value.
+*/
 function editRenderPriority(){
     let editTaskPriority = EditTask.priority;  
     let editPriority = document.getElementById('editPriorityButtonsdiv');  
@@ -265,6 +385,11 @@ function editRenderPriority(){
     } 
 }
 
+/**
+* The function checks for selected contacts of the edited task, and fills the related array.
+* 
+* @returns {void} This function does not return a value.
+*/
 function testForChoosenContact (){
     for (i=0; i<editContactsShow.length; i++){
         editContactsShow[i].checked = 0;
@@ -281,6 +406,12 @@ function testForChoosenContact (){
         }  }  } choosenContacts();
 }  
 
+/**
+* The function checks for selected contacts of the edited task, and fills the related array.
+* Its related to the testForChoosenContact().
+* 
+* @returns {void} This function does not return a value.
+*/
 function choosenContacts(){
     choosenContactsEdit = [];
     for (i=0; i<editContacts.length; i++){
@@ -297,6 +428,11 @@ function choosenContacts(){
         EditTask.contactEmblem.push(choosenContactsEdit[i].contactEmblem);    }
 }
 
+/**
+* The function renders the selected contact emblems for the edited task.
+* 
+* @returns {void} This function does not return a value.
+*/
 function renderChoosenContactsEmblems(){
     let editEmblems = document.getElementById('choosenContacts');
     editEmblems.innerHTML = ``;
@@ -312,6 +448,11 @@ function renderChoosenContactsEmblems(){
     }    
 }
 
+/**
+* The function renders the contact list for editing the choosen contacts.
+* 
+* @returns {string} The HTML content of the contact list.
+*/
 function renderContactListEdit() { 
     contactListEdit = ''
     for (i=0; i<editContactsShow.length;i++){  
@@ -328,6 +469,11 @@ function renderContactListEdit() {
     return contactListEdit;
 }    
 
+/**
+* The function clears the edit task for editing.
+* 
+* @returns {void} This function does not return a value.
+*/
 function emptyEditTask(){    
     editTask = '';
     editTask = EditTask;
@@ -336,12 +482,22 @@ function emptyEditTask(){
     overlay.innerHTML = '';    
 }
 
+/**
+* The function sets up the date listener for the edited date of the task.
+* 
+* @returns {void} This function does not return a value.
+*/
 function setDateListener(){
     document.getElementById('InputSearchEdit').addEventListener('input', filterContactsEdit);
     document.getElementById('titleEdit').addEventListener('input', getTitle);
     document.getElementById('descriptionEdit').addEventListener('input', getDescription);
 }
 
+/**
+* The function renders the date input field for the edited task.
+* 
+* @returns {void} This function does not return a value.
+*/
 function renderEditDate(){
     let initialDate = editTask.date; //  YYYY-MM-DD-Format (!)
     let dateInput = document.getElementById("edit_input");
@@ -351,6 +507,11 @@ function renderEditDate(){
     let selectedDate = dateInput.value; EditTask.date = selectedDate;}); 
 }
 
+/**
+* The function gets the current date in the required format.
+* 
+* @returns {string} The current date in YYYY-MM-DD format.
+*/
 function getTheCurrentDate() {
     let today = new Date();
     let day = String(today.getDate()).padStart(2, '0');
@@ -359,4 +520,3 @@ function getTheCurrentDate() {
     return year + '-' + month + '-' + day;
 }
 
-/// renderEditTask() --> render_board.js ///

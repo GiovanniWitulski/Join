@@ -12,8 +12,12 @@ let newPriority;
 let subTaskChecked;
 let taskToMove;
 
-// content functions //
-
+/**
+ * This function reads in the downloaded Tasks and sorts them due to their type.
+ * Afterwards the relative function gets started. 
+ * 
+ * @returns {void} This function returns no value.
+ */
 function startReadingTasks(){
     for(x=0; x<TaskBoard.length; x++){
         const toDoCard = TaskBoard[x];              
@@ -30,6 +34,11 @@ function startReadingTasks(){
             renderDone();   }  }
 }
 
+/**
+ * This function this function checks if the current read in task has subtasks.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function subTaskCheck(){ 
     subTaskChecked = 0;  
     if(toDoTask.subtaskSum){
@@ -41,6 +50,12 @@ function subTaskCheck(){
     }
 }
 
+/**
+ * This function sets the subtask section to invisible if no subtask is contained at the current task.
+ * Afterwards the relative function gets started. 
+ * 
+ * @returns {void} This function returns no value.
+ */
 function subTaskNoShow(){
     if (subTaskChecked === 0){       
        let idSubtask = 'cardSubtasks' + toDoTask.taskid;
@@ -48,7 +63,12 @@ function subTaskNoShow(){
     } 
 }
 
-function readInTasks(){         //reading Tasksinformation
+/**
+ * This function starts the process of the creating & calculating of the current task.
+ * 
+ * @returns {void} This function returns no value.
+ */
+function readInTasks(){         
     label(toDoTask); 
     amountSubTasks();
     calcProgressBar();
@@ -57,6 +77,11 @@ function readInTasks(){         //reading Tasksinformation
     priorityEmblem();
 }
 
+/**
+ * This function sets the kind of label for the current task.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function label(){     
     if(toDoTask.label === 1){
         newLabel = technicalTaskLabel;
@@ -65,6 +90,11 @@ function label(){
     }                 
 }
 
+/**
+ * This function reads out the subtasks of the current task.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function amountSubTasks(){     
     newAmountSubtask = toDoTask.subtask.length;
     newSumSubtask = 0;
@@ -78,6 +108,11 @@ function amountSubTasks(){
     } 
 }
 
+/**
+ * This function pre-calcualtes the size of the progress bar of the current task.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function calcProgressBar(){  
     newSumSubtaskCalc = 0;     
     newSumSubtaskCalc = newSumSubtask/newAmountSubtask;      
@@ -89,6 +124,11 @@ function calcProgressBar(){
     newProgressBarId = toDoTask.taskid; 
 }
 
+/**
+ * This function reads in the description of the current task.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function descriptionChar(){
     let lastChar = toDoTask.description[toDoTask.description.length - 1];
     if (lastChar === "." || lastChar === "!" || lastChar === "?"){
@@ -96,6 +136,11 @@ function descriptionChar(){
     }                                 
 }
 
+/**
+ * This function reads in the emblems of the current task.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function emblemSvg() {            
     newEmblems = '';  
         if (toDoTask.contactEmblem.length > 0){                        
@@ -112,6 +157,11 @@ function emblemSvg() {
         } }          
 }
 
+/**
+ * This function reads in and sets the priority of the current task.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function priorityEmblem(){
     newPriority = '';
             if (toDoTask.priority){
@@ -124,8 +174,11 @@ function priorityEmblem(){
             }
 }
 
-// container render-functions //
-
+/**
+ * This function creates the tasks of the to do section.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function renderToDo(){
     toDo.innerHTML += `
     <div id="Task${toDoTask.taskid}" class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
@@ -148,6 +201,11 @@ function renderToDo(){
     subTaskNoShow();
 }
 
+/**
+ * This function creates the tasks of the in progress section.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function renderInProgress(){
     inProgress.innerHTML += `
     <div id="Task${toDoTask.taskid}" class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
@@ -170,6 +228,11 @@ function renderInProgress(){
     subTaskNoShow();
 }
 
+/**
+ * This function creates the tasks of the await feedback section.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function renderAwaitFeedback(){
     awaitFeedback.innerHTML += `
     <div id="Task${toDoTask.taskid}" class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
@@ -192,6 +255,11 @@ function renderAwaitFeedback(){
     subTaskNoShow();
 }
 
+/**
+ * This function creates the tasks of the done section.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function renderDone(){
     done.innerHTML += `
     <div id="Task${toDoTask.taskid}" class="card-body" onclick="overlayTask(${toDoTask.taskid})" ondragstart="startDragging(${toDoTask.taskid})" draggable="true">
@@ -214,6 +282,11 @@ function renderDone(){
     subTaskNoShow();
 }
 
+/**
+ * This function prepares the HTML sections für being filled with tasks.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function taskContainer(){             
     toDo.innerHTML = '';
     inProgress.innerHTML = '';
@@ -223,7 +296,11 @@ function taskContainer(){
     ifContainerEmpty();    
 }
 
-
+/**
+ * This function sets the placeholder for empty task areas, if needed.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function ifContainerEmpty(){
     if (toDo.innerHTML == ''){
         toDo.innerHTML = `<img class="placeholder-container-img" src="/assets/svg/no_task_to_do.png" alt="no-task-to-do">`
@@ -239,8 +316,11 @@ function ifContainerEmpty(){
     }
 }
 
-/// render Overlay Task /// 
-
+/**
+ * This function creates the popup task for further task information.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function overlayRender(){
     overlay.innerHTML = `
     <div id="${OverlayTask.taskid}" class="overlay-container">
@@ -267,8 +347,11 @@ function overlayRender(){
     `;        
 }
 
-/// render - EditTask - container ///
-
+/**
+ * This function creates the HTML for the task to edit.
+ * 
+ * @returns {void} This function returns no value.
+ */
 function renderEditTask(){
     overlay.innerHTML = `
     <div id="boardEditTask" class="board-edit-task">
@@ -310,8 +393,13 @@ function renderEditTask(){
     `
 
 } 
-/// Move Task Popup /// --> Move out functions if space need for other render (then ggf. render_board at least load )
 
+/**
+ * This function renders the surface for moving task while responsive mode.
+ * 
+ * @param {number} i shows which task to move
+ * @param {event} event stops other onclick events from processing.
+ */
 async function renderMoveTask(event, i){
     event.stopPropagation();
     taskToMove = i;
@@ -322,6 +410,11 @@ async function renderMoveTask(event, i){
     showShadow();
 }
 
+/**
+ * This function closes the move task surface.
+ * 
+ * @returns {void} This function returns no value.
+ */
 async function closeMoveTask(){
     document.getElementById('taskSwitchCategory').classList.add('transition')    
     await new Promise(resolve => setTimeout(resolve, 120));
@@ -329,6 +422,11 @@ async function closeMoveTask(){
     removeShadow();
 }
 
+/**
+ * This function sets the new type (status) of the task.
+ * 
+ * @param {number} newType this is the new chosen type and so status of the task.
+ */
 function moveCategoryTask(newType){
     TaskBoard[taskToMove].type = newType
     uploadData();
@@ -336,12 +434,20 @@ function moveCategoryTask(newType){
     findTask();
 }
 
-/// highlight drop container ///
-
+/**
+ * This function highlights the area on which the task will be dropped.
+ * 
+ * @param {number} id this is the id of the area to be highlighted.
+ */
 function highlight(id) {
     document.getElementById(id).classList.add('drag-area-highlight');
 }
 
+/**
+ * This function de-highlights the area on which the task will be dropped.
+ * 
+ * @param {number} id this is the id of the area to remove the highlight.
+ */
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
 }
