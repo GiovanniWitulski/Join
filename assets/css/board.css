@@ -1,13 +1,9 @@
-/* fonts: */
-
 @font-face {        
     font-family: 'interregular';
     src: url('/assets/fonts/inter/inter-v13-latin-regular.woff2') format('woff');
     font-weight: normal;
     font-style: normal;
 }
-
-/* body */
 
 body {
     margin: 0;
@@ -16,8 +12,6 @@ body {
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
-
-/* Board-mobile */ 
 
 .render_board_mobile{
     height: 100%; 
@@ -196,8 +190,6 @@ cursor: pointer;
     height: 17.58px;
     width: 17.58px;
 }
-
-/* JOHANNES CODE*/ 
 
 .noScroll{
     overflow-y: hidden;

@@ -21,13 +21,6 @@
     max-height: calc(100% - 18%);
 }
 
-@media (max-width: 1460px){
-    .board-edit-task{
-        overflow-y: auto;
-        max-height: calc(100% - 18%);
-        overflow-x: hidden;
-    }    }
-
 .edit-title{
     width: 100%;
     padding-top: 8px;
