@@ -229,8 +229,6 @@ cursor: pointer;
     transition: all 120ms ease-in-out;
 }
 
-/*MEDIA QUERYS 1/2 */
-
 @media (min-width: 800px) {
 
     .render_board_mobile{
