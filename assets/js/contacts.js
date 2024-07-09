@@ -21,7 +21,6 @@ async function readTheTokens(){
         if(contactsAsJson.hasOwnProperty(key)){
             const array = contactsAsJson[key];
             const token = {token: key};
-            
             array.forEach(element => {
                 contact = {...element, ...token};
                 contactsWithoutToken.push(contact);
@@ -65,7 +64,6 @@ let singleContacts = document.getElementsByClassName('singleContact');
 for (let index = 0; index < singleContacts.length; index++) {
     const singleContact = singleContacts[index];
     singleContact.classList.remove('clicked');
-    
 }
 document.getElementById(element).classList.add('clicked');
 }
@@ -99,9 +97,6 @@ async function showContactDetails(){
     let contactContainer = document.getElementById('middle-container-desktop');
     contactContainer.classList.remove('none');
     await removeTranslate(contactContainer);
-
-    
-  
 }
 
 
@@ -113,10 +108,8 @@ async function addTranslate(element){
 async function removeTranslate(element){
     setTimeout(() => {
         element.classList.add('show');
-    }, 50);
-    
+    }, 50); 
 }
-
 
 
 function showAddContact(){
@@ -171,8 +164,3 @@ function rewriteButton(){
 
 document.addEventListener('DOMContentLoaded', rewriteButton);
 window.addEventListener('resize', rewriteButton);
-
-
-
-
-

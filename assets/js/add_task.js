@@ -109,7 +109,6 @@ function renderAssignSelector(){
         document.getElementById('optionContainer').innerHTML = ``;
         for (let i = 0; i < contactsAsJson.length; i++) {
             const contact = contactsAsJson[i];
-            
             document.getElementById('optionContainer').innerHTML += `<div id="contact${i}" class="option" onclick="assignTheContact(this,${i})"><div class="contactNameDiv"><svg class="profile_pic" width="42px" height="42px">
             <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2" fill="${contact['color']}" />
             <text x="12" y="25" fill="white" font-size="12px">${contact['vorname'].charAt(0)}${contact['name'].charAt(0)}</text>
@@ -184,6 +183,7 @@ function showThisContact(id){
 function addEventListenerToInput(){
     document.getElementById('contact-selector').addEventListener('input',filterAssignedContacts);
 }
+
 
 function hideContactsToAssign(button){
     document.getElementById('optionContainer').classList.add('none');

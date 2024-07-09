@@ -80,6 +80,3 @@ async function getDataForPostContact(path){
     } 
     postData(path, data);
 }
-
-
-

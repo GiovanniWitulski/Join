@@ -625,7 +625,7 @@ cursor: pointer;
     z-index: 205;
 }
 
-@media(max-width: 361px){
+@media(max-width: 400px){
     #addTaskForm{
         width: 100%;
     }
