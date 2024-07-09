@@ -4,7 +4,6 @@ async function setSummaryNumbers() {
     document.getElementById('urgentTasksCount').innerHTML = counts[1];
     document.getElementById('upcomingDeadline').innerHTML = counts[2];
     document.getElementById('tasksInBoardCount').textContent = counts[3];
-
     for (let type in counts[0]) {
       document.getElementById(`type${type}Count`).textContent = counts[0][type];
     }

@@ -194,7 +194,6 @@ body{
     z-index: 4;
 }
 
-
 .displayNone{
     display: none;
 }
@@ -209,7 +208,6 @@ body{
     max-width: 100%;
 }
 
-
 .showContactAdded{
     transform: translateY(-100px) !important;
     transition: all 120ms ease-in-out;
@@ -220,7 +218,6 @@ body{
         padding-top: 10px;
     }
 }
-
 
 @media(min-width: 800px){
     #page-content-div{

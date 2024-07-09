@@ -8,6 +8,12 @@ function showLoginForm() {
     document.getElementById('loginParentDiv').classList.remove('d-none');
 }
 
+/**
+ * This function changes the image and the cursor depending on whether the input field is empty, 
+ * contains text or wants to make the written text visible, e.g. with a password.
+ * 
+ * @param {object} inputField - This is the input field in which the image and cursor would be changed
+ */
 function changeInputFieldImg(inputField) {
     let passwordValue = inputField.value
     let inputIconDiv = inputField.nextElementSibling;
