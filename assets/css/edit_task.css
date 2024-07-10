@@ -328,7 +328,8 @@
     border: none;
     outline: none;
     box-shadow: none;
-    border-radius: 10px;    
+    border-radius: 10px;  
+    height: 100%;  
 }
 
 .edit-subtask-add{

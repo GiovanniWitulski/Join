@@ -1,10 +1,8 @@
-/* Task - Card - Design */
-
 .card-body {
     max-width: 252px;
     display: flex;
     flex-direction: column;
-    background-color: #FFFFFF;    /* #FFFFFF; */
+    background-color: #FFFFFF;    
     padding: 16px;
     border-radius: 24px;
     margin-bottom: 16px;        
@@ -69,7 +67,7 @@
     margin-left: -20px;
 }
 
-.card-contact-emblems-img{          /*ggf. obsolet  */
+.card-contact-emblems-img{          
     margin-left: -20px;
 }
 
@@ -85,16 +83,6 @@
     cursor: pointer;
     opacity: 0.5;    
 }
-
-.card-emblems{
-
-}
-
-.delete-edit{
-    
-}
-
-/* OVERLAY - TASK */
 
 .overlay-container{
     position: relative;
@@ -119,7 +107,7 @@
     left: 16px; 
     right: 16px; 
     padding: 32px 24px 32px 24px;
-    margin: 0 auto;                 /* Zentrierung */  
+    margin: 0 auto;                  
     transition: all 120ms ease-in-out;
     overflow-y: auto;
 }
@@ -169,7 +157,6 @@
     color: #42526E;
     width: 59px;
 }
-
 
 .overlay-card-priority-text-img{
     padding-left: 25px;
@@ -250,9 +237,14 @@
 }
 
 .close-overlay{
+    background-image: url(/assets/svg/Close_black.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
     position: relative;
     border-radius: 50%;
     transition: background-color 0.3s ease;
+    width: 20px;
+    height: 20px;
 }
 
 .close-overlay:hover{
@@ -269,13 +261,13 @@
 .overlay-cde-edit-svg{
     display: flex;
     align-items: center;
-    gap: 2px; /* Abstand zwischen SVG und Text */
+    gap: 2px; 
     height: 24px;
     cursor: pointer;
-    background-image: url('/assets/svg/edit_black.svg'); /* Pfad zur SVG-Datei */
-    background-size: 24px 24px; /* Größe des SVG-Hintergrundbilds */
+    background-image: url('/assets/svg/edit_black.svg'); 
+    background-size: 24px 24px; 
     background-repeat: no-repeat;
-    padding-left: 28px; /* Platz für das SVG plus Abstand */
+    padding-left: 28px; 
         
 }
 
@@ -287,13 +279,13 @@
 .overlay-cde-delete-svg{
     display: flex;
     align-items: center;
-    gap: 2px; /* Abstand zwischen SVG und Text */
+    gap: 2px; 
     height: 24px;
     cursor: pointer;
-    background-image: url('/assets/svg/delete.svg'); /* Pfad zur SVG-Datei */
-    background-size: 20px 20px; /* Größe des SVG-Hintergrundbilds */
+    background-image: url('/assets/svg/delete.svg'); 
+    background-size: 20px 20px; 
     background-repeat: no-repeat;
-    padding-left: 28px; /* Platz für das SVG plus Abstand */
+    padding-left: 28px; 
     
 }
 
@@ -335,8 +327,6 @@
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-/* special - Classes */
-
 .drag-area-highlight{    
     outline: 4px dashed rgba(0, 0, 0, 0.1);
     border-radius: 24px;
@@ -356,13 +346,10 @@
     filter: blur(1px); 
 }
 
-/* Media Querys */
-
 @media (max-width: 800px){
    
 .overlay-task{
     overflow-y: auto;
     max-height: calc(100% - 18%);
-    overflow-x: hidden;}    
-    
+    overflow-x: hidden;}        
 }
