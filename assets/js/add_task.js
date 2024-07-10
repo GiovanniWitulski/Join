@@ -2,6 +2,11 @@ let subtaskCount = 0;
 let priorityOfTask;
 let idOfNewTask;
 
+/**
+ * This function is used to determine, which priority-button will be highlighted 
+ * 
+ * @param {string} id - This parameter has to be an id of one of the priority-buttons
+ */
 function changeToActive(id){
     let possibleId = ['urgent-btn', 'medium-btn', 'low-btn'];
     possibleId.splice(possibleId.indexOf(id), 1);
@@ -14,6 +19,10 @@ function changeToActive(id){
     }
 }
 
+/**
+ * This function is used to either make subtask buttons visible and hide the + sign or vice versa.
+ * 
+ */
 function changeButtons(){
     if (document.getElementById('subtask-buttons').classList.contains('none')){
         document.getElementById('subtask-buttons').classList.remove('none');
@@ -21,6 +30,10 @@ function changeButtons(){
     }
 }
 
+/**
+ * This function checks, if the value of the subtask-inputfield is empty. If it`s empty, the subtask buttons will be hidden and the + sign reappears.
+ * 
+ */
 function onSubtaskBlur(){
     let inputfield = document.getElementById('subtask-input');
     if(inputfield.value === ''){
@@ -31,6 +44,10 @@ function onSubtaskBlur(){
     }
 }
 
+/**
+ * This function is used to check if the subtask-input exists. If it exists, an eventlistener(blur) will be given to it that will execute the function onSubtaskBlur every time when it looses focus
+ * 
+ */
 function addBlurListener(){
     let subtaskInput = document.getElementById('subtask-input');
     if(subtaskInput){
@@ -38,8 +55,16 @@ function addBlurListener(){
     }
 }
 
+/**
+ * This executes the function addBlurListener, when the page is completely loaded
+ * 
+ */
 document.addEventListener("DOMContentLoaded", addBlurListener);
 
+/**
+ * This function increases the subtaskCount by 1 and adds the value of the subtask, that was given in the subtask-inputfield, to the subtask-list in form of a list item. Then the value of the subtask-input is reseted.
+ * 
+ */
 function addToSubtasks(){
     subtaskCount += 1;
     let inputfield = document.getElementById('subtask-input');
@@ -51,6 +76,11 @@ function addToSubtasks(){
     onSubtaskBlur();
 }
 
+/**
+ * This function is used to edit the clicked Subtask by showing the value of the subtask in an inputfield. The value of it can be overwritten and saved to the clicked subtask.
+ * 
+ * @param {string} id - this parameter is the id of the current subtask and is given by the call of the function through clicking the Add-Subtask-Button 
+ */
 function editSubtask(id){
     let subtaskToChange = document.getElementById(`subtask${id}`);
     let valueToInsert = document.getElementById(`textOfSubtask${id}`).innerHTML;
@@ -64,6 +94,12 @@ function editSubtask(id){
     }
 }
 
+/**
+ * This function is used to change the past value of the subtask to the new overwritten value from the inputfield. It also changes the element from an inputfield back to a list item
+ * 
+ * @param {string} id - this is the id of the clicked subtask given by the function editSubtask
+ * @param {string} functionValue  - this is the number, which will be used to determine the correct subtask in the function. 
+ */
 function confirmEditedSubtask(id, functionValue){
     let subtask = document.getElementById(id);
     let editedText = document.getElementById(`edit-subtask${functionValue}`).value;
@@ -75,17 +111,31 @@ function confirmEditedSubtask(id, functionValue){
     }
 }
 
+/**
+ * This function is used to delete the chosen subtask by clicking the delete/bin-button
+ * 
+ * @param {string} id - this is the id of the subtask-element
+ */
 function deleteSubtask(id){
     let subtaskToDelete = document.getElementById(id);
     subtaskToDelete.parentNode.removeChild(subtaskToDelete);  
 }
 
+/**
+ * This function is used to cancel the current subtask. The value of the Inputfield will be reseted and the function onSubtaskBlur will be executed
+ * 
+ */
 function cancelSubtask(){
     let inputfield = document.getElementById('subtask-input');
     inputfield.value = '';
     onSubtaskBlur();
 }
 
+/**
+ * This function is used to delete a subtask
+ * 
+ * @param {string} elementId - This parameter is the id of the element which the user wants to delete. It is given on call of the function
+ */
 function deleteElementById(elementId){
     let element = document.getElementById(elementId);
     if (element){
@@ -93,6 +143,10 @@ function deleteElementById(elementId){
     }
 }
 
+/**
+ * This function is used to give the assigend-to-container every contact thats in the array contactsAsJson, so they can be displayed by clicking the assign-field
+ * 
+ */
 function renderAssignSelector(){
     if(document.getElementById('optionContainer').innerHTML == ``){
         document.getElementById('optionContainer').innerHTML = ``;
@@ -106,6 +160,12 @@ function renderAssignSelector(){
     }
 }
 
+/**
+ * This function is used to change the css of the clicked div, that it can be clearly seen as checked. It also changes the icon from an empty checkbox to a checked-checkbox or vice versa by clicking the contact again.
+ * 
+ * @param {HTMLDivElement} element - The <div> element which represents the clicked contact
+ * @param {number} checkboxID - This number will be used as the id of the checkbox in the function below
+ */
 function assignTheContact(element, checkboxID){
     document.getElementById(element.id).classList.toggle('checked');
     let checkbox = document.getElementById(`checkbox${checkboxID}`);
@@ -118,6 +178,10 @@ function assignTheContact(element, checkboxID){
     assignPicturesToDiv();
 }
 
+/**
+ * This function is used to display the profile-pics of the assigned contacts in the assignedContactPics-<div>. It will be executed every time, when a contact is assigned
+ * 
+ */
 function assignPicturesToDiv(){
     let checkedContacts = document.getElementsByClassName('checked');
     document.getElementById('assignedContactPics').innerHTML = ``;
@@ -127,6 +191,10 @@ function assignPicturesToDiv(){
     }
 }
 
+/**
+ * This function displays all contacts from the contactsAsJson-Array
+ * 
+ */
 function showContactsToAssign(){
     document.getElementById('optionContainer').classList.remove('none');
     if(!document.getElementById('dropdown-btn').classList.contains('active')){
@@ -134,6 +202,10 @@ function showContactsToAssign(){
     }
 }
 
+/**
+ * This function is used to filter the displayed contacts by the value of the assign-inputfield. The only displayed contacts will be the contacts that share the value of the inputfield with their names
+ * 
+ */
 function filterAssignedContacts(){
     let assignableContacts = document.getElementsByClassName('contactNames');
     let input = document.getElementById('contact-selector');
@@ -152,20 +224,39 @@ function filterAssignedContacts(){
     }
 }
 
+/**
+ * This function is used to remove the current contact from display
+ * 
+ * @param {string} id - this parameter was given by the function filterAssignedContacts and is the id of the contact 
+ */
 function hideThisContact(id){
     document.getElementById(id).classList.add('none');
     document.getElementById(id).classList.remove('option');
 }
 
+/**
+ * This function is used to show the current contact
+ * 
+ * @param {String}  id - this parameter was given by the function filterAssignedContacts and is the id of the contact 
+ */
 function showThisContact(id){
     document.getElementById(id).classList.add('option');
     document.getElementById(id).classList.remove('none');
 }
 
+/**
+ * This function adds an eventlistener to the assing-inputfield which executes the filterAssignedContacts-function every time, some input is typed in.
+ * 
+ */
 function addEventListenerToInput(){
     document.getElementById('contact-selector').addEventListener('input',filterAssignedContacts);
 }
 
+/**
+ * This function is used to hide all assignable contacts and determines if the dropdown button either points up or down
+ * 
+ * @param {string} button - the id of the dropdown-button 
+ */
 function hideContactsToAssign(button){
     document.getElementById('optionContainer').classList.add('none');
     if(button.classList.contains('active')){
@@ -173,6 +264,12 @@ function hideContactsToAssign(button){
     } 
 }
 
+/**
+ * This function provides the sumitted formular from being reloaded and executes the functions below in order to complete and post the task
+ * 
+ * @param {object} event - This is an event-object passed by an eventlistener from a formular
+ * @param {String} tasktype - the type of a task, that determines the category of the task. By default it´s 0 for the category "to-do"
+ */
 async function getTheDataForPostTask(event, tasktype) {
     let type = Number(tasktype);
     event.preventDefault();
@@ -181,6 +278,12 @@ async function getTheDataForPostTask(event, tasktype) {
     await showNotification();
 }
 
+/**
+ * This function is used to get all the Data for the post-ready task in form of an JSON-Object which is represented by the variable data
+ * 
+ * @param {string} type - the type of a task, that determines the category of the task. By default it´s 0 for the category "to-do"
+ * @returns {JSON} data - the complete data-set for the current task
+ */
 async function fetchTheData(type){
 let data = {
     title: document.getElementById('title-input').value,
@@ -198,6 +301,10 @@ let data = {
 return data;
 }
 
+/**
+ * This functino is used to display the animated "task added to board"-notification with a little delay. after the notification showed up, the window-location will change to the board.html page
+ * 
+ */
 async function showNotification() {
     const notificationElement = document.getElementById('taskAddedNotification');
     notificationElement.classList.remove('none');
@@ -214,6 +321,11 @@ async function showNotification() {
     }, 1000);
 }
 
+/**
+ * This function is used to determine the ID of the current task. It fetches the Value of the variable taskId from the database and changes the value of the variable idOfNewTask to that value +1. If there is no variable to fetch, the variable idOfNewTask becomes 0 and this value will be posted to the database with the name taskId
+ * 
+ * @returns {number} idOfNewTask - The id of the current task
+ */
 async function getTheIdOfTask(){
     let id = await loadData('taskId');
     if(id != null){
@@ -226,6 +338,12 @@ async function getTheIdOfTask(){
     return idOfNewTask;  
 }
 
+/**
+ * This function gets all subtasks that are given to the current task and sets the value of the subtaskStatus for each subtask to 0 (undone)
+ * 
+ * @param {Array} subtasks - an array with all the given subtasks for the current task 
+ * @returns {Array} subtaskStatus - an array with a status for each of the subtasks from the current task. The status can be 0 (undone) or 1 (done). Be default/creation of a task, it`s always 0
+ */
 function getTheSubtaskStatus(subtasks){
     let subtaskStatus = [];
     for (let index = 0; index < subtasks.length; index++) {
@@ -235,12 +353,22 @@ function getTheSubtaskStatus(subtasks){
     return subtaskStatus;
 }
 
+/**
+ * This function is used to determine and returning the Category of the current Task, choosen by the user in taskCreation. 
+ * 
+ * @returns {number} selectedCategory - this number can be either 0(no category), 1(technical task) or 2(user story)
+ */
 function getTheCategoryOfTask(){
     let selection = document.getElementsByClassName('selector dropdown-img');
     let selectedCategory = selection[0].options.selectedIndex;
     return selectedCategory
 }
 
+/**
+ * This function is used to return all the Text of each Subtask an push them into an array, which can be used to post the task
+ * 
+ * @returns {Array} subtasksAsText - an array with the values of each subtask that were given to the task by the user in the task creation
+ */
 function getTheSubtasksOfTask(){
     let listOfSubtasks = document.getElementsByClassName('content-of-subtask');
     let subtasksAsText = [];
@@ -251,6 +379,11 @@ function getTheSubtasksOfTask(){
     return subtasksAsText;
 }
 
+/**
+ * This function is used to return all profile pics of each contact, that is assigned to the current task
+ * 
+ * @returns {Array} listOfContactEmblems - an array with the html-code for each assigned contact´s profile picture
+ */
 function getTheEmblemsOfAssignedContacts(){
     let listOfCheckedContacts = document.getElementsByClassName('checked');
     let listOfContactEmblems = [];
@@ -261,6 +394,11 @@ function getTheEmblemsOfAssignedContacts(){
     return listOfContactEmblems;
 }
 
+/**
+ * This function returns all names of the assigned Contacts in form of an array
+ * 
+ * @returns {Array} listOfAssignedNames - An array with all Names of the assigned Contacts
+ */
 function fetchAllAssignedContacts(){
     let listOfCheckedContacts = document.getElementsByClassName('checked');
     let listOfAssignedNames = [];
@@ -271,7 +409,14 @@ function fetchAllAssignedContacts(){
     return listOfAssignedNames;
 }
 
+/**
+ * This eventlistener is triggered when the complete contect has loaded and executes the function addEventListenerToInput
+ */
 document.addEventListener('DOMContentLoaded', addEventListenerToInput);
+
+/**
+ * This eventlistener is triggered when the complete content has loaded and adds the function the the subtask-inputfield, that recognizes the press of the enter-key and then executes the function addToSubtasks
+ */
 document.addEventListener('DOMContentLoaded', () => {
     let subtaskInputField = document.getElementById('subtask-input');
     subtaskInputField.addEventListener('keydown', function(event){
@@ -282,6 +427,10 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 });
 
+/**
+ * This eventlistener enables clicking on the assign-contacts-field and then shows the assignable contacts. It also hides them, when the user clicks somewhere except the assign-contacts-field
+ * 
+ */
 document.addEventListener('click', function(event){
     let optionContainer = document.getElementById('optionContainer');
     if(!optionContainer.contains(event.target) && event.target != document.getElementById('contact-selector')){
@@ -293,6 +442,9 @@ document.addEventListener('click', function(event){
     }
 })
 
+/**
+ * This function is used to reset the Values of all form-elements 
+ */
 function clearTheForm(){
     document.getElementById('list-of-subtasks').innerHTML=``; 
     setTimeout(() => {
@@ -308,6 +460,12 @@ function clearTheForm(){
     document.getElementById('assignedContactPics').innerHTML = ``;
 }
 
+/**
+ * This function is used to return the number of the given elements id, so it can be toggled by executing the assignTheContact-function.
+ * 
+ * @param {HTMLElement} element - this parameter is a html element of the html collection from elements with the class checked
+ * @returns {number} newValue - the number of the elements id
+ */
 function getTheValueForFunction(element){
 let id = element.id;
 let newValue = parseInt(id.charAt(id.length - 1), 10);

@@ -3,6 +3,10 @@ let newLastName;
 const moreButton = document.getElementById('more-button');
 const moreBtnMenu = document.getElementById('edit-menu');
 
+/**
+ * This is used to either show or hide the side menu. It is triggered by clicking the moreButton and by clicking anywhere except itself
+ * 
+ */
 if (moreButton && moreBtnMenu) {
     function toggleMenu() {
         moreBtnMenu.classList.toggle('hide');
