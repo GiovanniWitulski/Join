@@ -16,7 +16,6 @@ let taskToMove;
  * This function reads in the downloaded Tasks and sorts them due to their type.
  * Afterwards the relative function gets started. 
  * 
- * @returns {void} - This function returns no value.
  */
 function startReadingTasks(){
     for(x=0; x<TaskBoard.length; x++){
@@ -37,7 +36,6 @@ function startReadingTasks(){
 /**
  * This function this function checks if the current read in task has subtasks.
  * 
- * @returns {void} - This function returns no value.
  */
 function subTaskCheck(){ 
     subTaskChecked = 0;  
@@ -54,7 +52,6 @@ function subTaskCheck(){
  * This function sets the subtask section to invisible if no subtask is contained at the current task.
  * Afterwards the relative function gets started. 
  * 
- * @returns {void} - This function returns no value.
  */
 function subTaskNoShow(){
     if (subTaskChecked === 0){       
@@ -66,7 +63,6 @@ function subTaskNoShow(){
 /**
  * This function starts the process of the creating & calculating of the current task.
  * 
- * @returns {void} - This function returns no value.
  */
 function readInTasks(){         
     label(toDoTask); 
@@ -80,7 +76,6 @@ function readInTasks(){
 /**
  * This function sets the kind of label for the current task.
  * 
- * @returns {void} - This function returns no value.
  */
 function label(){     
     if(toDoTask.label === 1){
@@ -93,7 +88,6 @@ function label(){
 /**
  * This function reads out the subtasks of the current task.
  * 
- * @returns {void} - This function returns no value.
  */
 function amountSubTasks(){     
     newAmountSubtask = toDoTask.subtask.length;
@@ -111,7 +105,6 @@ function amountSubTasks(){
 /**
  * This function pre-calcualtes the size of the progress bar of the current task.
  * 
- * @returns {void} - This function returns no value.
  */
 function calcProgressBar(){  
     newSumSubtaskCalc = 0;     
@@ -127,7 +120,6 @@ function calcProgressBar(){
 /**
  * This function reads in the description of the current task.
  * 
- * @returns {void} - This function returns no value.
  */
 function descriptionChar(){
     let lastChar = toDoTask.description[toDoTask.description.length - 1];
@@ -139,7 +131,6 @@ function descriptionChar(){
 /**
  * This function reads in the emblems of the current task.
  * 
- * @returns {void} - This function returns no value.
  */
 function emblemSvg() {            
     newEmblems = '';  
@@ -160,7 +151,6 @@ function emblemSvg() {
 /**
  * This function reads in and sets the priority of the current task.
  * 
- * @returns {void} - This function returns no value.
  */
 function priorityEmblem(){
     newPriority = '';
@@ -177,7 +167,6 @@ function priorityEmblem(){
 /**
  * This function creates the tasks of the to do section.
  * 
- * @returns {void} - This function returns no value.
  */
 function renderToDo(){
     toDo.innerHTML += `
@@ -203,7 +192,6 @@ function renderToDo(){
 /**
  * This function creates the tasks of the in progress section.
  * 
- * @returns {void} - This function returns no value.
  */
 function renderInProgress(){
     inProgress.innerHTML += `
@@ -229,7 +217,6 @@ function renderInProgress(){
 /**
  * This function creates the tasks of the await feedback section.
  * 
- * @returns {void} - This function returns no value.
  */
 function renderAwaitFeedback(){
     awaitFeedback.innerHTML += `
@@ -255,7 +242,6 @@ function renderAwaitFeedback(){
 /**
  * This function creates the tasks of the done section.
  * 
- * @returns {void} - This function returns no value.
  */
 function renderDone(){
     done.innerHTML += `
@@ -281,7 +267,6 @@ function renderDone(){
 /**
  * This function prepares the HTML sections für being filled with tasks.
  * 
- * @returns {void} - This function returns no value.
  */
 function taskContainer(){             
     toDo.innerHTML = '';
@@ -295,7 +280,6 @@ function taskContainer(){
 /**
  * This function sets the placeholder for empty task areas, if needed.
  * 
- * @returns {void} - This function returns no value.
  */
 function ifContainerEmpty(){
     if (toDo.innerHTML == ''){
@@ -315,7 +299,6 @@ function ifContainerEmpty(){
 /**
  * This function creates the popup task for further task information.
  * 
- * @returns {void} - This function returns no value.
  */
 function overlayRender(){
     overlay.innerHTML = `
@@ -346,7 +329,6 @@ function overlayRender(){
 /**
  * This function creates the HTML for the task to edit.
  * 
- * @returns {void} - This function returns no value.
  */
 function renderEditTask(){
     overlay.innerHTML = `

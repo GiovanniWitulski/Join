@@ -104,7 +104,7 @@
     
 
     
-    <h4 class="name" id="addEditTaskToFirebase"><span class="type-signature">(async) </span>addEditTaskToFirebase<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="amountSubTasks"><span class="type-signature"></span>amountSubTasks<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -112,7 +112,7 @@
 
 
 <div class="description">
-    Adds a task in the database.
+    This function reads out the subtasks of the current task.
 </div>
 
 
@@ -156,7 +156,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line21">line 21</a>
+        <a href="render_board.js.html">render_board.js</a>, <a href="render_board.js.html#line92">line 92</a>
     </li></ul></dd>
     
 
@@ -181,28 +181,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - This function does not return a value.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -214,7 +192,7 @@
     
 
     
-    <h4 class="name" id="choosenContacts"><span class="type-signature"></span>choosenContacts<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="calcProgressBar"><span class="type-signature"></span>calcProgressBar<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -222,7 +200,7 @@
 
 
 <div class="description">
-    The function checks for selected contacts of the edited task, and fills the related array.Its related to the testForChoosenContact().
+    This function pre-calcualtes the size of the progress bar of the current task.
 </div>
 
 
@@ -266,7 +244,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line312">line 312</a>
+        <a href="render_board.js.html">render_board.js</a>, <a href="render_board.js.html#line109">line 109</a>
     </li></ul></dd>
     
 
@@ -291,28 +269,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - This function does not return a value.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -324,7 +280,7 @@
     
 
     
-    <h4 class="name" id="createContactEdit"><span class="type-signature"></span>createContactEdit<span class="signature">(vorname, nachname, color)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="descriptionChar"><span class="type-signature"></span>descriptionChar<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -332,212 +288,7 @@
 
 
 <div class="description">
-    The function creates the SVG template for a contact.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>vorname</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The first name of the contact.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>nachname</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The last name of the contact.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>color</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The color of the profile picture.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line67">line 67</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - The SVG template for the contact.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="editAddSub"><span class="type-signature"></span>editAddSub<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    The function adds a new/edited subtask to the edited task.
+    This function reads in the description of the current task.
 </div>
 
 
@@ -581,7 +332,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line192">line 192</a>
+        <a href="render_board.js.html">render_board.js</a>, <a href="render_board.js.html#line124">line 124</a>
     </li></ul></dd>
     
 
@@ -606,28 +357,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - This function does not return a value.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -639,7 +368,7 @@
     
 
     
-    <h4 class="name" id="editEditSub"><span class="type-signature"></span>editEditSub<span class="signature">(toEditSub)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="emblemSvg"><span class="type-signature"></span>emblemSvg<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -647,166 +376,7 @@
 
 
 <div class="description">
-    The function edits the subtask of the edited task.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>toEditSub</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The subtask to edit.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line207">line 207</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - This function does not return a value.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="editRenderPriority"><span class="type-signature"></span>editRenderPriority<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    The function renders the priority buttons for the edited task.
+    This function reads in the emblems of the current task.
 </div>
 
 
@@ -850,7 +420,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line270">line 270</a>
+        <a href="render_board.js.html">render_board.js</a>, <a href="render_board.js.html#line135">line 135</a>
     </li></ul></dd>
     
 
@@ -875,28 +445,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - This function does not return a value.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -908,7 +456,7 @@
     
 
     
-    <h4 class="name" id="editRenderSubtask"><span class="type-signature"></span>editRenderSubtask<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="ifContainerEmpty"><span class="type-signature"></span>ifContainerEmpty<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -916,7 +464,7 @@
 
 
 <div class="description">
-    The function renders the subtasks of the edited task.The idCounter preserves a speific id for the rendered subtask.
+    This function sets the placeholder for empty task areas, if needed.
 </div>
 
 
@@ -960,7 +508,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line254">line 254</a>
+        <a href="render_board.js.html">render_board.js</a>, <a href="render_board.js.html#line284">line 284</a>
     </li></ul></dd>
     
 
@@ -985,28 +533,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - This function does not return a value.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -1018,7 +544,7 @@
     
 
     
-    <h4 class="name" id="editSelectPriority"><span class="type-signature"></span>editSelectPriority<span class="signature">(priority)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="label"><span class="type-signature"></span>label<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -1026,487 +552,7 @@
 
 
 <div class="description">
-    The function sets the priority of the edited task.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>priority</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The priority level to set.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line147">line 147</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - This function does not return a value.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="filterContactsEdit"><span class="type-signature"></span>filterContactsEdit<span class="signature">(eventOrValue)</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    The function filters contacts based on the search input value or event.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>eventOrValue</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Event</span>
-|
-
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The event object or search value.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line104">line 104</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - This function does not return a value.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="filteredContacts"><span class="type-signature"></span>filteredContacts<span class="signature">(searchedContact)</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    The function filters contacts based on the searched contact.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>searchedContact</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The contact to search for.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line125">line 125</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - This function does not return a value.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="getDate"><span class="type-signature"></span>getDate<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    The function gets the date of the task to edit.
+    This function sets the kind of label for the current task.
 </div>
 
 
@@ -1550,7 +596,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line243">line 243</a>
+        <a href="render_board.js.html">render_board.js</a>, <a href="render_board.js.html#line80">line 80</a>
     </li></ul></dd>
     
 
@@ -1575,28 +621,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - This function does not return a value.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -1608,7 +632,7 @@
     
 
     
-    <h4 class="name" id="getDescription"><span class="type-signature"></span>getDescription<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="overlayRender"><span class="type-signature"></span>overlayRender<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -1616,7 +640,7 @@
 
 
 <div class="description">
-    The function sets the description of the task to edit.
+    This function creates the popup task for further task information.
 </div>
 
 
@@ -1660,7 +684,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line232">line 232</a>
+        <a href="render_board.js.html">render_board.js</a>, <a href="render_board.js.html#line303">line 303</a>
     </li></ul></dd>
     
 
@@ -1685,28 +709,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - This function does not return a value.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -1718,7 +720,7 @@
     
 
     
-    <h4 class="name" id="getTheCurrentDate"><span class="type-signature"></span>getTheCurrentDate<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="priorityEmblem"><span class="type-signature"></span>priorityEmblem<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -1726,7 +728,7 @@
 
 
 <div class="description">
-    The function gets the current date in the required format.
+    This function reads in and sets the priority of the current task.
 </div>
 
 
@@ -1770,7 +772,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line388">line 388</a>
+        <a href="render_board.js.html">render_board.js</a>, <a href="render_board.js.html#line155">line 155</a>
     </li></ul></dd>
     
 
@@ -1795,28 +797,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - The current date in YYYY-MM-DD format.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -1828,7 +808,7 @@
     
 
     
-    <h4 class="name" id="getTitle"><span class="type-signature"></span>getTitle<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="readInTasks"><span class="type-signature"></span>readInTasks<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -1836,7 +816,7 @@
 
 
 <div class="description">
-    The function sets the title of the current task to edit.
+    This function starts the process of the creating & calculating of the current task.
 </div>
 
 
@@ -1880,7 +860,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line221">line 221</a>
+        <a href="render_board.js.html">render_board.js</a>, <a href="render_board.js.html#line67">line 67</a>
     </li></ul></dd>
     
 
@@ -1905,28 +885,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - This function does not return a value.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -1938,7 +896,7 @@
     
 
     
-    <h4 class="name" id="loadContacts"><span class="type-signature">(async) </span>loadContacts<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id="renderAwaitFeedback"><span class="type-signature"></span>renderAwaitFeedback<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -1946,7 +904,7 @@
 
 
 <div class="description">
-    The function loads and processes contacts for editing a task.
+    This function creates the tasks of the await feedback section.
 </div>
 
 
@@ -1990,7 +948,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line43">line 43</a>
+        <a href="render_board.js.html">render_board.js</a>, <a href="render_board.js.html#line221">line 221</a>
     </li></ul></dd>
     
 
@@ -2015,28 +973,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - An array of contact data.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -2048,7 +984,7 @@
     
 
     
-    <h4 class="name" id="processContacts"><span class="type-signature">(async) </span>processContacts<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="renderDone"><span class="type-signature"></span>renderDone<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -2056,7 +992,7 @@
 
 
 <div class="description">
-    The function prepares every contacts into a usable format for the edit task.
+    This function creates the tasks of the done section.
 </div>
 
 
@@ -2100,7 +1036,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line82">line 82</a>
+        <a href="render_board.js.html">render_board.js</a>, <a href="render_board.js.html#line246">line 246</a>
     </li></ul></dd>
     
 
@@ -2125,28 +1061,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - This function does not return a value.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -2158,7 +1072,7 @@
     
 
     
-    <h4 class="name" id="renderChoosenContactsEmblems"><span class="type-signature"></span>renderChoosenContactsEmblems<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="renderEditTask"><span class="type-signature"></span>renderEditTask<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -2166,7 +1080,7 @@
 
 
 <div class="description">
-    The function renders the selected contact emblems for the edited task.
+    This function creates the HTML for the task to edit.
 </div>
 
 
@@ -2210,7 +1124,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line333">line 333</a>
+        <a href="render_board.js.html">render_board.js</a>, <a href="render_board.js.html#line333">line 333</a>
     </li></ul></dd>
     
 
@@ -2235,28 +1149,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - This function does not return a value.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -2268,7 +1160,7 @@
     
 
     
-    <h4 class="name" id="renderContactListEdit"><span class="type-signature"></span>renderContactListEdit<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="renderInProgress"><span class="type-signature"></span>renderInProgress<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -2276,7 +1168,7 @@
 
 
 <div class="description">
-    The function renders the contact list for editing the choosen contacts.
+    This function creates the tasks of the in progress section.
 </div>
 
 
@@ -2320,7 +1212,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line353">line 353</a>
+        <a href="render_board.js.html">render_board.js</a>, <a href="render_board.js.html#line196">line 196</a>
     </li></ul></dd>
     
 
@@ -2345,28 +1237,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - The HTML content of the contact list.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -2378,7 +1248,7 @@
     
 
     
-    <h4 class="name" id="renderEditDate"><span class="type-signature"></span>renderEditDate<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="renderToDo"><span class="type-signature"></span>renderToDo<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -2386,7 +1256,7 @@
 
 
 <div class="description">
-    The function renders the date input field for the edited task.
+    This function creates the tasks of the to do section.
 </div>
 
 
@@ -2430,7 +1300,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line374">line 374</a>
+        <a href="render_board.js.html">render_board.js</a>, <a href="render_board.js.html#line171">line 171</a>
     </li></ul></dd>
     
 
@@ -2455,28 +1325,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - This function does not return a value.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -2488,7 +1336,7 @@
     
 
     
-    <h4 class="name" id="selectContact"><span class="type-signature"></span>selectContact<span class="signature">(contactId)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="startReadingTasks"><span class="type-signature"></span>startReadingTasks<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -2496,166 +1344,7 @@
 
 
 <div class="description">
-    The function selects or deselects a contact for the edited task.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>contactId</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The ID of the contact to select.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line158">line 158</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - This function does not return a value.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="selectContactIf"><span class="type-signature"></span>selectContactIf<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    The function processes contacts if selected and updates the the edited task.
+    This function reads in the downloaded Tasks and sorts them due to their type.Afterwards the relative function gets started.
 </div>
 
 
@@ -2699,7 +1388,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line179">line 179</a>
+        <a href="render_board.js.html">render_board.js</a>, <a href="render_board.js.html#line20">line 20</a>
     </li></ul></dd>
     
 
@@ -2724,28 +1413,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - This function does not return a value.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -2757,7 +1424,7 @@
     
 
     
-    <h4 class="name" id="testForChoosenContact"><span class="type-signature"></span>testForChoosenContact<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="subTaskCheck"><span class="type-signature"></span>subTaskCheck<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -2765,7 +1432,7 @@
 
 
 <div class="description">
-    The function checks for selected contacts of the edited task, and fills the related array.
+    This function this function checks if the current read in task has subtasks.
 </div>
 
 
@@ -2809,7 +1476,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit_task.js.html">edit_task.js</a>, <a href="edit_task.js.html#line290">line 290</a>
+        <a href="render_board.js.html">render_board.js</a>, <a href="render_board.js.html#line40">line 40</a>
     </li></ul></dd>
     
 
@@ -2834,28 +1501,182 @@
 
 
 
-<h5>Returns:</h5>
+
+
+
+
 
         
-<div class="param-desc">
-    - This function does not return a value.
+            
+
+    
+
+    
+    <h4 class="name" id="subTaskNoShow"><span class="type-signature"></span>subTaskNoShow<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function sets the subtask section to invisible if no subtask is contained at the current task.Afterwards the relative function gets started.
 </div>
 
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
 
 
-    </dd>
-</dl>
+
+
+
+
+
+
+
+
+<dl class="details">
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="render_board.js.html">render_board.js</a>, <a href="render_board.js.html#line56">line 56</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="taskContainer"><span class="type-signature"></span>taskContainer<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function prepares the HTML sections für being filled with tasks.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="render_board.js.html">render_board.js</a>, <a href="render_board.js.html#line271">line 271</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2877,13 +1698,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addEditTaskToFirebase">addEditTaskToFirebase</a></li><li><a href="global.html#choosenContacts">choosenContacts</a></li><li><a href="global.html#createContactEdit">createContactEdit</a></li><li><a href="global.html#editAddSub">editAddSub</a></li><li><a href="global.html#editEditSub">editEditSub</a></li><li><a href="global.html#editRenderPriority">editRenderPriority</a></li><li><a href="global.html#editRenderSubtask">editRenderSubtask</a></li><li><a href="global.html#editSelectPriority">editSelectPriority</a></li><li><a href="global.html#filterContactsEdit">filterContactsEdit</a></li><li><a href="global.html#filteredContacts">filteredContacts</a></li><li><a href="global.html#getDate">getDate</a></li><li><a href="global.html#getDescription">getDescription</a></li><li><a href="global.html#getTheCurrentDate">getTheCurrentDate</a></li><li><a href="global.html#getTitle">getTitle</a></li><li><a href="global.html#loadContacts">loadContacts</a></li><li><a href="global.html#processContacts">processContacts</a></li><li><a href="global.html#renderChoosenContactsEmblems">renderChoosenContactsEmblems</a></li><li><a href="global.html#renderContactListEdit">renderContactListEdit</a></li><li><a href="global.html#renderEditDate">renderEditDate</a></li><li><a href="global.html#selectContact">selectContact</a></li><li><a href="global.html#selectContactIf">selectContactIf</a></li><li><a href="global.html#testForChoosenContact">testForChoosenContact</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#amountSubTasks">amountSubTasks</a></li><li><a href="global.html#calcProgressBar">calcProgressBar</a></li><li><a href="global.html#descriptionChar">descriptionChar</a></li><li><a href="global.html#emblemSvg">emblemSvg</a></li><li><a href="global.html#ifContainerEmpty">ifContainerEmpty</a></li><li><a href="global.html#label">label</a></li><li><a href="global.html#overlayRender">overlayRender</a></li><li><a href="global.html#priorityEmblem">priorityEmblem</a></li><li><a href="global.html#readInTasks">readInTasks</a></li><li><a href="global.html#renderAwaitFeedback">renderAwaitFeedback</a></li><li><a href="global.html#renderDone">renderDone</a></li><li><a href="global.html#renderEditTask">renderEditTask</a></li><li><a href="global.html#renderInProgress">renderInProgress</a></li><li><a href="global.html#renderToDo">renderToDo</a></li><li><a href="global.html#startReadingTasks">startReadingTasks</a></li><li><a href="global.html#subTaskCheck">subTaskCheck</a></li><li><a href="global.html#subTaskNoShow">subTaskNoShow</a></li><li><a href="global.html#taskContainer">taskContainer</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Jul 10 2024 20:32:32 GMT+0200 (Mitteleuropäische Sommerzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Jul 11 2024 10:43:41 GMT+0200 (Mitteleuropäische Sommerzeit)
 </footer>
 
 <script> prettyPrint(); </script>

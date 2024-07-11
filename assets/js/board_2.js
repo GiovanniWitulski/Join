@@ -1,7 +1,6 @@
 /**
  * This function enables the background shadow.
  * 
- * @returns {void} - This function returns no value.
  */          
 function showShadow(){ 
     document.getElementById('mainContainerOverlay').classList.add('taskOverlayContainerShadow');
@@ -10,7 +9,6 @@ function showShadow(){
 /**
  * This function removes the shadow of the background.
  * 
- * @returns {void} - This function returns no value.
  */    
 function removeShadow(){ 
     document.getElementById('mainContainerOverlay').classList.remove('taskOverlayContainerShadow');
@@ -19,7 +17,6 @@ function removeShadow(){
 /**
  * This function removes added effects via adding a new task.
  * 
- * @returns {void} - This function returns no value.
  */
 function hideOverlay(){
     document.getElementById('addTaskOverlayContainer').classList.remove('addTaskOverlayContainerShowing');
@@ -43,7 +40,6 @@ function deleteTask(i){
  * 
  * @param {number} idTask - The ID of the task to delete.
  * @param {number} i - The index of the task at the BackgroundTaskBoard.
- * @returns {void} - This function does not return a value.
  */
 function overlayDeleteTask(idTask, i){         
     let taskToDelete = BackgroundTaskBoard[i];
@@ -56,7 +52,6 @@ function overlayDeleteTask(idTask, i){
 /**
  * This function cloeses the popup task if clicked beside it and removes the optical effects.
  * 
- * @returns {void} - This function returns no value.
  */
 async function closeOverlaySideClick(){     
     if (document.getElementById('overlayBoard')) {
@@ -73,7 +68,6 @@ async function closeOverlaySideClick(){
 /**
  * This function cloeses the popup task and starts the upload of the changes and removes effects.
  * 
- * @returns {void} - This function returns no value.
  */
 async function closeOverlay(){ 
     if (document.getElementById('overlayBoard')) {
@@ -90,8 +84,8 @@ async function closeOverlay(){
 
 /**
  * This function is for adding a task with pre-set type (status).
+ * 
  * @param {string} type - The type of task to add.
- * @returns {void} - This function does not return a value.
  */
 function switchToAddTask(type){
     if(window.innerWidth < 1250){
@@ -111,7 +105,6 @@ function switchToAddTask(type){
  * The function deletes a subtask from the edited task.
  * 
  * @param {number} toDeleteId - The ID of the subtask to delete.
- * @returns {void} - This function does not return a value.
  */
 function editDeleteSub(toDeleteId){
     let number = toDeleteId
@@ -124,7 +117,6 @@ function editDeleteSub(toDeleteId){
 /**
  * The function clears the subtask input field.
  * 
- * @returns {void} - This function does not return a value.
  */
 function emptyEditSub(){
     document.getElementById('subtaskEdit').value = '';
@@ -135,7 +127,6 @@ function emptyEditSub(){
  * 
  * @param {number} idTask - The ID of the task.
  * @param {number} i - The index of the task.
- * @returns {void} - This function does not return a value.
  */
 function editTaskOverlay(idTask, i){    
     EditTask = TaskBoard[i];
@@ -156,7 +147,6 @@ function editTaskOverlay(idTask, i){
 /**
  * The function clears the edit task for editing.
  * 
- * @returns {void} - This function does not return a value.
  */
 function emptyEditTask(){    
     editTask = '';
@@ -170,7 +160,6 @@ function emptyEditTask(){
  * The function stores the new data for the edited task.
  * 
  * @param {number} taskboardPosition - The position of the task on the board.
- * @returns {void} - This function does not return a value.
  */
 function storeNewData(taskboardPosition){ 
     deleteTask(taskboardPosition); //1.
@@ -181,7 +170,6 @@ function storeNewData(taskboardPosition){
 /**
  * The function toggles the search button and updates the search display.
  * 
- * @returns {number} - The current state of the search button.
  */
 function clickButtonSearch(){
     let inputElement = document.getElementById('InputSearchEdit');
@@ -202,7 +190,6 @@ function clickButtonSearch(){
 /**
 * The function checks the input field value and triggers search filtering.
 * 
-* @returns {void} - This function does not return a value.
 */
 function checkInputFieldValue(){
     const inputElement = document.getElementById('InputSearchEdit');
@@ -217,7 +204,6 @@ function checkInputFieldValue(){
 /**
  * The function sets up the date listener for the edited task.
  * 
- * @returns {void} - This function does not return a value.
  */
 function setDateListener(){
     document.getElementById('InputSearchEdit').addEventListener('input', filterContactsEdit);
@@ -228,7 +214,6 @@ function setDateListener(){
 /**
  * The function clears the input field.
  * 
- * @returns {void} - This function does not return a value.
  */
 function clearInputField() {
     document.getElementById('InputSearchEdit').value = '';
@@ -239,7 +224,6 @@ function clearInputField() {
  * 
  * @param {number} i - shows which task to move
  * @param {event} event - stops other onclick events from processing.
- * @returns {void} - This function does not return a value.
  */
 async function renderMoveTask(event, i){
     event.stopPropagation();
@@ -253,7 +237,6 @@ async function renderMoveTask(event, i){
 /**
  * This function closes the move task surface.
  * 
- * @returns {void} - This function returns no value.
  */
 async function closeMoveTask(){
     document.getElementById('taskSwitchCategory').classList.add('transition')    
@@ -266,7 +249,6 @@ async function closeMoveTask(){
  * This function sets the new type (status) of the task.
  * 
  * @param {string} newType - The new category type to move the task to.
- * @returns {void} - This function does not return a value.
  */
 function moveCategoryTask(newType){
     TaskBoard[taskToMove].type = newType

@@ -16,7 +16,6 @@ let editTask;
 /**
  * Adds a task in the database.
  * 
- * @returns {void} - This function does not return a value.
  */
 async function addEditTaskToFirebase() {
     const databaseURL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app';
@@ -77,7 +76,6 @@ function createContactEdit(vorname, nachname, color) {
 /**
  * The function prepares every contacts into a usable format for the edit task.
  * 
- * @returns {void} - This function does not return a value.
  */
 async function processContacts() {
     editContacts = [];
@@ -99,7 +97,6 @@ async function processContacts() {
  * The function filters contacts based on the search input value or event.
  * 
  * @param {Event | string} eventOrValue - The event object or search value.
- * @returns {void} - This function does not return a value.
  */
 function filterContactsEdit(eventOrValue) {
     let searchedContact = '';
@@ -120,7 +117,6 @@ function filterContactsEdit(eventOrValue) {
  * The function filters contacts based on the searched contact.
  * 
  * @param {string} searchedContact - The contact to search for.
- * @returns {void} - This function does not return a value.
  */
 function filteredContacts(searchedContact){
     editContactsShow = [];
@@ -142,7 +138,6 @@ function filteredContacts(searchedContact){
  * The function sets the priority of the edited task.
  * 
  * @param {string} priority - The priority level to set.
- * @returns {void} - This function does not return a value.
  */
 function editSelectPriority (priority){
     EditTask.priority = priority;
@@ -153,7 +148,6 @@ function editSelectPriority (priority){
  * The function selects or deselects a contact for the edited task.
  * 
  * @param {number} contactId - The ID of the contact to select.
- * @returns {void} - This function does not return a value.
  */
 function selectContact (contactId){    
     for (i=0; i<editContacts.length; i++){
@@ -174,7 +168,6 @@ function selectContact (contactId){
 /**
  * The function processes contacts if selected and updates the the edited task.
  * 
- * @returns {void} - This function does not return a value.
  */
 function selectContactIf(){
     choosenContacts();
@@ -187,7 +180,6 @@ function selectContactIf(){
 /**
  * The function adds a new/edited subtask to the edited task.
  * 
- * @returns {void} - This function does not return a value.
  */
 function editAddSub(){
     const inputField = document.getElementById('subtaskEdit');
@@ -202,7 +194,6 @@ function editAddSub(){
  * The function edits the subtask of the edited task.
  * 
  * @param {number} toEditSub - The subtask to edit.
- * @returns {void} - This function does not return a value.
  */
 function editEditSub(toEditSub){
     let number = toEditSub;
@@ -216,7 +207,6 @@ function editEditSub(toEditSub){
 /**
  * The function sets the title of the current task to edit.
  * 
- * @returns {void} - This function does not return a value.
  */
 function getTitle(){
     const inputField = document.getElementById('titleEdit'); 
@@ -227,7 +217,6 @@ function getTitle(){
 /**
  * The function sets the description of the task to edit.
  * 
- * @returns {void} - This function does not return a value.
  */
 function getDescription(){
     const inputField = document.getElementById('descriptionEdit');
@@ -238,7 +227,6 @@ function getDescription(){
 /**
  * The function gets the date of the task to edit.
  * 
- * @returns {void} - This function does not return a value.
  */
 function getDate(){ 
     const inputField = document.getElementById('Edit_Input');
@@ -249,7 +237,6 @@ function getDate(){
  * The function renders the subtasks of the edited task.
  * The idCounter preserves a speific id for the rendered subtask.
  * 
- * @returns {void} - This function does not return a value.
  */
 function editRenderSubtask(){            
         let editSubtask = document.getElementById('editRenderSubtasks');
@@ -265,7 +252,6 @@ function editRenderSubtask(){
 /**
  * The function renders the priority buttons for the edited task.
  * 
- * @returns {void} - This function does not return a value.
  */
 function editRenderPriority(){
     let editTaskPriority = EditTask.priority;  
@@ -285,7 +271,6 @@ function editRenderPriority(){
 /**
  * The function checks for selected contacts of the edited task, and fills the related array.
  * 
- * @returns {void} - This function does not return a value.
  */
 function testForChoosenContact (){
     for (i=0; i<editContactsShow.length; i++){
@@ -307,7 +292,6 @@ function testForChoosenContact (){
  * The function checks for selected contacts of the edited task, and fills the related array.
  * Its related to the testForChoosenContact().
  * 
- * @returns {void} - This function does not return a value.
  */
 function choosenContacts(){
     choosenContactsEdit = [];
@@ -328,7 +312,6 @@ function choosenContacts(){
 /**
  * The function renders the selected contact emblems for the edited task.
  * 
- * @returns {void} - This function does not return a value.
  */
 function renderChoosenContactsEmblems(){
     let editEmblems = document.getElementById('choosenContacts');
@@ -369,7 +352,6 @@ function renderContactListEdit() {
 /**
  * The function renders the date input field for the edited task.
  * 
- * @returns {void} - This function does not return a value.
  */
 function renderEditDate(){
     let initialDate = editTask.date; //  YYYY-MM-DD-Format (!)

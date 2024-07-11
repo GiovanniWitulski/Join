@@ -27,7 +27,6 @@ let overlaySub = document.getElementById('overlaySubCheckbox');
 /**
  * This function emptys the download and the working array.
  * 
- * @returns {void} - This function returns no value.
  */
 function cleanArrays(){
     TaskBoard = [];
@@ -37,7 +36,6 @@ function cleanArrays(){
 /**
  * This function starts the downloading and processing of the tasks stored at the firebase.
  * 
- * @returns {void} - This function returns no value.
  */
 async function downloadData() {
     cleanArrays();
@@ -99,7 +97,6 @@ function formatTask(task) {
  * This function updates the task board with the formatted tasks.
  * 
  * @param {Array} formattedTasks - The formatted tasks to update the board with.
- * @returns {void} - This function does not return a value.
  */
 function updateTaskBoard(formattedTasks) {
     BackgroundTaskBoard.push(...formattedTasks);
@@ -118,7 +115,6 @@ function handleError(error) {
 /**
  * This function starts the render process of the board.
  * 
- * @returns {void} - This function returns no value.
  */
 function renderBoard(){ 
     taskContainer();                          
@@ -137,7 +133,6 @@ function overlayTask(id){
 /**
  * This function updates the firebase storage with the lates changes at the task board.
  * 
- * @returns {void} - This function returns no value.
  */
 async function uploadData() {
     const databaseURL = 'https://join-remotestorage-default-rtdb.europe-west1.firebasedatabase.app';
@@ -158,7 +153,6 @@ async function uploadData() {
 /**
  * This function checks if the search field is empty, otherwise it starts the result showing function.
  * 
- * @returns {void} - This function returns no value.
  */
 function findTask(){
     const inputfield = document.getElementById('boardInput');
@@ -208,7 +202,6 @@ function startDragging(id){
 /**
  * This function establishes the ability to drop a task.
  * 
- * @returns {void} - This function returns no value.
  */
 function allowDrop(ev) {
     ev.preventDefault();
@@ -274,7 +267,6 @@ function overlayContactsRead(i){
 /**
  * This function sets the priority emblems of the popup task.
  * 
- * @returns {void} - This function returns no value.
  */
 function overlayPrio(){
     overlayPriority = '';
@@ -290,7 +282,6 @@ function overlayPrio(){
 /**
  * This function sets a timeout for removing a the class (slide - in - effect).
  * 
- * @returns {void} - This function returns no value.
  */
 async function removeTranslate(){
     await new Promise(resolve => setTimeout(resolve, 120));
@@ -300,7 +291,6 @@ async function removeTranslate(){
 /**
  * This function sets a timeout for adding a the class (slide - in - effect).
  * 
- * @returns {void} - This function returns no value.
  */
 async function addTranslate(){
     await new Promise(resolve => setTimeout(resolve, 120));
@@ -310,7 +300,6 @@ async function addTranslate(){
 /**
  * This function renders the subtasks for the poupup task.
  * 
- * @returns {void} - This function returns no value.
  */
 function overlaySubtaskCheck(){
     overlaySubtaskStorage = '';
@@ -330,7 +319,6 @@ function overlaySubtaskCheck(){
 /**
  * This function checks and sets the label for the popup task.
  * 
- * @returns {void} - This function returns no value.
  */
 function overlayLabelCheck(){
     if (OverlayTask.label == 1) {
@@ -343,7 +331,6 @@ function overlayLabelCheck(){
 /**
  * This function checks which kind of label is existing, and it sets the different text properties.
  * 
- * @returns {void} - This function returns no value.
  */
 function ifOverlay(){
     if (OverlayTask.subtask === undefined || OverlayTask.subtask === null) {
@@ -381,7 +368,6 @@ function toggleCheckboxValue(taskid, position) {
 /**
  * This function renders the subtask into the popup task.
  * 
- * @returns {void} - This function returns no value.
  */          
 function toggleSubstaskRender(){            
     let toggledSubtasks = document.getElementById('overlaySubtaskContainer');
