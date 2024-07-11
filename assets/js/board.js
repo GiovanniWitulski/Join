@@ -374,5 +374,3 @@ function toggleSubstaskRender(){
     toggledSubtasks.innerHTML = `${overlaySubtaskStorage}`;
     renderBoard();
 }
-
-
