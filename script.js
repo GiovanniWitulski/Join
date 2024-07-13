@@ -2,6 +2,11 @@ function init() {
     includeHTML();
 }
 
+/**
+ * This function swaps the displayed image onclick. 
+ * 
+ * @param {object} checkboxImg - This is the image that will be changed.
+ */
 function toggleCheckbox(checkboxImg) {
     const currentSrc = checkboxImg.src;
     if (currentSrc.endsWith('rectangle.svg')) {
@@ -11,12 +16,20 @@ function toggleCheckbox(checkboxImg) {
     }
 }
 
+/**
+ * This function opens and closes the side menu.
+ * 
+ */
 function openSideMenu() {
     let sideMenu = document.getElementById("sideMenu");
     sideMenu.classList.toggle("side-menu-open");
   document.addEventListener('click', handleClickOutside);
 }
 
+/**
+ * This function ensures that the page menu is not displayed for 1000ms.
+ * 
+ */
 function dNoneSideMenu() {
   let sideMenu = document.getElementById("sideMenu");
   setTimeout(() => {
@@ -24,6 +37,12 @@ function dNoneSideMenu() {
 }, 1000);
 }
 
+/**
+ *This function checks whether the user clicks outside the side menu, 
+ *If so, the page menu will be closed.
+ *
+ * @param {object} event - This object checks where the user clicks. 
+ */
 function handleClickOutside(event) {
   let sideMenu = document.getElementById("sideMenu");
   let smBtn = document.getElementById("smBtn");
@@ -33,6 +52,10 @@ function handleClickOutside(event) {
   }
 }
 
+/**
+ * This function sets the letters displayed in the side menu depending on whether the user is logged in as a guest or with an account.
+ * 
+ */
 async function setSideMenuCharacters() {
   let sideMenuCharacters = localStorage.getItem('sideMenuCharacters');
   document.getElementById('smBtn').innerHTML = sideMenuCharacters;
@@ -41,6 +64,10 @@ async function setSideMenuCharacters() {
   }
 }
 
+/**
+ * This function highlights the button in the navigation bar, depending on which page the user is currently on.
+ * 
+ */
 function highlightNavigationButton() {
   let pfad = window.location.pathname; 
   let menuLinks = document.querySelectorAll('.menu-links');
@@ -56,6 +83,10 @@ function highlightNavigationButton() {
   }
 }
 
+/**
+ * This feature greets the user as soon as they log in to the site.
+ * 
+ */
 function greetingMsg() {
   let greetingElement = document.getElementById('greetingMsgAnimation');
   if (localStorage.getItem('isSignedUp') === 'true') {
@@ -75,6 +106,12 @@ function greetingMsg() {
 }
 }
 
+/**
+ * This function checks what time it is at the time the user logs in.
+ * A greeting will then be returned depending on the time of morning, lunch or evening. 
+ * 
+ * @returns - Returns the greeting.
+ */
 function getTimeOfDayGreeting() {
   let now = new Date();
   let hour = now.getHours();
